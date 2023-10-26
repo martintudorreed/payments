@@ -1,0 +1,69 @@
+@use '@angular/material' as mat;
+@use 'src/sass/themes/ifm-theme' as cust-auth-theme;
+
+$primary-blue: #144573;
+$primary-red: #BB162B;
+$primary-green: #005A2B;
+$primary-neutral: #333333;
+
+$primary: #105fa8;
+$dark-blue: #144573;
+$alice-blue: #EFF8FF;
+$highlight-blue: #E7EFF6;
+$totals-blue: #dbe7f2;
+$bright-blue: #2F81C9;
+
+$red: #C83232;
+$green: #2da44e;
+$orange: #FF8530;
+$dark-orange: #C75300;
+$cust-urgent-red: #A90000;
+$cust-amber: #F3A100;
+$cust-green: #009007;
+$purple: #7859B6;
+$peach: #FFD9B4;
+$dark-peach: #D29153;
+$note-yellow: #FFFEEE;
+$message-yellow: #FFFBE5;
+$incoming-yellow: #FFFEF6;
+$chat-green: #D9FDD3;
+$chat-blue: #D3F4FD;
+
+$very-light-grey: #F9F9F9;
+$light-grey: #EDEDED;
+$medium-light-grey: #DFDFDF;
+$medium-grey: #CECECE;
+$medium-dark-grey: #A4A4A4;
+$dark-grey: #979797;
+$very-dark-grey: #333333;
+$very-dark-grey-contrast: #525252;
+
+$grey-text: #BEBEBE;
+$white: #ffffff;
+$black: #000000;
+
+
+$brag-blue: #357AD9;
+$brag-red: #F12F1F;
+$brag-green: #42A648;
+$brag-amber: #FAC113;
+
+//Workflow colours - Prototype only
+
+$color0: #105FA8;
+$color1: #F5A623;
+$color2: #C60101;
+$color3: #13A086;
+$color4: #35ED84;
+$color5: #9C59B8;
+$color6: #C60101;
+$color7: #0BCC00;
+
+$sci-fi-green: #B6FF8A;
+$sci-fi-accent: #5FFF00;
+
+$faded-black: #000000;
+
+$border-radius-small: 6px;
+$border-radius-medium: 12px;
+$border-radius-large: 24px;

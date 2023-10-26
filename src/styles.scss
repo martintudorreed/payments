@@ -1,0 +1,63 @@
+@use '@angular/material' as mat;
+@use 'src/sass/themes/ifm-theme' as ifm-theme;
+@use 'src/sass/typography/typography' as ifm-typography;
+
+@include mat.core();
+
+$ifm-theme: mat.define-light-theme((
+  color: (
+    primary: ifm-theme.$ifm-primary,
+    accent: ifm-theme.$ifm-accent,
+    warn: ifm-theme.$ifm-warn,
+  )
+  //,
+  //density: -3,
+));
+
+$dense-theme: mat.define-light-theme((
+  color: (
+    primary: ifm-theme.$ifm-primary,
+    accent: ifm-theme.$ifm-accent,
+    warn: ifm-theme.$ifm-warn,
+  )
+  ,
+  density: -3,
+));
+
+@include mat.typography-hierarchy(ifm-typography.$ifm-theme-typography);
+@include mat.all-component-themes($ifm-theme);
+
+@import "./sass/typography/typography-classes.scss";
+@import "./sass/themes/palette-classes.scss";
+@import "./sass/themes/elevations.scss";
+
+@import "./sass/ifm-tabs/ifm-tabs.scss";
+@import "./sass/ifm-menu/ifm-menu.scss";
+@import "./sass/ifm-select/ifm-select.scss";
+@import "./sass/ifm-sidenav/ifm-sidenav.scss";
+@import "./sass/ifm-table/ifm-table.scss";
+@import "./sass/ifm-toggle/ifm-toggle.scss";
+@import "./sass/ifm-snackbar/ifm-snackbar.scss";
+@import "./sass/ifm-input/ifm-input.scss";
+@import "./sass/ifm-expansion-panel/ifm-expansion-panel.scss";
+@import "./sass/ifm-slide-toggle/ifm-slide-toggle.scss";
+@import "./sass/ifm-dialog/ifm-dialog.scss";
+@import "./sass/ifm-checkbox/ifm-checkbox.scss";
+@import "./sass/ifm-button/ifm-button.scss";
+@import "./sass/ifm-icon/ifm-icon.scss";
+@import "./sass/ifm-bottom-sheet/ifm-bottom-sheet.scss";
+@import "./sass/ifm-spinner/ifm-spinner.scss";
+
+html, body { height: 100%; overflow: hidden;}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+}
+app-root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}

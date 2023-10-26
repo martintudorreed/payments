@@ -1,0 +1,24 @@
+@use "src/sass/themes/palette-constants" as palette;
+
+//This instance is here to apply the fill on the hover as the .svg is encapsulated and can't be effected like this in the tile component
+.tile {
+  &:hover {
+    .mat-icon {
+      color: palette.$primary;
+      .custom-icon {
+        #Shape {
+          fill: palette.$primary;
+        }
+      }
+    }
+  }
+}
+.mat-icon {
+  &.ifm-icon-medium {
+    font-size: 18px;
+    line-height: 18px;
+    height: 18px;
+    width: 18px;
+  }
+}
+

@@ -1,0 +1,21 @@
+@use "src/sass/themes/palette-constants" as palette;
+@use "src/sass/ifm-mixins/ifm-breakpoints" as bp;
+
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.payment-index-inner {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid palette.$medium-grey;
+  border-radius: 6px;
+  padding: 24px;
+  button {
+    margin-bottom: 12px;
+  }
+}

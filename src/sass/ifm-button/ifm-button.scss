@@ -1,0 +1,22 @@
+@use "src/sass/themes/palette-constants" as palette;
+
+
+button {
+  &.white-border {
+    background-color: palette.$white;
+  }
+  &.light-outline {
+    --mdc-outlined-button-outline-color:  rgba(255,255,255,.4);
+  }
+  &.ifm-stroked-button {
+    --mdc-outlined-button-outline-color:  #ccc;
+    background-color: white;
+    &.primary-outline {
+      --mdc-outlined-button-outline-color:  #105fa8;
+    }
+    &.light-outline {
+      --mdc-outlined-button-outline-color:  rgba(255,255,255,.4);
+    }
+  }
+}
+

@@ -1,0 +1,42 @@
+
+<div class="finance-data">
+<!--  <div class="data-row">-->
+<!--    <span class="total-label total-ex-tax">Total Exc Tax</span>-->
+<!--    <span class="total-ammount">$80.00</span>-->
+<!--  </div>-->
+<!--  <div class="data-row">-->
+<!--    <span class="total-label total-tax">Tax</span>-->
+<!--    <span class="total-ammount">$8.00</span>-->
+<!--  </div>-->
+<!--  <div class="data-row  total">-->
+<!--    <span class="total-label">Total</span>-->
+<!--    <span class="total-ammount mat-headline-2">$88.00</span>-->
+<!--  </div>-->
+<!--  <div class="ts-and-cs">-->
+<!--    <span class="mat-caption">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </span>-->
+<!--  </div>-->
+
+  <div class="total-fields">
+    <div class="field-outer data-total-ex-tax">
+      <mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
+        <mat-label>Total Ex Tax</mat-label>
+        <input type="number" matInput placeholder="" [(ngModel)]="totalExTax" step="0.01">
+      </mat-form-field>
+    </div>
+    <div class="field-outer data-total-tax">
+      <mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
+        <mat-label>Total Tax</mat-label>
+        <input type="number" matInput placeholder="P" [(ngModel)]="totalTax" step="0.01">
+      </mat-form-field>
+    </div>
+    <div class="field-outer data-total-inc-tax">
+      <mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
+        <mat-label>Total Inc Tax</mat-label>
+        <input type="number" matInput placeholder="" [(ngModel)]="totalIncTax" step="0.01">
+      </mat-form-field>
+    </div>
+  </div>
+
+
+</div>
+

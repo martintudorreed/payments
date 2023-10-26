@@ -1,0 +1,145 @@
+@import 'src/sass/themes/palette-constants';
+
+body.ifm {
+
+  .primary { background-color: $primary; }
+  .primary-text { color: $primary; }
+
+  .blue-theme {
+    .primary { background-color: $primary-blue; }
+    .primary-text { color: $primary-blue; }
+  }
+  .red-theme {
+    .primary { background-color: $primary-red; }
+    .primary-text { color: $primary-red; }
+  }
+  .green-theme {
+    .primary { background-color: $primary-green; }
+    .primary-text { color: $primary-green; }
+  }
+
+  .neutral-theme {
+    .primary { background-color: $primary-neutral; }
+    .primary-text { color: $very-dark-grey; }
+  }
+  //themes for cust auth
+
+  .theme-red {
+    background-color: $primary-red;
+  }
+  .theme-red-contrast {
+    background-color: $primary-red;
+  }
+
+  .theme-blue {
+    background-color: $primary-blue;
+  }
+  .theme-blue-contrast {
+  }
+
+  .theme-green {
+    background-color: $primary-green;
+  }
+  .theme-green-contrast {
+  }
+
+  .very-dark-grey-contrast {
+    background-color: darken($very-dark-grey,4);
+  }
+
+
+
+  .dark-blue { background-color: $dark-blue; }
+  .bright-blue { background-color: $bright-blue; }
+  .bright-blue-text { color: $bright-blue; }
+  .highlight-blue { background-color: $highlight-blue; }
+  .very-dark-grey { background-color: $very-dark-grey; }
+
+  .red { background-color: $red; }
+  .red-text { color: $red; }
+  .green { background-color: $green; }
+  .green-text { color: $green; }
+  .orange { background-color: $orange; }
+  .orange-text { color: $orange; }
+  .dark-orange { background-color: $dark-orange; }
+  .purple { background-color: $purple; }
+  .note-yellow {background-color: $note-yellow}
+  .alice-blue {background-color: $alice-blue}
+
+  // very-light-grey is the page bg
+  .very-light-grey { background-color: $very-light-grey; }
+  .light-grey { background-color: $light-grey; }
+  // medium-light-grey is the table header bg
+  .medium-light-grey { background-color: $medium-light-grey; }
+  // medium-grey is the default border colour for just about everything
+  .medium-grey { background-color: $medium-grey; }
+  .medium-dark-grey { background-color: $medium-dark-grey; }
+  .dark-grey { background-color: $dark-grey; }
+  .very-dark-grey { background-color: $very-dark-grey; }
+  .very-dark-grey-text { color: $very-dark-grey; }
+
+  .white { background-color: $white; }
+  .black { background-color: $black; }
+  .white-text { color: $white; }
+  .black-text { color: $black; }
+  .placeholder-text { color: $medium-dark-grey; }
+
+  .blue-brag {
+    background-color: $brag-blue;
+  }
+  .red-brag {
+    background-color: $brag-red;
+  }
+  .green-brag {
+    background-color: $brag-green;
+  }
+  .amber-brag {
+    background-color: $brag-amber;
+  }
+
+  //Cust Auth
+
+  .cust-urgent-text {
+    color: $cust-urgent-red;
+  }
+
+  .cust-urgent {
+    background-color: $cust-urgent-red;
+  }
+
+  .cust-amber-text {
+    color: $cust-amber;
+  }
+
+  .cust-amber {
+    background-color: $cust-amber;
+  }
+
+  .cust-ok-text {
+    color: $cust-green;
+  }
+
+  .cust-ok{
+    background-color: $cust-green;
+  }
+
+  .cust-unchecked-text {
+    color: $bright-blue;
+  }
+
+  .cust-unchecked {
+    background-color: $bright-blue;
+  }
+
+  .sci-fi-accent {
+    color: $white;
+  }
+
+
+  .sci-fi-green {
+    color: $sci-fi-green;
+  }
+}
+
+
+

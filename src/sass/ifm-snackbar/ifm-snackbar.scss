@@ -1,0 +1,10 @@
+@use "src/sass/themes/palette-constants" as palette;
+mat-snack-bar-container {
+  &.ifm-snackbar {
+    .mdc-snackbar {
+      &__surface {
+        min-width: unset;
+      }
+    }
+  }
+}

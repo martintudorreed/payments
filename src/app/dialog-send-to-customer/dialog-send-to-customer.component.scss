@@ -1,0 +1,30 @@
+@use "src/sass/themes/palette-constants" as palette;
+@use "src/sass/ifm-mixins/ifm-breakpoints" as bp;
+
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+mat-dialog-content {
+  padding: 0;
+  max-height: unset;
+}
+
+.tab-inner {
+  display: flex;
+  height: 100%;
+}
+
+mat-dialog-actions {
+  background-color: palette.$very-light-grey;
+  border-top: 1px solid palette.$medium-grey;
+}
+.actions-inner {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  align-items: center;
+}

@@ -1,0 +1,29 @@
+@use "src/sass/themes/palette-constants" as palette;
+
+.ifm-table {
+  width: 100%;
+
+  thead {
+    height: 40px;
+    tr {
+      background-color: palette.$light-grey;
+      th {
+        font-weight: 400;
+        padding: 6px;
+        text-align: left;
+        color: palette.$very-dark-grey
+      }
+    }
+  }
+  tbody {
+    tr {
+      height: 40px;
+      td {
+        border-bottom: 1px solid palette.$medium-light-grey;
+      }
+    }
+  }
+  tfoot {
+
+  }
+}

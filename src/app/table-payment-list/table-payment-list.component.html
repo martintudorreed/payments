@@ -1,0 +1,60 @@
+<mat-table
+  #table
+  [dataSource]="dataSource"
+>
+  <!---
+  (cdkDropListDropped)="drop($event)"
+  Note that these columns can be defined in any order.
+        The actual rendered     columns are set as a property on the row definition" -->
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="paymentCustomerName" sticky>
+    <mat-header-cell *matHeaderCellDef>Customer Name</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <span class="cell-contents">{{element.paymentCustomerName}}</span>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="paymentDateRaised">
+    <mat-header-cell *matHeaderCellDef> Date Raised </mat-header-cell>
+    <mat-cell *matCellDef="let element"><span class="cell-contents"> {{element.paymentDateRaised}} </span></mat-cell>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="paymentAmmount">
+    <mat-header-cell *matHeaderCellDef> Amount </mat-header-cell>
+    <mat-cell *matCellDef="let element"> <span class="cell-contents">{{element.paymentAmmount}} </span></mat-cell>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="paymentSource">
+    <mat-header-cell *matHeaderCellDef> Source </mat-header-cell>
+    <mat-cell *matCellDef="let element"> <span class="cell-contents"> {{element.paymentSource}} </span></mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="paymentStatus">
+    <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <span class="cell-contents">{{element.paymentStatus}}</span>
+    </mat-cell>
+  </ng-container>
+
+<!--  <ng-container matColumnDef="controls">-->
+<!--    <mat-header-cell *matHeaderCellDef></mat-header-cell>-->
+<!--    <mat-cell *matCellDef="let element">-->
+<!--      <button mat-icon-button color="primary"><mat-icon>edit</mat-icon></button>-->
+<!--      <button mat-icon-button class="control"><mat-icon>delete</mat-icon></button>-->
+<!--      <div class="dragCursor drag-handle" (mousedown)="dragDisabled = false;">-->
+<!--        <mat-icon>reorder</mat-icon>-->
+<!--      </div>-->
+<!--    </mat-cell>-->
+<!--  </ng-container>-->
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row
+    *matRowDef="let row; columns: displayedColumns;"
+    cdkDrag
+    [cdkDragData]="row"
+  ></mat-row>
+</mat-table>

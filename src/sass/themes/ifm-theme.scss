@@ -1,0 +1,76 @@
+@use '@angular/material' as mat;
+
+$ifm-theme-primary: (
+  50: #E4F0F8,
+  100: #BBD9EE,
+  200: #8DBFE3,
+  300: #528ad8,
+  400: #3D92CF,
+  500: #E4F0F8,
+  600: #105fa8,
+  700: #146CBA,
+  800: #144478,
+  900: #003476,
+  A100: #D2E4FF,
+  A200: #9FC5FF,
+  A400: #6CA7FF,
+  A700: #5297FF,
+  contrast: (
+    50: #333333,
+    100: #333333,
+    200: #333333,
+    300: #333333,
+    400: #cecece,
+    500: #cecece,
+    600: #cecece,
+    700: #cecece,
+    800: #cecece,
+    900: #cecece,
+    A100: #333333,
+    A200: #333333,
+    A400: #333333,
+    A700: #333333,
+  )
+);
+
+$ifm-theme-accent: (
+  50: #E0EAF2,
+  100: #B3CBE0,
+  200: #80A9CB,
+  300: #4D87B6,
+  400: #2E5A81,
+  500: #105FAB,
+  600: #004C8E,
+  700: #144573,
+  800: #003979,
+  900: #002968,
+  A100: #97B7FF,
+  A200: #678aab,
+  A400: #3170FF,
+  A700: #d2000d,
+  contrast: (
+    50: #333333,
+    100: #333333,
+    200: #333333,
+    300: #ffffff,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #333333,
+    A200: #333333,
+    A400: #ffffff,
+    A700: #ffffff,
+  )
+);
+
+$ifm-primary: mat.define-palette($ifm-theme-primary, 600);
+$ifm-accent: mat.define-palette($ifm-theme-accent, A200, A100, A700);
+$ifm-warn: mat.define-palette(mat.$red-palette);
+
+//$cust-auth-prototype-primary: mat.define-palette(mat.$indigo-palette, 500);
+//$cust-auth-prototype-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+//$cust-auth-prototype-warn: mat.define-palette(mat.$red-palette);
+

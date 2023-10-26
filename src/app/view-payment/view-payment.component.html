@@ -1,0 +1,137 @@
+<div class="payments-inner" [ngClass]="{'no-border': noBorder}">
+  <div class="colA">
+    <header class="header">
+      <h2 class="headline mat-headline-2">
+        <span class="section-title">{{paymentText}}</span>
+        <span *ngIf="isHasData">{{paymentReference}}</span>
+      </h2>
+      <div class="field-outer data-reference" *ngIf="!isHasData">
+        <mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
+          <mat-label>Job Number</mat-label>
+          <input type="text" matInput placeholder="RO:xxxxxx" [(ngModel)]="paymentReference">
+        </mat-form-field>
+      </div>
+    </header>
+
+    <div class="summary">
+<!--      <div class="summary-text" *ngIf="!editMode">-->
+<!--        <span>Ref: 8884422</span>-->
+<!--        <span>Replace Brake Discs and Pads, Front</span>-->
+<!--        <span>Replace Globe, Fog Lamp Right Rear</span>-->
+<!--        <span>Replace wiper blades</span>-->
+<!--      </div>-->
+      <mat-form-field  [(ngModel)]="summaryData" floatLabel="always">
+        <mat-label>Summary</mat-label>
+        <textarea matInput
+                  cdkTextareaAutosize
+                  #autosize="cdkTextareaAutosize"
+                  [(ngModel)]="summaryData"
+                  cdkAutosizeMinRows="1"
+                  cdkAutosizeMaxRows="15"></textarea>
+      </mat-form-field>
+
+<!--      <div class="summary-controls" *ngIf="!editMode">-->
+<!--        <span>Show full details...</span>-->
+<!--      </div>-->
+
+    </div>
+  <app-controls-payment-form
+    [totalExTax]="totalExTax"
+    [totalTax]="totalTax"
+    [totalIncTax]="totalIncTax"
+    [buttonText]="buttonText" *ngIf="(applicationModelService.currentBreakpoint$ | async) !== 'XSmall'"></app-controls-payment-form>
+  </div>
+
+  <div class="colB">
+    <h2 class="mat-headline-2 header-review">{{reviewText}}</h2>
+
+    <div class="field-outer data-card-holder data-card-field">
+      <mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
+        <mat-label>Card Holder</mat-label>
+        <input type="text" matInput placeholder="Name" [(ngModel)]="cardHolder">
+      </mat-form-field>
+    </div>
+
+    <div class="field-outer data-card-holder data-card-field">
+      <mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
+        <mat-label>Card Number</mat-label>
+        <input type="text" matInput placeholder="1234 1234 1234 1234" [(ngModel)]="cardNumber">
+        <mat-icon matSuffix>lock</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <div class="side-by-side-fields">
+      <div class="field-outer data-expiration-date  data-card-field">
+        <mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
+          <mat-label>Expiration Date</mat-label>
+          <input type="text" matInput placeholder="MM / YY" [(ngModel)]="cardExpirationDate">
+        </mat-form-field>
+      </div>
+
+      <div class="field-outer data-ccv data-card-field">
+        <mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
+          <mat-label>CVC</mat-label>
+          <input type="text" matInput placeholder="XXX" [(ngModel)]="cardCVC">
+          <mat-icon matSuffix>help_outline</mat-icon>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="field-outer data-card-holder">
+      <mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
+        <mat-label>Your Name</mat-label>
+        <input type="text" matInput placeholder="Name" [(ngModel)]="cardHolder">
+      </mat-form-field>
+    </div>
+    <div class="field-outer data-card-holder">
+      <mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
+        <mat-label>Contact Number</mat-label>
+        <input type="text" matInput placeholder="Number" [(ngModel)]="contactNumber">
+      </mat-form-field>
+    </div>
+    <div class="field-outer data-card-holder">
+      <mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
+        <mat-label>Contact Email</mat-label>
+        <input type="text" matInput placeholder="Email" [(ngModel)]="contactEmail">
+      </mat-form-field>
+    </div>
+    <div class="field-outer data-address-item" *ngIf="isHasAddress">
+      <mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
+        <mat-label>Address Line 1</mat-label>
+        <input type="text" matInput placeholder="Address" [(ngModel)]="addressLine1">
+      </mat-form-field>
+    </div>
+    <div class="field-outer data-address-item" *ngIf="isHasAddress">
+      <mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
+        <mat-label>Address Line 2</mat-label>
+        <input type="text" matInput placeholder="Address" [(ngModel)]="addressLine2">
+      </mat-form-field>
+    </div>
+    <div class="field-outer data-address-item" *ngIf="isHasAddress">
+      <mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
+        <mat-label>Address Line 3</mat-label>
+        <input type="text" matInput placeholder="Address" [(ngModel)]="addressLine3">
+      </mat-form-field>
+    </div>
+    <div class="field-outer data-address-item" *ngIf="isHasAddress">
+      <mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
+        <mat-label>State</mat-label>
+        <input type="text" matInput placeholder="State" [(ngModel)]="state">
+      </mat-form-field>
+    </div>
+    <div class="field-outer data-address-item" *ngIf="isHasAddress">
+      <mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
+        <mat-label>Post Code</mat-label>
+        <input type="text" matInput placeholder="Post Code" [(ngModel)]="postcode">
+      </mat-form-field>
+    </div>
+
+  </div>
+
+</div>
+<div class="payment mat-elevation-z2-up">
+  <app-controls-payment-form
+    [totalExTax]="totalExTax"
+    [totalTax]="totalTax"
+    [totalIncTax]="totalIncTax"
+    [buttonText]="buttonText" *ngIf="(applicationModelService.currentBreakpoint$ | async) === 'XSmall'"></app-controls-payment-form>
+</div>

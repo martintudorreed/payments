@@ -1,0 +1,42 @@
+@mixin breakpoint($breakOn) {
+  @if $breakOn == very-small {
+    @media only screen and (max-width: 639px)  { @content; }
+  }
+  @if $breakOn == smaller {
+    @media only screen and (max-width: 768px)  { @content; }
+  }
+  @if $breakOn == small {
+    @media only screen and (max-width: 1024px)  { @content; }
+  }
+
+  @if $breakOn == medium {
+    @media only screen and (min-width: 960px) and (max-width: 1279.98px)  { @content; }
+  }
+
+  @if $breakOn == large {
+    @media only screen and (min-width: 1280px) and (max-width: 1919.98px)  { @content; }
+  }
+
+  @if $breakOn == xlarge {
+    @media only screen and (min-width: 1441px) { @content; }
+  }
+
+  @if $breakOn == large-tablet {
+    @media only screen and (max-width: 1366px) { @content; }
+  }
+  //some semantic bps
+  @if $breakOn == ipad-portrait {
+    @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait)  { @content; }
+  }
+
+  @if $breakOn == tablet-portrait {
+    @media only screen and (min-width: 600px) and (max-width: 839.98px) and (orientation: portrait) {
+      @content;
+    }
+  }
+  @if $breakOn == tablet-landscape {
+    @media only screen and (min-width: 960px) and (max-width: 1279.98px) and (orientation: landscape) {
+      @content;
+    }
+  }
+}

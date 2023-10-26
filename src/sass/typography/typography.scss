@@ -1,0 +1,18 @@
+@use '@angular/material' as mat;
+$family: 'Albert Sans, Roboto, Arial, Helvetica, Sans-Serif';
+$ifm-theme-typography: mat.define-typography-config(
+  $font-family: $family,
+  $headline-1: mat.define-typography-level(20px, 20px, 700),
+  $headline-2: mat.define-typography-level(18px, 18px, 400),
+  $headline-3: mat.define-typography-level(15px, 15px, 400),
+  $button: mat.define-typography-level(14px, 26px, 400),
+    //$input: mat.define-typography-level(14px, 1.15, 400),
+  $headline-4: mat.define-typography-level(16px, 16px, 500),
+  $headline-5: mat.define-typography-level(16px, 16px, 100),
+  $headline-6: mat.define-typography-level(14px, 14px, 400),
+  $body-1: mat.define-typography-level(14px, 14px, 300),
+  $body-2: mat.define-typography-level(14px, 18px, 400),
+  $caption: mat.define-typography-level(12px, 12px, 300)
+);
+
+

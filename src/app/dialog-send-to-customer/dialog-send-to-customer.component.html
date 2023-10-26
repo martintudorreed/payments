@@ -1,0 +1,20 @@
+<mat-dialog-content>
+<app-view-payment [reviewText]="'Customer Details'"
+                  [paymentText]="'Payment Details'"
+                  [buttonText]="'Send to Customer'"
+                  [isHasData]="isHasData"
+                  [editMode]="editMode"
+                  [isHasAddress]="isHasAddress"
+                  ></app-view-payment>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <div class="actions-inner">
+    <app-control-provider-select></app-control-provider-select>
+
+    <div class="control">
+      <button mat-button color="primary" mat-dialog-close>Cancel</button>
+      <button mat-flat-button color="primary" (click)="doSend()" [mat-dialog-close]="true">Send to Customer</button>
+    </div>
+  </div>
+
+</mat-dialog-actions>

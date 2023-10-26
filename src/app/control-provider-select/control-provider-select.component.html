@@ -1,0 +1,8 @@
+<div class="field-outer data-payment-type">
+  <mat-form-field class="field ifm-input selector compact" subscriptSizing="dynamic" floatLabel="always" appearance="outline">
+    <mat-label>Payment Provider</mat-label>
+    <mat-select [(value)]="selectedPaymentMethod"  (selectionChange)="onSelectedCardTypeChange()">
+      <mat-option  [value]="paymentMethod.paymentMethodID" *ngFor="let paymentMethod of paymentMethods">{{ paymentMethod.paymentMethodName }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

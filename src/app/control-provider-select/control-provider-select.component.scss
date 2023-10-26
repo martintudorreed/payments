@@ -1,0 +1,26 @@
+@use '@angular/material' as mat;
+@use 'src/sass/themes/ifm-theme' as ifm-theme;
+
+@include mat.core();
+
+$dense-theme: mat.define-light-theme((
+  color: (
+    primary: ifm-theme.$ifm-primary,
+    accent: ifm-theme.$ifm-accent,
+    warn: ifm-theme.$ifm-warn,
+  )
+,
+  density: -3,
+));
+
+@include mat.select-density($dense-theme);
+
+
+.data-payment-type {
+  margin: 0 12px;
+  width: 180px;
+}
+
+.selector {
+  @include mat.select-density(-4);
+}

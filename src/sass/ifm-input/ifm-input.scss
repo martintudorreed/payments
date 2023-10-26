@@ -1,0 +1,66 @@
+@use "src/sass/themes/palette-constants" as palette;
+.ifm-input {
+  width: 100%;
+  .mat-mdc-form-field-infix {
+    width: 100%;
+  }
+  input  {
+    &[type=number] {
+      text-align: right;
+    }
+  }
+  .small {
+    font-size: 18px;
+  }
+  &.no-spinners {
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+}
+
+.naked-form-field {
+  &.has-control {
+    display: flex;
+    .data-area {
+      flex-grow: 1;
+    }
+  }
+
+  .field-label {
+    font-size: 80%;
+    color: palette.$primary-blue;
+    //position: absolute;
+    //top: -3px;
+    position: relative;
+    z-index: 9;
+    white-space: nowrap;
+    line-height: 16px;
+    flex-basis: 100%;
+  }
+  .field-outline {
+    position: relative;
+    padding: 0 0 4px 0;
+    width: 100%;
+    min-height: 19px;
+    .field-contents {
+      width: 100%;
+      font-weight: 400;
+      min-height: 24px;
+      .full-width {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: clip;
+      }
+    }
+  }
+  &.numeric {
+    .field-outline {
+      .field-contents {
+        text-align: right;
+      }
+    }
+  }
+}

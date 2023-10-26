@@ -1,0 +1,66 @@
+@use "src/sass/themes/palette-constants" as palette;
+@use "src/sass/ifm-mixins/ifm-breakpoints" as bp;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 12px 0 0;
+  @include bp.breakpoint(small) {
+    padding: 18px 12px 0 12px;
+    border-top: 1px solid palette.$medium-grey;
+  }
+}
+.field-outer {
+  margin: 12px 0;
+}
+.finance-data {
+  display: flex;
+  flex-direction: column;
+  @include bp.breakpoint(small) {
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+  }
+  .data-row {
+    display: flex;
+    margin-bottom: 6px;
+    &.total {
+      padding-bottom: 12px;
+      border-bottom: 1px solid palette.$medium-grey;
+    }
+    .total-label {
+      flex-grow: 1;
+    }
+    .total-ammount {
+      margin: 0;
+      font-weight: bold;
+    }
+  }
+
+  .total-fields {
+    display: flex;
+    .data-total-tax {
+      margin-left: 12px;
+      margin-right: 12px;
+    }
+  }
+  .control {
+    display: flex;
+    padding-top: 6px;
+    button {
+      width: 100%;
+    }
+  }
+
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

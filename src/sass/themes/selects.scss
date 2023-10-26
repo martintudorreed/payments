@@ -1,0 +1,10 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+// Create a custom theme mixin with the desired density
+@mixin slim-select($theme) {
+  $density: -3;
+}
+
+

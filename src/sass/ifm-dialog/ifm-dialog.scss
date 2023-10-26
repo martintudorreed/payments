@@ -1,0 +1,26 @@
+.ifm-dialog {
+  .mat-mdc-dialog-container {
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    .mdc-dialog__surface {
+      display: flex;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      flex-direction: column;
+    }
+    .mdc-dialog__content {
+      display: flex;
+      color: #000;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      flex-direction: column;
+    }
+  }
+}
+.mat-dialog-container {
+
+}

@@ -1,0 +1,68 @@
+@use "src/sass/themes/palette-constants" as palette;
+
+table {
+  width: 100%;
+}
+
+mat-header-row {
+  background-color: palette.$light-grey;
+  min-height: 40px;
+  mat-header-cell {
+    padding: 6px;
+  }
+}
+
+mat-row {
+  min-height: 0;
+  height: auto;
+  mat-cell {
+    padding: 0;
+    align-items: flex-start;
+    .cell-contents {
+      margin: 6px;
+    }
+  }
+}
+
+.mat-column-type {
+  flex-basis: 12%;
+}
+.mat-column-operation {
+  flex-basis: 27%;
+}
+.mat-column-applicableTo {
+  flex-basis: 28%;
+}
+.mat-column-modifiedOn {
+  flex-basis: 14%;
+}
+.mat-column-modifiedBy {
+  flex-basis: 14%;
+}
+
+.mat-column-controls {
+  flex-basis: 165px;
+  flex-wrap: nowrap;
+  padding: 0;
+  justify-content: space-between;
+}
+
+.mat-mdc-row.cdk-drag.cdk-drag-preview {
+  mat-row {
+    min-height: 0;
+    height: auto;
+    mat-cell {
+      padding: 0 6px;
+      align-items: flex-start;
+      .cell-contents {
+        margin: 6px;
+      }
+    }
+  }
+  mat-header-cell {
+    padding: 6px;
+  }
+}
+
+
+
