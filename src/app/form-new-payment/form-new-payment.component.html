@@ -130,16 +130,12 @@
 				[totalIncTax]="totalIncTax"
 				[buttonText]="buttonText" *ngIf="(applicationModelService.currentBreakpoint$ | async) === 'XSmall'"></app-controls-payment-form>
 	</div>
-
-
-
-
 </main>
-<footer class="footer">
+<footer class="footer mat-elevation-z2-up">
 
 	<div class="footer-inner" *ngIf="tabContentType === 'newPayment'">
 		<div class="control">
-			<button mat-button color="primary" mat-dialog-close>Cancel</button>
+			<button mat-button color="primary" mat-dialog-close>Clear All</button>
 			<button mat-flat-button color="primary" (click)="doSend()">Send to Customer</button>
 		</div>
 	</div>

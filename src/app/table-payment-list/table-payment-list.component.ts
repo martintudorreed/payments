@@ -10,7 +10,7 @@ import {ApplicationModelService} from "../services/ApplicationModelService";
 export class TablePaymentListComponent {
 
   dataSource = this.localDataService.paymentListData;
-  displayedColumns: string[] = ['paymentCustomerName', 'paymentDateRaised', 'paymentAmmount', 'paymentSource', 'paymentStatus'];
+  displayedColumns: string[] = ['paymentCustomerName', 'paymentDateRaised', 'paymentSource', 'paymentStatus', 'paymentAmmount',];
 
     constructor(public applicationModelService: ApplicationModelService,
                 private localDataService: LocalDataService ) {

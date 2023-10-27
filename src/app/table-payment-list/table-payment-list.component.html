@@ -9,36 +9,37 @@
 
   <!-- Position Column -->
   <ng-container matColumnDef="paymentCustomerName" sticky>
-    <mat-header-cell *matHeaderCellDef>Customer Name</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef><mat-icon>person</mat-icon> <span class="th-text">Customer Name</span></mat-header-cell>
     <mat-cell *matCellDef="let element">
-      <span class="cell-contents">{{element.paymentCustomerName}}</span>
+		<span class="cell-contents">{{element.paymentCustomerName}}</span>
     </mat-cell>
   </ng-container>
 
   <!-- Name Column -->
   <ng-container matColumnDef="paymentDateRaised">
-    <mat-header-cell *matHeaderCellDef> Date Raised </mat-header-cell>
+    <mat-header-cell *matHeaderCellDef><mat-icon class="th-icon">event</mat-icon> <span class="th-text">Date Raised</span> </mat-header-cell>
     <mat-cell *matCellDef="let element"><span class="cell-contents"> {{element.paymentDateRaised}} </span></mat-cell>
-  </ng-container>
-
-  <!-- Weight Column -->
-  <ng-container matColumnDef="paymentAmmount">
-    <mat-header-cell *matHeaderCellDef> Amount </mat-header-cell>
-    <mat-cell *matCellDef="let element"> <span class="cell-contents">{{element.paymentAmmount}} </span></mat-cell>
   </ng-container>
 
   <!-- Symbol Column -->
   <ng-container matColumnDef="paymentSource">
-    <mat-header-cell *matHeaderCellDef> Source </mat-header-cell>
+    <mat-header-cell *matHeaderCellDef><mat-icon class="th-icon">monitor</mat-icon> <span class="th-text">Source </span> </mat-header-cell>
     <mat-cell *matCellDef="let element"> <span class="cell-contents"> {{element.paymentSource}} </span></mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="paymentStatus">
-    <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+    <mat-header-cell *matHeaderCellDef><mat-icon class="th-icon">traffic</mat-icon> 	<span class="th-text">Status</span>  </mat-header-cell>
     <mat-cell *matCellDef="let element">
       <span class="cell-contents">{{element.paymentStatus}}</span>
     </mat-cell>
   </ng-container>
+
+
+	<!-- Weight Column -->
+	<ng-container matColumnDef="paymentAmmount">
+		<mat-header-cell *matHeaderCellDef><mat-icon class="th-icon">person</mat-icon>  <span class="th-text">Amount</span> </mat-header-cell>
+		<mat-cell *matCellDef="let element"> <span class="cell-contents">{{element.paymentAmmount}} </span></mat-cell>
+	</ng-container>
 
 <!--  <ng-container matColumnDef="controls">-->
 <!--    <mat-header-cell *matHeaderCellDef></mat-header-cell>-->

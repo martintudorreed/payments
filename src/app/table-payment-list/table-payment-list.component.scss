@@ -5,10 +5,14 @@ table {
 }
 
 mat-header-row {
-  background-color: palette.$light-grey;
+  background-color: palette.$white;
+  position: relative;
+  z-index: 99;
+  box-shadow: 0px 5px 10px -1px rgba(0,0,0,0.12);
   min-height: 40px;
   mat-header-cell {
     padding: 6px;
+    font-weight: normal;
   }
 }
 
@@ -19,9 +23,13 @@ mat-row {
     padding: 0;
     align-items: flex-start;
     .cell-contents {
-      margin: 6px;
+      margin: 12px 6px;
     }
   }
+}
+
+.th-text {
+  margin: 0 12px;
 }
 
 .mat-column-type {
