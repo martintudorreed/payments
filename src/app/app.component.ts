@@ -54,4 +54,7 @@ export class AppComponent {
         }
       });
   }
+  sidenavClosed() {
+    this.applicationModelService.isSidenavActive$.next(false);
+  }
 }

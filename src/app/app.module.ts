@@ -17,6 +17,7 @@ import { HeaderComponent } from './header/header.component';
 import { HeaderTwoComponent } from './header-two/header-two.component';
 import { ViewTabbedWorkspaceComponent } from './view-tabbed-workspace/view-tabbed-workspace.component';
 import { FormNewPaymentComponent } from './form-new-payment/form-new-payment.component';
+import { ViewSettingsComponent } from './view-settings/view-settings.component';
 const routes: Routes = [
 
 ];
@@ -33,7 +34,8 @@ const routes: Routes = [
     HeaderComponent,
     HeaderTwoComponent,
     ViewTabbedWorkspaceComponent,
-    FormNewPaymentComponent
+    FormNewPaymentComponent,
+    ViewSettingsComponent
   ],
   imports: [
     BrowserModule,

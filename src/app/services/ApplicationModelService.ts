@@ -33,9 +33,6 @@ export class ApplicationModelService {
   selectedThemeBrand = 'nissan';
   selectedThemeBrand$: BehaviorSubject<string> = new BehaviorSubject<string>(this.selectedThemeBrand);
 
-  isSidenavActiveForSettings = false;
-  isSidenavActiveForSettings$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.isSidenavActiveForSettings);
-
   activeSettingsDescription = '';
   activeSettingsDescription$: BehaviorSubject<string> = new BehaviorSubject<string>(this.activeSettingsDescription);
 
@@ -47,5 +44,10 @@ export class ApplicationModelService {
 
   activeMainUITab = 0;
   activeMainUITab$: BehaviorSubject<number> = new BehaviorSubject<number>(this.activeMainUITab);
+
+
+  // There are two tabs by default always showing, this starts at 1 to reflect index values , e.g. 0 ,1,...
+  currentTabCount = 1;
+  currentTabCount$: BehaviorSubject<number> = new BehaviorSubject<number>(this.currentTabCount);
 
 }

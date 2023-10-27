@@ -8,17 +8,17 @@
         The actual rendered     columns are set as a property on the row definition" -->
 
   <!-- Position Column -->
-  <ng-container matColumnDef="paymentCustomerName" sticky>
-    <mat-header-cell *matHeaderCellDef><mat-icon>person</mat-icon> <span class="th-text">Customer Name</span></mat-header-cell>
+  <ng-container matColumnDef="paymentCustomerSurname" sticky>
+    <mat-header-cell *matHeaderCellDef><mat-icon>person</mat-icon> <span class="th-text">Surname</span></mat-header-cell>
     <mat-cell *matCellDef="let element">
-		<span class="cell-contents">{{element.paymentCustomerName}}</span>
+		<span class="cell-contents">{{element.paymentCustomerSurname}}</span>
     </mat-cell>
   </ng-container>
 
   <!-- Name Column -->
-  <ng-container matColumnDef="paymentDateRaised">
-    <mat-header-cell *matHeaderCellDef><mat-icon class="th-icon">event</mat-icon> <span class="th-text">Date Raised</span> </mat-header-cell>
-    <mat-cell *matCellDef="let element"><span class="cell-contents"> {{element.paymentDateRaised}} </span></mat-cell>
+  <ng-container matColumnDef="paymentTransactionCreatedOn">
+    <mat-header-cell *matHeaderCellDef><mat-icon class="th-icon">event</mat-icon> <span class="th-text">Created On</span> </mat-header-cell>
+    <mat-cell *matCellDef="let element"><span class="cell-contents"> {{element.paymentTransactionCreatedOn}} </span></mat-cell>
   </ng-container>
 
   <!-- Symbol Column -->
@@ -36,9 +36,9 @@
 
 
 	<!-- Weight Column -->
-	<ng-container matColumnDef="paymentAmmount">
-		<mat-header-cell *matHeaderCellDef><mat-icon class="th-icon">person</mat-icon>  <span class="th-text">Amount</span> </mat-header-cell>
-		<mat-cell *matCellDef="let element"> <span class="cell-contents">{{element.paymentAmmount}} </span></mat-cell>
+	<ng-container matColumnDef="paymentTransactionTotalIncTax">
+		<mat-header-cell *matHeaderCellDef><mat-icon class="th-icon">person</mat-icon>  <span class="th-text">Total Inc Tax</span> </mat-header-cell>
+		<mat-cell *matCellDef="let element"> <span class="cell-contents">{{element.paymentTransactionTotalIncTax}} </span></mat-cell>
 	</ng-container>
 
 <!--  <ng-container matColumnDef="controls">-->
@@ -55,7 +55,6 @@
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row
     *matRowDef="let row; columns: displayedColumns;"
-    cdkDrag
-    [cdkDragData]="row"
+	(click)="onRowClick(row.paymentIdNo)"
   ></mat-row>
 </mat-table>

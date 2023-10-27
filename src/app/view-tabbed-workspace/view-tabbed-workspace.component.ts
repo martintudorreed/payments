@@ -34,6 +34,8 @@ export class ViewTabbedWorkspaceComponent {
   }
 
   doCloseTab(ind: number) {
+    this.applicationModelService.currentTabCount$.next(this.applicationModelService.currentTabCount$.getValue() -1 );
+    this.applicationModelService.activeMainUITab$.next(0);
     console.log('close executed' + ind);
     this.tabs.splice(ind, 1);
   }

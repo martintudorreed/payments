@@ -1,18 +1,35 @@
 <mat-tab-group mat-stretch-tabs="false" class="ifm-tabs-main-ui add-ops-tabs" [selectedIndex]="(applicationModelService.activeMainUITab$ | async)" (selectedTabChange)="onTabSelected($event)">
-	<mat-tab label="Index" *ngFor="let tab of tabs; let index = index">
+	<mat-tab label="Index">
 		<ng-template mat-tab-label>
 			<span class="tab-label">
-				<mat-icon class="tab-icon" *ngIf="tab.tabContentType === 'index'">list</mat-icon>
-				<mat-icon class="tab-icon" *ngIf="tab.tabContentType === 'newPayment'">add_outline</mat-icon>
-				<mat-icon class="tab-icon" *ngIf="tab.tabContentType === 'payment'">credit_card</mat-icon>
-				<span class="tab-label-text">{{tab.tabLabel}}</span></span>
-				<button  *ngIf="tab.tabContentType === 'payment'" mat-icon-button (click)="doCloseTab(index)"><mat-icon class="close-control">close</mat-icon></button>
-
+				<mat-icon class="tab-icon">list</mat-icon>
+				<span class="tab-label-text">Index</span></span>
 		</ng-template>
 		<div class="tab-inner">
-			<app-table-payment-list *ngIf="tab.tabContentType === 'index'"></app-table-payment-list>
-			<app-form-new-payment [tabContentType]='tab.tabContentType' [isHasData]='false' *ngIf="tab.tabContentType === 'newPayment'"></app-form-new-payment>
-			<app-form-new-payment [tabContentType]='tab.tabContentType' [isHasData]='true'  *ngIf="tab.tabContentType === 'payment'"></app-form-new-payment>
+			<app-table-payment-list></app-table-payment-list>
+		</div>
+	</mat-tab>
+
+	<mat-tab label="Index">
+		<ng-template mat-tab-label>
+			<span class="tab-label">
+				<mat-icon class="tab-icon">add_outline</mat-icon>
+				<span class="tab-label-text">New Payment</span></span>
+		</ng-template>
+		<div class="tab-inner">
+			<app-form-new-payment [dataItemIndexNo]=(-1)></app-form-new-payment>
+		</div>
+	</mat-tab>
+
+	<mat-tab *ngFor="let tab of tabs; let index = index">
+		<ng-template mat-tab-label>
+			<span class="tab-label">
+				<mat-icon class="tab-icon">credit_card</mat-icon>
+				<span class="tab-label-text">{{tab.tabLabel}}</span></span>
+				<button mat-icon-button (click)="doCloseTab(index)"><mat-icon class="close-control">close</mat-icon></button>
+		</ng-template>
+		<div class="tab-inner">
+			<app-form-new-payment [tabContentType]="'payment'" [dataItemIndexNo]=(tab.tabdataItemIndexNo)></app-form-new-payment>
 		</div>
 	</mat-tab>
 <!--	<mat-tab label="Form">-->

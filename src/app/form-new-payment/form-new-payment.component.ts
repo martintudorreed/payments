@@ -10,34 +10,41 @@ import {MatSnackBar} from "@angular/material/snack-bar";
   styleUrls: ['./form-new-payment.component.scss']
 })
 export class FormNewPaymentComponent {
+  @Input() dataItemIndexNo: number = -1;
   @Input() tabContentType: string = 'newPayment';
+
+  paymentIdNo: number = -1;
+  paymentCustomerName: string = '';
+  paymentDateRaised: string =  '';
+  paymentAmmount:  number = 0.00;
+  paymentSource: string = '';
+  paymentStatus: string = '';
+  paymentTransactionProviderId: number = 0;
+  paymentTransactionNumber: string = '';
+  paymentTransactionTotalExTax: number = 0.00;
+  paymentTransactionTotalTax: number = 0.00;
+  paymentTransactionTotalIncTax: number = 0.00;
+  paymentTransactionCreatedOn: string = '';
+  paymentTransactionCreatedBy: string = '';
+  paymentTransactionExpiry: string = '';
+  paymentCustomerForename: string = '';
+  paymentCustomerSurname: string = '';
+  paymentCustomerTelNo: string = '';
+  paymentCustomerEmail: string = '';
+  paymentAddress1: string = '';
+  paymentAddress2: string = '';
+  paymentAddress3: string = '';
+  paymentState: string = '';
+  paymentPostCode: string = '';
+  paymentInvoiceLines: string = '';
+
+
+  tabIndex: number = -1;
+
+  dataItems = this.localDataService.paymentListData;
+  dataItem: any;
+
   tabs = this.localDataService.mainUITabsData;
-  @Input() poweredBy: string = ''
-  @Input() cardHolder: string = 'Martin Tudor Reed'
-  @Input() cardNumber: string = ''
-  @Input() cardExpirationDate: string = '';
-  @Input() cardCVC: string = '';
-  @Input() contactNumber: string = '021 885839';
-  @Input() contactEmail: string = 'mtudoreed@infomedia.com.au';
-  @Input() addressLine1: string = '7 Palazzo Drive';
-  @Input() addressLine2: string = 'Papamoa';
-  @Input() addressLine3: string = 'Papamoa East';
-  @Input() state: string = 'Bay of Plenty';
-  @Input() postcode: string = '3118';
-  @Input() reviewText: string = 'Customer';
-  @Input() paymentText: string = 'Invoice';
-  @Input() paymentReference: string = 'RO88422';
-  @Input() buttonText: string = 'Go Pay';
-  @Input() summaryData: string = 'Replace Brake Discs and Pads, Front\nReplace Globe, Fog Lamp Right Rear\nReplace wiper blades\n';
-  @Input() editMode: boolean = false;
-  @Input() isHasData: boolean = true;
-  @Input() isHasAddress: boolean = true;
-  @Input() noBorder: boolean = false;
-
-  @Input() totalExTax: number = 80.00;
-  @Input() totalTax: number = 8.00;
-  @Input() totalIncTax: number = 88.00;
-
   paymentMethods = this.localDataService.paymentMethodData;
   selectedPaymentMethod = this.paymentMethods[0].paymentMethodID;
 
@@ -47,21 +54,37 @@ export class FormNewPaymentComponent {
               private _snackBar: MatSnackBar) {
   }
   ngOnInit() {
-    if(!this.isHasData) {
-      this.cardHolder = '';
-      this.contactNumber = '';
-      this.contactEmail = '';
-      this.addressLine1 = '';
-      this.addressLine2 = '';
-      this.addressLine3 = '';
-      this.state = '';
-      this.postcode = '';
-      this.summaryData = '';
-      this.paymentReference = '';
-      this.totalExTax = 0.00;
-      this.totalTax = 0.00;
-      this.totalIncTax = 0.00;
+    if (this.dataItemIndexNo !== -1) {
+      this.dataItem = this.dataItems[this.dataItemIndexNo];
+
+      this.paymentIdNo = this.dataItem.paymentIdNo ;
+      this.paymentCustomerName = this.dataItem.paymentCustomerName;
+      this.paymentDateRaised = this.dataItem.paymentDateRaised;
+      this.paymentAmmount = this.dataItem.paymentAmmount;
+      this.paymentSource = this.dataItem.paymentSource;
+      this.paymentStatus = this.dataItem.paymentStatus;
+      this.paymentTransactionProviderId = this.dataItem.paymentTransactionProviderId;
+      this.paymentTransactionNumber = this.dataItem.paymentTransactionNumber;
+      this.paymentTransactionTotalExTax = this.dataItem.paymentTransactionTotalExTax;
+      this.paymentTransactionTotalTax = this.dataItem.paymentTransactionTotalTax;
+      this.paymentTransactionTotalIncTax = this.dataItem.paymentTransactionTotalIncTax;
+      this.paymentTransactionCreatedOn = this.dataItem.paymentTransactionCreatedOn;
+      this.paymentTransactionCreatedBy = this.dataItem.paymentTransactionCreatedBy;
+      this.paymentTransactionExpiry = this.dataItem.paymentTransactionExpiry;
+      this.paymentCustomerForename = this.dataItem.paymentCustomerForename;
+      this.paymentCustomerSurname = this.dataItem.paymentCustomerSurname;
+      this.paymentCustomerTelNo = this.dataItem.paymentCustomerTelNo;
+      this.paymentCustomerEmail = this.dataItem.paymentCustomerEmail;
+      this.paymentAddress1 = this.dataItem.paymentAddress1;
+      this.paymentAddress2 = this.dataItem.paymentAddress2;
+      this.paymentAddress3 = this.dataItem.paymentAddress3;
+      this.paymentState = this.dataItem.paymentState;
+      this.paymentPostCode = this.dataItem.paymentPostCode;
+      this.paymentInvoiceLines = this.dataItem.paymentInvoiceLines;
+
     }
+
+    console.log('form is loading with adata item number of ' + this.dataItemIndexNo);
   }
 
   onSelectedCardTypeChange() {
@@ -69,13 +92,15 @@ export class FormNewPaymentComponent {
   }
 
   doSend() {
+    this.tabIndex = this.applicationModelService.currentTabCount$.getValue() + 1;
     this.tabs.push({
-      tabIndex: this.tabs.length + 1,
+      tabIndex: this.tabIndex,
       tabLabel: 'TN:' + (this.tabs.length + 1).toString(),
-      tabContentType: 'payment',});
+      tabContentType: 'payment',
+      tabdataItemIndexNo: -1});
 
     setTimeout(() => {
-      this.applicationModelService.activeMainUITab$.next(this.tabs.length);
+      this.applicationModelService.activeMainUITab$.next(0);
 
       this._snackBar.open('ROXXXXXX Sent to User ' , 'Undo', {
         duration: 3000,

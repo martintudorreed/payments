@@ -1,2 +1,16 @@
-<app-header></app-header>
-<router-outlet></router-outlet>
+<mat-sidenav-container id="sidenavContainer">
+	<!--Settings-->
+	<mat-sidenav id="settingsSidenav"
+				 mode="over"
+				 position="end"
+				 autoFocus="false"
+				 (closed)="sidenavClosed()"
+				 [opened]="(applicationModelService.isSidenavActive$ | async)"
+				 class="settings-sidenav">
+		<app-view-settings></app-view-settings>
+	</mat-sidenav>
+	<mat-sidenav-content>
+		<app-header></app-header>
+		<router-outlet></router-outlet>
+	</mat-sidenav-content>
+</mat-sidenav-container>

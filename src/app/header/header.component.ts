@@ -21,9 +21,8 @@ export class HeaderComponent {
     ev.stopPropagation();
   }
 
-  doOpenForSettings(setDesc: string) {
-    this.applicationModelService.isSidenavActiveForSettings$.next(true);
-    this.applicationModelService.activeSettingsDescription$.next(setDesc);
+  doOpenSettings() {
+    this.applicationModelService.isSidenavActive$.next(true);
   }
 
   doGoHome() {
@@ -37,4 +36,6 @@ export class HeaderComponent {
     this.applicationModelService.activeRouteDescription$.next(cat);
     this.applicationModelService.isSidenavActive$.next(true);
   }
+
+
 }
