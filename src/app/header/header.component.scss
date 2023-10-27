@@ -1,0 +1,69 @@
+@use "src/sass/themes/palette-constants" as palette;
+@use "src/sass/ifm-mixins/ifm-breakpoints" as bp;
+
+:host {
+  display: flex;
+  align-items: center;
+  position: relative;
+  background-color: palette.$white;
+  z-index: 99;
+}
+
+.header-inner {
+  display: flex;
+  width: 100%;
+  min-height: 54px;
+  align-items: center;
+  @include bp.breakpoint(tablet-portrait) {
+    border-bottom: 1px solid palette.$light-grey;
+    min-height: 58px;
+  }
+  @include bp.breakpoint(tablet-landscape) {
+    border-bottom: 1px solid palette.$light-grey;
+    min-height: 58px;
+  }
+  .brand-container {
+    display: flex;
+    flex-grow: 1;
+    padding: 0 12px;
+    align-items: center;
+    .app-logo {
+      margin: 0 24px;
+      max-height: 28px;
+    }
+  }
+  .control-container {
+    display: flex;
+    align-items: center;
+    .user-type {
+      margin: 0 6px;
+    }
+
+    .region-select {
+
+    }
+
+  }
+  .user-controls {
+    display: flex;
+    padding: 0 12px;
+    align-items: center;
+  }
+  .help {
+    padding: 0 6px;
+  }
+  .settings {
+    padding: 0 6px;
+  }
+  .option-label {
+    padding: 0 6px;
+  }
+}
+
+.flag {
+  height: 14px;
+}
+
+.control-container-in-menu {
+  margin: 0 6px;
+}

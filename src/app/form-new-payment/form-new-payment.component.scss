@@ -1,0 +1,154 @@
+@use "src/sass/themes/palette-constants" as palette;
+@use "src/sass/ifm-mixins/ifm-breakpoints" as bp;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.main {
+  display: flex;
+  height: 100%;
+  .payments-inner {
+    padding: 12px;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    display: flex;
+    border-radius: 6px;
+    &.no-border {
+      border: 0;
+    }
+
+    @include bp.breakpoint(small) {
+      flex-direction: column;
+      flex-grow: 1;
+      height: 100%;
+      border: 0;
+      border-radius: 0;
+      margin: 0;
+    }
+    .header {
+      display: flex;
+      .headline {
+        margin: 12px 0;
+        display: flex;
+        width: 100%;
+        .section-title {
+          flex-grow: 1;
+        }
+      }
+      @include bp.breakpoint(small) {
+        margin: 0 0 12px 0;
+      }
+      .data-reference {
+        margin: 12px 0;
+      }
+    }
+    .colA {
+      display: flex;
+      flex-direction: column;
+      order: 2;
+      padding: 0 12px 12px;
+      margin: 0 0 0 12px;
+      width: 100%;
+      background-color: palette.$light-grey;
+      border: 1px solid palette.$medium-grey;
+      border-radius: 6px;
+      flex-shrink: 1;
+      @include bp.breakpoint(small) {
+        order: 1;
+        padding: 0;
+        flex-grow: 1;
+        background-color: palette.$white;
+        margin: 0 ;
+        border: 0;
+      }
+      .summary {
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 12px;
+        border-bottom: 1px solid palette.$medium-grey;
+        flex-grow: 1;
+        @include bp.breakpoint(small) {
+
+          margin-bottom: 0;
+        }
+        .summary-text {
+          display: flex;
+          flex-direction: column;
+          margin-bottom: 12px;
+        }
+        .summary-controls {
+          display: flex;
+          justify-content: flex-end;
+        }
+      }
+
+    }
+
+    .colB {
+      order: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 280px;
+      flex-shrink: 1;
+      overflow: auto;
+      @include bp.breakpoint(small) {
+        order: 2;
+        flex-grow: 1;
+        justify-content: center;
+      }
+      .header-review {
+        margin: 6px 12px 12px 12px;
+        @include bp.breakpoint(small) {
+          margin: 12px;
+          display: none;
+        }
+      }
+      .side-by-side-fields {
+        display: flex;
+        .data-ccv {
+          margin-left: 12px;
+        }
+      }
+      .field-outer {
+        margin-bottom: 12px;
+        &.data-address-item {
+          @include bp.breakpoint(small) {
+            display: none;
+          }
+        }
+        &.data-card-field {
+          display: none;
+          @include bp.breakpoint(small) {
+            display: flex;
+          }
+        }
+      }
+    }
+
+    .logo {
+      max-width: 180px;
+    }
+
+    footer {
+      padding-top: 12px;
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+}
+
+.footer {
+  padding: 0 12px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 64px;
+  border-top:1px solid palette.$medium-grey;
+  background-color: palette.$very-light-grey;
+}

@@ -1,0 +1,55 @@
+@use "src/sass/themes/palette-constants" as palette;
+@use "src/sass/ifm-mixins/ifm-breakpoints" as bp;
+
+:host {
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 9;
+}
+
+.header-inner {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  min-height: 42px;
+  align-items: center;
+  background-color: palette.$dark-blue;
+
+  &.bottom-placement {
+    padding: 6px;
+    min-height: 54px;
+  }
+  @include bp.breakpoint(tablet-portrait) {
+    padding: 6px;
+    min-height: 54px;
+  }
+  @include bp.breakpoint(tablet-landscape) {
+    padding: 6px;
+    min-height: 54px;
+  }
+  &.dark-bue {
+    button {
+      border: 1px solid palette.$white;
+    }
+  }
+  .home-control {
+    margin: 0 6px;
+    display: flex;
+    align-items: center;
+  }
+  .active-route {
+    margin: 0;
+    display: flex;
+    align-items: center;
+  }
+  &.mobile {
+    min-height: 22px;
+  }
+  .crumb-separator {
+    margin : 12px;
+  }
+  .text {
+    margin: 0 6px;
+  }
+}

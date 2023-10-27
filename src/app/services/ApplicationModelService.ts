@@ -30,4 +30,22 @@ export class ApplicationModelService {
   browserWindowHeight = 22;
   browserWindowHeight$: BehaviorSubject<number> = new BehaviorSubject<number>(this.browserWindowHeight);
 
+  selectedThemeBrand = 'nissan';
+  selectedThemeBrand$: BehaviorSubject<string> = new BehaviorSubject<string>(this.selectedThemeBrand);
+
+  isSidenavActiveForSettings = false;
+  isSidenavActiveForSettings$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.isSidenavActiveForSettings);
+
+  activeSettingsDescription = '';
+  activeSettingsDescription$: BehaviorSubject<string> = new BehaviorSubject<string>(this.activeSettingsDescription);
+
+  isLevel2Active = false;
+  isLevel2Active$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.isLevel2Active);
+
+  isSidenavActive = false;
+  isSidenavActive$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.isSidenavActive);
+
+  activeMainUITab = 0;
+  activeMainUITab$: BehaviorSubject<number> = new BehaviorSubject<number>(this.activeMainUITab);
+
 }

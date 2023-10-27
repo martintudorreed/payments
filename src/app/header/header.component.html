@@ -1,0 +1,84 @@
+<div class="header-inner">
+	<div class="control" [matMenuTriggerFor]="homeMenu" *ngIf="(applicationModelService.currentBreakpoint$ | async) == 'TabletPortrait' || (applicationModelService.currentBreakpoint$ | async) == 'TabletLandscape'"><button mat-icon-button tabindex="-1"><mat-icon>menu</mat-icon></button></div>
+	<mat-menu #homeMenu="matMenu">
+		<button mat-menu-item (click)="doSidenavMobile('/', 'Home')">Home</button>
+		<button mat-menu-item (click)="doSidenavMobile('vehicle-categories', 'Vehicle Categories')">Vehicle Categories</button>
+		<button mat-menu-item (click)="doSidenavMobile('section-framework','Section Framework')">Section Framework</button>
+		<button mat-menu-item (click)="doSidenavMobile('time-adjustment','Time Adjustment')">Labour Time Adjustment</button>
+		<button mat-menu-item (click)="doSidenavMobile('operation-authoring','Operation Authoring')">Operation Authoring</button>
+		<button mat-menu-item (click)="doSidenavMobile('part-and-sundry-substitution','Part and Sundry Substitution')">Part and Sundry Substitution</button>
+		<button mat-menu-item (click)="doSidenavMobile('upsell-recommendations','Upsell Recommendations')">Upsell Recommendations</button>
+		<button mat-menu-item (click)="doSidenavMobile('operation-packages','Operation Packages')">Operation Packages</button>
+		<button mat-menu-item (click)="doSidenavMobile('item-bundles','Item Bundles')">Item Bundles</button>
+		<button mat-menu-item (click)="doSidenavMobile('discount-rules','Discount Rules')">Discount Rules</button>
+		<button mat-menu-item (click)="doSidenavMobile('price-rounding','Price Rounding')">Price Rounding</button>
+		<button mat-menu-item (click)="doSidenavMobile('pricing-matrix','Pricing Matrix')">Pricing Matrix</button>
+		<button mat-menu-item (click)="doSidenavMobile('part-price-markups','Part Price Mark-ups')">Part Price Markup</button>
+		<button mat-menu-item (click)="doSidenavMobile('external-systems','External Systems')">External Systems</button>
+		<button mat-menu-item (click)="doSidenavMobile('file-export','File Import / Export')">File Import / Export</button>
+		<button mat-menu-item (click)="doSidenavMobile('file-import','File Import')">File Import</button>
+	</mat-menu>
+	<div class="brand-container">
+		<!--  <img class="logo" src="./assets/svg-logos/{{applicationModelService.selectedThemeBrand$.value}}-logo.svg" (click)="doShowSidebar('start', 'settings')" alt="logo" />-->
+		<img class="logo" (click)="doGoHome()" src="./assets/svg-logos/{{applicationModelService.selectedThemeBrand$.value}}-logo.svg" alt="logo" />
+		<img class="app-logo" (click)="doGoHome()" src="./assets/svg-logos/super-service-payments-logo.svg" alt="SuperservicePayments" />
+		<!--    <mat-label>Market</mat-label>-->
+<!--		<div class="control-container" *ngIf="(applicationModelService.currentBreakpoint$ | async) === 'Medium' || (applicationModelService.currentBreakpoint$ | async) === 'Large' || (applicationModelService.currentBreakpoint$ | async) === 'XLarge'"alt="Australian Flag">-->
+<!--			<span class="user-type">RBU :</span>-->
+<!--			<img class='flag'  src="./assets/flags/au.svg" alt="Australian Flag" />-->
+<!--			<mat-form-field class="no-hint region-select white-bg no-ripple-line">-->
+<!--				<mat-select [(value)]="selectedRegion">-->
+<!--					<mat-option  [value]="region.regionValue" *ngFor="let region of localRegions"><img class='flag' src="./assets/flags/au.svg" alt="Australian Flag"/><span class="option-label">{{ region.regionName }}</span></mat-option>-->
+<!--				</mat-select>-->
+<!--			</mat-form-field>-->
+<!--		</div>-->
+
+	</div>
+	<div class="user-controls" *ngIf="(applicationModelService.currentBreakpoint$ | async) !== 'XSmall'">
+		<button mat-button [matMenuTriggerFor]="userMenu" class="primary-text"><mat-icon>account_circle</mat-icon><span>Martin Tudor Reed</span></button>
+	</div>
+	<mat-menu #userMenu="matMenu" class="ifm-menu user-menu">
+		<button mat-menu-item><mat-icon color="warn">logout</mat-icon>Logout</button>
+	</mat-menu>
+	<div class="help">
+		<button mat-icon-button class="primary-text" [matMenuTriggerFor]="helpMenu"><mat-icon>help_outline</mat-icon></button>
+	</div>
+	<div class="settings">
+		<button mat-icon-button [matMenuTriggerFor]="settingsMenu" class="primary-text"><mat-icon>settings</mat-icon></button>
+	</div>
+
+</div>
+
+<mat-menu #helpMenu="matMenu">
+	<button mat-menu-item>Settings Guide</button>
+	<button mat-menu-item (click)="doOpenForSettings('Prototype Settings')">About</button>
+</mat-menu>
+
+<mat-menu #settingsMenu="matMenu" class="ifm-menu user-menu">
+	<div class="user-controls" *ngIf="(applicationModelService.currentBreakpoint$ | async) === 'XSmall'">
+		<button mat-button [matMenuTriggerFor]="userMenu" class="primary-text"><mat-icon>account_circle</mat-icon><span>Martin Tudor Reed</span></button>
+	</div>
+	<div class="control-container control-container-in-menu" *ngIf="(applicationModelService.currentBreakpoint$ | async) === 'Small' || (applicationModelService.currentBreakpoint$ | async) === 'XSmall'">
+		<img class='flag' src="./assets/flags/au.svg" alt="Australian Flag" />
+		<mat-form-field class="no-hint region-select white-bg no-ripple-line"  (click)="doAbsorb($event)">
+			<mat-select [(value)]="selectedRegion">
+				<mat-option  [value]="region.regionValue" *ngFor="let region of localRegions"><img class='flag' src="./assets/flags/au.svg" alt="Australian Flag"/><span class="option-label">{{ region.regionName }}</span></mat-option>
+			</mat-select>
+		</mat-form-field>
+		<mat-divider></mat-divider>
+	</div>
+
+	<button mat-menu-item (click)="doOpenForSettings('Difficulty Levels')">Difficulty Levels</button>
+	<button mat-menu-item>Tax Rates</button>
+	<button mat-menu-item>Labour Rates</button>
+	<button mat-menu-item>Parts Pricing</button>
+	<button mat-menu-item>Sundries</button>
+	<button mat-menu-item (click)="doOpenForSettings('Price Settings')">Price Settings</button>
+	<!--  <button mat-menu-item (click)="doOpenForSettings('Comparison Thresholds')">Comparison Thresholds</button>-->
+	<button mat-menu-item (click)="doOpenForSettings('Employee Groups')">Employee Groups</button>
+	<button mat-menu-item (click)="doOpenForSettings('Dealer Regions')">Dealer Region</button>
+	<button mat-menu-item (click)="doOpenForSettings('Security')">Security</button>
+	<button mat-menu-item (click)="doOpenForSettings('Feature Access')">Feature Access</button>
+	<button mat-menu-item (click)="doOpenForSettings('Market Settings')">Market Settings</button>
+
+</mat-menu>

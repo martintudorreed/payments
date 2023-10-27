@@ -13,6 +13,10 @@ import { DialogSendToCustomerComponent } from './dialog-send-to-customer/dialog-
 import { ControlProviderSelectComponent } from './control-provider-select/control-provider-select.component';
 import { DialogPaymentAppComponent } from './dialog-payment-app/dialog-payment-app.component';
 import { TablePaymentListComponent } from './table-payment-list/table-payment-list.component';
+import { HeaderComponent } from './header/header.component';
+import { HeaderTwoComponent } from './header-two/header-two.component';
+import { ViewTabbedWorkspaceComponent } from './view-tabbed-workspace/view-tabbed-workspace.component';
+import { FormNewPaymentComponent } from './form-new-payment/form-new-payment.component';
 const routes: Routes = [
 
 ];
@@ -25,7 +29,11 @@ const routes: Routes = [
     DialogSendToCustomerComponent,
     ControlProviderSelectComponent,
     DialogPaymentAppComponent,
-    TablePaymentListComponent
+    TablePaymentListComponent,
+    HeaderComponent,
+    HeaderTwoComponent,
+    ViewTabbedWorkspaceComponent,
+    FormNewPaymentComponent
   ],
   imports: [
     BrowserModule,

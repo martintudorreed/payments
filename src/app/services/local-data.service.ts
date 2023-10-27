@@ -5,6 +5,12 @@ export interface paymentMethods {
   paymentMethodName: string;
 }
 
+export interface mainUITabs {
+  tabIndex: number;
+  tabLabel: string;
+  tabContentType: string;
+}
+
 export interface paymentData {
   paymentCustomerName: string;
   paymentDateRaised: string;
@@ -13,6 +19,12 @@ export interface paymentData {
   paymentStatus: string;
 }
 
+export interface regions {
+  regionValue: string;
+  regionName: string;
+}
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +32,30 @@ export interface paymentData {
 export class LocalDataService {
 
   constructor() { }
+
+  mainUITabsData: mainUITabs [] = [
+    {
+      tabIndex: 0,
+      tabLabel: 'Index',
+      tabContentType: 'index',
+    },
+    {
+      tabIndex: 1,
+      tabLabel: 'New Payment',
+      tabContentType: 'newPayment',
+    },
+  ]
+
+  regionData: regions [] = [
+    {
+      regionValue: "australia",
+      regionName: "Australia"
+    },
+    {
+      regionValue: "newzealand",
+      regionName: "New Zealand"
+    }
+  ]
 
   paymentMethodData: paymentMethods [] = [
     {
