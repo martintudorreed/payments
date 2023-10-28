@@ -1,43 +1,45 @@
-<table class="ifm-table">
+<table class="ifm-table" *ngIf="(applicationModelService.currentBreakpoint$ | async) !== 'Small' && (applicationModelService.currentBreakpoint$ | async) !== 'XSmall'">
 	<thead>
 		<tr>
 			<th>
 				<div class="cell-inner">
-					<mat-icon>person</mat-icon> <span>Surname</span>
+					<mat-icon class="th-icon">event</mat-icon><span class="header-text">Created on</span>
+					<mat-icon>vertical_align_bottom</mat-icon>
+<!--					<mat-icon>upgrade</mat-icon> ascending-->
 				</div>
 			</th>
 			<th>
 				<div class="cell-inner">
-					<mat-icon class="th-icon">event</mat-icon><span>Created on</span>
+					<mat-icon>person</mat-icon> <span class="header-text">Surname</span>
 				</div>
 			</th>
 			<th>
 				<div class="cell-inner">
-					<mat-icon class="th-icon">monitor</mat-icon> <span>Source</span>
+					<mat-icon class="th-icon">monitor</mat-icon><span class="header-text">Source</span>
 				</div>
 			</th>
 			<th>
 				<div class="cell-inner">
-					<mat-icon class="th-icon">traffic</mat-icon> <span>Status</span>
+					<mat-icon class="th-icon">traffic</mat-icon><span class="header-text">Status</span>
 				</div>
 			</th>
 			<th>
 				<div class="cell-inner">
-					<mat-icon class="th-icon">paid</mat-icon> <span>Total Inc Tax</span>
+					<mat-icon class="th-icon">paid</mat-icon> <span class="header-text">Total Inc Tax</span>
 				</div>
 			</th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr *ngFor="let item of dataSource,let i = index" (click)="onRowClick(item.paymentIdNo)">
+		<tr *ngFor="let item of dataSource,let i = index" (click)="onRowClick(item.paymentIdNo)" class="is-selectable">
 			<td>
 				<div class="cell-inner">
-					{{item.paymentCustomerSurname}}
+					{{item.paymentTransactionCreatedOn}}
 				</div>
 			</td>
 			<td>
 				<div class="cell-inner">
-					{{item.paymentTransactionCreatedOn}}
+					{{item.paymentCustomerSurname}}
 				</div>
 			</td>
 			<td>
@@ -59,6 +61,20 @@
 	</tbody>
 </table>
 
+<div class="cards-container" *ngIf="(applicationModelService.currentBreakpoint$ | async) === 'Small' || (applicationModelService.currentBreakpoint$ | async) === 'XSmall'">
+	<mat-card *ngFor="let item of dataSource" class="card-generic">
+		<mat-card-content class="card-inner" (click)="onRowClick(item.paymentIdNo)">
+			<div class="naked-form-field data-type">
+				<div class="field-label"><span>Created On</span></div>
+				<div class="field-outline">
+					<div class="field-contents">
+						<span>{{item.paymentTransactionCreatedOn}}</span>
+					</div>
+				</div>
+			</div>
+		</mat-card-content>
+	</mat-card>
+</div>
 
 <!--<mat-table-->
 <!--  #table-->

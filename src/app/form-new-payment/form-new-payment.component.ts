@@ -96,7 +96,7 @@ export class FormNewPaymentComponent {
       tabContentType: 'payment',
       tabdataItemIndexNo: -1});
 
-    this.dataItems.push({
+    this.dataItems.unshift({
       paymentIdNo: this.paymentIdNo,
       paymentCustomerName:  this.paymentCustomerName,
       paymentDateRaised: this.paymentDateRaised,

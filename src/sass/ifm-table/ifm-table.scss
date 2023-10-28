@@ -2,24 +2,58 @@
 
 .ifm-table {
   width: 100%;
-
+  border-collapse: collapse;
   thead {
-    height: 40px;
+    height: 48px;
     tr {
       background-color: palette.$very-light-grey;
       th {
         font-weight: 400;
-        padding: 6px;
         text-align: left;
-        color: palette.$very-dark-grey
+        color: palette.$very-dark-grey;
+        border-bottom: 1px solid palette.$medium-grey;
+        box-shadow: 0px 8px 10px -5px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        border-left: 1px solid $medium-grey;
+        &:first-child {
+          border-left:1px solid $white;
+          border-top-left-radius: 6px;
+        }
+        &:last-child {
+          border-right:1px solid $white;
+          border-top-right-radius: 6px;
+        }
+        .cell-inner {
+          display: flex;
+          align-items: center;
+          padding: 6px;
+          .header-text {
+            margin: 0 6px;
+            flex-grow: 1;
+          }
+        }
       }
     }
   }
   tbody {
     tr {
+      &:first-child {
+        box-shadow: inset 0px 3px 8px -4px rgba(0,0,0,0.2);
+      }
       background-color: palette.$white;
       height: 40px;
+      &.is-selectable {
+        &:hover {
+          cursor: pointer;
+          background-color: $light-grey;
+        }
+      }
       td {
+        .cell-inner {
+          padding: 6px;
+        }
         border-bottom: 1px solid palette.$medium-light-grey;
       }
     }

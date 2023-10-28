@@ -23,9 +23,6 @@ export class AppComponent {
     [Breakpoints.Medium, 'Medium'],
     [Breakpoints.Large, 'Large'],
     [Breakpoints.XLarge, 'XLarge'],
-    [Breakpoints.Tablet, 'Tablet'],
-    [Breakpoints.TabletPortrait, 'TabletPortrait'],
-    [Breakpoints.TabletLandscape, 'TabletLandscape'],
   ]);
 
   constructor( public dialog: MatDialog,
@@ -39,9 +36,6 @@ export class AppComponent {
         Breakpoints.Medium,
         Breakpoints.Large,
         Breakpoints.XLarge,
-        Breakpoints.Tablet,
-        Breakpoints.TabletPortrait,
-        Breakpoints.TabletLandscape,
       ])
       .pipe(takeUntil(this.destroyed))
       .subscribe(result => {
