@@ -1,3 +1,6 @@
+@use "src/sass/themes/palette-constants" as palette;
+@use "src/sass/ifm-mixins/ifm-breakpoints" as bp;
+
 :host {
   display: flex;
   flex-direction: column;
@@ -10,10 +13,17 @@
   display: flex;
   width: 100%;
   align-items: center;
+  background-color: palette.$very-light-grey;
   .header-title {
     flex-grow: 1;
     .title-text {
       margin: 0 12px;
     }
+  }
+}
+
+.main {
+  .tab-inner {
+    padding: 12px;
   }
 }

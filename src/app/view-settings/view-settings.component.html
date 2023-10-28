@@ -6,3 +6,47 @@
 		<button mat-icon-button color="primary" (click)="doClose()"><mat-icon>close</mat-icon></button>
 	</div>
 </header>
+<main class="main">
+	<mat-tab-group mat-stretch-tabs="false" class="ifm-tabs" [selectedIndex]="(applicationModelService.activeSettingsUITab$ | async)" (selectedTabChange)="onTabSelected($event)">
+		<mat-tab label="General Settings">
+			<ng-template mat-tab-label>
+			<span class="tab-label">
+				<mat-icon class="tab-icon">language</mat-icon>
+				<span class="tab-label-text">General Settings</span></span>
+			</ng-template>
+			<div class="tab-inner">
+				<span>General Settings goe here</span>
+			</div>
+		</mat-tab>
+		<mat-tab label="Email Templates">
+			<ng-template mat-tab-label>
+			<span class="tab-label">
+				<mat-icon class="tab-icon">email</mat-icon>
+				<span class="tab-label-text">Email Templates</span></span>
+			</ng-template>
+			<div class="tab-inner">
+				<span>Email Template Settings go here</span>
+			</div>
+		</mat-tab>
+		<mat-tab label="SMS Templates">
+			<ng-template mat-tab-label>
+			<span class="tab-label">
+				<mat-icon class="tab-icon">phone_iphone</mat-icon>
+				<span class="tab-label-text">SMS Templates</span></span>
+			</ng-template>
+			<div class="tab-inner">
+				<span>SMS Templates Settings go here</span>
+			</div>
+		</mat-tab>
+		<mat-tab label="Rich Text Teplates">
+			<ng-template mat-tab-label>
+			<span class="tab-label">
+				<mat-icon class="tab-icon">chat</mat-icon>
+				<span class="tab-label-text">Rich Text Teplates</span></span>
+			</ng-template>
+			<div class="tab-inner">
+				<span>Rich Text Teplate Settings go here</span>
+			</div>
+		</mat-tab>
+	</mat-tab-group>
+</main>

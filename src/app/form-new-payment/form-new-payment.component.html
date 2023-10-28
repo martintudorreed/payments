@@ -145,8 +145,10 @@
 <footer class="footer mat-elevation-z2-up">
 
 	<div class="footer-inner" *ngIf="tabContentType === 'newPayment'">
-		<div class="control">
-			<button mat-button color="primary" mat-dialog-close>Clear All</button>
+		<div class="control-secondary">
+			<button mat-button color="primary" mat-dialog-close (click)="doClearFields()">Clear All</button>
+		</div>
+		<div class="control-primary">
 			<button mat-flat-button color="primary" (click)="doSend()">Send to Customer</button>
 		</div>
 	</div>

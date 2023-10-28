@@ -18,10 +18,8 @@ export interface paymentData {
   paymentIdNo: number;
   paymentCustomerName: string;
   paymentDateRaised: string;
-  paymentAmmount: string;
   paymentSource: string;
   paymentStatus: string;
-
   paymentTransactionProviderId: number;
   paymentTransactionNumber: string;
   paymentTransactionTotalExTax: number;
@@ -116,7 +114,6 @@ export class LocalDataService {
       paymentIdNo: 0,
       paymentCustomerName: 'Martin Tudor Reed',
       paymentDateRaised: '22/08/2032 4:44 PM',
-      paymentAmmount: '$88.88',
       paymentSource: 'Triage',
       paymentStatus: 'Paid in Full',
       paymentTransactionProviderId: 0,
@@ -142,7 +139,6 @@ export class LocalDataService {
       paymentIdNo: 1,
       paymentCustomerName: 'Martin Tudor Reed',
       paymentDateRaised: '22/08/2032 4:44 PM',
-      paymentAmmount: '$88.88',
       paymentSource: 'Triage',
       paymentStatus: 'Paid in Full',
       paymentTransactionProviderId: 0,
@@ -168,7 +164,6 @@ export class LocalDataService {
       paymentIdNo: 2,
       paymentCustomerName: 'Martin Tudor Reed',
       paymentDateRaised: '22/08/2032 4:44 PM',
-      paymentAmmount: '$88.88',
       paymentSource: 'Triage',
       paymentStatus: 'Paid in Full',
       paymentTransactionProviderId: 0,

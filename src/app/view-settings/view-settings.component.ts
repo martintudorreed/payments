@@ -16,4 +16,8 @@ export class ViewSettingsComponent {
   doClose() {
     this.applicationModelService.isSidenavActive$.next(false);
   }
+
+  onTabSelected(ev: any) {
+    this.applicationModelService.activeSettingsUITab$.next(ev.index);
+  }
 }

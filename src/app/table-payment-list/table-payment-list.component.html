@@ -1,60 +1,122 @@
-<mat-table
-  #table
-  [dataSource]="dataSource"
->
-  <!---
-  (cdkDropListDropped)="drop($event)"
-  Note that these columns can be defined in any order.
-        The actual rendered     columns are set as a property on the row definition" -->
+<table class="ifm-table">
+	<thead>
+		<tr>
+			<th>
+				<div class="cell-inner">
+					<mat-icon>person</mat-icon> <span>Surname</span>
+				</div>
+			</th>
+			<th>
+				<div class="cell-inner">
+					<mat-icon class="th-icon">event</mat-icon><span>Created on</span>
+				</div>
+			</th>
+			<th>
+				<div class="cell-inner">
+					<mat-icon class="th-icon">monitor</mat-icon> <span>Source</span>
+				</div>
+			</th>
+			<th>
+				<div class="cell-inner">
+					<mat-icon class="th-icon">traffic</mat-icon> <span>Status</span>
+				</div>
+			</th>
+			<th>
+				<div class="cell-inner">
+					<mat-icon class="th-icon">paid</mat-icon> <span>Total Inc Tax</span>
+				</div>
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let item of dataSource,let i = index" (click)="onRowClick(item.paymentIdNo)">
+			<td>
+				<div class="cell-inner">
+					{{item.paymentCustomerSurname}}
+				</div>
+			</td>
+			<td>
+				<div class="cell-inner">
+					{{item.paymentTransactionCreatedOn}}
+				</div>
+			</td>
+			<td>
+				<div class="cell-inner">
+					{{item.paymentSource}}
+				</div>
+			</td>
+			<td>
+				<div class="cell-inner">
+					{{item.paymentStatus}}
+				</div>
+			</td>
+			<td>
+				<div class="cell-inner">
+					{{item.paymentTransactionTotalIncTax}}
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
 
-  <!-- Position Column -->
-  <ng-container matColumnDef="paymentCustomerSurname" sticky>
-    <mat-header-cell *matHeaderCellDef><mat-icon>person</mat-icon> <span class="th-text">Surname</span></mat-header-cell>
-    <mat-cell *matCellDef="let element">
-		<span class="cell-contents">{{element.paymentCustomerSurname}}</span>
-    </mat-cell>
-  </ng-container>
 
-  <!-- Name Column -->
-  <ng-container matColumnDef="paymentTransactionCreatedOn">
-    <mat-header-cell *matHeaderCellDef><mat-icon class="th-icon">event</mat-icon> <span class="th-text">Created On</span> </mat-header-cell>
-    <mat-cell *matCellDef="let element"><span class="cell-contents"> {{element.paymentTransactionCreatedOn}} </span></mat-cell>
-  </ng-container>
+<!--<mat-table-->
+<!--  #table-->
+<!--  [dataSource]="dataSource"-->
+<!--&gt;-->
+<!--  &lt;!&ndash;- -->
+<!--  (cdkDropListDropped)="drop($event)"-->
+<!--  Note that these columns can be defined in any order.-->
+<!--        The actual rendered     columns are set as a property on the row definition" &ndash;&gt;-->
 
-  <!-- Symbol Column -->
-  <ng-container matColumnDef="paymentSource">
-    <mat-header-cell *matHeaderCellDef><mat-icon class="th-icon">monitor</mat-icon> <span class="th-text">Source </span> </mat-header-cell>
-    <mat-cell *matCellDef="let element"> <span class="cell-contents"> {{element.paymentSource}} </span></mat-cell>
-  </ng-container>
-
-  <ng-container matColumnDef="paymentStatus">
-    <mat-header-cell *matHeaderCellDef><mat-icon class="th-icon">traffic</mat-icon> 	<span class="th-text">Status</span>  </mat-header-cell>
-    <mat-cell *matCellDef="let element">
-      <span class="cell-contents">{{element.paymentStatus}}</span>
-    </mat-cell>
-  </ng-container>
-
-
-	<!-- Weight Column -->
-	<ng-container matColumnDef="paymentTransactionTotalIncTax">
-		<mat-header-cell *matHeaderCellDef><mat-icon class="th-icon">person</mat-icon>  <span class="th-text">Total Inc Tax</span> </mat-header-cell>
-		<mat-cell *matCellDef="let element"> <span class="cell-contents">{{element.paymentTransactionTotalIncTax}} </span></mat-cell>
-	</ng-container>
-
-<!--  <ng-container matColumnDef="controls">-->
-<!--    <mat-header-cell *matHeaderCellDef></mat-header-cell>-->
+<!--  &lt;!&ndash; Position Column &ndash;&gt;-->
+<!--  <ng-container matColumnDef="paymentCustomerSurname" sticky>-->
+<!--    <mat-header-cell *matHeaderCellDef><mat-icon>person</mat-icon> <span class="th-text">Surname</span></mat-header-cell>-->
 <!--    <mat-cell *matCellDef="let element">-->
-<!--      <button mat-icon-button color="primary"><mat-icon>edit</mat-icon></button>-->
-<!--      <button mat-icon-button class="control"><mat-icon>delete</mat-icon></button>-->
-<!--      <div class="dragCursor drag-handle" (mousedown)="dragDisabled = false;">-->
-<!--        <mat-icon>reorder</mat-icon>-->
-<!--      </div>-->
+<!--		<span class="cell-contents">{{element.paymentCustomerSurname}}</span>-->
 <!--    </mat-cell>-->
 <!--  </ng-container>-->
 
-  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row
-    *matRowDef="let row; columns: displayedColumns;"
-	(click)="onRowClick(row.paymentIdNo)"
-  ></mat-row>
-</mat-table>
+<!--  &lt;!&ndash; Name Column &ndash;&gt;-->
+<!--  <ng-container matColumnDef="paymentTransactionCreatedOn">-->
+<!--    <mat-header-cell *matHeaderCellDef><mat-icon class="th-icon">event</mat-icon> <span class="th-text">Created On</span> </mat-header-cell>-->
+<!--    <mat-cell *matCellDef="let element"><span class="cell-contents"> {{element.paymentTransactionCreatedOn}} </span></mat-cell>-->
+<!--  </ng-container>-->
+
+<!--  &lt;!&ndash; Symbol Column &ndash;&gt;-->
+<!--  <ng-container matColumnDef="paymentSource">-->
+<!--    <mat-header-cell *matHeaderCellDef><mat-icon class="th-icon">monitor</mat-icon> <span class="th-text">Source </span> </mat-header-cell>-->
+<!--    <mat-cell *matCellDef="let element"> <span class="cell-contents"> {{element.paymentSource}} </span></mat-cell>-->
+<!--  </ng-container>-->
+
+<!--  <ng-container matColumnDef="paymentStatus">-->
+<!--    <mat-header-cell *matHeaderCellDef><mat-icon class="th-icon">traffic</mat-icon> 	<span class="th-text">Status</span>  </mat-header-cell>-->
+<!--    <mat-cell *matCellDef="let element">-->
+<!--      <span class="cell-contents">{{element.paymentStatus}}</span>-->
+<!--    </mat-cell>-->
+<!--  </ng-container>-->
+
+
+<!--	&lt;!&ndash; Weight Column &ndash;&gt;-->
+<!--	<ng-container matColumnDef="paymentTransactionTotalIncTax">-->
+<!--		<mat-header-cell *matHeaderCellDef><mat-icon class="th-icon">person</mat-icon>  <span class="th-text">Total Inc Tax</span> </mat-header-cell>-->
+<!--		<mat-cell *matCellDef="let element"> <span class="cell-contents">{{element.paymentTransactionTotalIncTax}} </span></mat-cell>-->
+<!--	</ng-container>-->
+
+<!--&lt;!&ndash;  <ng-container matColumnDef="controls">&ndash;&gt;-->
+<!--&lt;!&ndash;    <mat-header-cell *matHeaderCellDef></mat-header-cell>&ndash;&gt;-->
+<!--&lt;!&ndash;    <mat-cell *matCellDef="let element">&ndash;&gt;-->
+<!--&lt;!&ndash;      <button mat-icon-button color="primary"><mat-icon>edit</mat-icon></button>&ndash;&gt;-->
+<!--&lt;!&ndash;      <button mat-icon-button class="control"><mat-icon>delete</mat-icon></button>&ndash;&gt;-->
+<!--&lt;!&ndash;      <div class="dragCursor drag-handle" (mousedown)="dragDisabled = false;">&ndash;&gt;-->
+<!--&lt;!&ndash;        <mat-icon>reorder</mat-icon>&ndash;&gt;-->
+<!--&lt;!&ndash;      </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    </mat-cell>&ndash;&gt;-->
+<!--&lt;!&ndash;  </ng-container>&ndash;&gt;-->
+
+<!--  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>-->
+<!--  <mat-row-->
+<!--    *matRowDef="let row; columns: displayedColumns;"-->
+<!--	(click)="onRowClick(row.paymentIdNo)"-->
+<!--  ></mat-row>-->
+<!--</mat-table>-->

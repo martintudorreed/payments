@@ -16,7 +16,6 @@ export class FormNewPaymentComponent {
   paymentIdNo: number = -1;
   paymentCustomerName: string = '';
   paymentDateRaised: string =  '';
-  paymentAmmount:  number = 0.00;
   paymentSource: string = '';
   paymentStatus: string = '';
   paymentTransactionProviderId: number = 0;
@@ -56,11 +55,9 @@ export class FormNewPaymentComponent {
   ngOnInit() {
     if (this.dataItemIndexNo !== -1) {
       this.dataItem = this.dataItems[this.dataItemIndexNo];
-
       this.paymentIdNo = this.dataItem.paymentIdNo ;
       this.paymentCustomerName = this.dataItem.paymentCustomerName;
       this.paymentDateRaised = this.dataItem.paymentDateRaised;
-      this.paymentAmmount = this.dataItem.paymentAmmount;
       this.paymentSource = this.dataItem.paymentSource;
       this.paymentStatus = this.dataItem.paymentStatus;
       this.paymentTransactionProviderId = this.dataItem.paymentTransactionProviderId;
@@ -99,6 +96,32 @@ export class FormNewPaymentComponent {
       tabContentType: 'payment',
       tabdataItemIndexNo: -1});
 
+    this.dataItems.push({
+      paymentIdNo: this.paymentIdNo,
+      paymentCustomerName:  this.paymentCustomerName,
+      paymentDateRaised: this.paymentDateRaised,
+      paymentSource: this.paymentSource,
+      paymentStatus: this.paymentStatus,
+      paymentTransactionProviderId: this.paymentTransactionProviderId,
+      paymentTransactionNumber: this.paymentTransactionNumber,
+      paymentTransactionTotalExTax: this.paymentTransactionTotalExTax,
+      paymentTransactionTotalTax: this.paymentTransactionTotalTax,
+      paymentTransactionTotalIncTax: this.paymentTransactionTotalIncTax,
+      paymentTransactionCreatedOn: this.paymentTransactionCreatedOn,
+      paymentTransactionCreatedBy: this.paymentTransactionCreatedBy,
+      paymentTransactionExpiry: this.paymentTransactionExpiry,
+      paymentCustomerForename: this.paymentCustomerForename,
+      paymentCustomerSurname: this.paymentCustomerSurname,
+      paymentCustomerTelNo: this.paymentCustomerTelNo,
+      paymentCustomerEmail: this.paymentCustomerEmail,
+      paymentAddress1: this.paymentAddress1,
+      paymentAddress2: this.paymentAddress2,
+      paymentAddress3: this.paymentAddress3,
+      paymentState: this.paymentState,
+      paymentPostCode: this.paymentPostCode,
+      paymentInvoiceLines: this.paymentInvoiceLines,
+      });
+
     setTimeout(() => {
       this.applicationModelService.activeMainUITab$.next(0);
 
@@ -109,6 +132,27 @@ export class FormNewPaymentComponent {
     }, 200);
 
 
+  }
+
+  doClearFields() {
+    this.paymentCustomerName = '';
+    this.paymentStatus = '';
+    this.paymentTransactionProviderId = -1;
+    this.paymentTransactionNumber = '';
+    this.paymentTransactionTotalExTax = 0.00;
+    this.paymentTransactionTotalTax = 0.00;
+    this.paymentTransactionTotalIncTax = 0.00;
+    this.paymentTransactionExpiry = '';
+    this.paymentCustomerForename = '';
+    this.paymentCustomerSurname = '';
+    this.paymentCustomerTelNo = '';
+    this.paymentCustomerEmail = '';
+    this.paymentAddress1 = '';
+    this.paymentAddress2 = '';
+    this.paymentAddress3 = '';
+    this.paymentState = '';
+    this.paymentPostCode = '';
+    this.paymentInvoiceLines = '';
   }
 }
 
