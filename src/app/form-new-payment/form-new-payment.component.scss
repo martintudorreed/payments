@@ -11,10 +11,52 @@
 
 .main {
   display: flex;
-  flex-direction: column;
   overflow: hidden;
   height: 100%;
   padding: 12px;
+  .side-panel {
+    width: 320px;
+    padding: 12px;
+    .field-outer {
+      margin: 6px;
+    }
+  }
+  .canvas-container {
+    flex-grow: 1;
+    padding: 18px 24px;
+    .canvas {
+      border:1px solid palette.$medium-grey;
+      border-radius: 4px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      height: 100%;
+      .header {
+        display: flex;
+        margin-bottom: 24px;
+        .logo-container {
+          .logo {
+            max-height: 120px;
+          }
+        }
+        .address {
+          flex-grow: 1;
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+          .invoice-address {
+            line-height: 24px;
+          }
+        }
+      }
+      .sub-header {
+        .customer-address {
+          line-height: 18px;
+        }
+      }
+    }
+  }
 }
 
 .footer {
@@ -28,6 +70,9 @@
   .footer-inner {
     display: flex;
     width: 200%;
+    &.resend {
+      justify-content: flex-end;
+    }
     .control-primary {
 
     }

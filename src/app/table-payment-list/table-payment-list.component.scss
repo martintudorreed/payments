@@ -1,77 +1,35 @@
 @use "src/sass/themes/palette-constants" as palette;
 
-table {
-  width: 100%;
-}
-
-mat-header-row {
+.header {
+  height: 62px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid palette.$medium-grey;
   background-color: palette.$white;
-  position: relative;
-  z-index: 99;
-  box-shadow: 0px 5px 10px -1px rgba(0,0,0,0.12);
-  min-height: 40px;
-  mat-header-cell {
-    padding: 6px;
-    font-weight: normal;
-  }
 }
 
-mat-row {
-  min-height: 0;
-  height: auto;
-  mat-cell {
-    padding: 0;
-    align-items: flex-start;
-    .cell-contents {
-      margin: 12px 6px;
-    }
-  }
-}
 
-.th-text {
-  margin: 0 12px;
+.data-created-on {
+  width: 20%;
 }
-
-.mat-column-type {
-  flex-basis: 12%;
+.data-name {
+  width: 20%;
 }
-.mat-column-operation {
-  flex-basis: 27%;
+.data-email {
+  width: 20%;
 }
-.mat-column-applicableTo {
-  flex-basis: 28%;
+.data-source {
+  width: 10%;
 }
-.mat-column-modifiedOn {
-  flex-basis: 14%;
+.data-total-inc-tax {
+  width: 1%;
 }
-.mat-column-modifiedBy {
-  flex-basis: 14%;
+.data-status {
+  width: 10%;
 }
-
-.mat-column-controls {
-  flex-basis: 165px;
-  flex-wrap: nowrap;
-  padding: 0;
-  justify-content: space-between;
+.control {
+  width: 1%;
 }
-
-.mat-mdc-row.cdk-drag.cdk-drag-preview {
-  mat-row {
-    min-height: 0;
-    height: auto;
-    mat-cell {
-      padding: 0 6px;
-      align-items: flex-start;
-      .cell-contents {
-        margin: 6px;
-      }
-    }
-  }
-  mat-header-cell {
-    padding: 6px;
-  }
-}
-
 
 .cards-container {
   padding: 12px;

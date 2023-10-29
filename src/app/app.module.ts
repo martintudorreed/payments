@@ -18,6 +18,8 @@ import { HeaderTwoComponent } from './header-two/header-two.component';
 import { ViewTabbedWorkspaceComponent } from './view-tabbed-workspace/view-tabbed-workspace.component';
 import { FormNewPaymentComponent } from './form-new-payment/form-new-payment.component';
 import { ViewSettingsComponent } from './view-settings/view-settings.component';
+import { ControlGridFiltersComponent } from './control-grid-filters/control-grid-filters.component';
+import { ControlGridStatusFilterComponent } from './control-grid-status-filter/control-grid-status-filter.component';
 const routes: Routes = [
 
 ];
@@ -35,7 +37,9 @@ const routes: Routes = [
     HeaderTwoComponent,
     ViewTabbedWorkspaceComponent,
     FormNewPaymentComponent,
-    ViewSettingsComponent
+    ViewSettingsComponent,
+    ControlGridFiltersComponent,
+    ControlGridStatusFilterComponent
   ],
   imports: [
     BrowserModule,

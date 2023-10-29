@@ -29,6 +29,12 @@
           display: flex;
           align-items: center;
           padding: 6px;
+          &.no-collapse {
+            flex-wrap: nowrap;
+            .header-text {
+              white-space: nowrap;
+            }
+          }
           .header-text {
             margin: 0 6px;
             flex-grow: 1;
@@ -39,6 +45,7 @@
   }
   tbody {
     tr {
+      position: relative;
       &:first-child {
         box-shadow: inset 0px 3px 8px -4px rgba(0,0,0,0.2);
       }
@@ -52,7 +59,24 @@
       }
       td {
         .cell-inner {
+          display: flex;
           padding: 6px;
+          &.no-collapse {
+            flex-wrap: nowrap;
+            .cell-text {
+              white-space: nowrap;
+            }
+          }
+          &.control {
+            padding-top: 0;
+            padding-bottom: 0;
+          }
+          &.has-icon {
+            align-items: center;
+            .cell-text {
+              margin: 0 6px;
+            }
+          }
         }
         border-bottom: 1px solid palette.$medium-light-grey;
       }
@@ -60,6 +84,10 @@
   }
   tfoot {
 
+  }
+
+  .numeric {
+    justify-content: flex-end;
   }
 }
 

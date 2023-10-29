@@ -48,5 +48,7 @@ export class TablePaymentListComponent {
       }, 200);
     }
 
-
+  absorb(ev: any) {
+    ev.stopPropagation();
+  }
 }

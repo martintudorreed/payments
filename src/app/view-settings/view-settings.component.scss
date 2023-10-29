@@ -25,5 +25,16 @@
 .main {
   .tab-inner {
     padding: 12px;
+    &.email-template {
+      padding-top: 18px;
+      div {
+        margin-bottom: 12px;
+        &.editable-message-body {
+          padding: 12px 0;
+          margin: 12px 0;
+          border-top: 1px solid palette.$medium-grey;
+        }
+      }
+    }
   }
 }

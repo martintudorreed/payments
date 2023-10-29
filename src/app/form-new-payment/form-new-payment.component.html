@@ -1,14 +1,93 @@
 <main class="main">
+<div class="side-panel">
+	<div class="field-outer data-customer-forename">
+		<span>User search goes here - uses Triage Dialoge<mat-icon>search</mat-icon></span>
+	</div>
+	<div class="field-outer data-customer-forename">
+		<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
+			<mat-label>Customer ForeName(s)</mat-label>
+			<input type="text" matInput placeholder="Forename" [(ngModel)]="paymentCustomerForename">
+		</mat-form-field>
+	</div>
+
+	<div class="field-outer data-customer-surname">
+		<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
+			<mat-label>Customer Surname</mat-label>
+			<input type="text" matInput placeholder="Surname" [(ngModel)]="paymentCustomerSurname">
+		</mat-form-field>
+	</div>
+
+	<div class="field-outer data-customer-email">
+		<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
+			<mat-label>Email Address</mat-label>
+			<input type="text" matInput placeholder="Email Address" [(ngModel)]="paymentCustomerEmail">
+		</mat-form-field>
+	</div>
+
+	<div class="field-outer data-customer-email">
+		<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
+			<mat-label>Contact Number</mat-label>
+			<input type="text" matInput placeholder="Contact Number" [(ngModel)]="paymentCustomerTelNo">
+		</mat-form-field>
+	</div>
+</div>
+<div class="canvas-container">
+	<div class="canvas">
+		<div class="header">
+			<div class="logo-container">
+				<img class="logo" src="./assets/logos/future-motors-logo.png" alt="FutureMotors">
+			</div>
+			<div class="address">
+				<address class="invoice-address">
+					<span class="mat-headline-4">Future Motors Intergalactic</span><br />
+					2001 Space Oddity Drive<br />
+					Olympus Mons<br />
+					Mars 2010<br />
+				</address>
+			</div>
+		</div>
+		<div class="sub-header">
+			<div class="address">
+				<address class="customer-address">
+					<span class="mat-headline-4">{{paymentCustomerForename}} {{paymentCustomerSurname}}</span><br />
+					{{paymentAddress1}}<br />
+					{{paymentAddress2}}<br />
+					{{paymentAddress3}}<br />
+					{{paymentState}}<br />
+					{{paymentPostCode}}<br />
+				</address>
+			</div>
+		</div>
+	</div>
+</div>
 
 
 
-				<div class="field-outer data-card-holder data-card-field">
-					<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
-						<mat-label>Customer Surname</mat-label>
-						<input type="text" matInput placeholder="Name" [(ngModel)]="paymentCustomerSurname">
-					</mat-form-field>
-				</div>
 
+</main>
+
+<footer class="footer mat-elevation-z2-up">
+
+	<div class="footer-inner" *ngIf="tabContentType === 'newPayment'">
+		<div class="control-secondary">
+			<button mat-button color="primary" mat-dialog-close (click)="doClearFields()">Clear All</button>
+		</div>
+		<div class="control-primary">
+			<button mat-flat-button color="primary" (click)="doSend()" disabled>Send to Customer</button>
+		</div>
+	</div>
+
+	<div class="footer-inner resend" *ngIf="tabContentType === 'payment'">
+		<div class="control-secondary">
+			<button mat-flat-button color="warn" mat-dialog-close (click)="doClearFields()">Refund</button>
+		</div>
+		<div class="control-primary">
+			<button mat-flat-button color="primary" (click)="doSend()">Send Again</button>
+		</div>
+	</div>
+<!--	<app-control-provider-select></app-control-provider-select>-->
+
+</footer>
 
 <!--	<div class="payments-inner" [ngClass]="{'no-border': noBorder}">-->
 <!--		<div class="colA">-->
@@ -134,30 +213,10 @@
 <!--		</div>-->
 
 <!--	</div>-->
-	<div class="payment mat-elevation-z2-up">
-<!--		<app-controls-payment-form-->
-<!--				[totalExTax]="totalExTax"-->
-<!--				[totalTax]="totalTax"-->
-<!--				[totalIncTax]="totalIncTax"-->
-<!--				[buttonText]="buttonText" *ngIf="(applicationModelService.currentBreakpoint$ | async) === 'XSmall'"></app-controls-payment-form>-->
-	</div>
-</main>
-<footer class="footer mat-elevation-z2-up">
-
-	<div class="footer-inner" *ngIf="tabContentType === 'newPayment'">
-		<div class="control-secondary">
-			<button mat-button color="primary" mat-dialog-close (click)="doClearFields()">Clear All</button>
-		</div>
-		<div class="control-primary">
-			<button mat-flat-button color="primary" (click)="doSend()">Send to Customer</button>
-		</div>
-	</div>
-
-	<div class="footer-inner" *ngIf="tabContentType === 'payment'">
-		<div class="control">
-			<button mat-flat-button color="primary" (click)="doSend()">Resend</button>
-		</div>
-	</div>
-<!--	<app-control-provider-select></app-control-provider-select>-->
-
-</footer>
+<!--<div class="payment mat-elevation-z2-up">-->
+	<!--		<app-controls-payment-form-->
+	<!--				[totalExTax]="totalExTax"-->
+	<!--				[totalTax]="totalTax"-->
+	<!--				[totalIncTax]="totalIncTax"-->
+	<!--				[buttonText]="buttonText" *ngIf="(applicationModelService.currentBreakpoint$ | async) === 'XSmall'"></app-controls-payment-form>-->
+<!--</div>-->

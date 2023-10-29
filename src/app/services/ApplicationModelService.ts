@@ -45,7 +45,7 @@ export class ApplicationModelService {
   activeMainUITab = 0;
   activeMainUITab$: BehaviorSubject<number> = new BehaviorSubject<number>(this.activeMainUITab);
 
-  activeSettingsUITab = 0;
+  activeSettingsUITab = 1;
   activeSettingsUITab$: BehaviorSubject<number> = new BehaviorSubject<number>(this.activeSettingsUITab);
 
   // There are two tabs by default always showing, this starts at 1 to reflect index values , e.g. 0 ,1,...
