@@ -1,0 +1,16 @@
+<div class="chip-filter-outer">
+	<div class="chip-list">
+		<mat-chip>
+		<div class="chip-inner">
+			<span class="chip-text">All</span><mat-icon class="ifm-icon-medium chip-icon">close</mat-icon>
+		</div>
+		</mat-chip>
+	</div>
+	<mat-icon [matMenuTriggerFor]="menu">arrow_drop_down</mat-icon>
+</div>
+<mat-menu #menu="matMenu" xPosition="before">
+	<button mat-menu-item>All</button>
+	<button mat-menu-item>In Progress</button>
+	<button mat-menu-item>Overdue</button>
+	<button mat-menu-item>Paid In Full</button>
+</mat-menu>

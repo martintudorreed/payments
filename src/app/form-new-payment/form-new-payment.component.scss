@@ -15,47 +15,144 @@
   height: 100%;
   padding: 12px;
   .side-panel {
-    width: 320px;
+    min-width: 320px;
     padding: 12px;
+    overflow: auto;
+    .search-outer {
+      display: flex;
+      align-items: center;
+      border: 1px solid palette.$medium-grey;
+      height: 48px;
+      border-radius: 24px;
+      padding: 0 12px;
+      margin-bottom: 12px;
+      input {
+        outline: 0;
+        border: 0;
+        width: 100%;
+      }
+    }
+    .invoice-meta-data {
+      display: flex;
+      width: 100%;
+      padding: 0 6px;
+      .field-outer {
+        flex-basis: 50%;
+        margin: 0 6px 0;
+      }
+    }
+    .two-fields {
+      display: flex;
+    }
     .field-outer {
       margin: 6px;
+      &.data-is-has-address {
+        margin: 12px 0;
+        padding: 0 6px;
+      }
     }
   }
   .canvas-container {
+    display: flex;
     flex-grow: 1;
     padding: 18px 24px;
-    .canvas {
-      border:1px solid palette.$medium-grey;
-      border-radius: 4px;
-      padding: 24px;
+    .canvas-outer {
       display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      height: 100%;
-      .header {
-        display: flex;
-        margin-bottom: 24px;
-        .logo-container {
-          .logo {
-            max-height: 120px;
-          }
-        }
-        .address {
-          flex-grow: 1;
-          display: flex;
-          justify-content: flex-end;
-          align-items: center;
-          .invoice-address {
-            line-height: 24px;
-          }
-        }
+      position: relative;
+      width: 100%;
+      &.invoice {
+        flex-basis: 66%
       }
-      .sub-header {
-        .customer-address {
-          line-height: 18px;
+      &.comms {
+        flex-basis: 34%;
+      }
+      .canvas {
+        border:1px solid palette.$medium-grey;
+        border-radius: 4px;
+
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        overflow: auto;
+        position: relative;
+        z-index: 9;
+        &.invoice {
+          margin: 0 12px;
+          padding: 24px 24px 12px;
+        }
+        &.comms {
+          margin: 0 12px;
+          padding: 0;
+          display: flex;
+          flex-direction: column;
+          overflow: hidden;
+          .editor {
+            flex-grow: 1;
+            overflow: auto;
+            padding: 24px;
+          }
+          .field-outer{
+            display: flex;
+            justify-content: flex-end;
+            padding: 12px;
+          }
+        }
+        .header {
+          display: flex;
+          margin-bottom: 24px;
+          .logo-container {
+            .logo {
+              max-height: 120px;
+            }
+          }
+          .address {
+            flex-grow: 1;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            .invoice-address {
+              line-height: 24px;
+            }
+          }
+        }
+        .sub-header {
+          display: flex;
+          .address {
+            flex-grow: 1;
+            .customer-address {
+              line-height: 20px;
+            }
+          }
+          .additional-data {
+            .additional-data-inner {
+              padding: 24px;
+            }
+          }
+
+        }
+        .invoice-body {
+          display: flex;
+          flex-direction: column;
+          flex-grow: 1;
+          .salutation-text {
+            margin: 12px 0;
+          }
+        }
+        .invoice-totals {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          .total {
+            margin-bottom: 12px;
+          }
+        }
+        .invoice-fine-print {
+          display: flex;
+          justify-items: center;
         }
       }
     }
+
   }
 }
 
@@ -74,9 +171,15 @@
       justify-content: flex-end;
     }
     .control-primary {
-
+      display: flex;
+      align-items: center;
+      .cardless {
+        margin: 12px;
+      }
     }
     .control-secondary {
+      display: flex;
+      align-items: center;
       flex-grow: 1;
     }
   }

@@ -20,6 +20,12 @@ import { FormNewPaymentComponent } from './form-new-payment/form-new-payment.com
 import { ViewSettingsComponent } from './view-settings/view-settings.component';
 import { ControlGridFiltersComponent } from './control-grid-filters/control-grid-filters.component';
 import { ControlGridStatusFilterComponent } from './control-grid-status-filter/control-grid-status-filter.component';
+import { ControlEditableEmailTemplateComponent } from './control-editable-email-template/control-editable-email-template.component';
+import { ControlChipFilterComponent } from './control-chip-filter/control-chip-filter.component';
+import { ControlEditableSmsTemplateComponent } from './control-editable-sms-template/control-editable-sms-template.component';
+import { DialogCustomerFormComponent } from './dialog-customer-form/dialog-customer-form.component';
+import { FormCustomerPaymentComponent } from './form-customer-payment/form-customer-payment.component';
+import { DialogLoadFromApplicationDatasourceComponent } from './dialog-load-from-application-datasource/dialog-load-from-application-datasource.component';
 const routes: Routes = [
 
 ];
@@ -39,7 +45,13 @@ const routes: Routes = [
     FormNewPaymentComponent,
     ViewSettingsComponent,
     ControlGridFiltersComponent,
-    ControlGridStatusFilterComponent
+    ControlGridStatusFilterComponent,
+    ControlEditableEmailTemplateComponent,
+    ControlChipFilterComponent,
+    ControlEditableSmsTemplateComponent,
+    DialogCustomerFormComponent,
+    FormCustomerPaymentComponent,
+    DialogLoadFromApplicationDatasourceComponent
   ],
   imports: [
     BrowserModule,

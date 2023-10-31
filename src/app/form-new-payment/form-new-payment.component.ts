@@ -1,23 +1,27 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit, AfterViewInit } from '@angular/core';
 import {LocalDataService} from "../services/local-data.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ApplicationModelService} from "../services/ApplicationModelService";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {DialogCustomerFormComponent} from "../dialog-customer-form/dialog-customer-form.component";
 
 @Component({
   selector: 'app-form-new-payment',
   templateUrl: './form-new-payment.component.html',
   styleUrls: ['./form-new-payment.component.scss']
 })
-export class FormNewPaymentComponent {
+export class FormNewPaymentComponent implements OnInit, AfterViewInit{
   @Input() dataItemIndexNo: number = -1;
   @Input() tabContentType: string = 'newPayment';
+  isShowEmail: number = 0;
+  isHasAddress: boolean = false;
 
   paymentIdNo: number = -1;
   paymentCustomerName: string = '';
   paymentDateRaised: string =  '';
   paymentSource: string = '';
   paymentStatus: string = '';
+  paymentStatusId: number = -1;
   paymentTransactionProviderId: number = 0;
   paymentTransactionNumber: string = '';
   paymentTransactionTotalExTax: number = 0.00;
@@ -60,6 +64,7 @@ export class FormNewPaymentComponent {
       this.paymentDateRaised = this.dataItem.paymentDateRaised;
       this.paymentSource = this.dataItem.paymentSource;
       this.paymentStatus = this.dataItem.paymentStatus;
+      this.paymentStatusId = this.dataItem.paymentStatusId;
       this.paymentTransactionProviderId = this.dataItem.paymentTransactionProviderId;
       this.paymentTransactionNumber = this.dataItem.paymentTransactionNumber;
       this.paymentTransactionTotalExTax = this.dataItem.paymentTransactionTotalExTax;
@@ -84,6 +89,12 @@ export class FormNewPaymentComponent {
     console.log('form is loading with adata item number of ' + this.dataItemIndexNo);
   }
 
+  ngAfterViewInit() {
+    setTimeout(() => {
+      // this.isLoading = false;
+    }, 2000);
+  }
+
   onSelectedCardTypeChange() {
     //   do something with your life;
   }
@@ -102,6 +113,7 @@ export class FormNewPaymentComponent {
       paymentDateRaised: this.paymentDateRaised,
       paymentSource: this.paymentSource,
       paymentStatus: this.paymentStatus,
+      paymentStatusId: this.paymentStatusId,
       paymentTransactionProviderId: this.paymentTransactionProviderId,
       paymentTransactionNumber: this.paymentTransactionNumber,
       paymentTransactionTotalExTax: this.paymentTransactionTotalExTax,
@@ -130,8 +142,6 @@ export class FormNewPaymentComponent {
         panelClass: 'ifm-snackbar'
       });
     }, 200);
-
-
   }
 
   doClearFields() {
@@ -154,5 +164,21 @@ export class FormNewPaymentComponent {
     this.paymentPostCode = '';
     this.paymentInvoiceLines = '';
   }
-}
+
+  doToggleAddress() {
+    this.isHasAddress = !this.isHasAddress;
+  }
+
+  doCardlessPayment(ev: any) {
+    ev.stopPropagation();
+    this.dialog.open(DialogCustomerFormComponent, {
+      maxWidth: '800px',
+      minWidth: '300px',
+      minHeight: '180px',
+      maxHeight: '96vh',
+      panelClass: 'ifm-dialog',
+      autoFocus: false,
+    });
+  }
+ }
 

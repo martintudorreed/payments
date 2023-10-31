@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import {LocalDataService} from "../services/local-data.service";
 import {ApplicationModelService} from "../services/ApplicationModelService";
+import {MatDialog} from "@angular/material/dialog";
+import {DialogCustomerFormComponent} from "../dialog-customer-form/dialog-customer-form.component";
 
 @Component({
   selector: 'app-table-payment-list',
@@ -21,7 +23,7 @@ export class TablePaymentListComponent {
   dataItemIndexNo: number = -1
 
     constructor(public applicationModelService: ApplicationModelService,
-                private localDataService: LocalDataService ) {
+                private localDataService: LocalDataService, public dialog: MatDialog, ) {
     }
 
     onRowClick(item: number) {
@@ -51,4 +53,16 @@ export class TablePaymentListComponent {
   absorb(ev: any) {
     ev.stopPropagation();
   }
+
+  doCardlessPayment() {
+    this.dialog.open(DialogCustomerFormComponent, {
+      maxWidth: '800px',
+      minWidth: '300px',
+      minHeight: '180px',
+      maxHeight: '96vh',
+      panelClass: 'ifm-dialog',
+      autoFocus: false,
+    });
+  }
+
 }

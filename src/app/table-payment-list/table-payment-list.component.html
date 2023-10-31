@@ -1,39 +1,50 @@
 <header class="header">
 	<app-control-grid-filters></app-control-grid-filters>
 </header>
-<table class="ifm-table" *ngIf="(applicationModelService.currentBreakpoint$ | async) !== 'Small' && (applicationModelService.currentBreakpoint$ | async) !== 'XSmall'">
-	<thead>
+<div class="table-container">
+	<table class="ifm-table" *ngIf="(applicationModelService.currentBreakpoint$ | async) !== 'Small' && (applicationModelService.currentBreakpoint$ | async) !== 'XSmall'">
+		<thead>
 		<tr>
 			<th class="data-created-on">
 				<div class="cell-inner">
-					<mat-icon class="th-icon">event</mat-icon><span class="header-text">Created on</span>
+					<mat-icon class="ifm-icon-medium th-icon">event</mat-icon><span class="header-text">Created on</span>
 					<mat-icon>vertical_align_bottom</mat-icon>
-<!--					<mat-icon>upgrade</mat-icon> ascending-->
+					<!--					<mat-icon>upgrade</mat-icon> ascending-->
 				</div>
 			</th>
 			<th class="data-name">
 				<div class="cell-inner">
-					<mat-icon>person</mat-icon> <span class="header-text">Surname</span>
+					<mat-icon class="ifm-icon-medium th-icon">person</mat-icon> <span class="header-text">Surname</span>
 				</div>
 			</th>
 			<th class="data-email">
 				<div class="cell-inner">
-					<mat-icon>email</mat-icon> <span class="header-text">Email</span>
+					<mat-icon class="ifm-icon-medium th-icon">email</mat-icon> <span class="header-text">Email</span>
 				</div>
 			</th>
 			<th class="data-source">
 				<div class="cell-inner">
-					<mat-icon class="th-icon">monitor</mat-icon><span class="header-text">Source</span>
+					<mat-icon class="ifm-icon-medium th-icon">monitor</mat-icon><span class="header-text">Source</span>
+				</div>
+			</th>
+			<th class="data-source">
+				<div class="cell-inner">
+					<mat-icon class="ifm-icon-medium th-icon">pin</mat-icon><span class="header-text">Number</span>
 				</div>
 			</th>
 			<th class="data-status">
 				<div class="cell-inner">
-					<mat-icon class="th-icon">traffic</mat-icon><span class="header-text">Status</span>
+					<mat-icon class="ifm-icon-medium th-icon">traffic</mat-icon><span class="header-text">Status</span>
 				</div>
 			</th>
 			<th class="data-total-inc-tax">
 				<div class="cell-inner numeric no-collapse">
-					<mat-icon class="th-icon">paid</mat-icon> <span class="header-text">Due</span>
+					<mat-icon class="ifm-icon-medium th-icon">paid</mat-icon> <span class="header-text">Total</span>
+				</div>
+			</th>
+			<th class="data-expires">
+				<div class="cell-inner numeric no-collapse">
+					<mat-icon class="ifm-icon-medium th-icon">event_busy</mat-icon> <span class="header-text">Expires</span>
 				</div>
 			</th>
 			<th class="control no-collapse">
@@ -42,8 +53,8 @@
 				</div>
 			</th>
 		</tr>
-	</thead>
-	<tbody>
+		</thead>
+		<tbody>
 		<tr *ngFor="let item of dataSource,let i = index" (click)="onRowClick(item.paymentIdNo)" class="is-selectable">
 			<td>
 				<div class="cell-inner">
@@ -66,8 +77,13 @@
 				</div>
 			</td>
 			<td>
+				<div class="cell-inner">
+					<span class="cell-text">INV-{{item.paymentTransactionNumber}}</span>
+				</div>
+			</td>
+			<td>
 				<div class="cell-inner has-icon no-collapse">
-					<mat-icon class="ifm-icon-medium  green-text">credit_card</mat-icon><span class="cell-text">{{item.paymentStatus}}</span>
+					<mat-icon class="ifm-icon-medium th-icon" [ngClass]="{'green-text': item.paymentStatusId === 0,'bright-blue-text': item.paymentStatusId === 1,'red-text': item.paymentStatusId === 2}">credit_card</mat-icon><span class="cell-text">{{item.paymentStatus}}</span>
 				</div>
 			</td>
 			<td>
@@ -76,53 +92,120 @@
 				</div>
 			</td>
 			<td>
+				<div class="cell-inner numeric">
+					<span class="cell-text">{{item.paymentTransactionExpiry}}</span>
+				</div>
+			</td>
+			<td>
 				<div class="cell-inner control">
 					<button mat-icon-button [matMenuTriggerFor]="menu" color="primary" (click)="absorb($event)"><mat-icon>more_vert</mat-icon></button>
 				</div>
 			</td>
 		</tr>
-	</tbody>
-</table>
-<mat-menu #menu="matMenu">
-	<button mat-menu-item>Open</button>
-	<button mat-menu-item>Download</button>
-	<button mat-menu-item>Refund</button>
-	<mat-divider></mat-divider>
-	<button mat-menu-item color="warn">Archive</button>
-</mat-menu>
+		</tbody>
+	</table>
+	<mat-menu #menu="matMenu">
+		<button mat-menu-item>Open</button>
+		<button mat-menu-item>Download</button>
+		<button mat-menu-item (click)="doCardlessPayment()">Cardless Payment</button>
+		<button mat-menu-item>Refund</button>
+		<mat-divider></mat-divider>
+		<button mat-menu-item color="warn">Archive</button>
+	</mat-menu>
 
-<div class="cards-container" *ngIf="(applicationModelService.currentBreakpoint$ | async) === 'Small' || (applicationModelService.currentBreakpoint$ | async) === 'XSmall'">
-	<mat-card *ngFor="let item of dataSource" class="card-generic">
-		<mat-card-content class="card-inner" (click)="onRowClick(item.paymentIdNo)">
-			<div class="naked-form-field data-type">
-				<div class="field-label"><span>Created On</span></div>
-				<div class="field-outline">
-					<div class="field-contents">
-						<span>{{item.paymentTransactionCreatedOn}}</span>
+	<div class="cards-container" *ngIf="(applicationModelService.currentBreakpoint$ | async) === 'Small' || (applicationModelService.currentBreakpoint$ | async) === 'XSmall'">
+		<mat-card *ngFor="let item of dataSource" class="card-generic">
+			<div class="caption-container">
+				<caption class="mat-caption">
+					<mat-icon class="ifm-icon-medium th-icon" [ngClass]="{'green-text': item.paymentStatusId === 0,'bright-blue-text': item.paymentStatusId === 1,'red-text': item.paymentStatusId === 2}">credit_card</mat-icon><span class="caption-text">INV - {{item.paymentTransactionNumber}}</span>
+				</caption>
+			</div>
+			<mat-card-content class="card-inner" (click)="onRowClick(item.paymentIdNo)">
+
+				<div class="naked-form-field data-number">
+					<div class="field-label"><span>Number</span></div>
+					<div class="field-outline">
+						<div class="field-contents">
+							<span>INV - {{item.paymentTransactionNumber}}</span>
+						</div>
 					</div>
 				</div>
-			</div>
 
-			<div class="naked-form-field data-type">
-				<div class="field-label"><span>Customer</span></div>
-				<div class="field-outline">
-					<div class="field-contents">
-						<span>{{item.paymentCustomerForename}} {{item.paymentCustomerSurname}}</span>
+				<div class="naked-form-field data-created-on">
+					<div class="field-label"><span>Created On</span></div>
+					<div class="field-outline">
+						<div class="field-contents">
+							<span>{{item.paymentTransactionCreatedOn}}</span>
+						</div>
 					</div>
 				</div>
-			</div>
 
-			<div class="naked-form-field data-type">
-				<div class="field-label"><span>Email</span></div>
-				<div class="field-outline">
-					<div class="field-contents">
-						<span>{{item.paymentCustomerEmail}}</span>
+				<div class="naked-form-field data-customer">
+					<div class="field-label"><span>Customer</span></div>
+					<div class="field-outline">
+						<div class="field-contents">
+							<span>{{item.paymentCustomerForename}} {{item.paymentCustomerSurname}}</span>
+						</div>
 					</div>
 				</div>
-			</div>
-		</mat-card-content>
-	</mat-card>
+
+				<div class="naked-form-field data-email">
+					<div class="field-label"><span>Email</span></div>
+					<div class="field-outline">
+						<div class="field-contents">
+							<span>{{item.paymentCustomerEmail}}</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="naked-form-field data-source">
+					<div class="field-label"><span>Source</span></div>
+					<div class="field-outline">
+						<div class="field-contents">
+							<span>{{item.paymentSource}}</span>
+						</div>
+					</div>
+				</div>
+
+
+
+				<div class="naked-form-field data-status">
+					<div class="field-label"><span>Status</span></div>
+					<div class="field-outline">
+						<div class="field-contents">
+							<span>{{item.paymentStatus}}</span>
+						</div>
+					</div>
+				</div>
+
+
+
+				<div class="naked-form-field data-expiry">
+					<div class="field-label"><span>Expiry</span></div>
+					<div class="field-outline">
+						<div class="field-contents">
+							<span>{{item.paymentTransactionExpiry}}</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="naked-form-field data-total">
+					<div class="field-label"><span>Total</span></div>
+					<div class="field-outline">
+						<div class="field-contents">
+							<span class="mat-headline-4">{{item.paymentTransactionTotalIncTax | number: '1.2-2'}}</span>
+						</div>
+					</div>
+				</div>
+
+
+			</mat-card-content>
+		</mat-card>
+	</div>
 </div>
+
+
+
 
 <!--<mat-table-->
 <!--  #table-->
@@ -143,18 +226,18 @@
 
 <!--  &lt;!&ndash; Name Column &ndash;&gt;-->
 <!--  <ng-container matColumnDef="paymentTransactionCreatedOn">-->
-<!--    <mat-header-cell *matHeaderCellDef><mat-icon class="th-icon">event</mat-icon> <span class="th-text">Created On</span> </mat-header-cell>-->
+<!--    <mat-header-cell *matHeaderCellDef><mat-icon class="ifm-icon-medium th-icon">event</mat-icon> <span class="th-text">Created On</span> </mat-header-cell>-->
 <!--    <mat-cell *matCellDef="let element"><span class="cell-contents"> {{element.paymentTransactionCreatedOn}} </span></mat-cell>-->
 <!--  </ng-container>-->
 
 <!--  &lt;!&ndash; Symbol Column &ndash;&gt;-->
 <!--  <ng-container matColumnDef="paymentSource">-->
-<!--    <mat-header-cell *matHeaderCellDef><mat-icon class="th-icon">monitor</mat-icon> <span class="th-text">Source </span> </mat-header-cell>-->
+<!--    <mat-header-cell *matHeaderCellDef><mat-icon class="ifm-icon-medium th-icon">monitor</mat-icon> <span class="th-text">Source </span> </mat-header-cell>-->
 <!--    <mat-cell *matCellDef="let element"> <span class="cell-contents"> {{element.paymentSource}} </span></mat-cell>-->
 <!--  </ng-container>-->
 
 <!--  <ng-container matColumnDef="paymentStatus">-->
-<!--    <mat-header-cell *matHeaderCellDef><mat-icon class="th-icon">traffic</mat-icon> 	<span class="th-text">Status</span>  </mat-header-cell>-->
+<!--    <mat-header-cell *matHeaderCellDef><mat-icon class="ifm-icon-medium th-icon">traffic</mat-icon> 	<span class="th-text">Status</span>  </mat-header-cell>-->
 <!--    <mat-cell *matCellDef="let element">-->
 <!--      <span class="cell-contents">{{element.paymentStatus}}</span>-->
 <!--    </mat-cell>-->
@@ -163,7 +246,7 @@
 
 <!--	&lt;!&ndash; Weight Column &ndash;&gt;-->
 <!--	<ng-container matColumnDef="paymentTransactionTotalIncTax">-->
-<!--		<mat-header-cell *matHeaderCellDef><mat-icon class="th-icon">person</mat-icon>  <span class="th-text">Total Inc Tax</span> </mat-header-cell>-->
+<!--		<mat-header-cell *matHeaderCellDef><mat-icon class="ifm-icon-medium th-icon">person</mat-icon>  <span class="th-text">Total Inc Tax</span> </mat-header-cell>-->
 <!--		<mat-cell *matCellDef="let element"> <span class="cell-contents">{{element.paymentTransactionTotalIncTax}} </span></mat-cell>-->
 <!--	</ng-container>-->
 

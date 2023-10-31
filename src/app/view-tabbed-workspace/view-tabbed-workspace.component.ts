@@ -3,6 +3,8 @@ import {LocalDataService} from "../services/local-data.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ApplicationModelService} from "../services/ApplicationModelService";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {DialogLoadFromApplicationDatasourceComponent} from "../dialog-load-from-application-datasource/dialog-load-from-application-datasource.component";
+import {DialogCustomerFormComponent} from "../dialog-customer-form/dialog-customer-form.component";
 
 @Component({
   selector: 'app-view-tabbed-workspace',
@@ -19,6 +21,8 @@ export class ViewTabbedWorkspaceComponent {
   selectedTab: number = 1;
   paymentMethods = this.localDataService.paymentMethodData;
   selectedPaymentMethod = this.paymentMethods[0].paymentMethodID;
+
+  invoiceSource = this.localDataService.ifmAppData;
 
   tabs = this.localDataService.mainUITabsData;
 
@@ -40,4 +44,20 @@ export class ViewTabbedWorkspaceComponent {
     this.tabs.splice(ind, 1);
   }
 
+  absorb(ev: any) {
+    ev.stopPropagation();
+  }
+
+  doLoadSourceData(sourceAppID: string) {
+    this.dialog.open(DialogLoadFromApplicationDatasourceComponent, {
+      maxWidth: '800px',
+      minWidth: '300px',
+      minHeight: '180px',
+      maxHeight: '96vh',
+      panelClass: 'ifm-dialog',
+      autoFocus: false,data: {
+        sourceAppID: sourceAppID,
+      }
+    });
+  }
 }

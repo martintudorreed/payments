@@ -1,4 +1,28 @@
 <div class="controls-inner">
-<!--	<app-control-grid-status-filter></app-control-grid-status-filter>-->
-	<button mat-stroked-button color="primary" class="ifm-stroked-button primary-outline">Export</button>
+	<div class="field-outer data-customer-search">
+		<div class="search-outer"><input type="text" matInput placeholder="Search"><mat-icon>search</mat-icon></div>
+	</div>
+	<span> Filter by </span>
+	<app-control-chip-filter class="chip-filter"></app-control-chip-filter>
+
+	<div class="field-outer field-from-date">
+		<mat-form-field class="field ifm-input white-bg" subscriptSizing="dynamic">
+			<mat-label>From</mat-label>
+			<input matInput [matDatepicker]="picker" placeholder="From">
+			<mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+			<mat-datepicker #picker></mat-datepicker>
+		</mat-form-field>
+	</div>
+
+	<div class="field-outer field-to-date">
+		<mat-form-field class="field ifm-input white-bg" subscriptSizing="dynamic">
+			<mat-label>To</mat-label>
+			<input matInput [matDatepicker]="picker" placeholder="To">
+			<mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+			<mat-datepicker #picker></mat-datepicker>
+		</mat-form-field>
+	</div>
+
+	<button mat-stroked-button color="primary" class="ifm-stroked-button primary-outline export">Export</button>
+
 </div>

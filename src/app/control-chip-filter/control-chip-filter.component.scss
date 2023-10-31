@@ -1,0 +1,38 @@
+@use "src/sass/themes/palette-constants" as palette;
+@use "src/sass/ifm-mixins/ifm-breakpoints" as bp;
+
+:host {
+  display: flex;
+}
+
+.chip-filter-outer {
+  display: flex;
+  align-items: center;
+  border: 1px solid palette.$medium-grey;
+  height: 48px;
+  border-radius: 24px;
+  padding: 0 6px;
+  min-width: 180px;
+  .chip-list {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    .chip-inner {
+      display: flex;
+      align-items: center;
+      .chip-text {
+        flex-grow: 1;
+        margin: 0 6px;
+      }
+      .chip-icon {
+        flex-grow: 1;
+        margin: 0 6px;
+      }
+    }
+  }
+
+}
+
+.mat-mdc-chip.mat-mdc-standard-chip {
+  //--mdc-chip-container-height: 28px;
+}

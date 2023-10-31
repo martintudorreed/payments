@@ -1,71 +1,245 @@
 <main class="main">
-<div class="side-panel">
-	<div class="field-outer data-customer-forename">
-		<span>User search goes here - uses Triage Dialoge<mat-icon>search</mat-icon></span>
-	</div>
-	<div class="field-outer data-customer-forename">
-		<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
-			<mat-label>Customer ForeName(s)</mat-label>
-			<input type="text" matInput placeholder="Forename" [(ngModel)]="paymentCustomerForename">
-		</mat-form-field>
-	</div>
+	<div class="side-panel">
+		<div class="field-outer data-customer-search" *ngIf="dataItemIndexNo === -1">
+			<div class="search-outer"><input type="text" matInput placeholder="Customer Search"><mat-icon>search</mat-icon></div>
+		</div>
+		<div class="invoice-meta-data">
 
-	<div class="field-outer data-customer-surname">
-		<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
-			<mat-label>Customer Surname</mat-label>
-			<input type="text" matInput placeholder="Surname" [(ngModel)]="paymentCustomerSurname">
-		</mat-form-field>
-	</div>
-
-	<div class="field-outer data-customer-email">
-		<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
-			<mat-label>Email Address</mat-label>
-			<input type="text" matInput placeholder="Email Address" [(ngModel)]="paymentCustomerEmail">
-		</mat-form-field>
-	</div>
-
-	<div class="field-outer data-customer-email">
-		<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
-			<mat-label>Contact Number</mat-label>
-			<input type="text" matInput placeholder="Contact Number" [(ngModel)]="paymentCustomerTelNo">
-		</mat-form-field>
-	</div>
-</div>
-<div class="canvas-container">
-	<div class="canvas">
-		<div class="header">
-			<div class="logo-container">
-				<img class="logo" src="./assets/logos/future-motors-logo.png" alt="FutureMotors">
+			<div class="field-outer data-customer-search" *ngIf="dataItemIndexNo !== -1">
+				<div class="naked-form-field data-email">
+					<div class="field-label"><span>Provider</span></div>
+					<div class="field-outline">
+						<div class="field-contents">
+							<span *ngIf="paymentTransactionProviderId === 0">Tillpay</span>
+						</div>
+					</div>
+				</div>
 			</div>
-			<div class="address">
-				<address class="invoice-address">
-					<span class="mat-headline-4">Future Motors Intergalactic</span><br />
-					2001 Space Oddity Drive<br />
-					Olympus Mons<br />
-					Mars 2010<br />
-				</address>
+
+			<div class="field-outer data-customer-search" *ngIf="dataItemIndexNo !== -1">
+				<div class="naked-form-field data-email">
+					<div class="field-label"><span>Source</span></div>
+					<div class="field-outline">
+						<div class="field-contents">
+							<span>{{paymentSource}}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="two-fields">
+			<div class="field-outer data-ammount-payable">
+				<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
+					<mat-label>Ammount Payable</mat-label>
+					<input type="number" matInput placeholder="Contact Number" [(ngModel)]="paymentTransactionTotalIncTax">
+				</mat-form-field>
+			</div>
+			<div class="field-outer data-expiry">
+				<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
+					<mat-label>Expiry Date</mat-label>
+					<input type="text" matInput placeholder="Contact Number" [(ngModel)]="paymentTransactionExpiry">
+				</mat-form-field>
 			</div>
 		</div>
-		<div class="sub-header">
-			<div class="address">
-				<address class="customer-address">
-					<span class="mat-headline-4">{{paymentCustomerForename}} {{paymentCustomerSurname}}</span><br />
-					{{paymentAddress1}}<br />
-					{{paymentAddress2}}<br />
-					{{paymentAddress3}}<br />
-					{{paymentState}}<br />
-					{{paymentPostCode}}<br />
-				</address>
+
+		<div class="field-outer data-customer-forename">
+			<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
+				<mat-label>Customer ForeName(s)</mat-label>
+				<input type="text" matInput placeholder="Forename" [(ngModel)]="paymentCustomerForename">
+			</mat-form-field>
+		</div>
+
+		<div class="field-outer data-customer-surname">
+			<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
+				<mat-label>Customer Surname</mat-label>
+				<input type="text" matInput placeholder="Surname" [(ngModel)]="paymentCustomerSurname">
+			</mat-form-field>
+		</div>
+
+		<div class="field-outer data-customer-email">
+			<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
+				<mat-label>Email Address</mat-label>
+				<input type="text" matInput placeholder="Email Address" [(ngModel)]="paymentCustomerEmail">
+			</mat-form-field>
+		</div>
+
+		<div class="field-outer data-customer-email">
+			<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
+				<mat-label>Contact Number</mat-label>
+				<input type="text" matInput placeholder="Contact Number" [(ngModel)]="paymentCustomerTelNo">
+			</mat-form-field>
+		</div>
+
+		<div class="field-outer data-is-has-address">
+			<mat-slide-toggle [checked]='isHasAddress' (change)="doToggleAddress()">Show Address</mat-slide-toggle>
+		</div>
+
+		<div class="address-fields" *ngIf="isHasAddress">
+			<div class="field-outer data-customer-address1">
+				<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
+					<mat-label>Address 1</mat-label>
+					<input type="text" matInput placeholder="Address 1" [(ngModel)]="paymentAddress1">
+				</mat-form-field>
+			</div>
+			<div class="field-outer data-customer-address2">
+				<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
+					<mat-label>Address 2</mat-label>
+					<input type="text" matInput placeholder="Address 2" [(ngModel)]="paymentAddress2">
+				</mat-form-field>
+			</div>
+			<div class="field-outer data-customer-address3">
+				<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
+					<mat-label>Address 3</mat-label>
+					<input type="text" matInput placeholder="Address 2" [(ngModel)]="paymentAddress3">
+				</mat-form-field>
+			</div>
+			<div class="field-outer data-customer-state">
+				<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
+					<mat-label>State</mat-label>
+					<input type="text" matInput placeholder="Address 2" [(ngModel)]="paymentState">
+				</mat-form-field>
+			</div>
+			<div class="field-outer data-customer-state">
+				<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
+					<mat-label>Post Code</mat-label>
+					<input type="text" matInput placeholder="Post Code" [(ngModel)]="paymentPostCode">
+				</mat-form-field>
+			</div>
+		</div>
+
+
+	</div>
+	<div class="canvas-container">
+		<div class="canvas-outer invoice">
+			<div class="caption-container">
+				<caption class="mat-caption">Invoice Preview</caption>
+			</div>
+			<div class="canvas invoice">
+				<div class="header">
+					<div class="logo-container">
+						<img class="logo" src="./assets/logos/future-motors-logo.png" alt="FutureMotors">
+					</div>
+					<div class="address">
+						<address class="invoice-address">
+							<span class="mat-headline-2">INV-<span *ngIf="paymentTransactionNumber !== ''">{{paymentTransactionNumber}}</span> <span *ngIf="paymentTransactionNumber === ''">XXXXXX</span></span><br />
+							<span class="mat-headline-4">Future Motors Intergalactic</span><br />
+							2001 Space Oddity Drive<br />
+							Olympus Mons<br />
+							Mars 2010<br />
+						</address>
+					</div>
+				</div>
+				<div class="sub-header">
+					<div class="address">
+						<address class="customer-address">
+							<span class="mat-headline-4">{{paymentCustomerForename}} {{paymentCustomerSurname}}</span><br />
+							<span *ngIf="paymentAddress1 !== ''">{{paymentAddress1}}<br /></span>
+							<span *ngIf="paymentAddress2 !== ''">{{paymentAddress2}}<br /></span>
+							<span *ngIf="paymentAddress3 !== ''">{{paymentAddress3}}<br /></span>
+							<span *ngIf="paymentState !== ''">{{paymentState}}<br /></span>
+							<span *ngIf="paymentPostCode !== ''">{{paymentPostCode}}<br /></span>
+
+							<span *ngIf="paymentCustomerTelNo !== ''">{{paymentCustomerTelNo}}<br /></span>
+							<span *ngIf="paymentCustomerTelNo === ''">Add Customer Telephone<br /></span>
+							<span *ngIf="paymentCustomerEmail !== ''">{{paymentCustomerEmail}}</span>
+							<span *ngIf="paymentCustomerEmail === ''">Add Customer Email</span>
+						</address>
+					</div>
+					<div class="additional-data">
+						<div class="additional-data-inner">
+							<div class="naked-form-field data-gst">
+								<div class="field-label"><span>GST</span></div>
+								<div class="field-outline">
+									<div class="field-contents">
+										<span>884422824</span>
+									</div>
+								</div>
+							</div>
+							<div class="naked-form-field data-issue-date">
+								<div class="field-label"><span>Issue Date</span></div>
+								<div class="field-outline">
+									<div class="field-contents">
+										<span>05/02/2032</span>
+									</div>
+								</div>
+							</div>
+							<div class="naked-form-field data-emxpiry">
+								<div class="field-label"><span>Expiry Date</span></div>
+								<div class="field-outline">
+									<div class="field-contents">
+										<span>{{paymentTransactionExpiry}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="invoice-body">
+					<span class="salutation-text" contenteditable="true">Dear {{paymentCustomerForename}}, <br/><br/>Thank you for the opportunity to work on your hovercar, if you have any questions, please contact the office and we will answer any questions.</span>
+					<mat-form-field  [(ngModel)]="paymentInvoiceLines" floatLabel="always">
+						<mat-label>Summary</mat-label>
+						<textarea matInput
+								  cdkTextareaAutosize
+								  #autosize="cdkTextareaAutosize"
+								  [(ngModel)]="paymentInvoiceLines"
+								  cdkAutosizeMinRows="1"
+								  cdkAutosizeMaxRows="15"></textarea>
+					</mat-form-field>
+				</div>
+
+				<div class="invoice-totals">
+					<div class="mat-headline-4 total">Total Excluding Tax ${{paymentTransactionTotalExTax | number: '1.2-2'}}</div>
+					<div class="mat-headline-4 total">Total Tax ${{paymentTransactionTotalTax | number: '1.2-2'}}</div>
+					<div class="mat-headline-2 total">Total Including Tax ${{paymentTransactionTotalIncTax | number: '1.2-2'}}</div>
+				</div>
+
+				<div class="invoice-fine-print">
+					<div class="mat-caption">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+
+				</div>
+			</div>
+		</div>
+
+		<div class="canvas-outer comms">
+			<div class="caption-container">
+				<caption class="mat-caption">
+					<span *ngIf="isShowEmail === 0">Email Template</span>
+					<span *ngIf="isShowEmail === 1">SMS Template</span>
+				</caption>
+			</div>
+			<div class="canvas comms" >
+				<div class="editor">
+					<app-control-editable-email-template
+							*ngIf="isShowEmail === 0"
+							[customerName]="paymentCustomerForename"
+							[paymentTransactionExpiry]="paymentTransactionExpiry"
+							[invoiceAmmount]="paymentTransactionTotalIncTax"
+							[paymentTransactionNumber]="paymentTransactionNumber"
+							[isInMainUI]="true"></app-control-editable-email-template>
+
+					<app-control-editable-sms-template
+							*ngIf="isShowEmail === 1"
+							[customerName]="paymentCustomerForename"
+							[paymentTransactionExpiry]="paymentTransactionExpiry"
+							[invoiceAmmount]="paymentTransactionTotalIncTax"
+							[paymentTransactionNumber]="paymentTransactionNumber"></app-control-editable-sms-template>
+				</div>
+
+				<div class="field-outer data-customer-email">
+					<mat-radio-group
+							aria-labelledby="example-radio-group-label"
+							class="example-radio-group"
+							[(ngModel)]="isShowEmail">
+						<mat-radio-button [checked]="isShowEmail === 0" class="example-radio-button" [value]="0">Email</mat-radio-button>
+						<mat-radio-button class="example-radio-button" [value]="1">SMS</mat-radio-button>
+					</mat-radio-group>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
-
-
-
-
 </main>
-
 <footer class="footer mat-elevation-z2-up">
 
 	<div class="footer-inner" *ngIf="tabContentType === 'newPayment'">
@@ -73,7 +247,8 @@
 			<button mat-button color="primary" mat-dialog-close (click)="doClearFields()">Clear All</button>
 		</div>
 		<div class="control-primary">
-			<button mat-flat-button color="primary" (click)="doSend()" disabled>Send to Customer</button>
+			<app-control-provider-select></app-control-provider-select>
+			<button class="cardless" mat-flat-button color="primary" (click)="doSend()" disabled>Cardless Payment</button><button mat-flat-button color="primary" (click)="doSend()" disabled>Send to Customer</button>
 		</div>
 	</div>
 
@@ -82,141 +257,9 @@
 			<button mat-flat-button color="warn" mat-dialog-close (click)="doClearFields()">Refund</button>
 		</div>
 		<div class="control-primary">
-			<button mat-flat-button color="primary" (click)="doSend()">Send Again</button>
+			<app-control-provider-select></app-control-provider-select>
+			<button class="cardless ifm-stroked-button primary-outline"  mat-stroked-button color="primary" (click)="doCardlessPayment($event)">Cardless Payment</button><button mat-flat-button color="primary" (click)="doSend()">Send Again</button>
 		</div>
 	</div>
-<!--	<app-control-provider-select></app-control-provider-select>-->
 
 </footer>
-
-<!--	<div class="payments-inner" [ngClass]="{'no-border': noBorder}">-->
-<!--		<div class="colA">-->
-<!--			<header class="header">-->
-<!--				<h2 class="headline mat-headline-2">-->
-<!--					<span class="section-title">{{paymentText}}</span>-->
-<!--					<span *ngIf="isHasData">{{paymentReference}}</span>-->
-<!--				</h2>-->
-<!--				<div class="field-outer data-reference" *ngIf="!isHasData">-->
-<!--					<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">-->
-<!--						<mat-label>Job Number</mat-label>-->
-<!--						<input type="text" matInput placeholder="xxxxxx" [(ngModel)]="paymentReference">-->
-<!--					</mat-form-field>-->
-<!--				</div>-->
-<!--			</header>-->
-
-<!--			<div class="summary">-->
-<!--				<mat-form-field  [(ngModel)]="summaryData" floatLabel="always">-->
-<!--					<mat-label>Summary</mat-label>-->
-<!--					<textarea matInput-->
-<!--							  cdkTextareaAutosize-->
-<!--                              #autosize="cdkTextareaAutosize"-->
-<!--							  [(ngModel)]="summaryData"-->
-<!--							  cdkAutosizeMinRows="1"-->
-<!--							  cdkAutosizeMaxRows="15"></textarea>-->
-<!--				</mat-form-field>-->
-
-<!--				&lt;!&ndash;      <div class="summary-controls" *ngIf="!editMode">&ndash;&gt;-->
-<!--				&lt;!&ndash;        <span>Show full details...</span>&ndash;&gt;-->
-<!--				&lt;!&ndash;      </div>&ndash;&gt;-->
-
-<!--			</div>-->
-<!--			<app-controls-payment-form-->
-<!--					[totalExTax]="totalExTax"-->
-<!--					[totalTax]="totalTax"-->
-<!--					[totalIncTax]="totalIncTax"-->
-<!--					[buttonText]="buttonText" *ngIf="(applicationModelService.currentBreakpoint$ | async) !== 'XSmall'"></app-controls-payment-form>-->
-<!--		</div>-->
-
-<!--		<div class="colB">-->
-<!--			<h2 class="mat-headline-2 header-review">{{reviewText}}</h2>-->
-
-<!--			<div class="field-outer data-card-holder data-card-field">-->
-<!--				<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">-->
-<!--					<mat-label>Card Holder</mat-label>-->
-<!--					<input type="text" matInput placeholder="Name" [(ngModel)]="cardHolder">-->
-<!--				</mat-form-field>-->
-<!--			</div>-->
-
-<!--			<div class="field-outer data-card-holder data-card-field">-->
-<!--				<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">-->
-<!--					<mat-label>Card Number</mat-label>-->
-<!--					<input type="text" matInput placeholder="1234 1234 1234 1234" [(ngModel)]="cardNumber">-->
-<!--					<mat-icon matSuffix>lock</mat-icon>-->
-<!--				</mat-form-field>-->
-<!--			</div>-->
-
-<!--			<div class="side-by-side-fields">-->
-<!--				<div class="field-outer data-expiration-date  data-card-field">-->
-<!--					<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">-->
-<!--						<mat-label>Expiration Date</mat-label>-->
-<!--						<input type="text" matInput placeholder="MM / YY" [(ngModel)]="cardExpirationDate">-->
-<!--					</mat-form-field>-->
-<!--				</div>-->
-
-<!--				<div class="field-outer data-ccv data-card-field">-->
-<!--					<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">-->
-<!--						<mat-label>CVC</mat-label>-->
-<!--						<input type="text" matInput placeholder="XXX" [(ngModel)]="cardCVC">-->
-<!--						<mat-icon matSuffix>help_outline</mat-icon>-->
-<!--					</mat-form-field>-->
-<!--				</div>-->
-<!--			</div>-->
-<!--			<div class="field-outer data-card-holder">-->
-<!--				<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">-->
-<!--					<mat-label>Your Name</mat-label>-->
-<!--					<input type="text" matInput placeholder="Name" [(ngModel)]="cardHolder">-->
-<!--				</mat-form-field>-->
-<!--			</div>-->
-<!--			<div class="field-outer data-card-holder">-->
-<!--				<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">-->
-<!--					<mat-label>Contact Number</mat-label>-->
-<!--					<input type="text" matInput placeholder="Number" [(ngModel)]="contactNumber">-->
-<!--				</mat-form-field>-->
-<!--			</div>-->
-<!--			<div class="field-outer data-card-holder">-->
-<!--				<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">-->
-<!--					<mat-label>Contact Email</mat-label>-->
-<!--					<input type="text" matInput placeholder="Email" [(ngModel)]="contactEmail">-->
-<!--				</mat-form-field>-->
-<!--			</div>-->
-<!--			<div class="field-outer data-address-item" *ngIf="isHasAddress">-->
-<!--				<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">-->
-<!--					<mat-label>Address Line 1</mat-label>-->
-<!--					<input type="text" matInput placeholder="Address" [(ngModel)]="addressLine1">-->
-<!--				</mat-form-field>-->
-<!--			</div>-->
-<!--			<div class="field-outer data-address-item" *ngIf="isHasAddress">-->
-<!--				<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">-->
-<!--					<mat-label>Address Line 2</mat-label>-->
-<!--					<input type="text" matInput placeholder="Address" [(ngModel)]="addressLine2">-->
-<!--				</mat-form-field>-->
-<!--			</div>-->
-<!--			<div class="field-outer data-address-item" *ngIf="isHasAddress">-->
-<!--				<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">-->
-<!--					<mat-label>Address Line 3</mat-label>-->
-<!--					<input type="text" matInput placeholder="Address" [(ngModel)]="addressLine3">-->
-<!--				</mat-form-field>-->
-<!--			</div>-->
-<!--			<div class="field-outer data-address-item" *ngIf="isHasAddress">-->
-<!--				<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">-->
-<!--					<mat-label>State</mat-label>-->
-<!--					<input type="text" matInput placeholder="State" [(ngModel)]="state">-->
-<!--				</mat-form-field>-->
-<!--			</div>-->
-<!--			<div class="field-outer data-address-item" *ngIf="isHasAddress">-->
-<!--				<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">-->
-<!--					<mat-label>Post Code</mat-label>-->
-<!--					<input type="text" matInput placeholder="Post Code" [(ngModel)]="postcode">-->
-<!--				</mat-form-field>-->
-<!--			</div>-->
-
-<!--		</div>-->
-
-<!--	</div>-->
-<!--<div class="payment mat-elevation-z2-up">-->
-	<!--		<app-controls-payment-form-->
-	<!--				[totalExTax]="totalExTax"-->
-	<!--				[totalTax]="totalTax"-->
-	<!--				[totalIncTax]="totalIncTax"-->
-	<!--				[buttonText]="buttonText" *ngIf="(applicationModelService.currentBreakpoint$ | async) === 'XSmall'"></app-controls-payment-form>-->
-<!--</div>-->

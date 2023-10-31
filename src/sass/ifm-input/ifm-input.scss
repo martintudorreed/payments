@@ -1,6 +1,12 @@
 @use "src/sass/themes/palette-constants" as palette;
+
 .ifm-input {
   width: 100%;
+  &.white-bg {
+    .mat-mdc-text-field-wrapper {
+      background-color: palette.$white;
+    }
+  }
   .mat-mdc-form-field-infix {
     width: 100%;
   }
@@ -64,3 +70,21 @@
     }
   }
 }
+
+.caption-container {
+  position: absolute;
+  top: -2px;
+  left: 18px;
+  display: flex;
+  height: 6px;
+  overflow: visible;
+  background-color: white;
+  z-index: 999;
+  .mat-caption {
+    position: relative;
+    top: -4px;
+    padding: 0 4px;
+  }
+}
+
+

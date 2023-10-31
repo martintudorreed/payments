@@ -1,0 +1,19 @@
+.logo-container {
+  margin-bottom: 12px;
+  .logo {
+    max-width: 320px;
+  }
+}
+
+.field-outer {
+  margin-bottom: 12px;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  padding:12px;
+  .button-pay {
+    width: 100%;
+  }
+}

@@ -15,7 +15,25 @@
 				<span class="tab-label-text">General Settings</span></span>
 			</ng-template>
 			<div class="tab-inner">
-				<span>General Settings go here</span>
+				<br />
+				<span>General Settings go here</span><br /><br />
+				<span>API Key</span><br /><br />
+				<span>Currency </span><br /><br />
+				<span>Merchant ID's</span><br /><br />
+				<span>Permissions</span><br /><br />
+				<span>Credit Card processing fee %</span><br /><br />
+				<span>Logos a go go's</span><br /><br />
+
+			</div>
+		</mat-tab>
+		<mat-tab label="Rich Text Tepmlates">
+			<ng-template mat-tab-label>
+			<span class="tab-label">
+				<mat-icon class="tab-icon">receipt</mat-icon>
+				<span class="tab-label-text">Invoice Tepmlates</span></span>
+			</ng-template>
+			<div class="tab-inner">
+				<span>Invoice Template stuff goes here</span>
 			</div>
 		</mat-tab>
 		<mat-tab label="Email Templates">
@@ -25,29 +43,8 @@
 				<span class="tab-label-text">Email Templates</span></span>
 			</ng-template>
 			<div class="tab-inner email-template">
-				<div><span class="mat-headline-4">Your Invoice from Future Motors Ltd (BES-29367)</span></div>
-				<div><span class="mat-headline-2">$221.95</span></div>
-				<div><span class="mat-headline-4">INV-6209 is due on 31/10/2048</span></div>
-
-				<div><button mat-flat-button color="primary">Pay Invoice</button></div>
-
-				<div class="editable-message-body">
-
-					<p contenteditable="true">Hi Martin,<br/><br/> Here's your tax invoice INV-6209 for $221.95 for work completed at 7 Philip K. Dick Drive, Mars.<br/>
-
-						Please click the Pay Invoice button above to view, print, download or pay the invoice.<br/>
-
-						If you have any questions, please contact us on the interdimentional telephone - Mars99.<br />
-						<br />
-						Thanks</p>
-
-
-					<div><span></span></div></div>
-
-				<div><span>Future Motors Ltd</span></div>
+				<app-control-editable-email-template></app-control-editable-email-template>
 			</div>
-
-
 		</mat-tab>
 		<mat-tab label="SMS Templates">
 			<ng-template mat-tab-label>
@@ -56,17 +53,7 @@
 				<span class="tab-label-text">SMS Templates</span></span>
 			</ng-template>
 			<div class="tab-inner">
-				<span>SMS Templates Settings go here</span>
-			</div>
-		</mat-tab>
-		<mat-tab label="Rich Text Teplates">
-			<ng-template mat-tab-label>
-			<span class="tab-label">
-				<mat-icon class="tab-icon">chat</mat-icon>
-				<span class="tab-label-text">Rich Text Teplates</span></span>
-			</ng-template>
-			<div class="tab-inner">
-				<span>Rich Text Teplate Settings go here</span>
+				<app-control-editable-sms-template></app-control-editable-sms-template>
 			</div>
 		</mat-tab>
 		<mat-tab label="Rich Text Teplates">

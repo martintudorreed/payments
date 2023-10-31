@@ -15,6 +15,13 @@
 			<span class="tab-label">
 				<mat-icon class="tab-icon">add_outline</mat-icon>
 				<span class="tab-label-text">New Payment</span></span>
+			<button [matMenuTriggerFor]="quickMenu" (click)="absorb($event)"mat-icon-button class="white-text"><mat-icon>arrow_drop_down</mat-icon></button>
+			<mat-menu #quickMenu="matMenu">
+				<button mat-menu-item
+						*ngFor="let source of invoiceSource"
+						(click)="doLoadSourceData(source.ifmAppsID)"
+						[disabled]="(applicationModelService.activeMainUITab$ | async) === 1">{{source.ifmAppsName}}</button>
+			</mat-menu>
 		</ng-template>
 		<div class="tab-inner">
 			<app-form-new-payment [dataItemIndexNo]=(-1)></app-form-new-payment>
