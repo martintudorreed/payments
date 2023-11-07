@@ -23,6 +23,6 @@
 		</mat-form-field>
 	</div>
 
-	<button mat-stroked-button color="primary" class="ifm-stroked-button primary-outline export">Export</button>
-
+	<button *ngIf="!isStandalone" mat-stroked-button color="primary" class="ifm-stroked-button primary-outline export">Export</button>
+	<button *ngIf="isStandalone" mat-stroked-button (click)="doOpenFormInDialog()" color="primary" class="new-payment ifm-stroked-button primary-outline export">New Payment</button>
 </div>

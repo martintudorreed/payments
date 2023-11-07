@@ -1,11 +1,25 @@
 <main class="main">
 	<div class="side-panel">
-		<div class="field-outer data-customer-search" *ngIf="dataItemIndexNo === -1">
-			<div class="search-outer"><input type="text" matInput placeholder="Customer Search"><mat-icon>search</mat-icon></div>
-		</div>
-		<div class="invoice-meta-data">
 
-			<div class="field-outer data-customer-search" *ngIf="dataItemIndexNo !== -1">
+		<div class="field-outer data-payment-type" *ngIf="dataItemIndexNo === -1 && (applicationModelService.isShow2WayMenu$ | async)">
+			<mat-form-field class="field ifm-input selector compact" subscriptSizing="dynamic" floatLabel="always" appearance="outline">
+				<mat-label>Change Source</mat-label>
+				<mat-select [(value)]="selectedSauceID" (selectionChange)="onSelectedSourceChange(selectedSauceID)">
+					<mat-option  [value]="app.ifmAppsID" *ngFor="let app of sourceApp">{{ app.ifmAppsName }}</mat-option>
+				</mat-select>
+			</mat-form-field>
+		</div>
+
+		<div class="invoice-status">
+			<mat-icon class="ifm-icon-medium th-icon" [ngClass]="{'green-text': paymentStatusId === 0,'bright-blue-text': paymentStatusId === 1,'red-text': paymentStatusId === 2}">credit_card</mat-icon>
+			<span class="status-text mat-headeline-4">{{paymentStatus}}</span>
+			<div class="refNumber">
+				<span class="mat-headline-4 refNumber-text">INV:{{paymentTransactionNumber}}</span>
+			</div>
+		</div>
+
+		<div class="invoice-meta-data" *ngIf="dataItemIndexNo !== -1">
+			<div class="field-outer data-customer-search">
 				<div class="naked-form-field data-email">
 					<div class="field-label"><span>Provider</span></div>
 					<div class="field-outline">
@@ -16,7 +30,7 @@
 				</div>
 			</div>
 
-			<div class="field-outer data-customer-search" *ngIf="dataItemIndexNo !== -1">
+			<div class="field-outer data-customer-search">
 				<div class="naked-form-field data-email">
 					<div class="field-label"><span>Source</span></div>
 					<div class="field-outline">
@@ -27,8 +41,40 @@
 				</div>
 			</div>
 
-		</div>
+			<div class="field-outer data-customer-search">
+				<div class="naked-form-field data-created-on">
+					<div class="field-label"><span>Date Created</span></div>
+					<div class="field-outline">
+						<div class="field-contents">
+							<span>{{paymentTransactionCreatedOn}}</span>
+						</div>
+					</div>
+				</div>
+			</div>
 
+			<div class="field-outer data-vehicle-model">
+				<div class="naked-form-field data-email">
+					<div class="field-label"><span>Vehicle Model</span></div>
+					<div class="field-outline">
+						<div class="field-contents">
+							<span>Space Car 4000 - 4sField-100</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<div class="field-outer">
+			<mat-form-field  class="ifm-input" [(ngModel)]="paymentInvoiceLines" floatLabel="always" subscriptSizing="dynamic">
+				<mat-label>Summary</mat-label>
+				<textarea matInput
+						  cdkTextareaAutosize
+						  #autosize="cdkTextareaAutosize"
+						  [(ngModel)]="paymentInvoiceLines"
+						  cdkAutosizeMinRows="1"
+						  cdkAutosizeMaxRows="15"></textarea>
+			</mat-form-field>
+		</div>
 		<div class="two-fields">
 			<div class="field-outer data-ammount-payable">
 				<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
@@ -76,6 +122,8 @@
 			<mat-slide-toggle [checked]='isHasAddress' (change)="doToggleAddress()">Show Address</mat-slide-toggle>
 		</div>
 
+
+
 		<div class="address-fields" *ngIf="isHasAddress">
 			<div class="field-outer data-customer-address1">
 				<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
@@ -111,154 +159,59 @@
 
 
 	</div>
-	<div class="canvas-container">
-		<div class="canvas-outer invoice">
-			<div class="caption-container">
-				<caption class="mat-caption">Invoice Preview</caption>
-			</div>
-			<div class="canvas invoice">
-				<div class="header">
-					<div class="logo-container">
-						<img class="logo" src="./assets/logos/future-motors-logo.png" alt="FutureMotors">
-					</div>
-					<div class="address">
-						<address class="invoice-address">
-							<span class="mat-headline-2">INV-<span *ngIf="paymentTransactionNumber !== ''">{{paymentTransactionNumber}}</span> <span *ngIf="paymentTransactionNumber === ''">XXXXXX</span></span><br />
-							<span class="mat-headline-4">Future Motors Intergalactic</span><br />
-							2001 Space Oddity Drive<br />
-							Olympus Mons<br />
-							Mars 2010<br />
-						</address>
-					</div>
-				</div>
-				<div class="sub-header">
-					<div class="address">
-						<address class="customer-address">
-							<span class="mat-headline-4">{{paymentCustomerForename}} {{paymentCustomerSurname}}</span><br />
-							<span *ngIf="paymentAddress1 !== ''">{{paymentAddress1}}<br /></span>
-							<span *ngIf="paymentAddress2 !== ''">{{paymentAddress2}}<br /></span>
-							<span *ngIf="paymentAddress3 !== ''">{{paymentAddress3}}<br /></span>
-							<span *ngIf="paymentState !== ''">{{paymentState}}<br /></span>
-							<span *ngIf="paymentPostCode !== ''">{{paymentPostCode}}<br /></span>
+	<div class="canvas-container" [ngClass]="{'doc-viewer-collapsed': (applicationModelService.isDocumentViewerCollapsed$ | async)}">
+<!--{{applicationModelService.browserWindowWidth$.value}} || (browserWindowWidthValue !== null && browserWindowWidthValue <= 1500)}-->
+		<app-control-display-send-methods
+				class="comms"
+				[customerName]="paymentCustomerForename"
+				[paymentTransactionExpiry]="paymentTransactionExpiry"
+				[invoiceAmmount]="paymentTransactionTotalIncTax"
+				[paymentTransactionNumber]="paymentTransactionNumber"
+				[isInMainUI]="true"></app-control-display-send-methods>
 
-							<span *ngIf="paymentCustomerTelNo !== ''">{{paymentCustomerTelNo}}<br /></span>
-							<span *ngIf="paymentCustomerTelNo === ''">Add Customer Telephone<br /></span>
-							<span *ngIf="paymentCustomerEmail !== ''">{{paymentCustomerEmail}}</span>
-							<span *ngIf="paymentCustomerEmail === ''">Add Customer Email</span>
-						</address>
-					</div>
-					<div class="additional-data">
-						<div class="additional-data-inner">
-							<div class="naked-form-field data-gst">
-								<div class="field-label"><span>GST</span></div>
-								<div class="field-outline">
-									<div class="field-contents">
-										<span>884422824</span>
-									</div>
-								</div>
-							</div>
-							<div class="naked-form-field data-issue-date">
-								<div class="field-label"><span>Issue Date</span></div>
-								<div class="field-outline">
-									<div class="field-contents">
-										<span>05/02/2032</span>
-									</div>
-								</div>
-							</div>
-							<div class="naked-form-field data-emxpiry">
-								<div class="field-label"><span>Expiry Date</span></div>
-								<div class="field-outline">
-									<div class="field-contents">
-										<span>{{paymentTransactionExpiry}}</span>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="invoice-body">
-					<span class="salutation-text" contenteditable="true">Dear {{paymentCustomerForename}}, <br/><br/>Thank you for the opportunity to work on your hovercar, if you have any questions, please contact the office and we will answer any questions.</span>
-					<mat-form-field  [(ngModel)]="paymentInvoiceLines" floatLabel="always">
-						<mat-label>Summary</mat-label>
-						<textarea matInput
-								  cdkTextareaAutosize
-								  #autosize="cdkTextareaAutosize"
-								  [(ngModel)]="paymentInvoiceLines"
-								  cdkAutosizeMinRows="1"
-								  cdkAutosizeMaxRows="15"></textarea>
-					</mat-form-field>
-				</div>
+		<app-control-document-viewer
+				class="invoice"
+				[paymentStatusId]="paymentStatusId"></app-control-document-viewer>
 
-				<div class="invoice-totals">
-					<div class="mat-headline-4 total">Total Excluding Tax ${{paymentTransactionTotalExTax | number: '1.2-2'}}</div>
-					<div class="mat-headline-4 total">Total Tax ${{paymentTransactionTotalTax | number: '1.2-2'}}</div>
-					<div class="mat-headline-2 total">Total Including Tax ${{paymentTransactionTotalIncTax | number: '1.2-2'}}</div>
-				</div>
-
-				<div class="invoice-fine-print">
-					<div class="mat-caption">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
-
-				</div>
-			</div>
-		</div>
-
-		<div class="canvas-outer comms">
-			<div class="caption-container">
-				<caption class="mat-caption">
-					<span *ngIf="isShowEmail === 0">Email Template</span>
-					<span *ngIf="isShowEmail === 1">SMS Template</span>
-				</caption>
-			</div>
-			<div class="canvas comms" >
-				<div class="editor">
-					<app-control-editable-email-template
-							*ngIf="isShowEmail === 0"
-							[customerName]="paymentCustomerForename"
-							[paymentTransactionExpiry]="paymentTransactionExpiry"
-							[invoiceAmmount]="paymentTransactionTotalIncTax"
-							[paymentTransactionNumber]="paymentTransactionNumber"
-							[isInMainUI]="true"></app-control-editable-email-template>
-
-					<app-control-editable-sms-template
-							*ngIf="isShowEmail === 1"
-							[customerName]="paymentCustomerForename"
-							[paymentTransactionExpiry]="paymentTransactionExpiry"
-							[invoiceAmmount]="paymentTransactionTotalIncTax"
-							[paymentTransactionNumber]="paymentTransactionNumber"></app-control-editable-sms-template>
-				</div>
-
-				<div class="field-outer data-customer-email">
-					<mat-radio-group
-							aria-labelledby="example-radio-group-label"
-							class="example-radio-group"
-							[(ngModel)]="isShowEmail">
-						<mat-radio-button [checked]="isShowEmail === 0" class="example-radio-button" [value]="0">Email</mat-radio-button>
-						<mat-radio-button class="example-radio-button" [value]="1">SMS</mat-radio-button>
-					</mat-radio-group>
-				</div>
-			</div>
-		</div>
 	</div>
 </main>
 <footer class="footer mat-elevation-z2-up">
-
 	<div class="footer-inner" *ngIf="tabContentType === 'newPayment'">
 		<div class="control-secondary">
 			<button mat-button color="primary" mat-dialog-close (click)="doClearFields()">Clear All</button>
+<!--			<div class="field-outer data-is-view-attachments">-->
+<!--				<mat-slide-toggle [checked]='isViewAttachment' (change)="doToggleAttachmentViewer()">View Attachment</mat-slide-toggle>-->
+<!--			</div>-->
 		</div>
 		<div class="control-primary">
-			<app-control-provider-select></app-control-provider-select>
-			<button class="cardless" mat-flat-button color="primary" (click)="doSend()" disabled>Cardless Payment</button><button mat-flat-button color="primary" (click)="doSend()" disabled>Send to Customer</button>
+			<button class="launcher" mat-icon-button color="primary" (click)="doCardlessPayment($event)"><mat-icon>rocket_launch</mat-icon></button>
+			<app-control-provider-select class="provider-select"></app-control-provider-select>
+			<button mat-flat-button color="primary" (click)="doSendFromDataSource()">Send to Customer</button>
 		</div>
 	</div>
 
 	<div class="footer-inner resend" *ngIf="tabContentType === 'payment'">
 		<div class="control-secondary">
 			<button mat-flat-button color="warn" mat-dialog-close (click)="doClearFields()">Refund</button>
+<!--			<div class="field-outer data-is-view-attachments">-->
+<!--				<mat-slide-toggle [checked]='isViewAttachment' (change)="doToggleAttachmentViewer()">View Attachment</mat-slide-toggle>-->
+<!--			</div>-->
 		</div>
 		<div class="control-primary">
-			<app-control-provider-select></app-control-provider-select>
-			<button class="cardless ifm-stroked-button primary-outline"  mat-stroked-button color="primary" (click)="doCardlessPayment($event)">Cardless Payment</button><button mat-flat-button color="primary" (click)="doSend()">Send Again</button>
+			<button class="launcher" mat-icon-button color="primary" (click)="doCardlessPayment($event)"><mat-icon>rocket_launch</mat-icon></button>
+<!--			<app-control-provider-select class="provider-select"></app-control-provider-select>-->
+			<button mat-flat-button color="primary" (click)="doSend()" [disabled]="paymentStatusId === 0">Send Again</button>
+		</div>
+	</div>
+
+	<div class="footer-inner" *ngIf="tabContentType === 'newPaymentTriage' || tabContentType === 'newPaymentTriageNotSent'">
+		<div class="control-secondary">
+			<button mat-button color="primary" mat-dialog-close (click)="doClearFields()">Clear All</button>
+		</div>
+		<div class="control-primary">
+			<button mat-icon-button class="launcher" color="primary" (click)="doCardlessPayment($event)"><mat-icon>rocket_launch</mat-icon></button>
+			<app-control-provider-select class="provider-select" *ngIf="paymentStatusId !== 0"></app-control-provider-select>
+			<button mat-flat-button color="primary" (click)="doSendFromDataSource()">Send to Customer</button>
 		</div>
 	</div>
 

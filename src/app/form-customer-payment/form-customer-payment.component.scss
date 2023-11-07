@@ -1,7 +1,75 @@
+@use "src/sass/themes/palette-constants" as palette;
+@use "src/sass/ifm-mixins/ifm-breakpoints" as bp;
+
+:host {
+  max-width: 380px;
+}
+
 .logo-container {
   margin-bottom: 12px;
   .logo {
-    max-width: 320px;
+    max-width: 100px;
+  }
+}
+
+.meta-data {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 12px;
+  .meta-inner {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    margin-bottom: 12px;
+    .logo {
+      max-width: 100px;
+    }
+  }
+
+  .meta {
+    flex-grow: 1;
+    margin-bottom: 12px;
+    display: flex;
+    &.invoice-ammount {
+      justify-content: flex-end;
+    }
+    &.dealer-name {
+      justify-content: flex-end;
+    }
+    .meta-text {
+      margin: 0;
+    }
+
+  }
+}
+
+.payment-methods {
+  padding: 12px 0;
+  border-top: 1px solid palette.$medium-grey;
+  .google-play-outer {
+    border-radius: 4px;
+    background-color: palette.$black;
+    display: flex;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+  }
+  margin-bottom: 12px;
+}
+
+.pay-by-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: palette.$medium-grey;
+  height: 1px;
+  max-height: 1px;
+  overflow: visible;
+  margin-bottom: 32px;
+  .text {
+    background-color: palette.$white;
+    padding: 0 12px;
   }
 }
 
@@ -9,10 +77,25 @@
   margin-bottom: 12px;
 }
 
+.card-container {
+  position: relative;
+  border:1px solid palette.$medium-grey;
+  border-radius: 4px;
+  padding: 24px 12px 12px;
+  .side-by-side-fields {
+    display: flex;
+    justify-content: space-between;
+    .field-outer {
+      flex-basis: 48%;
+    }
+  }
+}
+
 .footer {
   display: flex;
   align-items: center;
-  padding:12px;
+  padding: 12px 0;
+  margin: 12px 0;
   .button-pay {
     width: 100%;
   }

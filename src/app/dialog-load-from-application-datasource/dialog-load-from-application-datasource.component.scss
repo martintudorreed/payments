@@ -1,0 +1,39 @@
+:host {
+  display:flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+.header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 12px;
+  .search-filter {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    .search-input {
+      width: 420px;
+      margin: 0 12px;
+    }
+
+    .logo {
+      height: 28px;
+      width: auto;
+    }
+    .app-logo {
+      height: 22px;
+      width: auto;
+      margin: 0 6px;
+    }
+  }
+}
+.table-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: auto;
+  flex-grow: 1;
+  position: relative;
+}

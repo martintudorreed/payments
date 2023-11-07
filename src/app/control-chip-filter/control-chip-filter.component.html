@@ -1,16 +1,16 @@
 <div class="chip-filter-outer">
 	<div class="chip-list">
-		<mat-chip>
+		<mat-chip  *ngFor="let filter of filters" class="filter-item">
 		<div class="chip-inner">
-			<span class="chip-text">All</span><mat-icon class="ifm-icon-medium chip-icon">close</mat-icon>
+			<span class="chip-text">{{filter.gridFilterItemName}}</span><mat-icon (click)="doRemoveChip(filter.gridFilterItemID)" *ngIf="filter.gridFilterItemID !== 0" class="ifm-icon-medium chip-icon">close</mat-icon>
 		</div>
 		</mat-chip>
 	</div>
-	<mat-icon [matMenuTriggerFor]="menu">arrow_drop_down</mat-icon>
+	<button [matMenuTriggerFor]="menu" mat-icon-button color="primary"><mat-icon>arrow_drop_down</mat-icon></button>
 </div>
 <mat-menu #menu="matMenu" xPosition="before">
-	<button mat-menu-item>All</button>
-	<button mat-menu-item>In Progress</button>
-	<button mat-menu-item>Overdue</button>
-	<button mat-menu-item>Paid In Full</button>
+	<button mat-menu-item (click)="onAddFilterChip(0,'All')">All</button>
+	<button mat-menu-item (click)="onAddFilterChip(1,'In Progress')">Pending</button>
+	<button mat-menu-item (click)="onAddFilterChip(2,'Overdue')">Overdue</button>
+	<button mat-menu-item (click)="onAddFilterChip(3,'Paid In Full')">Paid In Full</button>
 </mat-menu>

@@ -1,38 +1,71 @@
-<div class="logo-container">
-	<img class="logo" src="./assets/logos/future-motors-logo.png" alt="FutureMotors">
+
+<div class="meta-data">
+	<div class="meta-inner">
+		<img class="logo" src="./assets/logos/future-motors-logo.png" alt="FutureMotors">
+		<div class="meta dealer-name">
+			<span class="mat-headline-2 meta-text">Future Motors LTD</span>
+		</div>
+
+	</div>
+	<div class="meta-inner">
+		<div class="meta invoice-number">
+			<span class="mat-headline-4 meta-text">INV:800200</span>
+		</div>
+		<div class="meta invoice-ammount">
+			<span class="mat-headline-2 meta-text">$88.88</span>
+		</div>
+	</div>
+
+</div>
+<div class="payment-methods">
+	<div class="google-play-outer">
+		<img src="./assets/images/google-pay.svg" />
+	</div>
+</div>
+<div class="pay-by-card">
+	<div class="text">or Pay By Card</div>
 </div>
 
-<div class="field-outer data-card-holder data-card-field">
-	<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
-		<mat-label>Card Holder</mat-label>
-		<input type="text" matInput placeholder="Name" [(ngModel)]="cardHolder">
-	</mat-form-field>
-</div>
 
-<div class="field-outer data-card-holder data-card-field">
-	<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
-		<mat-label>Card Number</mat-label>
-		<input type="text" matInput placeholder="1234 1234 1234 1234" [(ngModel)]="cardNumber">
-		<mat-icon matSuffix>lock</mat-icon>
-	</mat-form-field>
-</div>
-
-<div class="side-by-side-fields">
-	<div class="field-outer data-expiration-date  data-card-field">
+<div class="card-container">
+	<div class="caption-container">
+		<caption class="mat-caption">Card Details</caption>
+	</div>
+	<div class="field-outer data-card-holder data-card-field">
 		<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
-			<mat-label>Expiration Date</mat-label>
-			<input type="text" matInput placeholder="MM / YY" [(ngModel)]="cardExpirationDate">
+			<mat-label>Card Holder</mat-label>
+			<input type="text" matInput placeholder="Name" [(ngModel)]="cardHolder">
 		</mat-form-field>
 	</div>
 
-	<div class="field-outer data-ccv data-card-field">
+	<div class="field-outer data-card-holder data-card-field">
 		<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
-			<mat-label>CVC</mat-label>
-			<input type="text" matInput placeholder="XXX" [(ngModel)]="cardCVC">
-			<mat-icon matSuffix>help_outline</mat-icon>
+			<mat-label>Card Number</mat-label>
+			<input type="text" matInput placeholder="1234 1234 1234 1234" [(ngModel)]="cardNumber">
+			<mat-icon matSuffix>lock</mat-icon>
 		</mat-form-field>
 	</div>
+
+	<div class="side-by-side-fields">
+		<div class="field-outer data-expiration-date  data-card-field">
+			<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
+				<mat-label>Expiration Date</mat-label>
+				<input type="text" matInput placeholder="MM / YY" [(ngModel)]="cardExpirationDate">
+			</mat-form-field>
+		</div>
+
+		<div class="field-outer data-ccv data-card-field">
+			<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
+				<mat-label>CVC</mat-label>
+				<input type="text" matInput placeholder="XXX" [(ngModel)]="cardCVC">
+				<mat-icon matSuffix>help_outline</mat-icon>
+			</mat-form-field>
+		</div>
+	</div>
 </div>
+
+
+
 
 <footer class="footer">
 	<button class="button-pay" mat-flat-button color=primary>Pay Now</button>

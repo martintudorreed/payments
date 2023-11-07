@@ -1,0 +1,68 @@
+@use "src/sass/themes/palette-constants" as palette;
+@use "src/sass/ifm-mixins/ifm-breakpoints" as bp;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  padding: 12px;
+  min-width: 400px;
+}
+
+.canvas-outer {
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  .canvas {
+    border: 1px solid palette.$medium-grey;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: auto;
+    position: relative;
+    z-index: 9;
+
+    &.comms {
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      width: 100%;
+
+      .editor {
+        flex-grow: 1;
+        overflow: auto;
+        padding: 0;
+        background-color: palette.$white;
+
+        .tab-inner {
+          padding-top: 12px;
+          padding: 24px;
+        }
+      }
+
+      .footer {
+        border-top: 1px solid palette.$medium-grey;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding: 12px 24px;
+
+        .field-outer {
+          display: flex;
+          justify-content: flex-end;
+          min-height: 48px;
+
+          &.data-checkboxes {
+            align-items: center;
+          }
+        }
+      }
+    }
+  }
+}
+

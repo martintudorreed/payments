@@ -20,4 +20,12 @@ export class ViewSettingsComponent {
   onTabSelected(ev: any) {
     this.applicationModelService.activeSettingsUITab$.next(ev.index);
   }
+
+  doToggleTwoWayMenu() {
+    this.applicationModelService.isShow2WayMenu$.next(!this.applicationModelService.isShow2WayMenu$.getValue());
+  }
+
+  doToggleDashboardTab() {
+    this.applicationModelService.isShowDashboard$.next(!this.applicationModelService.isShowDashboard$.getValue());
+  }
 }

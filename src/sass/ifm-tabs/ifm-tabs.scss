@@ -48,6 +48,54 @@
   }
 }
 
+.ifm-tabs-sub-main-ui {
+  height: 100%;
+  .mat-mdc-tab-body-wrapper {
+    height: 100%;
+  }
+  .mat-mdc-tab-header {
+    border-bottom: 1px solid palette.$light-grey;
+    box-shadow: none;
+    z-index: 99;
+  }
+  .mat-mdc-tab-labels {
+    background-color: palette.$white;
+    .tab-label {
+      display: flex;
+      align-items: center;
+      .tab-icon {
+        color: palette.$very-dark-grey;
+      }
+      .tab-label-text {
+        margin: 0 12px;
+        color: palette.$very-dark-grey;
+      }
+    }
+  }
+
+  .mat-mdc-tab {
+    .tab-label {
+      opacity: .84
+    }
+    &.mdc-tab--active {
+      background-color: palette.$white;
+      border-left: 1px solid rgba(255,255,255,.12);
+      border-right: 1px solid rgba(255,255,255,.12);
+      .mdc-tab-indicator {
+        .mdc-tab-indicator__content--underline {
+          border-color: palette.$primary;
+          border-width: 3px;
+          border-right: 3px solid palette.$primary;
+          border-left: 3px solid palette.$primary;
+        }
+      }
+      .tab-label {
+        opacity: 1;
+      }
+    }
+  }
+}
+
 .ifm-tabs {
   height: 100%;
   .mat-mdc-tab-body-wrapper {

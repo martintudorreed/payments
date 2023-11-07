@@ -1,1 +1,16 @@
-<span>Source App Id = {{sourceAppID}}</span>
+<!--<span>Source App Id = {{sourceAppID}}</span>-->
+<header class="header">
+	<div class="search-filter">
+		<img class="logo" src="./assets/svg-logos/{{applicationModelService.selectedThemeBrand$.value}}-logo.svg" alt="logo" />
+		<img class="app-logo" src="./assets/svg-logos/triage-logo.svg" alt="SuperservicePayments" />
+		<app-control-serach-input [placeholderText]="'Filter'" class="search-input"></app-control-serach-input>
+	</div>
+	<div class="control">
+		<button [mat-dialog-close]="true" mat-icon-button color="primary"><mat-icon>close</mat-icon></button>
+	</div>
+
+</header>
+<div class="table-container">
+	<app-table-triage-data></app-table-triage-data>
+</div>
+

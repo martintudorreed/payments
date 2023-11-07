@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, AfterViewInit } from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {ApplicationModelService} from "./services/ApplicationModelService";
-import { Router } from '@angular/router';
+import {NavigationEnd, Router} from '@angular/router';
 import {MatDialog} from "@angular/material/dialog";
 
 @Component({
@@ -11,7 +11,7 @@ import {MatDialog} from "@angular/material/dialog";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
   title = 'triage-index';
 
   destroyed = new Subject<void>();
@@ -47,7 +47,30 @@ export class AppComponent {
           }
         }
       });
+
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        console.log('Current Route:', event.url);
+        this.applicationModelService.activeRoute$.next(event.url);
+        console.log('rout in ams : ' + this.applicationModelService.activeRoute$.getValue());
+      }
+    });
+    const currentRoute = this.router.url;
+    this.applicationModelService.activeRoute$.next(currentRoute);
+    console.log('Current Route:', currentRoute);
+    console.log('rout in ams : ' + this.applicationModelService.activeRoute$.getValue());
   }
+
+  ngAfterViewInit() {
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any){
+    this.applicationModelService.browserWindowWidth = event.target.innerWidth;
+    this.applicationModelService.browserWindowWidth$.next(this.applicationModelService.browserWindowWidth);
+    console.log(this.applicationModelService.browserWindowWidth$.getValue());
+  }
+
   sidenavClosed() {
     this.applicationModelService.isSidenavActive$.next(false);
   }

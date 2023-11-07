@@ -3,7 +3,7 @@
 :host {
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow: auto;
 }
 
 .header {
@@ -15,28 +15,33 @@
 }
 
 
-.data-created-on {
-  width: 15%;
-}
-.data-name {
-  width: 30%;
-}
-.data-email {
-  width: 25%;
-}
-.data-source {
-  width: 10%;
-}
-.data-total-inc-tax {
+.mat-column-paymentTransactionCreatedOn {
   width: 1%;
 }
-.data-status {
-  width: 10%;
+.mat-column-paymentCustomerSurname {
+  width: 30%;
 }
-.data-expires {
-  width: 10%;
+.mat-column-paymentCustomerEmail {
+  width: 25%;
 }
+.mat-column-paymentSource {
 
+}
+.mat-column-paymentTransactionNumber {
+  width: 1%;
+}
+.mat-column-paymentStatus {
+  width: 10%;
+}
+.mat-column-paymentTransactionTotalIncTax  {
+  width: 10%;
+}
+.mat-column-paymentTransactionTotalIncTax  {
+  width: 10%;
+}
+.mat-column-paymentTransactionExpiry {
+  width: 10%;
+}
 .control {
   width: 1%;
 }

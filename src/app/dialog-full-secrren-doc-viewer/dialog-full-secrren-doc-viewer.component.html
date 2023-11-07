@@ -1,0 +1,7 @@
+<div class="close-control-container" *ngIf="isInFullScreenViewer">
+	<button mat-icon-button matDialogClose color="primary"><mat-icon>close</mat-icon></button>
+</div>
+<app-control-document-viewer
+		[isShowAttachments]="isShowAttachments"
+		[isInFullScreenViewer]="isInFullScreenViewer"
+		[paymentStatusId]="1"></app-control-document-viewer>

@@ -13,30 +13,32 @@
   align-items: center;
   justify-content: flex-end;
   width: 100%;
+  .data-customer-search {
+    flex-grow: 1;
+  }
+  .search-outer {
+    display: flex;
+    align-items: center;
+    border: 1px solid palette.$medium-grey;
+    height: 48px;
+    border-radius: 24px;
+    padding: 0 12px;
+    max-width:220px;
+    input {
+      outline: 0;
+      border: 0;
+      width: 100%;
+    }
+  }
 }
 
 button {
   margin: 0 6px;
 }
 
-.data-customer-search {
-  flex-grow: 1;
-}
 
-.search-outer {
-  display: flex;
-  align-items: center;
-  border: 1px solid palette.$medium-grey;
-  height: 48px;
-  border-radius: 24px;
-  padding: 0 12px;
-  max-width:220px;
-  input {
-    outline: 0;
-    border: 0;
-    width: 100%;
-  }
-}
+
+
 
 .chip-filter {
   margin: 0 6px;
@@ -50,5 +52,8 @@ button {
   &.field-from-date {
     max-width: 148px;
   }
+}
 
+.new-payment {
+  margin: 0 24px;
 }

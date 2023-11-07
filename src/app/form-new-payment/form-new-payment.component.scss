@@ -13,7 +13,7 @@
   display: flex;
   overflow: hidden;
   height: 100%;
-  padding: 12px;
+  padding: 12px 12px 0 12px;
   .side-panel {
     min-width: 320px;
     padding: 12px;
@@ -32,20 +32,53 @@
         width: 100%;
       }
     }
+    .invoice-status {
+      display: flex;
+      margin-bottom: 12px;
+      align-items: center;
+      padding: 6px 6px 12px 6px;
+      border-bottom: 1px solid palette.$medium-light-grey;
+      .status-text {
+        display: flex;
+        margin: 0 6px;
+        flex-grow: 1;
+      }
+      .refNumber {
+        display: flex;
+        .refNumber-text {
+          margin: 0;
+        }
+      }
+    }
     .invoice-meta-data {
       display: flex;
       width: 100%;
-      padding: 0 6px;
+      margin-bottom: 6px;
+      padding: 6px;
+      border-bottom: 1px solid palette.$medium-light-grey;
+      flex-wrap: wrap;
       .field-outer {
-        flex-basis: 50%;
-        margin: 0 6px 0;
+        flex-basis: 33%;
+        padding: 0 6px;
+        &.data-vehicle-model {
+          flex-basis: 100%;
+        }
       }
     }
     .two-fields {
       display: flex;
+      justify-content: space-between;
+      .field-outer {
+        flex-basis: 49%;
+      }
+    }
+
+    .data-payment-type {
+      padding: 6px 6px 12px 6px;
+      border-bottom: 1px solid palette.$medium-light-grey;
     }
     .field-outer {
-      margin: 6px;
+      margin-bottom: 6px;
       &.data-is-has-address {
         margin: 12px 0;
         padding: 0 6px;
@@ -55,102 +88,25 @@
   .canvas-container {
     display: flex;
     flex-grow: 1;
-    padding: 18px 24px;
-    .canvas-outer {
-      display: flex;
-      position: relative;
-      width: 100%;
-      &.invoice {
-        flex-basis: 66%
+    &.doc-viewer-collapsed {
+      flex-direction: column;
+      .comms {
+        flex-basis: unset;
+        flex-grow: 1;
       }
-      &.comms {
-        flex-basis: 34%;
+      .invoice {
+        min-height: 72px;
+        flex-basis: unset;
+        height: unset;
+        flex-shrink: 0;
       }
-      .canvas {
-        border:1px solid palette.$medium-grey;
-        border-radius: 4px;
-
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        overflow: auto;
-        position: relative;
-        z-index: 9;
-        &.invoice {
-          margin: 0 12px;
-          padding: 24px 24px 12px;
-        }
-        &.comms {
-          margin: 0 12px;
-          padding: 0;
-          display: flex;
-          flex-direction: column;
-          overflow: hidden;
-          .editor {
-            flex-grow: 1;
-            overflow: auto;
-            padding: 24px;
-          }
-          .field-outer{
-            display: flex;
-            justify-content: flex-end;
-            padding: 12px;
-          }
-        }
-        .header {
-          display: flex;
-          margin-bottom: 24px;
-          .logo-container {
-            .logo {
-              max-height: 120px;
-            }
-          }
-          .address {
-            flex-grow: 1;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            .invoice-address {
-              line-height: 24px;
-            }
-          }
-        }
-        .sub-header {
-          display: flex;
-          .address {
-            flex-grow: 1;
-            .customer-address {
-              line-height: 20px;
-            }
-          }
-          .additional-data {
-            .additional-data-inner {
-              padding: 24px;
-            }
-          }
-
-        }
-        .invoice-body {
-          display: flex;
-          flex-direction: column;
-          flex-grow: 1;
-          .salutation-text {
-            margin: 12px 0;
-          }
-        }
-        .invoice-totals {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-end;
-          .total {
-            margin-bottom: 12px;
-          }
-        }
-        .invoice-fine-print {
-          display: flex;
-          justify-items: center;
-        }
-      }
+    }
+    .comms {
+      flex-basis: 34%;
+      min-width: 400px;
+    }
+    .invoice {
+      flex-basis: 66%;
     }
 
   }
@@ -173,14 +129,24 @@
     .control-primary {
       display: flex;
       align-items: center;
+      .provider-select {
+        margin: 0 12px;
+      }
       .cardless {
         margin: 12px;
+      }
+      .launcher {
+        opacity: .1;
       }
     }
     .control-secondary {
       display: flex;
       align-items: center;
       flex-grow: 1;
+      .data-is-view-attachments {
+        margin: 0 12px;
+      }
+
     }
   }
 

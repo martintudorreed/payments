@@ -66,5 +66,21 @@
 				<span>Disclaimers and Legal Settings go here</span>
 			</div>
 		</mat-tab>
+		<mat-tab label="Rich Text Teplates">
+			<ng-template mat-tab-label>
+			<span class="tab-label">
+				<mat-icon class="tab-icon">rocket_launch</mat-icon>
+				<span class="tab-label-text">Prototype</span></span>
+			</ng-template>
+			<div class="tab-inner">
+				<div class="field-outer data-is-view-attachments">
+					<mat-slide-toggle [checked]='(applicationModelService.isShow2WayMenu$ | async)' (change)="doToggleTwoWayMenu()">Show 2 Way Menu</mat-slide-toggle>
+				</div>
+				<div class="field-outer data-is-view-attachments">
+					<mat-slide-toggle [checked]='(applicationModelService.isShowDashboard$ | async)' (change)="doToggleDashboardTab()">Show Dashboard Tab</mat-slide-toggle>
+				</div>
+			</div>
+		</mat-tab>
+
 	</mat-tab-group>
 </main>

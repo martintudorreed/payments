@@ -26,6 +26,17 @@ import { ControlEditableSmsTemplateComponent } from './control-editable-sms-temp
 import { DialogCustomerFormComponent } from './dialog-customer-form/dialog-customer-form.component';
 import { FormCustomerPaymentComponent } from './form-customer-payment/form-customer-payment.component';
 import { DialogLoadFromApplicationDatasourceComponent } from './dialog-load-from-application-datasource/dialog-load-from-application-datasource.component';
+import { TableTriageDataComponent } from './table-triage-data/table-triage-data.component';
+import { ControlSerachInputComponent } from './control-serach-input/control-serach-input.component';
+import { ArchivedDisplayInvoiceFromDataComponent } from './archived-display-invoice-from-data/archived-display-invoice-from-data.component';
+import { ViewPaymentTableOnlyComponent } from './view-payment-table-only/view-payment-table-only.component';
+import { ViewPaymentFormOnlyComponent } from './view-payment-form-only/view-payment-form-only.component';
+import { ResizableModule } from 'angular-resizable-element';
+import { NgxDocViewerModule} from "ngx-doc-viewer";
+import { ViewPaymentFormNewComponent } from './view-payment-form-new/view-payment-form-new.component';
+import { ControlDisplaySendMethodsComponent } from './control-display-send-methods/control-display-send-methods.component';
+import { ControlDocumentViewerComponent } from './control-document-viewer/control-document-viewer.component';
+import { DialogFullSecrrenDocViewerComponent } from './dialog-full-secrren-doc-viewer/dialog-full-secrren-doc-viewer.component';
 const routes: Routes = [
 
 ];
@@ -51,7 +62,16 @@ const routes: Routes = [
     ControlEditableSmsTemplateComponent,
     DialogCustomerFormComponent,
     FormCustomerPaymentComponent,
-    DialogLoadFromApplicationDatasourceComponent
+    DialogLoadFromApplicationDatasourceComponent,
+    TableTriageDataComponent,
+    ControlSerachInputComponent,
+    ArchivedDisplayInvoiceFromDataComponent,
+    ViewPaymentTableOnlyComponent,
+    ViewPaymentFormOnlyComponent,
+    ViewPaymentFormNewComponent,
+    ControlDisplaySendMethodsComponent,
+    ControlDocumentViewerComponent,
+    DialogFullSecrrenDocViewerComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +79,9 @@ const routes: Routes = [
     BrowserAnimationsModule,
     MaterialModule,
     RouterModule.forRoot(routes, { useHash: true }),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ResizableModule,
+    NgxDocViewerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

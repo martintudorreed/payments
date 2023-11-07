@@ -52,4 +52,21 @@ export class ApplicationModelService {
   currentTabCount = 1;
   currentTabCount$: BehaviorSubject<number> = new BehaviorSubject<number>(this.currentTabCount);
 
+  nextNewTabContentType = 'payment';
+  nextNewTabContentType$: BehaviorSubject<string> = new BehaviorSubject<string>(this.nextNewTabContentType);
+
+  isShowDashboard = false;
+  isShowDashboard$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.isShowDashboard);
+
+  isShow2WayMenu = false;
+  isShow2WayMenu$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.isShow2WayMenu);
+
+  isInIframe = false;
+  isInIframe$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.isInIframe);
+
+  isInIframeDataValue = -1;
+  isInIframeDataValue$: BehaviorSubject<number> = new BehaviorSubject<number>(this.isInIframeDataValue);
+
+  isDocumentViewerCollapsed  = false;
+  isDocumentViewerCollapsed$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.isDocumentViewerCollapsed);
 }

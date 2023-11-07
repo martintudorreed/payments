@@ -1,0 +1,126 @@
+@use "src/sass/themes/palette-constants" as palette;
+@use "src/sass/ifm-mixins/ifm-breakpoints" as bp;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  padding: 12px;
+}
+
+.canvas-outer {
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  &.in-fullscreen {
+    .canvas {
+      border: 0;
+    }
+    .caption-container {
+      display: none;
+    }
+  }
+  .canvas {
+    border: 1px solid palette.$medium-grey;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: auto;
+    position: relative;
+    z-index: 9;
+
+    &.invoice {
+      width: 100%;
+      overflow: hidden;
+
+      .attached-page-view {
+        height: 100%;
+        width: 100%;
+      }
+
+      .attachment-viewer-canvas {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-grow: 1;
+        overflow: hidden;
+        padding: 24px;
+        height: 94vh;
+      }
+    }
+  }
+}
+.footer-attachment-viewer {
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid palette.$medium-grey;
+  &.collapsed {
+    border-top: 0;
+  }
+  position: relative;
+  &.in-comms {
+    border: 1px solid palette.$medium-grey;
+    margin-top: 12px;
+  }
+  .drag-target {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border: 4px dashed palette.$light-grey;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    width: 100%;
+    height: 100%;
+    background-color: palette.$white;
+    .placeholder-text {
+      margin: 0;
+    }
+  }
+
+  .attachments-list {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+  }
+  .controls {
+    .file-input {
+      display:none;
+    }
+  }
+  .attachment {
+    display: flex;
+    align-items: center;
+    margin: 0 6px;
+    &:hover {
+      cursor: pointer;
+    }
+    &.active {
+      border-bottom: 2px solid palette.$primary;
+    }
+    .file-icon {
+    }
+    .attachment-text {
+      margin: 0 6px;
+    }
+  }
+  .no-attachments {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    .no-attachment-text {
+      margin: 0;
+    }
+  }
+
+}

@@ -1,0 +1,57 @@
+<div class="canvas-outer comms">
+	<div class="caption-container">
+		<caption class="mat-caption">
+			<span>Templates</span>
+		</caption>
+	</div>
+
+	<div class="canvas comms mat-elevation-custom-z1">
+		<div class="editor">
+			<mat-tab-group mat-stretch-tabs="false" class="ifm-tabs-sub-main-ui" [selectedIndex]="0" (selectedTabChange)="onTabSelected($event)">
+
+				<mat-tab label="First">
+					<ng-template mat-tab-label>
+						<span class="tab-label">
+							<mat-icon class="tab-icon">email</mat-icon>
+						<span class="tab-label-text">Email</span></span>
+					</ng-template>
+					<div class="tab-inner">
+						<app-control-editable-email-template
+								[customerName]="customerName"
+								[paymentTransactionExpiry]="paymentTransactionExpiry"
+								[invoiceAmmount]="invoiceAmmount"
+								[paymentTransactionNumber]="paymentTransactionNumber"
+								[isInMainUI]="true"></app-control-editable-email-template>
+					</div>
+				</mat-tab>
+
+				<mat-tab label="Second">
+					<ng-template mat-tab-label>
+						<span class="tab-label">
+							<mat-icon class="tab-icon">phone_iphone</mat-icon>
+						<span class="tab-label-text">SMS</span></span>
+					</ng-template>
+					<div class="tab-inner">
+						<app-control-editable-sms-template
+								[customerName]="customerName"
+								[paymentTransactionExpiry]="paymentTransactionExpiry"
+								[invoiceAmmount]="invoiceAmmount"
+								[paymentTransactionNumber]="paymentTransactionNumber"></app-control-editable-sms-template>
+					</div>
+				</mat-tab>
+
+			</mat-tab-group>
+
+
+		</div>
+		<div class="footer">
+			<div class="field-outer data-checkboxes">
+				<span>Send using - </span>
+				<mat-checkbox [(ngModel)]="isEMailChecked" (click)="doCheckBoxStatus(0, $event)">Email</mat-checkbox>
+				<mat-checkbox [(ngModel)]="isSMSChecked" (click)="doCheckBoxStatus(1, $event)">SMS</mat-checkbox>
+			</div>
+		</div>
+
+	</div>
+
+</div>

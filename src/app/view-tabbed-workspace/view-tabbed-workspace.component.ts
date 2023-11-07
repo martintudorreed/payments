@@ -25,6 +25,7 @@ export class ViewTabbedWorkspaceComponent {
   invoiceSource = this.localDataService.ifmAppData;
 
   tabs = this.localDataService.mainUITabsData;
+  tabToTreatAsHome: number = 0;
 
   constructor( private localDataService: LocalDataService,
                public dialog: MatDialog,
@@ -38,10 +39,21 @@ export class ViewTabbedWorkspaceComponent {
   }
 
   doCloseTab(ind: number) {
+    if(!this.applicationModelService.isShowDashboard$.getValue()) {
+      this.tabToTreatAsHome = 0;
+    } else {
+      this.tabToTreatAsHome = 1;
+    }
     this.applicationModelService.currentTabCount$.next(this.applicationModelService.currentTabCount$.getValue() -1 );
-    this.applicationModelService.activeMainUITab$.next(0);
+    this.applicationModelService.activeMainUITab$.next(this.tabToTreatAsHome);
     console.log('close executed' + ind);
     this.tabs.splice(ind, 1);
+  }
+
+  loadAppChooser(ev: any) {
+    ev.stopPropagation();
+    ev.preventDefault();
+    this.doLoadSourceData('1');
   }
 
   absorb(ev: any) {
@@ -51,7 +63,7 @@ export class ViewTabbedWorkspaceComponent {
   doLoadSourceData(sourceAppID: string) {
     this.dialog.open(DialogLoadFromApplicationDatasourceComponent, {
       maxWidth: '800px',
-      minWidth: '300px',
+      minWidth: '96%',
       minHeight: '180px',
       maxHeight: '96vh',
       panelClass: 'ifm-dialog',

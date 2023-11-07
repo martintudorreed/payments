@@ -1,0 +1,104 @@
+@use "src/sass/themes/palette-constants" as palette;
+@use "src/sass/ifm-mixins/ifm-breakpoints" as bp;
+.canvas-container {
+  display: flex;
+  flex-grow: 1;
+  padding: 18px 24px;
+  .canvas-outer {
+    display: flex;
+    position: relative;
+    width: 100%;
+    &.invoice {
+      flex-basis: 66%
+    }
+    &.comms {
+      flex-basis: 34%;
+    }
+    .canvas {
+      border:1px solid palette.$medium-grey;
+      border-radius: 4px;
+
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      overflow: auto;
+      position: relative;
+      z-index: 9;
+      &.invoice {
+        margin: 0 12px;
+        padding: 24px 24px 12px;
+      }
+      &.comms {
+        margin: 0 12px;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        .editor {
+          flex-grow: 1;
+          overflow: auto;
+          padding: 24px;
+        }
+        .field-outer{
+          display: flex;
+          justify-content: flex-end;
+          padding: 12px;
+        }
+      }
+      .header {
+        display: flex;
+        margin-bottom: 24px;
+        .logo-container {
+          .logo {
+            max-height: 120px;
+          }
+        }
+        .address {
+          flex-grow: 1;
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+          .invoice-address {
+            line-height: 24px;
+          }
+        }
+      }
+      .sub-header {
+        display: flex;
+        .address {
+          flex-grow: 1;
+          .customer-address {
+            line-height: 20px;
+          }
+        }
+        .additional-data {
+          .additional-data-inner {
+            padding: 24px;
+          }
+        }
+
+      }
+      .invoice-body {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        .salutation-text {
+          margin: 12px 0;
+        }
+      }
+      .invoice-totals {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        .total {
+          margin-bottom: 12px;
+        }
+      }
+      .invoice-fine-print {
+        display: flex;
+        justify-items: center;
+      }
+    }
+  }
+
+}

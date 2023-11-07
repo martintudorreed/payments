@@ -1,0 +1,79 @@
+<div class="table-container">
+	<table class="ifm-table" *ngIf="(applicationModelService.currentBreakpoint$ | async) !== 'Small' && (applicationModelService.currentBreakpoint$ | async) !== 'XSmall'">
+		<thead>
+			<tr>
+				<th class="data-job-number">
+					<div class="cell-inner">
+						<mat-icon class="ifm-icon-medium th-icon">check_circle</mat-icon><span class="header-text">Job Number</span>
+						<mat-icon class="ifm-icon-medium">vertical_align_bottom</mat-icon>
+						<!--					<mat-icon>upgrade</mat-icon> ascending-->
+					</div>
+				</th>
+
+				<th class="data-created-on">
+					<div class="cell-inner">
+						<mat-icon class="ifm-icon-medium th-icon">person</mat-icon><span class="header-text">Customer Name</span>
+					</div>
+				</th>
+
+				<th class="data-vehicle">
+					<div class="cell-inner">
+						<mat-icon class="ifm-icon-medium th-icon">rocket_launch</mat-icon><span class="header-text">Vehicle</span>
+					</div>
+				</th>
+
+				<th class="data-rego-vin">
+					<div class="cell-inner">
+						<mat-icon class="ifm-icon-medium th-icon">fingerprint</mat-icon><span class="header-text">Rego / VIN</span>
+					</div>
+				</th>
+
+				<th class="data-created-on numeric">
+					<div class="cell-inner numeric no-collapse">
+						<mat-icon class="ifm-icon-medium th-icon">paid</mat-icon><span class="header-text">Ammount</span>
+					</div>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let item of triageData,let i = index" (click)="onRowClick(i)" class="is-selectable">
+				<td>
+					<div class="cell-inner">
+						<span class="cell-text">{{item.triageDataJobNumber}}</span>
+					</div>
+				</td>
+
+				<td>
+					<div class="cell-inner">
+						<span class="cell-text">{{item.triageDataCustomerName}}</span>
+					</div>
+				</td>
+
+				<td>
+					<div class="cell-inner">
+						<span class="cell-text">{{item.triageDataVehicle}}</span>
+					</div>
+				</td>
+
+
+				<td>
+					<div class="cell-inner">
+						<span class="cell-text">{{item.triageDataRegoVIN}}</span>
+					</div>
+				</td>
+
+				<td>
+					<div class="cell-inner numeric">
+						<span class="cell-text">{{item.triageDataAuthorised | number: '1.2-2'}}</span>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<!--triageDataJobNumber: '88288442',-->
+<!--triageDataCustomerName: 'Duncan Seyward',-->
+<!--triageDataVehicle: 'Spacecar 3034 - Convertible 4sField',-->
+<!--triageDataRegoVIN: 'Zaphod99',-->
+<!--triageDataAuthorised: '88.88',-->
