@@ -10,6 +10,8 @@
 			</mat-form-field>
 		</div>
 
+
+
 		<div class="invoice-status">
 			<mat-icon class="ifm-icon-medium th-icon" [ngClass]="{'green-text': paymentStatusId === 0,'bright-blue-text': paymentStatusId === 1,'red-text': paymentStatusId === 2}">credit_card</mat-icon>
 			<span class="status-text mat-headeline-4">{{paymentStatus}}</span>
@@ -17,7 +19,7 @@
 				<span class="mat-headline-4 refNumber-text">INV:{{paymentTransactionNumber}}</span>
 			</div>
 		</div>
-
+		<app-control-provider-select class="provider-select" *ngIf="paymentStatusId === 5"></app-control-provider-select>
 		<div class="invoice-meta-data" *ngIf="dataItemIndexNo !== -1">
 			<div class="field-outer data-customer-search">
 				<div class="naked-form-field data-email">
@@ -185,7 +187,7 @@
 		</div>
 		<div class="control-primary">
 			<button class="launcher" mat-icon-button color="primary" (click)="doCardlessPayment($event)"><mat-icon>rocket_launch</mat-icon></button>
-			<app-control-provider-select class="provider-select"></app-control-provider-select>
+<!--			<app-control-provider-select class="provider-select"></app-control-provider-select>-->
 			<button mat-flat-button color="primary" (click)="doSendFromDataSource()">Send to Customer</button>
 		</div>
 	</div>
@@ -210,7 +212,6 @@
 		</div>
 		<div class="control-primary">
 			<button mat-icon-button class="launcher" color="primary" (click)="doCardlessPayment($event)"><mat-icon>rocket_launch</mat-icon></button>
-			<app-control-provider-select class="provider-select" *ngIf="paymentStatusId !== 0"></app-control-provider-select>
 			<button mat-flat-button color="primary" (click)="doSendFromDataSource()">Send to Customer</button>
 		</div>
 	</div>

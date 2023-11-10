@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {LocalDataService} from "../services/local-data.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ApplicationModelService} from "../services/ApplicationModelService";
@@ -9,6 +9,8 @@ import {ApplicationModelService} from "../services/ApplicationModelService";
   styleUrls: ['./control-provider-select.component.scss']
 })
 export class ControlProviderSelectComponent {
+  @Input() isShowLabel: boolean = true;
+  @Input() isSettings: boolean = false;
   paymentMethods = this.localDataService.paymentMethodData;
   selectedPaymentMethod = this.paymentMethods[0].paymentMethodID;
 

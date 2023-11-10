@@ -22,6 +22,26 @@
   }
 }
 
+.editor-drag {
+  &.cdk-drag-preview {
+    background-color: palette.$white;
+    display: flex;
+    box-shadow: 0 4px 20px -8px rgba(0, 0, 0, 0.1);
+    border: 1px dotted palette.$medium-grey;
+    .section-body {
+      flex-grow: 1;
+      padding: 12px;
+      .section-content {
+        margin: 0;
+      }
+    }
+    .section-controls {
+
+    }
+  }
+}
+
+
 .ifm-table {
   width: 100%;
   border-collapse: separate;

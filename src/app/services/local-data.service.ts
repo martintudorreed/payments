@@ -1,5 +1,29 @@
 import {Injectable, Input} from '@angular/core';
 
+export interface sections {
+  sectionId: string;
+  sectionContent: string;
+  sectionContentStyle: string;
+}
+
+export interface commsTemplate {
+  templateID: string;
+  templateProviderId: string;
+  templateType: string;
+  templateName: string;
+  templateLogo: string;
+  templateSections: sections[];
+  templateContents: string;
+  templateCreatedBy: string;
+  templateCreatedOn: string;
+}
+
+
+export interface themeBrands {
+  brandValue: string;
+  brandName: string;
+}
+
 export interface paymentMethods {
   paymentMethodID: string;
   paymentMethodName: string;
@@ -73,6 +97,62 @@ export interface regions {
 export class LocalDataService {
 
   constructor() { }
+
+  templateData: commsTemplate[]=[
+    {
+      templateID: '0',
+      templateProviderId: '0',
+      templateType: 'email',
+      templateName: 'Triage Standard Email',
+      templateLogo: 'nissan',
+      templateSections: [
+        {
+        sectionId: '0',
+        sectionContent: 'logo',
+        sectionContentStyle: '',
+        },
+        {
+          sectionId: '1',
+          sectionContent: 'Your Invoice from [dealerName] (BES-29367)',
+          sectionContentStyle: 'mat-headline-4',
+        },
+        {
+          sectionId: '2',
+          sectionContent: '[ammount]',
+          sectionContentStyle: 'mat-headline-2',
+        },
+        {
+          sectionId: '3',
+          sectionContent: '[invoiceNumber] is due on [dueDate]',
+          sectionContentStyle: 'mat-headline-4',
+        },
+        {
+          sectionId: '4',
+          sectionContent: 'Pay Invoice',
+          sectionContentStyle: '',
+        }
+        ,
+        {
+          sectionId: '5',
+          sectionContent: 'Here\'s your tax invoice INV-6209 for $[invoiceAmmount] for work completed at 7 Philip K. Dick Drive, Mars.\n\n' +
+            'Please click the Pay Invoice button above to view, print, download or pay the invoice.\n\n' +
+            'If you have any questions, please contact us on the interdimensional telephone - Mars99.\n\n',
+          sectionContentStyle: '',
+        },
+        {
+          sectionId: '6',
+          sectionContent: '[dealerName]',
+          sectionContentStyle: '',
+        }
+      ],
+      templateContents: 'Here\'s your tax invoice INV-6209 for ${{invoiceAmmount | number: \'1.2-2\' }} for work completed at 7 Philip K. Dick Drive, Mars.\n\n' +
+        'Please click the Pay Invoice button above to view, print, download or pay the invoice.\n\n' +
+        'If you have any questions, please contact us on the interdimensional telephone - Mars99.\n\n'
+      ,
+      templateCreatedBy: 'Martin Tudor Reed',
+      templateCreatedOn: '05/02/2032',
+    }
+  ]
 
   mainUITabsData: mainUITabs [] = [
 
@@ -806,6 +886,134 @@ export class LocalDataService {
     }
 
   ]
+
+  themeBrandData: themeBrands [] = [
+    {
+      brandValue: "ford",
+      brandName: "Ford"
+    },
+    {
+      brandValue: "no",
+      brandName: "No Logo"
+    },
+    {
+      brandValue: "acura",
+      brandName: "Acura"
+    },
+    {
+      brandValue: "aston-martin",
+      brandName: "Aston Martin"
+    },
+    {
+      brandValue: "bentley",
+      brandName: "Bentley"
+    },
+    {
+      brandValue: "bmw",
+      brandName: "BMW"
+    },
+    {
+      brandValue: "bmwservice",
+      brandName: "BMW Service"
+    },
+    {
+      brandValue: "chrysler",
+      brandName: "Chrysler"
+    },
+    {
+      brandValue: "cupra",
+      brandName: "Cupra"
+    },
+    {
+      brandValue: "dacia",
+      brandName: "Dacia"
+    },
+    {
+      brandValue: "dodge",
+      brandName: "Dodge"
+    },
+    {
+      brandValue: "futuremotors",
+      brandName: "Future Motors"
+    },
+    {
+      brandValue: "genesis-white",
+      brandName: "Genesis (white)"
+    },
+    {
+      brandValue: "hino",
+      brandName: "Hino"
+    },
+    {
+      brandValue: "hyundai",
+      brandName: "Hyundai"
+    },
+    {
+      brandValue: "infiniti",
+      brandName: "Infiniti"
+    },
+    {
+      brandValue: "jeep",
+      brandName: "Jeep"
+    },
+    {
+      brandValue: "jaguar",
+      brandName: "Jaguar"
+    },
+    {
+      brandValue: "kia",
+      brandName: "Kia"
+    },
+    {
+      brandValue: "land-rover",
+      brandName: "Land Rover"
+    },
+    {
+      brandValue: "mclaren",
+      brandName: "Mclaren"
+    },
+    {
+      brandValue: "mercedes",
+      brandName: "Mercedes"
+    },
+    {
+      brandValue: "mg",
+      brandName: "MG"
+    },
+    {
+      brandValue: "mini",
+      brandName: "Mini"
+    },
+    {
+      brandValue: "nissan",
+      brandName: "Nissan"
+    },
+    {
+      brandValue: "peugeot",
+      brandName: "Paugeot"
+    },
+    {
+      brandValue: "ram",
+      brandName: "Ram"
+    },
+    {
+      brandValue: "sea-doo",
+      brandName: "Sea-Doo"
+    },
+    {
+      brandValue: "skoda",
+      brandName: "Skoda"
+    },
+    {
+      brandValue: "text2drive",
+      brandName: "Text2Drive"
+    },
+    {
+      brandValue: "toyota",
+      brandName: "Toyota"
+    }
+
+  ];
 }
 
 

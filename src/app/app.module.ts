@@ -33,10 +33,12 @@ import { ViewPaymentTableOnlyComponent } from './view-payment-table-only/view-pa
 import { ViewPaymentFormOnlyComponent } from './view-payment-form-only/view-payment-form-only.component';
 import { ResizableModule } from 'angular-resizable-element';
 import { NgxDocViewerModule} from "ngx-doc-viewer";
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { ViewPaymentFormNewComponent } from './view-payment-form-new/view-payment-form-new.component';
 import { ControlDisplaySendMethodsComponent } from './control-display-send-methods/control-display-send-methods.component';
 import { ControlDocumentViewerComponent } from './control-document-viewer/control-document-viewer.component';
 import { DialogFullSecrrenDocViewerComponent } from './dialog-full-secrren-doc-viewer/dialog-full-secrren-doc-viewer.component';
+import { ControlEmailViewerComponent } from './control-email-viewer/control-email-viewer.component';
 const routes: Routes = [
 
 ];
@@ -71,7 +73,8 @@ const routes: Routes = [
     ViewPaymentFormNewComponent,
     ControlDisplaySendMethodsComponent,
     ControlDocumentViewerComponent,
-    DialogFullSecrrenDocViewerComponent
+    DialogFullSecrrenDocViewerComponent,
+    ControlEmailViewerComponent
   ],
   imports: [
     BrowserModule,
@@ -81,7 +84,8 @@ const routes: Routes = [
     RouterModule.forRoot(routes, { useHash: true }),
     ReactiveFormsModule,
     ResizableModule,
-    NgxDocViewerModule
+    NgxDocViewerModule,
+    PdfViewerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -4,9 +4,15 @@ body {
       &.user-menu {
         min-width: 140px;
       }
+      &.style-menu {
+        .style-option {
+          margin: 0;
+        }
+      }
     }
     .add-external-system {
       padding: 12px;
     }
+
   }
 }

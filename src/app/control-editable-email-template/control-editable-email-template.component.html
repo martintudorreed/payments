@@ -1,4 +1,155 @@
-<div class="template-inner">
+<div class="editor" *ngIf="!isInMainUI">
+	<div class="sidebar-meta-data">
+		<div class="field-outer data-template-select" subscriptSizing="dynamic">
+			<mat-form-field class="ifm-input" >
+				<mat-select [(value)]="selectedTemplate">
+					<mat-option  [value]="template.templateID" *ngFor="let template of dataSource"><span class="option-label">{{ template.templateName }}</span></mat-option>
+				</mat-select>
+			</mat-form-field>
+		</div>
+<!--		<div class="field-outer data-template-name">-->
+<!--			<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">-->
+<!--				<mat-label>Name</mat-label>-->
+<!--				<input type="text" matInput placeholder="Contact Number" [(ngModel)]="templateName">-->
+<!--			</mat-form-field>-->
+<!--		</div>-->
+
+		<div class="macro-keys-container">
+			<div class="caption-container">
+				<caption class="mat-caption">
+					<span>Macro Keys</span>
+				</caption>
+			</div>
+			<div class="macro-keys-inner">
+				<div class="key">
+					<div class="key-text">[dealerName]</div>
+					<div class="key-control"><mat-icon class="ifm-icon-medium">content_copy</mat-icon></div>
+				</div>
+
+				<div class="key">
+					<div class="key-text">
+						[ammount]
+					</div>
+					<div class="key-control"><mat-icon class="ifm-icon-medium">content_copy</mat-icon></div>
+				</div>
+
+				<div class="key">
+					<div class="key-text">
+						[invoiceNumber]
+					</div>
+					<div class="key-control"><mat-icon class="ifm-icon-medium">content_copy</mat-icon></div>
+				</div>
+
+				<div class="key">
+					<div class="key-text">
+						[dueDate]
+					</div>
+					<div class="key-control"><mat-icon class="ifm-icon-medium">content_copy</mat-icon></div>
+				</div>
+
+				<div class="key">
+					<div class="key-text">
+						[workCarriedOut]
+					</div>
+					<div class="key-control"><mat-icon class="ifm-icon-medium">content_copy</mat-icon></div>
+				</div>
+				<div class="key-toggle">
+
+				</div>
+			</div>
+
+		</div>
+		<div class="macro-keys-container">
+			<div class="caption-container">
+				<caption class="mat-caption">
+					<span>Marty's Test Area</span>
+				</caption>
+			</div>
+			<div class="macro-keys-inner">
+
+				<div class="field-outer data-template-name">
+					<button mat-stroked-button color="primary" class="ifm-stroked-button primary-outline" (click)="doGetContents()">Get content</button>
+				</div>
+			</div>
+		</div>
+
+
+
+	</div>
+	<div class="canvas">
+		<div class="template-container">
+			<div class="caption-container">
+				<caption class="mat-caption">
+					<span>Template</span>
+				</caption>
+			</div>
+			<div class="template-inner mat-elevation-custom-z1">
+				<div class="edit-area">
+					<div cdkDropList class="section-list" (cdkDropListDropped)="drop($event)">
+						<section *ngFor="let template of templateSections, let i = index" class="section editor-drag" cdkDrag>
+
+							<div class="section-body">
+								<span *ngIf="template.sectionId === '0'"><img class="logo" src="{{logoString}}" alt="FutureMotors"></span>
+
+								<p *ngIf="template.sectionId !== '0' && template.sectionId !== '4'"
+								   class="section-content {{template.sectionContentStyle}}"
+								   contenteditable="true"
+								   [(ngModel)]="template.sectionContent"
+								   (blur)="doBlur($event, i)">
+									{{template.sectionContent}}
+								</p>
+
+								<div class="section-content" *ngIf="template.sectionId === '4'">
+									<button mat-flat-button color="primary">{{template.sectionContent}}</button>
+								</div>
+							</div>
+
+							<div class="section-controls">
+							<span class="drag-handle" cdkDragHandle>
+								<mat-icon *ngIf="template.sectionId !== '0'" [matMenuTriggerFor]="lineMenu">drag_indicator</mat-icon>
+								<mat-icon *ngIf="template.sectionId === '0'" [matMenuTriggerFor]="brandMenu">drag_indicator</mat-icon>
+							</span>
+							</div>
+
+							<mat-menu #lineMenu="matMenu" class="ifm-menu style-menu">
+								<button mat-menu-item class="style-option mat-headline-2">Headline 1</button>
+								<button mat-menu-item  class="style-option mat-headline-4">Headline 2</button>
+								<button mat-menu-item class="style-option">Body Text</button>
+								<mat-divider></mat-divider>
+								<button mat-menu-item class="style-option" color="warn" (click)="doDeleteRow(i)">Delete<mat-icon>delete</mat-icon></button>
+							</mat-menu>
+
+							<mat-menu #brandMenu="matMenu" class="ifm-menu style-menu">
+								<button *ngFor="let brand of brands, let i = index" mat-menu-item class="style-option" (click)="doChangeLogo(brand.brandValue)">
+									{{brand.brandName}}
+								</button>
+							</mat-menu>
+
+						</section>
+
+					</div>
+				</div>
+				<div class="footer">
+					<div class="secondary">
+						<div class="field-outer data-template-name">
+
+							<mat-slide-toggle>View Result</mat-slide-toggle>
+<!--							<button mat-stroked-button color="primary" class="ifm-stroked-button primary-outline" (click)="doAddRow()">Add Row</button>-->
+						</div>
+					</div>
+
+					<div class="controls">
+						<button mat-icon-button color="primary" (click)="doAddRow()"><mat-icon>add_circle_outline</mat-icon></button>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+</div>
+
+<div class="template-inner" *ngIf="isInMainUI">
 	<div class="logo-container" [ngClass]="{'is-in-main-ui': isInMainUI}">
 		<img class="logo" src="./assets/logos/future-motors-logo.png" alt="FutureMotors">
 	</div>
@@ -11,12 +162,12 @@
 	<div class="editable-message-body">
 
 		<p >Hi {{customerName}},<br/><br/> <span contenteditable="true">Here's your tax invoice INV-6209 for ${{invoiceAmmount | number: '1.2-2' }} for work completed at 7 Philip K. Dick Drive, Mars.<br/>
-			<br/>
-			Please click the Pay Invoice button above to view, print, download or pay the invoice.<br/>
-			<br/>
-			If you have any questions, please contact us on the interdimentional telephone - Mars99.<br />
-			<br />
-			Thanks</span></p>
+				<br/>
+				Please click the Pay Invoice button above to view, print, download or pay the invoice.<br/>
+				<br/>
+				If you have any questions, please contact us on the interdimentional telephone - Mars99.<br />
+				<br />
+				Thanks</span></p>
 
 
 		<div><span></span></div></div>

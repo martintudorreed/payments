@@ -18,6 +18,10 @@
     min-width: 320px;
     padding: 12px;
     overflow: auto;
+    .provider-select {
+      display: flex;
+      margin: 18px 0 12px 0;
+    }
     .search-outer {
       display: flex;
       align-items: center;
@@ -130,7 +134,7 @@
       display: flex;
       align-items: center;
       .provider-select {
-        margin: 0 12px;
+        margin: 12px;
       }
       .cardless {
         margin: 12px;

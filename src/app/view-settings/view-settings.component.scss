@@ -15,7 +15,10 @@
   align-items: center;
   background-color: palette.$very-light-grey;
   .header-title {
+    display: flex;
+    align-items: center;
     flex-grow: 1;
+    padding: 6px 12px;
     .title-text {
       margin: 0 12px;
     }

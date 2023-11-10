@@ -62,12 +62,20 @@
   &.collapsed {
     border-top: 0;
   }
+  &.is-dragging {
+    .attachments-list {
+      opacity: 0;
+    }
+    .drop-target {
+      display: flex;
+    }
+  }
   position: relative;
   &.in-comms {
     border: 1px solid palette.$medium-grey;
     margin-top: 12px;
   }
-  .drag-target {
+  .drop-target {
     position: absolute;
     top: 0;
     right: 0;
@@ -75,13 +83,13 @@
     left: 0;
     border: 4px dashed palette.$light-grey;
     border-radius: 4px;
-    display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 999;
+    z-index: 9;
     width: 100%;
     height: 100%;
     background-color: palette.$white;
+    display: none;
     .placeholder-text {
       margin: 0;
     }
@@ -91,6 +99,9 @@
     display: flex;
     flex-grow: 1;
     align-items: center;
+    &.is-dragging {
+      border: 2px dashed palette.$medium-grey;
+    }
   }
   .controls {
     .file-input {
