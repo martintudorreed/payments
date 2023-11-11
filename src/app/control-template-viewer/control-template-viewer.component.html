@@ -1,0 +1,17 @@
+<div class="section-container">
+	<section *ngFor="let template of templateSectionsConverted, let i = index" class="section">
+		<div class="section-body">
+			<span *ngIf="template.sectionId === '0'"><img class="logo" src="{{logoString}}" alt="FutureMotors"></span>
+
+			<p *ngIf="template.sectionId !== '0' && template.sectionId !== '4'"
+			   class="section-content {{template.sectionContentStyle}}"
+			   [innerHTML]="template.sectionContent | safeHtml">
+			</p>
+
+			<div class="section-content" *ngIf="template.sectionId === '4'">
+				<button mat-flat-button color="primary">{{template.sectionContent}}</button>
+			</div>
+		</div>
+	</section>
+</div>
+

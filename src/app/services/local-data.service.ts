@@ -134,9 +134,9 @@ export class LocalDataService {
         ,
         {
           sectionId: '5',
-          sectionContent: 'Here\'s your tax invoice INV-6209 for $[invoiceAmmount] for work completed at 7 Philip K. Dick Drive, Mars.\n\n' +
-            'Please click the Pay Invoice button above to view, print, download or pay the invoice.\n\n' +
-            'If you have any questions, please contact us on the interdimensional telephone - Mars99.\n\n',
+          sectionContent: 'Here\'s your tax invoice [invoiceNumber] for $[ammount] for work completed at 7 Philip K. Dick Drive, Mars.<br><br>' +
+            'Please click the Pay Invoice button above to view, print, download or pay the invoice.<br><br>' +
+            'If you have any questions, please contact us on the interdimensional telephone - Mars99.',
           sectionContentStyle: '',
         },
         {
@@ -145,7 +145,7 @@ export class LocalDataService {
           sectionContentStyle: '',
         }
       ],
-      templateContents: 'Here\'s your tax invoice INV-6209 for ${{invoiceAmmount | number: \'1.2-2\' }} for work completed at 7 Philip K. Dick Drive, Mars.\n\n' +
+      templateContents: 'Here\'s your tax invoice INV-6209 for ${{invoiceAmmount | number: \'1.2-2\' }} for work completed at 7 Philip K. Dick Drive, Mars.<br><br>' +
         'Please click the Pay Invoice button above to view, print, download or pay the invoice.\n\n' +
         'If you have any questions, please contact us on the interdimensional telephone - Mars99.\n\n'
       ,

@@ -39,6 +39,9 @@ import { ControlDisplaySendMethodsComponent } from './control-display-send-metho
 import { ControlDocumentViewerComponent } from './control-document-viewer/control-document-viewer.component';
 import { DialogFullSecrrenDocViewerComponent } from './dialog-full-secrren-doc-viewer/dialog-full-secrren-doc-viewer.component';
 import { ControlEmailViewerComponent } from './control-email-viewer/control-email-viewer.component';
+import { SafeHtmlPipe } from "./pipes/safe-html.pipe";
+import { ControlTemplateViewerComponent } from './control-template-viewer/control-template-viewer.component';
+
 const routes: Routes = [
 
 ];
@@ -74,7 +77,9 @@ const routes: Routes = [
     ControlDisplaySendMethodsComponent,
     ControlDocumentViewerComponent,
     DialogFullSecrrenDocViewerComponent,
-    ControlEmailViewerComponent
+    ControlEmailViewerComponent,
+    SafeHtmlPipe,
+    ControlTemplateViewerComponent
   ],
   imports: [
     BrowserModule,

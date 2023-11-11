@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit, AfterViewInit } from '@angular/core';
 import {LocalDataService} from "../services/local-data.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ApplicationModelService} from "../services/ApplicationModelService";
@@ -12,7 +12,7 @@ import {NgFor} from '@angular/common';
   templateUrl: './control-editable-email-template.component.html',
   styleUrls: ['./control-editable-email-template.component.scss']
 })
-export class ControlEditableEmailTemplateComponent {
+export class ControlEditableEmailTemplateComponent implements OnInit, AfterViewInit{
   @Input() customerName: string =' ';
   @Input() invoiceAmmount: number = 0;
   @Input() paymentTransactionExpiry: string ='01/01/2032';
@@ -30,15 +30,30 @@ export class ControlEditableEmailTemplateComponent {
   templateLogo = this.dataSource[0].templateLogo;
   logoString = "./assets/svg-logos/" + this.templateLogo + '-logo.svg';
   templateSections = this.dataSource[0].templateSections;
+  templateSectionsConverted: any[] = [];
   templateContents = this.dataSource[0].templateContents;
   templateCreatedBy = this.dataSource[0].templateCreatedBy;
   templateCreatedOn = this.dataSource[0].templateCreatedOn;
+
+  showViewer: boolean = false;
 
   constructor(private localDataService: LocalDataService,
               public dialog: MatDialog,
               public applicationModelService: ApplicationModelService,
               private _snackBar: MatSnackBar,
               private router: Router) {
+  }
+
+  ngOnInit() {
+
+  }
+
+  ngAfterViewInit() {
+    // if (localStorage.getItem('templateData')) {
+    //   console.log('anything in here');
+    //   const data = localStorage.getItem('templateData');
+    //   this.dataSource = (JSON.parse(data as string));
+    // }
   }
 
   drop(event: CdkDragDrop<string[]>) {
@@ -60,8 +75,16 @@ export class ControlEditableEmailTemplateComponent {
     this.dataSource[0].templateSections.splice(ind, 1);
   }
 
+  doSaveLocally() {
+    localStorage.setItem('templateData', JSON.stringify(this.dataSource));
+  }
+
   doChangeLogo(brand: string) {
     this.logoString = "./assets/svg-logos/" + brand + '-logo.svg';
+  }
+
+  doSetStyle(style: string, sectionNo: number) {
+    this.dataSource[0].templateSections[sectionNo].sectionContentStyle = style;
   }
 
   doGetContents() {
@@ -72,29 +95,17 @@ export class ControlEditableEmailTemplateComponent {
 
   doBlur(ev: any, ind: number) {
     this.dataSource[0].templateSections[ind].sectionContent = '';
-
-
-    const content = ev.target.innerText; // Get the plain text
-
-    console.log('inner is ' + content);
-
-    const contentWithNewlines = content.replace(/\n/g, '[NEWLINE]');
-
-    console.log('replacing new line looks like this' + contentWithNewlines);
-
-    const contentFromStorage = contentWithNewlines.replace(/\[NEWLINE\]/g, '\n');
-
-    console.log('and then back again' + contentWithNewlines);
-    this.dataSource[0].templateSections[ind].sectionContent = contentWithNewlines;
-
-
-// Store contentWithNewlines in your array or database as a string
+    this.dataSource[0].templateSections[ind].sectionContent = ev.target.innerHTML;
   }
 
   doReplaceKeysWithDataValues() {
     for (let i = 0; i < this.dataSource[0].templateSections.length; i++) {
       // look for the a key match in the contents and replace it with correcponding value
     }
+  }
+
+  doToggleViewer() {
+    this.showViewer = !this.showViewer;
   }
 
 }
