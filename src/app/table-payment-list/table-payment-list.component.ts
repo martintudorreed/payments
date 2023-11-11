@@ -50,7 +50,6 @@ export class TablePaymentListComponent implements AfterViewInit{
       this.doFilter();
 
       if (localStorage.getItem('columnOrder')) {
-        console.log('anything in here');
         const cols = localStorage.getItem('columnOrder');
         this.displayedColumns = (JSON.parse(cols as string));
       }
@@ -59,7 +58,6 @@ export class TablePaymentListComponent implements AfterViewInit{
     }
 
   onRowClick(item: number) {
-      console.log('paymenIdNo = ' + item);
       for (let i = 0; i < this.dataItems.length; i++) {
         if (this.dataItems[i].paymentIdNo === item) {
           this.dataItem = this.dataItems[i];
@@ -75,7 +73,6 @@ export class TablePaymentListComponent implements AfterViewInit{
         this.tabOffset = 2;
       }
       this.tabIndex = this.applicationModelService.currentTabCount$.getValue() + this.tabOffset;
-      console.log('current tab should be ' + this.tabIndex + 'displayed no ' + (this.tabIndex + this.tabOffset));
 
       this.tabs.push({
         tabIndex: this.tabIndex,
@@ -125,7 +122,6 @@ export class TablePaymentListComponent implements AfterViewInit{
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.displayedColumns, event.previousIndex, event.currentIndex);
-    console.log(this.displayedColumns);
     localStorage.setItem('columnOrder', JSON.stringify(this.displayedColumns));
   }
 
@@ -137,7 +133,6 @@ export class TablePaymentListComponent implements AfterViewInit{
 
   doFilter() {
     this.filteredData = this.localDataService.paymentListData.filter(payment => payment.paymentStatusId === 0);
-    console.log(this.filteredData);
   }
 
 }

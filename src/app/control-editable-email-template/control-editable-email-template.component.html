@@ -1,9 +1,9 @@
 <div class="editor" *ngIf="!isInMainUI">
 	<div class="sidebar-meta-data">
 		<div class="field-outer data-template-select" subscriptSizing="dynamic">
-			<mat-form-field class="ifm-input" >
-				<mat-select [(value)]="selectedTemplate">
-					<mat-option  [value]="template.templateID" *ngFor="let template of dataSource"><span class="option-label">{{ template.templateName }}</span></mat-option>
+			<mat-form-field class="ifm-input">
+				<mat-select [(value)]="selectedTemplate"  (selectionChange)="onSelectedTemplateChange(selectedTemplate)">
+					<mat-option  [value]="i" *ngFor="let template of dataSource, let i = index"><span class="option-label">{{ template.templateName }}</span></mat-option>
 				</mat-select>
 			</mat-form-field>
 		</div>
@@ -67,7 +67,7 @@
 			</div>
 			<div class="macro-keys-inner side-by-side">
 				<button mat-stroked-button color="primary" class="ifm-stroked-button primary-outline" (click)="doGetContents()">Get content</button>
-				<button mat-stroked-button color="primary" class="ifm-stroked-button primary-outline" (click)="doSaveLocally()">Save Locally</button>
+				<button mat-stroked-button color="primary" class="ifm-stroked-button primary-outline" (click)="doSaveLocally()">Duplicate</button>
 			</div>
 		</div>
 	</div>
@@ -79,7 +79,7 @@
 				</caption>
 			</div>
 			<div class="template-inner mat-elevation-custom-z1">
-				<app-control-template-viewer [templateID]="'0'" *ngIf="showViewer"></app-control-template-viewer>
+				<app-control-template-viewer [templateIDToUse]="currentTemplateID" *ngIf="showViewer"></app-control-template-viewer>
 				<div class="edit-area" [ngClass]="{'hide': showViewer}">
 					<div cdkDropList class="section-list" (cdkDropListDropped)="drop($event)">
 						<section *ngFor="let template of templateSections, let i = index" class="section editor-drag" cdkDrag>

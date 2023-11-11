@@ -69,4 +69,10 @@ export class ApplicationModelService {
 
   isDocumentViewerCollapsed  = false;
   isDocumentViewerCollapsed$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.isDocumentViewerCollapsed);
+
+  templateDataSource: any[] = [];
+  templateDataSource$: BehaviorSubject<Array<any>> = new BehaviorSubject<Array<any>>(this.templateDataSource);
+
+  templateSections: any[] = [];
+  templateSections$: BehaviorSubject<Array<any>> = new BehaviorSubject<Array<any>>(this.templateSections);
 }

@@ -89,12 +89,10 @@
             width: 100%;
             border: 1px dotted transparent;
             &:hover {
-              border: 1px dotted palette.$medium-light-grey;
-              box-shadow: 0px 5px 10px -1px rgba(0,0,0,0.1);
+              border: 1px dotted palette.$medium-grey;
             }
             &:focus {
-              border: 1px dotted palette.$medium-light-grey;
-              box-shadow: 0px 5px 10px -1px rgba(0,0,0,0.1);
+              border: 1px dotted palette.$medium-grey;
             }
             .section-body {
               flex-grow: 1;

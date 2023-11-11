@@ -4,6 +4,7 @@ export interface sections {
   sectionId: string;
   sectionContent: string;
   sectionContentStyle: string;
+  sectionIndexOrder: number;
 }
 
 export interface commsTemplate {
@@ -110,26 +111,31 @@ export class LocalDataService {
         sectionId: '0',
         sectionContent: 'logo',
         sectionContentStyle: '',
+        sectionIndexOrder: -1,
         },
         {
           sectionId: '1',
           sectionContent: 'Your Invoice from [dealerName] (BES-29367)',
           sectionContentStyle: 'mat-headline-4',
+          sectionIndexOrder: -1,
         },
         {
           sectionId: '2',
           sectionContent: '[ammount]',
           sectionContentStyle: 'mat-headline-2',
+          sectionIndexOrder: -1,
         },
         {
           sectionId: '3',
           sectionContent: '[invoiceNumber] is due on [dueDate]',
           sectionContentStyle: 'mat-headline-4',
+          sectionIndexOrder: -1,
         },
         {
           sectionId: '4',
           sectionContent: 'Pay Invoice',
           sectionContentStyle: '',
+          sectionIndexOrder: -1,
         }
         ,
         {
@@ -138,17 +144,16 @@ export class LocalDataService {
             'Please click the Pay Invoice button above to view, print, download or pay the invoice.<br><br>' +
             'If you have any questions, please contact us on the interdimensional telephone - Mars99.',
           sectionContentStyle: '',
+          sectionIndexOrder: -1,
         },
         {
           sectionId: '6',
           sectionContent: '[dealerName]',
           sectionContentStyle: '',
+          sectionIndexOrder: -1,
         }
       ],
-      templateContents: 'Here\'s your tax invoice INV-6209 for ${{invoiceAmmount | number: \'1.2-2\' }} for work completed at 7 Philip K. Dick Drive, Mars.<br><br>' +
-        'Please click the Pay Invoice button above to view, print, download or pay the invoice.\n\n' +
-        'If you have any questions, please contact us on the interdimensional telephone - Mars99.\n\n'
-      ,
+      templateContents: '',
       templateCreatedBy: 'Martin Tudor Reed',
       templateCreatedOn: '05/02/2032',
     }
