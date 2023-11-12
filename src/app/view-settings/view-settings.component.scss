@@ -26,8 +26,12 @@
 }
 
 .main {
+  display: flex;
+  height: 100%;
   .tab-inner {
     padding: 12px;
+    display: flex;
+    height: 100%;
     &.email-template {
       padding-top: 18px;
     }

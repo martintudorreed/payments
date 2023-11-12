@@ -7,10 +7,12 @@ import {Router} from "@angular/router";
 import {CdkDragDrop, CdkDropList, CdkDrag, CdkDragHandle, moveItemInArray} from '@angular/cdk/drag-drop';
 import {NgFor} from '@angular/common';
 import { List } from 'immutable';
+import { ChangeDetectionStrategy } from '@angular/core';
 @Component({
   selector: 'app-control-editable-email-template',
   templateUrl: './control-editable-email-template.component.html',
-  styleUrls: ['./control-editable-email-template.component.scss']
+  styleUrls: ['./control-editable-email-template.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ControlEditableEmailTemplateComponent implements OnInit, AfterViewInit{
   @Input() customerName: string =' ';
@@ -19,7 +21,9 @@ export class ControlEditableEmailTemplateComponent implements OnInit, AfterViewI
   @Input() paymentTransactionNumber: string ='xxxxx'
   @Input() isInMainUI: boolean = false;
 
-  dataSource: any[] = [];
+  sourceApp = this.localDataService.ifmAppData;
+  selectedSauceID: string = '';
+  dataSource = this.localDataService.templateData;
   brands = this.localDataService.themeBrandData;
   selectedTemplate: number = 0;
 
@@ -47,23 +51,26 @@ export class ControlEditableEmailTemplateComponent implements OnInit, AfterViewI
   }
 
   ngOnInit() {
-    // load from local storage
-    if (localStorage.getItem('templateData')) {
-      const data = localStorage.getItem('templateData');
-      this.dataSource = (JSON.parse(data as string));
-    } else {
-      this.dataSource = this.localDataService.templateData;
-    }
-    this.templateID = this.dataSource[0].templateID;
-    this.templateProviderId = this.dataSource[0].templateProviderId;
-    this.templateType = this.dataSource[0].templateType;
-    this.templateName = this.dataSource[0].templateName;
-    this.templateLogo = this.dataSource[0].templateLogo;
+    // // load from local storage
+    // if (localStorage.getItem('templateData')) {
+    //   const data = localStorage.getItem('templateData');
+    //   this.dataSource = (JSON.parse(data as string));
+    // } else {
+    //   this.dataSource = this.localDataService.templateData;
+    // }
+    this.templateID = this.dataSource[this.selectedTemplate].templateID;
+    this.templateLogo = this.dataSource[this.selectedTemplate].templateLogo;
     this.logoString = "./assets/svg-logos/" + this.templateLogo + '-logo.svg';
-    this.templateSections = this.dataSource[0].templateSections;
-    this.templateContents = this.dataSource[0].templateContents;
-    this.templateCreatedBy = this.dataSource[0].templateCreatedBy;
-    this.templateCreatedOn = this.dataSource[0].templateCreatedOn;
+
+    this.templateName = this.dataSource[this.selectedTemplate].templateName;
+
+    this.templateSections = this.dataSource[this.selectedTemplate].templateSections;
+    this.selectedSauceID = this.dataSource[this.selectedTemplate].templateSourceApplication;
+      // this.templateProviderId = this.dataSource[this.selectedTemplate].templateProviderId;
+    // this.templateType = this.dataSource[this.selectedTemplate].templateType;
+    // this.templateContents = this.dataSource[this.selectedTemplate].templateContents;
+    // this.templateCreatedBy = this.dataSource[this.selectedTemplate].templateCreatedBy;
+    // this.templateCreatedOn = this.dataSource[this.selectedTemplate].templateCreatedOn;
 
     console.log('after view inti datasource is');
     console.log(this.dataSource);
@@ -80,9 +87,9 @@ export class ControlEditableEmailTemplateComponent implements OnInit, AfterViewI
   }
 
   doAddRow() {
-    const newSectionId = this.dataSource[0].templateSections.length.toString();
+    const newSectionId = this.dataSource[this.selectedTemplate].templateSections.length.toString();
     console.log('new section is ' + newSectionId);
-    this.dataSource[0].templateSections.push({
+    this.dataSource[this.selectedTemplate].templateSections.push({
       sectionId: newSectionId,
       sectionContent: 'New Email Line - click to edit',
       sectionContentStyle: '',
@@ -91,52 +98,56 @@ export class ControlEditableEmailTemplateComponent implements OnInit, AfterViewI
   }
 
   doDeleteRow(ind: number) {
-    this.dataSource[0].templateSections.splice(ind, 1);
-  }
-
-  doSaveLocally() {
-    const numberOfElements = (this.dataSource.length).toString();
-    this.dataSource.push({
-      templateID: numberOfElements,
-      templateProviderId: this.templateProviderId,
-      templateType: this.templateType,
-      templateName: this.templateName,
-      templateLogo: this.templateLogo,
-      templateSections: this.templateSections,
-      templateContents: this.templateContents,
-      templateCreatedBy: this.templateCreatedBy,
-      templateCreatedOn: this.templateCreatedOn,
-    })
+    this.templateSections.splice(ind, 1);
     this.doSave();
   }
 
+  doSaveLocally() {
+    // const numberOfElements = (this.dataSource.length).toString();
+    // this.dataSource.push({
+    //   templateID: numberOfElements,
+    //   templateProviderId: this.templateProviderId,
+    //   templateType: this.templateType,
+    //   templateName: this.templateName,
+    //   templateLogo: this.templateLogo,
+    //   templateSections: this.templateSections,
+    //   templateContents: this.templateContents,
+    //   templateCreatedBy: this.templateCreatedBy,
+    //   templateCreatedOn: this.templateCreatedOn,
+    // })
+    // this.doSave();
+  }
+
   doSave() {
-    localStorage.setItem('templateData', JSON.stringify(this.dataSource));
+    // localStorage.setItem('templateData', JSON.stringify(this.dataSource));
+    // console.log('after save this is the dataset');
+    // console.log(this.dataSource);
   }
 
   doChangeLogo(brand: string) {
     this.logoString = "./assets/svg-logos/" + brand + '-logo.svg';
+    this.dataSource[this.selectedTemplate].templateLogo = brand;
     this.doSave();
   }
 
   doSetStyle(style: string, sectionNo: number) {
-    this.dataSource[0].templateSections[sectionNo].sectionContentStyle = style;
+    this.dataSource[this.selectedTemplate].templateSections[sectionNo].sectionContentStyle = style;
     this.doSave();
   }
 
   doGetContents() {
-    for (let i = 0; i < this.dataSource[0].templateSections.length; i++) {
-      console.log(this.dataSource[0].templateSections[i].sectionContent);
+    for (let i = 0; i < this.dataSource[this.selectedTemplate].templateSections.length; i++) {
+      console.log(this.dataSource[this.selectedTemplate].templateSections[i].sectionContent);
     }
   }
 
   doBlur(ev: any, ind: number) {
-    this.dataSource[0].templateSections[ind].sectionContent = ev.target.innerHTML;
+    this.dataSource[this.selectedTemplate].templateSections[ind].sectionContent = ev.target.innerHTML;
     this.doSave();
   }
 
   doReplaceKeysWithDataValues() {
-    for (let i = 0; i < this.dataSource[0].templateSections.length; i++) {
+    for (let i = 0; i < this.dataSource[this.selectedTemplate].templateSections.length; i++) {
       // look for the a key match in the contents and replace it with correcponding value
     }
   }
@@ -148,18 +159,26 @@ export class ControlEditableEmailTemplateComponent implements OnInit, AfterViewI
 
   onSelectedTemplateChange(ind: number) {
     console.log('gonna change to ' + ind)
-    this.templateID = this.dataSource[ind].templateID;
-    this.currentTemplateID = this.templateID;
-    this.templateProviderId = this.dataSource[ind].templateProviderId;
-    this.templateType = this.dataSource[ind].templateType;
-    this.templateName = this.dataSource[ind].templateName;
-    this.templateLogo = this.dataSource[ind].templateLogo;
+    console.log('using this dataset');
+    console.log(this.dataSource);
+    this.selectedTemplate = ind;
+    this.templateID = this.dataSource[this.selectedTemplate].templateID;
+    this.templateLogo = this.dataSource[this.selectedTemplate].templateLogo;
     this.logoString = "./assets/svg-logos/" + this.templateLogo + '-logo.svg';
-    this.templateSections = this.dataSource[ind].templateSections;
-    this.templateContents = this.dataSource[ind].templateContents;
-    this.templateCreatedBy = this.dataSource[ind].templateCreatedBy;
-    this.templateCreatedOn = this.dataSource[ind].templateCreatedOn;
-    console.log('when I toggle the view I will be sending ' + this.currentTemplateID)
+
+    this.templateName = this.dataSource[this.selectedTemplate].templateName;
+
+    this.templateSections = this.dataSource[this.selectedTemplate].templateSections;
+    console.log('when I toggle the view I will be sending ' + this.currentTemplateID);
   }
+
+  trackByFn(index: number, item: any) {
+    return item.sectionId;
+  }
+
+  onSelectedSourceChange(selectedSauceID: string) {
+
+  }
+
 
 }

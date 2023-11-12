@@ -75,4 +75,7 @@ export class ApplicationModelService {
 
   templateSections: any[] = [];
   templateSections$: BehaviorSubject<Array<any>> = new BehaviorSubject<Array<any>>(this.templateSections);
+
+  currentTemplateId = '0';
+  currentTemplateId$: BehaviorSubject<string> = new BehaviorSubject<string>(this.currentTemplateId);
 }

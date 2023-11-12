@@ -29,10 +29,14 @@ export class ControlTemplateViewerComponent implements OnInit, AfterViewInit{
   templateCreatedOn: string = '';
 
   @Input() dealerName: string = 'Future Motors Ltd';
+  @Input() customerFirstname: string = 'Martin';
   @Input() ammount: string = '$88.88';
   @Input() invoiceNumber: string = 'INV-888-8-88';
   @Input() dueDate: string = '05/02/3032';
   @Input() workCarriedOut: string = 'Carried out 32,000km Service as per owners manual.';
+  @Input() triageDisclaimer: string = '<hr>Superservice Triage does not store or process financial information. The Triage Customer Authorisation screen has the PayPal site within an Iframe and everything inside of that is secure. Triage cannot see any data that is being transacted due to the PayPal encryption being used.<br><br>' +
+    'Some additional options such as Payflow Link may need to be configured in the merchants account however the merchant (dealer) will need to investigate this as part of their due diligence. Additional fees may be charged to the dealer by PayPal for a business account.<br><br>' +
+    'Superservice Triage or Infomedia is not responsible for payment issues between the customer and PayPal.';
 
   workingString: string = '';
 
@@ -50,19 +54,20 @@ export class ControlTemplateViewerComponent implements OnInit, AfterViewInit{
   ngOnInit() {
     // find and then locally load template data
     // load from local storage
-    if (localStorage.getItem('templateData')) {
-      const data = localStorage.getItem('templateData');
-      this.dataSource = (JSON.parse(data as string));
-      console.log('just loaded this data source into the viewer');
-      console.log(this.dataSource);
-    } else {
-      this.dataSource = this.localDataService.templateData;
-    }
+    // if (localStorage.getItem('templateData')) {
+    //   const data = localStorage.getItem('templateData');
+    //   this.dataSource = (JSON.parse(data as string));
+    //   console.log('just loaded this data source into the viewer');
+    //   console.log(this.dataSource);
+    // } else {
+    //   this.dataSource = this.localDataService.templateData;
+    // }
+    this.dataSource = this.localDataService.templateData;
     this.doFindTemplate(this.templateIDToUse);
   }
 
   doFindTemplate(templateIDToUse: string) {
-    this.foundTemplateIndex = this.dataSource.findIndex(template => template.templateIDToUse === templateIDToUse);
+    this.foundTemplateIndex = this.dataSource.findIndex(template => template.templateID === templateIDToUse);
     if (this.foundTemplateIndex !== -1) {
       console.log('i found the one you want at ' + this.foundTemplateIndex);
       this.doLoadData(this.foundTemplateIndex);
@@ -101,10 +106,12 @@ export class ControlTemplateViewerComponent implements OnInit, AfterViewInit{
   doReplaceKeysWithData(ind: number) {
     this.workingString = this.templateSections[ind].sectionContent;
     this.workingString = this.workingString.replace(/\[dealerName\]/g, this.dealerName);
+    this.workingString = this.workingString.replace(/\[customerFirstname\]/g, this.customerFirstname);
     this.workingString = this.workingString.replace(/\[ammount\]/g, this.ammount);
     this.workingString = this.workingString.replace(/\[invoiceNumber\]/g, this.invoiceNumber);
     this.workingString = this.workingString.replace(/\[dueDate\]/g, this.dueDate);
     this.workingString = this.workingString.replace(/\[workCarriedOut\]/g, this.workCarriedOut);
+    this.workingString = this.workingString.replace(/\[triageDisclaimer\]/g, this.triageDisclaimer);
     return this.workingString
   }
 

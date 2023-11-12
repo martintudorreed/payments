@@ -22,16 +22,6 @@
 		<!--  <img class="logo" src="./assets/svg-logos/{{applicationModelService.selectedThemeBrand$.value}}-logo.svg" (click)="doShowSidebar('start', 'settings')" alt="logo" />-->
 		<img class="logo" (click)="doGoHome()" src="./assets/svg-logos/{{applicationModelService.selectedThemeBrand$.value}}-logo.svg" alt="logo" />
 		<img class="app-logo" (click)="doGoHome()" src="./assets/svg-logos/super-service-payments-logo.svg" alt="SuperservicePayments" />
-		<!--    <mat-label>Market</mat-label>-->
-<!--		<div class="control-container" *ngIf="(applicationModelService.currentBreakpoint$ | async) === 'Medium' || (applicationModelService.currentBreakpoint$ | async) === 'Large' || (applicationModelService.currentBreakpoint$ | async) === 'XLarge'"alt="Australian Flag">-->
-<!--			<span class="user-type">RBU :</span>-->
-<!--			<img class='flag'  src="./assets/flags/au.svg" alt="Australian Flag" />-->
-<!--			<mat-form-field class="no-hint region-select white-bg no-ripple-line">-->
-<!--				<mat-select [(value)]="selectedRegion">-->
-<!--					<mat-option  [value]="region.regionValue" *ngFor="let region of localRegions"><img class='flag' src="./assets/flags/au.svg" alt="Australian Flag"/><span class="option-label">{{ region.regionName }}</span></mat-option>-->
-<!--				</mat-select>-->
-<!--			</mat-form-field>-->
-<!--		</div>-->
 
 	</div>
 	<div class="user-controls" *ngIf="(applicationModelService.currentBreakpoint$ | async) !== 'XSmall'">

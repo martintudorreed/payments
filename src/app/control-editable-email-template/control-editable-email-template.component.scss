@@ -4,7 +4,6 @@
 :host {
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 .editor {
@@ -14,10 +13,16 @@
     min-width: 320px;
     padding: 12px;
     overflow: auto;
+    display: flex;
+    flex-direction: column;
+    .field-outer {
+      margin-bottom: 12px;
+    }
     .macro-keys-container {
       display: flex;
       width: 100%;
       position: relative;
+      margin-top: 12px;
       margin-bottom: 12px;
       .macro-keys-inner {
         display: flex;
@@ -43,6 +48,7 @@
           }
         }
         &.side-by-side {
+          flex-direction: row;
           button {
             &:first-child {
               margin-bottom: 6px;
@@ -132,6 +138,46 @@
           align-items: center;
         }
       }
+    }
+  }
+
+}
+
+.footer {
+  padding: 0 12px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 64px;
+  border-top:1px solid palette.$medium-grey;
+  background-color: palette.$very-light-grey;
+  .footer-inner {
+    display: flex;
+    width: 200%;
+    &.resend {
+      justify-content: flex-end;
+    }
+    .control-primary {
+      display: flex;
+      align-items: center;
+      .provider-select {
+        margin: 12px;
+      }
+      .cardless {
+        margin: 12px;
+      }
+      .launcher {
+        opacity: .1;
+      }
+    }
+    .control-secondary {
+      display: flex;
+      align-items: center;
+      flex-grow: 1;
+      .data-is-view-attachments {
+        margin: 0 12px;
+      }
+
     }
   }
 

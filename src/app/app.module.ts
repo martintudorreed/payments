@@ -41,6 +41,8 @@ import { DialogFullSecrrenDocViewerComponent } from './dialog-full-secrren-doc-v
 import { ControlEmailViewerComponent } from './control-email-viewer/control-email-viewer.component';
 import { SafeHtmlPipe } from "./pipes/safe-html.pipe";
 import { ControlTemplateViewerComponent } from './control-template-viewer/control-template-viewer.component';
+import { ControlTemplateEditorComponent } from './control-template-editor/control-template-editor.component';
+import { ViewEmailTemplatesComponent } from './view-email-templates/view-email-templates.component';
 
 const routes: Routes = [
 
@@ -79,7 +81,9 @@ const routes: Routes = [
     DialogFullSecrrenDocViewerComponent,
     ControlEmailViewerComponent,
     SafeHtmlPipe,
-    ControlTemplateViewerComponent
+    ControlTemplateViewerComponent,
+    ControlTemplateEditorComponent,
+    ViewEmailTemplatesComponent
   ],
   imports: [
     BrowserModule,
@@ -90,7 +94,8 @@ const routes: Routes = [
     ReactiveFormsModule,
     ResizableModule,
     NgxDocViewerModule,
-    PdfViewerModule
+    PdfViewerModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

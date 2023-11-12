@@ -1,0 +1,45 @@
+<div class="edit-area">
+	<div cdkDropList class="section-list" (cdkDropListDropped)="drop($event)">
+		<section *ngFor="let template of templateSections, let i = index" class="section editor-drag" cdkDrag>
+
+			<div class="section-body">
+				<span *ngIf="template.sectionId === '0'"><img class="logo" src="{{logoString}}" alt="FutureMotors"></span>
+
+				<p *ngIf="template.sectionId !== '0' && template.sectionId !== '4'"
+				   class="section-content {{template.sectionContentStyle}}"
+				   contenteditable="true"
+				   [(ngModel)]="template.sectionContent"
+				   (blur)="doBlur($event, i)"
+				   [innerHTML]="template.sectionContent | safeHtml">
+				</p>
+
+				<div class="section-content" *ngIf="template.sectionId === '4'">
+					<button mat-flat-button color="primary">{{template.sectionContent}}</button>
+				</div>
+			</div>
+
+			<div class="section-controls">
+							<span class="drag-handle" cdkDragHandle>
+								<mat-icon color="primary" *ngIf="template.sectionId !== '0'" [matMenuTriggerFor]="lineMenu">drag_indicator</mat-icon>
+								<mat-icon color="primary" *ngIf="template.sectionId === '0'" [matMenuTriggerFor]="brandMenu">drag_indicator</mat-icon>
+							</span>
+			</div>
+
+			<mat-menu #lineMenu="matMenu" class="ifm-menu style-menu">
+				<button mat-menu-item class="style-option mat-headline-2" (click)="doSetStyle('mat-headline-2', i)">Headline 1<mat-icon *ngIf="template.sectionContentStyle === 'mat-headline-2'">done</mat-icon></button>
+				<button mat-menu-item  class="style-option mat-headline-4" (click)="doSetStyle('mat-headline-4', i)">Headline 2<mat-icon *ngIf="template.sectionContentStyle === 'mat-headline-4'">done</mat-icon></button>
+				<button mat-menu-item class="style-option" (click)="doSetStyle('', i)">Body Text<mat-icon *ngIf="template.sectionContentStyle === ''">done</mat-icon></button>
+				<mat-divider></mat-divider>
+				<button mat-menu-item class="style-option" color="warn" (click)="doDeleteRow(i)">Delete<mat-icon>delete</mat-icon></button>
+			</mat-menu>
+
+			<mat-menu #brandMenu="matMenu" class="ifm-menu style-menu">
+				<button *ngFor="let brand of brands, let i = index" mat-menu-item class="style-option" (click)="doChangeLogo(brand.brandValue)">
+					{{brand.brandName}}
+				</button>
+			</mat-menu>
+
+		</section>
+
+	</div>
+</div>

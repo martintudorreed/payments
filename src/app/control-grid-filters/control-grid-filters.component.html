@@ -1,6 +1,6 @@
 <div class="controls-inner">
 	<div class="field-outer data-customer-search">
-		<div class="search-outer"><input type="text" matInput placeholder="Search"><mat-icon>search</mat-icon></div>
+		<div class="search-outer"><input type="text" matInput placeholder="Search" [(ngModel)]="search"><mat-icon>search</mat-icon></div>
 	</div>
 	<span> Filter by </span>
 	<app-control-chip-filter class="chip-filter"></app-control-chip-filter>
@@ -8,7 +8,7 @@
 	<div class="field-outer field-from-date">
 		<mat-form-field class="field ifm-input white-bg" subscriptSizing="dynamic">
 			<mat-label>From</mat-label>
-			<input matInput [matDatepicker]="picker" placeholder="From">
+			<input matInput [matDatepicker]="picker" placeholder="From" [(ngModel)]="dpicker">
 			<mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
 			<mat-datepicker #picker></mat-datepicker>
 		</mat-form-field>
@@ -17,7 +17,7 @@
 	<div class="field-outer field-to-date">
 		<mat-form-field class="field ifm-input white-bg" subscriptSizing="dynamic">
 			<mat-label>To</mat-label>
-			<input matInput [matDatepicker]="picker1" placeholder="To" name="p1">
+			<input matInput [matDatepicker]="picker1" placeholder="To" name="p1" [(ngModel)]="dpicker1">
 			<mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
 			<mat-datepicker #picker1></mat-datepicker>
 		</mat-form-field>

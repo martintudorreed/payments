@@ -9,7 +9,9 @@ import {MatDialog} from "@angular/material/dialog";
 })
 export class ControlGridFiltersComponent {
   @Input() isStandalone: boolean = false;
-
+  search: string = '';
+  dpicker: string = ''
+  dpicker1: string = ''
   constructor(public dialog: MatDialog,) {
   }
 

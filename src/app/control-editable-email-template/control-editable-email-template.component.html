@@ -1,18 +1,45 @@
 <div class="editor" *ngIf="!isInMainUI">
 	<div class="sidebar-meta-data">
+		<div class="field-outer data-payment-type">
+<!--			<mat-form-field class="field ifm-input selector" subscriptSizing="dynamic" floatLabel="always" appearance="outline">-->
+<!--				<mat-label>Applicable to</mat-label>-->
+<!--				<mat-select [(value)]="selectedSauceID" (selectionChange)="onSelectedSourceChange(selectedSauceID)">-->
+<!--					<mat-option  [value]="app.ifmAppsID" *ngFor="let app of sourceApp">{{ app.ifmAppsName }}</mat-option>-->
+<!--				</mat-select>-->
+<!--			</mat-form-field>-->
+			<app-control-chip-filter></app-control-chip-filter>
+		</div>
+
 		<div class="field-outer data-template-select" subscriptSizing="dynamic">
-			<mat-form-field class="ifm-input">
+			<mat-form-field class="ifm-input" appearance="outline">
+				<mat-label>Name</mat-label>
 				<mat-select [(value)]="selectedTemplate"  (selectionChange)="onSelectedTemplateChange(selectedTemplate)">
 					<mat-option  [value]="i" *ngFor="let template of dataSource, let i = index"><span class="option-label">{{ template.templateName }}</span></mat-option>
 				</mat-select>
 			</mat-form-field>
 		</div>
+
+				<div class="macro-keys-container">
+					<div class="caption-container">
+						<caption class="mat-caption">
+							<span>Edit</span>
+						</caption>
+					</div>
+					<div class="macro-keys-inner side-by-side">
+						<button mat-stroked-button color="primary" class="ifm-stroked-button primary-outline">Create New</button>
+						<button mat-stroked-button color="primary" class="ifm-stroked-button primary-outline">Edit</button>
+						<button mat-stroked-button color="primary" class="ifm-stroked-button primary-outline">Delete</button>
+					</div>
+				</div>
+
 <!--		<div class="field-outer data-template-name">-->
-<!--			<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">-->
+<!--			<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always" appearance="outline">-->
 <!--				<mat-label>Name</mat-label>-->
 <!--				<input type="text" matInput placeholder="Contact Number" [(ngModel)]="templateName">-->
 <!--			</mat-form-field>-->
 <!--		</div>-->
+
+
 
 		<div class="macro-keys-container">
 			<div class="caption-container">
@@ -23,6 +50,11 @@
 			<div class="macro-keys-inner">
 				<div class="key">
 					<div class="key-text">[dealerName]</div>
+					<div class="key-control"><mat-icon class="ifm-icon-medium">content_copy</mat-icon></div>
+				</div>
+
+				<div class="key">
+					<div class="key-text">[customerFirstname]</div>
 					<div class="key-control"><mat-icon class="ifm-icon-medium">content_copy</mat-icon></div>
 				</div>
 
@@ -53,23 +85,19 @@
 					</div>
 					<div class="key-control"><mat-icon class="ifm-icon-medium">content_copy</mat-icon></div>
 				</div>
+				<div class="key">
+					<div class="key-text">
+						[triageDisclaimer]
+					</div>
+					<div class="key-control"><mat-icon class="ifm-icon-medium">content_copy</mat-icon></div>
+				</div>
 				<div class="key-toggle">
 
 				</div>
 			</div>
 
 		</div>
-		<div class="macro-keys-container">
-			<div class="caption-container">
-				<caption class="mat-caption">
-					<span>Marty's Test Area</span>
-				</caption>
-			</div>
-			<div class="macro-keys-inner side-by-side">
-				<button mat-stroked-button color="primary" class="ifm-stroked-button primary-outline" (click)="doGetContents()">Get content</button>
-				<button mat-stroked-button color="primary" class="ifm-stroked-button primary-outline" (click)="doSaveLocally()">Duplicate</button>
-			</div>
-		</div>
+
 	</div>
 	<div class="canvas">
 		<div class="template-container">
@@ -79,10 +107,12 @@
 				</caption>
 			</div>
 			<div class="template-inner mat-elevation-custom-z1">
+
 				<app-control-template-viewer [templateIDToUse]="currentTemplateID" *ngIf="showViewer"></app-control-template-viewer>
+
 				<div class="edit-area" [ngClass]="{'hide': showViewer}">
 					<div cdkDropList class="section-list" (cdkDropListDropped)="drop($event)">
-						<section *ngFor="let template of templateSections, let i = index" class="section editor-drag" cdkDrag>
+						<section *ngFor="let template of templateSections; trackBy: trackByFn, let i = index" class="section editor-drag" cdkDrag>
 
 							<div class="section-body">
 								<span *ngIf="template.sectionId === '0'"><img class="logo" src="{{logoString}}" alt="FutureMotors"></span>
@@ -144,6 +174,9 @@
 
 	</div>
 </div>
+<footer  *ngIf="!isInMainUI">
+	<div class="footer-inner"></div>
+</footer>
 
 <div class="template-inner" *ngIf="isInMainUI">
 	<div class="logo-container" [ngClass]="{'is-in-main-ui': isInMainUI}">
