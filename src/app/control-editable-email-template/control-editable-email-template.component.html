@@ -1,37 +1,26 @@
 <div class="editor" *ngIf="!isInMainUI">
 	<div class="sidebar-meta-data">
-		<div class="field-outer data-payment-type">
+		<div class="field-outer data-payment-type" [ngClass]="{'fade': !showViewer}">
 <!--			<mat-form-field class="field ifm-input selector" subscriptSizing="dynamic" floatLabel="always" appearance="outline">-->
 <!--				<mat-label>Applicable to</mat-label>-->
 <!--				<mat-select [(value)]="selectedSauceID" (selectionChange)="onSelectedSourceChange(selectedSauceID)">-->
 <!--					<mat-option  [value]="app.ifmAppsID" *ngFor="let app of sourceApp">{{ app.ifmAppsName }}</mat-option>-->
 <!--				</mat-select>-->
 <!--			</mat-form-field>-->
-			<app-control-chip-filter></app-control-chip-filter>
+			<app-control-chip-ifm-apps></app-control-chip-ifm-apps>
 		</div>
 
-		<div class="field-outer data-template-select" subscriptSizing="dynamic">
-			<mat-form-field class="ifm-input" appearance="outline">
+		<div class="field-outer data-template-select" [ngClass]="{'fade': !showViewer}">
+			<mat-form-field class="ifm-input" appearance="outline" subscriptSizing="dynamic">
 				<mat-label>Name</mat-label>
 				<mat-select [(value)]="selectedTemplate"  (selectionChange)="onSelectedTemplateChange(selectedTemplate)">
 					<mat-option  [value]="i" *ngFor="let template of dataSource, let i = index"><span class="option-label">{{ template.templateName }}</span></mat-option>
 				</mat-select>
 			</mat-form-field>
 		</div>
-
-				<div class="macro-keys-container">
-					<div class="caption-container">
-						<caption class="mat-caption">
-							<span>Edit</span>
-						</caption>
-					</div>
-					<div class="macro-keys-inner side-by-side">
-						<button mat-stroked-button color="primary" class="ifm-stroked-button primary-outline">Create New</button>
-						<button mat-stroked-button color="primary" class="ifm-stroked-button primary-outline">Edit</button>
-						<button mat-stroked-button color="primary" class="ifm-stroked-button primary-outline">Delete</button>
-					</div>
-				</div>
-
+		<div class="field-outer data-create-button" [ngClass]="{'fade': !showViewer}">
+			<button mat-stroked-button color="primary" class="ifm-stroked-button primary-outline">Create New</button>
+		</div>
 <!--		<div class="field-outer data-template-name">-->
 <!--			<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always" appearance="outline">-->
 <!--				<mat-label>Name</mat-label>-->
@@ -44,7 +33,7 @@
 		<div class="macro-keys-container">
 			<div class="caption-container">
 				<caption class="mat-caption">
-					<span>Macro Keys - Copy & Paste</span>
+					<span>Triage Keys - Copy & Paste</span>
 				</caption>
 			</div>
 			<div class="macro-keys-inner">
@@ -131,10 +120,10 @@
 							</div>
 
 							<div class="section-controls">
-							<span class="drag-handle" cdkDragHandle>
-								<mat-icon color="primary" *ngIf="template.sectionId !== '0'" [matMenuTriggerFor]="lineMenu">drag_indicator</mat-icon>
-								<mat-icon color="primary" *ngIf="template.sectionId === '0'" [matMenuTriggerFor]="brandMenu">drag_indicator</mat-icon>
-							</span>
+								<span class="drag-handle" cdkDragHandle>
+									<mat-icon color="primary" *ngIf="template.sectionId !== '0'" [matMenuTriggerFor]="lineMenu">drag_indicator</mat-icon>
+									<mat-icon color="primary" *ngIf="template.sectionId === '0'" [matMenuTriggerFor]="brandMenu">drag_indicator</mat-icon>
+								</span>
 							</div>
 
 							<mat-menu #lineMenu="matMenu" class="ifm-menu style-menu">
@@ -153,19 +142,37 @@
 
 						</section>
 
+						<button mat-icon-button *ngIf="!showViewer" color="primary" (click)="doAddRow()"><mat-icon>add_circle_outline</mat-icon></button>
 					</div>
 				</div>
 				<div class="footer">
 					<div class="secondary">
-						<div class="field-outer data-template-name">
-
-							<mat-slide-toggle [checked]="showViewer" (change)="doToggleViewer()">View Result</mat-slide-toggle>
-<!--							<button mat-stroked-button color="primary" class="ifm-stroked-button primary-outline" (click)="doAddRow()">Add Row</button>-->
+						<div class="field-outer data-template-name" *ngIf="!showViewer">
+							<mat-form-field class="" subscriptSizing="dynamic" floatLabel="always" appearance="outline">
+								<mat-label>Edit Name</mat-label>
+								<input type="text" matInput placeholder="Contact Number" [(ngModel)]="templateName">
+							</mat-form-field>
 						</div>
+						<div class="field-outer data-template-app" *ngIf="!showViewer">
+							<mat-form-field class="field ifm-input selector" subscriptSizing="dynamic" floatLabel="always" appearance="outline">
+								<mat-label>Applicable to</mat-label>
+								<mat-select [(value)]="selectedSauceID" (selectionChange)="onSelectedSourceChange(selectedSauceID)">
+									<mat-option  [value]="app.ifmAppsID" *ngFor="let app of sourceApp">{{ app.ifmAppsName }}</mat-option>
+								</mat-select>
+							</mat-form-field>
+						</div>
+
+						<button mat-icon-button *ngIf="!showViewer" color="warn"><mat-icon>delete</mat-icon></button>
+
 					</div>
 
 					<div class="controls">
-						<button mat-icon-button color="primary" (click)="doAddRow()"><mat-icon>add_circle_outline</mat-icon></button>
+
+						<div class="field-outer">
+							<button mat-stroked-button *ngIf="showViewer" color="primary" class="ifm-stroked-button primary-outline" (click)="doToggleViewer()">Edit</button>
+							<button mat-button *ngIf="!showViewer" color="primary" (click)="doToggleViewer()">Cancel</button>
+							<button mat-flat-button *ngIf="!showViewer" color="primary" (click)="doToggleViewer()">Save</button>
+						</div>
 					</div>
 				</div>
 			</div>

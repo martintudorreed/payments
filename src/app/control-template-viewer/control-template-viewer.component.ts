@@ -12,7 +12,7 @@ import {Router} from "@angular/router";
 })
 export class ControlTemplateViewerComponent implements OnInit, AfterViewInit{
   @Input() templateIDToUse: string = '0'
-  dataSource: any[] = [];
+  dataSource = this.localDataService.templateData;
   foundTemplateIndex: number = -1;
 
   templateID: string = '';

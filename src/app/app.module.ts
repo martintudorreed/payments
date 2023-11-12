@@ -43,6 +43,7 @@ import { SafeHtmlPipe } from "./pipes/safe-html.pipe";
 import { ControlTemplateViewerComponent } from './control-template-viewer/control-template-viewer.component';
 import { ControlTemplateEditorComponent } from './control-template-editor/control-template-editor.component';
 import { ViewEmailTemplatesComponent } from './view-email-templates/view-email-templates.component';
+import { ControlChipIfmAppsComponent } from './control-chip-ifm-apps/control-chip-ifm-apps.component';
 
 const routes: Routes = [
 
@@ -83,7 +84,8 @@ const routes: Routes = [
     SafeHtmlPipe,
     ControlTemplateViewerComponent,
     ControlTemplateEditorComponent,
-    ViewEmailTemplatesComponent
+    ViewEmailTemplatesComponent,
+    ControlChipIfmAppsComponent
   ],
   imports: [
     BrowserModule,

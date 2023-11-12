@@ -1,0 +1,21 @@
+<div class="chip-filter-outer">
+	<div class="caption-container">
+		<caption class="mat-caption">
+			<span>Filter Templates by</span>
+		</caption>
+	</div>
+	<div class="chip-list">
+		<mat-chip  *ngFor="let filter of filters" class="filter-item">
+			<div class="chip-inner">
+				<span class="chip-text">{{filter.templateFilterItemName}}</span><mat-icon (click)="doRemoveChip(filter.templateFilterItemID)" *ngIf="filter.templateFilterItemID !== 0" class="ifm-icon-medium chip-icon">close</mat-icon>
+			</div>
+		</mat-chip>
+	</div>
+	<button [matMenuTriggerFor]="menu" mat-icon-button color="primary"><mat-icon>arrow_drop_down</mat-icon></button>
+</div>
+<mat-menu #menu="matMenu" xPosition="before">
+	<button mat-menu-item (click)="onAddFilterChip(0,'All')">All</button>
+	<button mat-menu-item (click)="onAddFilterChip(1,'Triage')">Triage</button>
+	<button mat-menu-item (click)="onAddFilterChip(2,'Menus')">Menus</button>
+	<button mat-menu-item (click)="onAddFilterChip(3,'EPC')">EPC</button>
+</mat-menu>

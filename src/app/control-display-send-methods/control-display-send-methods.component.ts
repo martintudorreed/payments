@@ -16,6 +16,7 @@ export class ControlDisplaySendMethodsComponent {
   @Input() paymentTransactionExpiry: string ='01/01/2032';
   @Input() paymentTransactionNumber: string ='xxxxx'
   @Input() isInMainUI: boolean = false;
+  @Input() paymentStatusId: number = 0;
   isEMailChecked: boolean = true;
   isSMSChecked: boolean = false;
   constructor(private localDataService: LocalDataService,

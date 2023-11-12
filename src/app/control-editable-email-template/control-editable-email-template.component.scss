@@ -4,19 +4,28 @@
 :host {
   display: flex;
   justify-content: center;
+  width: 100%;
 }
 
 .editor {
   display: flex;
   width: 100%;
+  overflow: hidden;
   .sidebar-meta-data {
     min-width: 320px;
     padding: 12px;
     overflow: auto;
     display: flex;
     flex-direction: column;
+    .fade {
+      opacity: .2;
+    }
     .field-outer {
+      display: flex;
       margin-bottom: 12px;
+      &.data-create-button {
+        justify-content: flex-end;
+      }
     }
     .macro-keys-container {
       display: flex;
@@ -65,15 +74,19 @@
   padding: 12px;
   display: flex;
   flex-direction: column;
+  width: 100%;
   .template-container {
     display: flex;
     position: relative;
+    height: 100%;
+    width: 100%;
     flex-grow: 1;
     .template-inner {
       display: flex;
       flex-direction: column;
-      max-width: 700px;
-      width: 700px;
+      //max-width: 700px;
+      //width: 700px;
+      width: 100%;
       border: 1px solid palette.$medium-grey;
       border-radius: 4px;
       height: 100%;
@@ -81,6 +94,10 @@
       position: relative;
       z-index: 9;
       .edit-area {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        overflow: auto;
         flex-grow: 1;
         padding: 12px;
         &.hide {
@@ -130,8 +147,15 @@
         min-height: 72px;
         border-top:1px solid palette.$medium-grey;
         .secondary {
-          padding: 0 12px;
+          display: flex;
+          align-items: center;
           flex-grow: 1;
+          .data-template-name {
+          }
+          .data-template-app {
+            min-width: 200px;
+            margin: 0 12px;
+          }
         }
         .controls {
           display: flex;
@@ -177,6 +201,7 @@
       .data-is-view-attachments {
         margin: 0 12px;
       }
+
 
     }
   }

@@ -45,10 +45,15 @@
 
 		</div>
 		<div class="footer">
-			<div class="field-outer data-checkboxes">
+			<div class="field-outer data-checkboxes" *ngIf="paymentStatusId !== 0">
 				<span>Send using - </span>
 				<mat-checkbox [(ngModel)]="isEMailChecked" (click)="doCheckBoxStatus(0, $event)">Email</mat-checkbox>
 				<mat-checkbox [(ngModel)]="isSMSChecked" (click)="doCheckBoxStatus(1, $event)">SMS</mat-checkbox>
+			</div>
+			<div class="field-outer data-checkboxes" *ngIf="paymentStatusId === 0">
+				<span>Sent on the 05/02/3021 @ 12.80xm</span>
+				<mat-checkbox [(ngModel)]="isEMailChecked" disabled>Email</mat-checkbox>
+				<mat-checkbox [(ngModel)]="isSMSChecked" disabled>SMS</mat-checkbox>
 			</div>
 		</div>
 

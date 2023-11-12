@@ -27,7 +27,9 @@
 
 .main {
   display: flex;
+  flex-direction: column;
   height: 100%;
+  overflow: hidden;
   .tab-inner {
     padding: 12px;
     display: flex;

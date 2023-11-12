@@ -36,6 +36,11 @@ export interface gridFilterItems {
   gridFilterItemName: string;
 }
 
+export interface templateFilterItems {
+  templateFilterItemID: number;
+  templateFilterItemName: string;
+}
+
 export interface mainUITabs {
   tabIndex: number;
   tabLabel: string;
@@ -159,57 +164,58 @@ export class LocalDataService {
       templateCreatedBy: 'Martin Tudor Reed',
       templateCreatedOn: '05/02/2032',
     },
-    // {
-    //   templateID: '1',
-    //   templateProviderId: '0',
-    //   templateType: 'email',
-    //   templateName: 'Menus Service - Fleet',
-    //   templateLogo: 'aston-martin',
-    //   templateSections: [
-    //     {
-    //       sectionId: '0',
-    //       sectionContent: 'logo',
-    //       sectionContentStyle: '',
-    //       sectionIndexOrder: -1,
-    //     },
-    //     {
-    //       sectionId: '1',
-    //       sectionContent: 'Service at [dealerName]',
-    //       sectionContentStyle: 'mat-headline-4',
-    //       sectionIndexOrder: -1,
-    //     },
-    //     {
-    //       sectionId: '2',
-    //       sectionContent: '[invoiceNumber] for [ammount] is due on [dueDate]',
-    //       sectionContentStyle: 'mat-headline-2',
-    //       sectionIndexOrder: -1,
-    //     },
-    //     {
-    //       sectionId: '3',
-    //       sectionContent: 'Pay Invoice',
-    //       sectionContentStyle: '',
-    //       sectionIndexOrder: -1,
-    //     }
-    //     ,
-    //     {
-    //       sectionId: '4',
-    //       sectionContent: 'Hi [customerFirstName] <br><br>' +
-    //         'Please click the Pay Invoice button above to view, print, download or pay the invoice.<br><br>' +
-    //         'If you have any questions, please contact us on the interdimensional telephone - Mars99.',
-    //       sectionContentStyle: '',
-    //       sectionIndexOrder: -1,
-    //     },
-    //     {
-    //       sectionId: '5',
-    //       sectionContent: '[dealerName]',
-    //       sectionContentStyle: '',
-    //       sectionIndexOrder: -1,
-    //     }
-    //   ],
-    //   templateContents: '',
-    //   templateCreatedBy: 'Martin Tudor Reed',
-    //   templateCreatedOn: '05/02/2032',
-    // }
+    {
+      templateID: '1',
+      templateProviderId: '0',
+      templateType: 'email',
+      templateSourceApplication: '0',
+      templateName: 'Menus Service - Fleet',
+      templateLogo: 'aston-martin',
+      templateSections: [
+        {
+          sectionId: '0',
+          sectionContent: 'logo',
+          sectionContentStyle: '',
+          sectionIndexOrder: -1,
+        },
+        {
+          sectionId: '1',
+          sectionContent: 'Service at [dealerName]',
+          sectionContentStyle: 'mat-headline-4',
+          sectionIndexOrder: -1,
+        },
+        {
+          sectionId: '2',
+          sectionContent: '[invoiceNumber] for [ammount] is due on [dueDate]',
+          sectionContentStyle: 'mat-headline-2',
+          sectionIndexOrder: -1,
+        },
+        {
+          sectionId: '3',
+          sectionContent: 'Pay Invoice',
+          sectionContentStyle: '',
+          sectionIndexOrder: -1,
+        }
+        ,
+        {
+          sectionId: '4',
+          sectionContent: 'Hi [customerFirstName] <br><br>' +
+            'Please click the Pay Invoice button above to view, print, download or pay the invoice.<br><br>' +
+            'If you have any questions, please contact us on the interdimensional telephone - Mars99.',
+          sectionContentStyle: '',
+          sectionIndexOrder: -1,
+        },
+        {
+          sectionId: '5',
+          sectionContent: '[dealerName]',
+          sectionContentStyle: '',
+          sectionIndexOrder: -1,
+        }
+      ],
+      templateContents: '',
+      templateCreatedBy: 'Martin Tudor Reed',
+      templateCreatedOn: '05/02/2032',
+    }
   ]
 
   mainUITabsData: mainUITabs [] = [
@@ -361,6 +367,13 @@ export class LocalDataService {
     {
       gridFilterItemID: 0,
       gridFilterItemName: 'All',
+    },
+  ]
+
+  templateFilterItemsData: templateFilterItems [] = [
+    {
+      templateFilterItemID: 0,
+      templateFilterItemName: 'All',
     },
   ]
 

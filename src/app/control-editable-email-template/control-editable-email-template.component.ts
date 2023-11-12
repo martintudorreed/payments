@@ -24,8 +24,9 @@ export class ControlEditableEmailTemplateComponent implements OnInit, AfterViewI
   sourceApp = this.localDataService.ifmAppData;
   selectedSauceID: string = '';
   dataSource = this.localDataService.templateData;
-  brands = this.localDataService.themeBrandData;
   selectedTemplate: number = 0;
+  templateSections = this.dataSource[this.selectedTemplate].templateSections;
+  brands = this.localDataService.themeBrandData;
 
   templateID: string = '';
   currentTemplateID: string = '0'
@@ -34,13 +35,13 @@ export class ControlEditableEmailTemplateComponent implements OnInit, AfterViewI
   templateName: string = '';
   templateLogo: string = '';
   logoString: string = '';
-  templateSections: any[] = [];
+  // templateSections: any[] = [];
   templateSectionsConverted: any[] = [];
   templateContents: string = '';
   templateCreatedBy: string = '';
   templateCreatedOn: string = '';
 
-  showViewer: boolean = false;
+  showViewer: boolean = true;
   dataSourceFromLocal: any[] = [];
 
   constructor(private localDataService: LocalDataService,
@@ -64,7 +65,7 @@ export class ControlEditableEmailTemplateComponent implements OnInit, AfterViewI
 
     this.templateName = this.dataSource[this.selectedTemplate].templateName;
 
-    this.templateSections = this.dataSource[this.selectedTemplate].templateSections;
+    // this.templateSections = this.dataSource[this.selectedTemplate].templateSections;
     this.selectedSauceID = this.dataSource[this.selectedTemplate].templateSourceApplication;
       // this.templateProviderId = this.dataSource[this.selectedTemplate].templateProviderId;
     // this.templateType = this.dataSource[this.selectedTemplate].templateType;
@@ -161,15 +162,15 @@ export class ControlEditableEmailTemplateComponent implements OnInit, AfterViewI
     console.log('gonna change to ' + ind)
     console.log('using this dataset');
     console.log(this.dataSource);
-    this.selectedTemplate = ind;
-    this.templateID = this.dataSource[this.selectedTemplate].templateID;
-    this.templateLogo = this.dataSource[this.selectedTemplate].templateLogo;
-    this.logoString = "./assets/svg-logos/" + this.templateLogo + '-logo.svg';
-
-    this.templateName = this.dataSource[this.selectedTemplate].templateName;
-
-    this.templateSections = this.dataSource[this.selectedTemplate].templateSections;
-    console.log('when I toggle the view I will be sending ' + this.currentTemplateID);
+    // this.selectedTemplate = ind;
+    // this.templateID = this.dataSource[this.selectedTemplate].templateID;
+    // this.templateLogo = this.dataSource[this.selectedTemplate].templateLogo;
+    // this.logoString = "./assets/svg-logos/" + this.templateLogo + '-logo.svg';
+    //
+    // this.templateName = this.dataSource[this.selectedTemplate].templateName;
+    //
+    // this.templateSections = this.dataSource[this.selectedTemplate].templateSections;
+    // console.log('when I toggle the view I will be sending ' + this.currentTemplateID);
   }
 
   trackByFn(index: number, item: any) {
