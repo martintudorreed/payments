@@ -115,13 +115,13 @@
 <!--	</mat-menu>-->
 
 <div class="cards-container" *ngIf="(applicationModelService.currentBreakpoint$ | async) === 'Medium' || (applicationModelService.currentBreakpoint$ | async) === 'Small' || (applicationModelService.currentBreakpoint$ | async) === 'XSmall'">
-	<mat-card *ngFor="let item of cardDataSource" class="card-generic">
+	<mat-card *ngFor="let item of cardDataSource; let i = index" class="card-generic">
 		<div class="caption-container">
 			<caption class="mat-caption">
 				<mat-icon class="ifm-icon-medium th-icon" [ngClass]="{'green-text': item.paymentStatusId === 0,'bright-blue-text': item.paymentStatusId === 1,'red-text': item.paymentStatusId === 2}">credit_card</mat-icon><span class="caption-text">INV - {{item.paymentTransactionNumber}}</span>
 			</caption>
 		</div>
-		<mat-card-content class="card-inner" (click)="onRowClick(item.paymentIdNo)">
+		<mat-card-content class="card-inner" (click)="onRowClick(item.paymentIdNo, i)">
 
 			<div class="naked-form-field data-number">
 				<div class="field-label"><span>Number</span></div>
@@ -354,7 +354,7 @@
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
   <tr mat-row
-    *matRowDef="let row; columns: displayedColumns;"
-	(click)="onRowClick(row.paymentIdNo)"
+    *matRowDef="let row;let i = index; columns: displayedColumns;"
+	(click)="onRowClick(row.paymentIdNo, i)"
   ></tr>
 </table>

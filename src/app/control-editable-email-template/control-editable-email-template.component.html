@@ -13,23 +13,76 @@
 		<div class="field-outer data-template-select" [ngClass]="{'fade': !showViewer}">
 			<mat-form-field class="ifm-input" appearance="outline" subscriptSizing="dynamic">
 				<mat-label>Name</mat-label>
-				<mat-select [(value)]="selectedTemplate"  (selectionChange)="onSelectedTemplateChange(selectedTemplate)">
-					<mat-option  [value]="i" *ngFor="let template of dataSource, let i = index"><span class="option-label">{{ template.templateName }}</span></mat-option>
+				<mat-select [(value)]="currentTemplateID"  (selectionChange)="onSelectedTemplateChange(currentTemplateID)">
+					<mat-option  [value]="template.templateID" *ngFor="let template of dataSource, let i = index"><span class="option-label">{{ template.templateName }} - {{doGetTemplateSourceApplication(template.templateSourceApplication)}}</span></mat-option>
 				</mat-select>
 			</mat-form-field>
 		</div>
+
 		<div class="field-outer data-create-button" [ngClass]="{'fade': !showViewer}">
 			<button mat-stroked-button color="primary" class="ifm-stroked-button primary-outline">Create New</button>
 		</div>
-<!--		<div class="field-outer data-template-name">-->
-<!--			<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always" appearance="outline">-->
-<!--				<mat-label>Name</mat-label>-->
-<!--				<input type="text" matInput placeholder="Contact Number" [(ngModel)]="templateName">-->
-<!--			</mat-form-field>-->
-<!--		</div>-->
+
+		<div class="field-outer data-template-app">
+			<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always" appearance="outline">
+				<mat-label>Edit Name</mat-label>
+				<input type="text" matInput placeholder="Template Name" [(ngModel)]="dataSource[foundTemplateIndex].templateName">
+			</mat-form-field>
+		</div>
+
+		<div class="field-outer data-template-app">
+			<mat-form-field class="field ifm-input selector" subscriptSizing="dynamic" floatLabel="always" appearance="outline">
+				<mat-label>Applicable to</mat-label>
+				<mat-select [(value)]="selectedSauceID" (selectionChange)="onSelectedSourceChange(selectedSauceID)">
+					<mat-option  [value]="app.ifmAppsID" *ngFor="let app of sourceApp">{{ app.ifmAppsName }}</mat-option>
+				</mat-select>
+			</mat-form-field>
+		</div>
+
+		<div class="field-outer data-template-app">
+			<mat-form-field class="field ifm-input selector" subscriptSizing="dynamic" floatLabel="always" appearance="outline">
+				<mat-label>Colour</mat-label>
+				<mat-select [(value)]="selectedColor" (selectionChange)="onSelectedColorChange(selectedColor)">
+					<mat-option  [value]="color.colorSchemeValue" *ngFor="let color of templateColors">{{ color.colorSchemeName }}</mat-option>
+				</mat-select>
+			</mat-form-field>
+		</div>
+		<button mat-icon-button *ngIf="!showViewer" color="warn"><mat-icon>delete</mat-icon></button>
+
+	</div>
+	<div class="canvas">
+		<div class="template-container">
+			<div class="caption-container">
+				<caption class="mat-caption">
+					<span>Template</span>
+				</caption>
+			</div>
+			<div class="template-inner mat-elevation-custom-z1">
+
+				<app-control-template-viewer *ngIf="showViewer"></app-control-template-viewer>
+				<app-control-template-editor *ngIf="!showViewer"></app-control-template-editor>
+
+				<div class="footer">
+					<div class="secondary">
 
 
+					</div>
 
+					<div class="controls">
+
+						<div class="field-outer">
+							<button mat-stroked-button *ngIf="showViewer" color="primary" class="ifm-stroked-button primary-outline" (click)="doToggleViewer()">Edit</button>
+							<button mat-button *ngIf="!showViewer" color="primary" (click)="doToggleViewer()">Cancel</button>
+							<button mat-flat-button *ngIf="!showViewer" color="primary" (click)="doToggleViewer()">Save</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+	<div class="supporting-controls">
 		<div class="macro-keys-container">
 			<div class="caption-container">
 				<caption class="mat-caption">
@@ -37,7 +90,8 @@
 				</caption>
 			</div>
 			<div class="macro-keys-inner">
-				<div class="key">
+<!--				[cdkCopyToClipboard]="'[dealerName]'"-->
+				<div class="key" >
 					<div class="key-text">[dealerName]</div>
 					<div class="key-control"><mat-icon class="ifm-icon-medium">content_copy</mat-icon></div>
 				</div>
@@ -86,127 +140,37 @@
 			</div>
 
 		</div>
-
 	</div>
-	<div class="canvas">
-		<div class="template-container">
-			<div class="caption-container">
-				<caption class="mat-caption">
-					<span>Template</span>
-				</caption>
-			</div>
-			<div class="template-inner mat-elevation-custom-z1">
 
-				<app-control-template-viewer [templateIDToUse]="currentTemplateID" *ngIf="showViewer"></app-control-template-viewer>
-
-				<div class="edit-area" [ngClass]="{'hide': showViewer}">
-					<div cdkDropList class="section-list" (cdkDropListDropped)="drop($event)">
-						<section *ngFor="let template of templateSections; trackBy: trackByFn, let i = index" class="section editor-drag" cdkDrag>
-
-							<div class="section-body">
-								<span *ngIf="template.sectionId === '0'"><img class="logo" src="{{logoString}}" alt="FutureMotors"></span>
-
-								<p *ngIf="template.sectionId !== '0' && template.sectionId !== '4'"
-								   class="section-content {{template.sectionContentStyle}}"
-								   contenteditable="true"
-								   [(ngModel)]="template.sectionContent"
-								   (blur)="doBlur($event, i)"
-								   [innerHTML]="template.sectionContent | safeHtml">
-								</p>
-
-								<div class="section-content" *ngIf="template.sectionId === '4'">
-									<button mat-flat-button color="primary">{{template.sectionContent}}</button>
-								</div>
-							</div>
-
-							<div class="section-controls">
-								<span class="drag-handle" cdkDragHandle>
-									<mat-icon color="primary" *ngIf="template.sectionId !== '0'" [matMenuTriggerFor]="lineMenu">drag_indicator</mat-icon>
-									<mat-icon color="primary" *ngIf="template.sectionId === '0'" [matMenuTriggerFor]="brandMenu">drag_indicator</mat-icon>
-								</span>
-							</div>
-
-							<mat-menu #lineMenu="matMenu" class="ifm-menu style-menu">
-								<button mat-menu-item class="style-option mat-headline-2" (click)="doSetStyle('mat-headline-2', i)">Headline 1<mat-icon *ngIf="template.sectionContentStyle === 'mat-headline-2'">done</mat-icon></button>
-								<button mat-menu-item  class="style-option mat-headline-4" (click)="doSetStyle('mat-headline-4', i)">Headline 2<mat-icon *ngIf="template.sectionContentStyle === 'mat-headline-4'">done</mat-icon></button>
-								<button mat-menu-item class="style-option" (click)="doSetStyle('', i)">Body Text<mat-icon *ngIf="template.sectionContentStyle === ''">done</mat-icon></button>
-								<mat-divider></mat-divider>
-								<button mat-menu-item class="style-option" color="warn" (click)="doDeleteRow(i)">Delete<mat-icon>delete</mat-icon></button>
-							</mat-menu>
-
-							<mat-menu #brandMenu="matMenu" class="ifm-menu style-menu">
-								<button *ngFor="let brand of brands, let i = index" mat-menu-item class="style-option" (click)="doChangeLogo(brand.brandValue)">
-									{{brand.brandName}}
-								</button>
-							</mat-menu>
-
-						</section>
-
-						<button mat-icon-button *ngIf="!showViewer" color="primary" (click)="doAddRow()"><mat-icon>add_circle_outline</mat-icon></button>
-					</div>
-				</div>
-				<div class="footer">
-					<div class="secondary">
-						<div class="field-outer data-template-name" *ngIf="!showViewer">
-							<mat-form-field class="" subscriptSizing="dynamic" floatLabel="always" appearance="outline">
-								<mat-label>Edit Name</mat-label>
-								<input type="text" matInput placeholder="Contact Number" [(ngModel)]="templateName">
-							</mat-form-field>
-						</div>
-						<div class="field-outer data-template-app" *ngIf="!showViewer">
-							<mat-form-field class="field ifm-input selector" subscriptSizing="dynamic" floatLabel="always" appearance="outline">
-								<mat-label>Applicable to</mat-label>
-								<mat-select [(value)]="selectedSauceID" (selectionChange)="onSelectedSourceChange(selectedSauceID)">
-									<mat-option  [value]="app.ifmAppsID" *ngFor="let app of sourceApp">{{ app.ifmAppsName }}</mat-option>
-								</mat-select>
-							</mat-form-field>
-						</div>
-
-						<button mat-icon-button *ngIf="!showViewer" color="warn"><mat-icon>delete</mat-icon></button>
-
-					</div>
-
-					<div class="controls">
-
-						<div class="field-outer">
-							<button mat-stroked-button *ngIf="showViewer" color="primary" class="ifm-stroked-button primary-outline" (click)="doToggleViewer()">Edit</button>
-							<button mat-button *ngIf="!showViewer" color="primary" (click)="doToggleViewer()">Cancel</button>
-							<button mat-flat-button *ngIf="!showViewer" color="primary" (click)="doToggleViewer()">Save</button>
-						</div>
-					</div>
-				</div>
-			</div>
-
-		</div>
-
-	</div>
 </div>
 <footer  *ngIf="!isInMainUI">
 	<div class="footer-inner"></div>
 </footer>
 
-<div class="template-inner" *ngIf="isInMainUI">
-	<div class="logo-container" [ngClass]="{'is-in-main-ui': isInMainUI}">
-		<img class="logo" src="./assets/logos/future-motors-logo.png" alt="FutureMotors">
-	</div>
-	<div><span class="mat-headline-4">Your Invoice from Future Motors Ltd (BES-29367)</span></div>
-	<div><span class="mat-headline-2">${{invoiceAmmount | number: '1.2-2'}}</span></div>
-	<div><span class="mat-headline-4">INV-<span *ngIf="paymentTransactionNumber !== ''">{{paymentTransactionNumber}}</span> <span *ngIf="paymentTransactionNumber === ''">XXXXXX</span> is due on {{paymentTransactionExpiry}}</span></div>
-
-	<div><button mat-flat-button color="primary">Pay Invoice</button></div>
-
-	<div class="editable-message-body">
-
-		<p >Hi {{customerName}},<br/><br/> <span contenteditable="true">Here's your tax invoice INV-6209 for ${{invoiceAmmount | number: '1.2-2' }} for work completed at 7 Philip K. Dick Drive, Mars.<br/>
-				<br/>
-				Please click the Pay Invoice button above to view, print, download or pay the invoice.<br/>
-				<br/>
-				If you have any questions, please contact us on the interdimentional telephone - Mars99.<br />
-				<br />
-				Thanks</span></p>
 
 
-		<div><span></span></div></div>
+<!--<div class="template-inner" *ngIf="isInMainUI">-->
+<!--	<div class="logo-container" [ngClass]="{'is-in-main-ui': isInMainUI}">-->
+<!--		<img class="logo" src="./assets/logos/future-motors-logo.png" alt="FutureMotors">-->
+<!--	</div>-->
+<!--	<div><span class="mat-headline-4">Your Invoice from Future Motors Ltd (BES-29367)</span></div>-->
+<!--	<div><span class="mat-headline-2">${{invoiceAmmount | number: '1.2-2'}}</span></div>-->
+<!--	<div><span class="mat-headline-4">INV-<span *ngIf="paymentTransactionNumber !== ''">{{paymentTransactionNumber}}</span> <span *ngIf="paymentTransactionNumber === ''">XXXXXX</span> is due on {{paymentTransactionExpiry}}</span></div>-->
 
-	<div><span>Future Motors Ltd</span></div>
-</div>
+<!--	<div><button mat-flat-button color="primary">Pay Invoice</button></div>-->
+
+<!--	<div class="editable-message-body">-->
+
+<!--		<p >Hi {{customerName}},<br/><br/> <span contenteditable="true">Here's your tax invoice INV-6209 for ${{invoiceAmmount | number: '1.2-2' }} for work completed at 7 Philip K. Dick Drive, Mars.<br/>-->
+<!--				<br/>-->
+<!--				Please click the Pay Invoice button above to view, print, download or pay the invoice.<br/>-->
+<!--				<br/>-->
+<!--				If you have any questions, please contact us on the interdimentional telephone - Mars99.<br />-->
+<!--				<br />-->
+<!--				Thanks</span></p>-->
+
+
+<!--		<div><span></span></div></div>-->
+
+<!--	<div><span>Future Motors Ltd</span></div>-->
+<!--</div>-->

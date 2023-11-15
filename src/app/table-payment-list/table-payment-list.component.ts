@@ -57,7 +57,7 @@ export class TablePaymentListComponent implements AfterViewInit{
       // this.displayedColumns = JSON.parse(localStorage.getItem('columnOrder'));
     }
 
-  onRowClick(item: number) {
+  onRowClick(item: number, ind: number) {
       for (let i = 0; i < this.dataItems.length; i++) {
         if (this.dataItems[i].paymentIdNo === item) {
           this.dataItem = this.dataItems[i];
@@ -73,12 +73,16 @@ export class TablePaymentListComponent implements AfterViewInit{
         this.tabOffset = 2;
       }
       this.tabIndex = this.applicationModelService.currentTabCount$.getValue() + this.tabOffset;
-
+      this.applicationModelService.currentPaymentIndexNumber$.next(ind);
       this.tabs.push({
         tabIndex: this.tabIndex,
         tabLabel: this.dataItem.paymentTransactionNumber,
         tabContentType: 'payment',
         tabdataItemIndexNo: this.dataItemIndexNo});
+
+      if( this.localDataService.paymentListData[ind].paymentStatusId === 2) {
+        this.applicationModelService.currentTemplateIdViewer$.next('1');
+      }
 
       setTimeout(() => {
         this.applicationModelService.activeMainUITab$.next(this.tabIndex);

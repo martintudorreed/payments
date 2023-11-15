@@ -1,4 +1,4 @@
-<div class="chip-filter-outer">
+<div class="chip-filter-outer" [matMenuTriggerFor]="menu">
 	<div class="caption-container">
 		<caption class="mat-caption">
 			<span>Filter Templates by</span>
@@ -7,7 +7,7 @@
 	<div class="chip-list">
 		<mat-chip  *ngFor="let filter of filters" class="filter-item">
 			<div class="chip-inner">
-				<span class="chip-text">{{filter.templateFilterItemName}}</span><mat-icon (click)="doRemoveChip(filter.templateFilterItemID)" *ngIf="filter.templateFilterItemID !== 0" class="ifm-icon-medium chip-icon">close</mat-icon>
+				<span class="chip-text">{{filter.templateFilterItemName}}</span><mat-icon (click)="doRemoveChip(filter.templateFilterItemID, $event)" *ngIf="filter.templateFilterItemID !== 0" class="ifm-icon-medium chip-icon">close</mat-icon>
 			</div>
 		</mat-chip>
 	</div>

@@ -15,13 +15,19 @@
 							<mat-icon class="tab-icon">email</mat-icon>
 						<span class="tab-label-text">Email</span></span>
 					</ng-template>
-					<div class="tab-inner">
-						<app-control-editable-email-template
-								[customerName]="customerName"
-								[paymentTransactionExpiry]="paymentTransactionExpiry"
-								[invoiceAmmount]="invoiceAmmount"
-								[paymentTransactionNumber]="paymentTransactionNumber"
-								[isInMainUI]="true"></app-control-editable-email-template>
+					<div class="tab-inner email">
+						<div class="controls mat-elevation-custom-z1" *ngIf="paymentStatusId === 5 || paymentStatusId === 1 || paymentStatusId === 2">
+							<div class="field-outer data-template-select compact">
+								<mat-form-field class="ifm-input" appearance="outline" subscriptSizing="dynamic">
+									<mat-label for="templateSelector">Name</mat-label>
+									<mat-select [(value)]="selectedTemplate" name="templateSelector" (selectionChange)="doSelectTemplate(selectedTemplate)">
+										<mat-option  [value]="template.templateID" *ngFor="let template of dataSource, let i = index"><span class="option-label">{{ template.templateName }}</span></mat-option>
+									</mat-select>
+								</mat-form-field>
+							</div>
+						</div>
+
+						<app-control-template-viewer class="viewer" [templateIDToUse]="selectedTemplate"></app-control-template-viewer>
 					</div>
 				</mat-tab>
 
@@ -45,15 +51,15 @@
 
 		</div>
 		<div class="footer">
-			<div class="field-outer data-checkboxes" *ngIf="paymentStatusId !== 0">
+			<div class="field-outer data-checkboxes" *ngIf="paymentStatusId === 5">
 				<span>Send using - </span>
 				<mat-checkbox [(ngModel)]="isEMailChecked" (click)="doCheckBoxStatus(0, $event)">Email</mat-checkbox>
 				<mat-checkbox [(ngModel)]="isSMSChecked" (click)="doCheckBoxStatus(1, $event)">SMS</mat-checkbox>
 			</div>
-			<div class="field-outer data-checkboxes" *ngIf="paymentStatusId === 0">
+			<div class="field-outer data-checkboxes" *ngIf="paymentStatusId !== 5">
 				<span>Sent on the 05/02/3021 @ 12.80xm</span>
-				<mat-checkbox [(ngModel)]="isEMailChecked" disabled>Email</mat-checkbox>
-				<mat-checkbox [(ngModel)]="isSMSChecked" disabled>SMS</mat-checkbox>
+				<mat-checkbox [(ngModel)]="isEMailChecked" [disabled]="paymentStatusId === 0">Email</mat-checkbox>
+				<mat-checkbox [(ngModel)]="isSMSChecked" [disabled]="paymentStatusId === 0">SMS</mat-checkbox>
 			</div>
 		</div>
 

@@ -16,28 +16,20 @@
 				<mat-icon class="tab-icon">language</mat-icon>
 				<span class="tab-label-text">General Settings</span></span>
 			</ng-template>
-			<div class="tab-inner">
-				<br />
-				<span>General Settings go here</span><br /><br />
-				<span>API Key</span><br /><br />
-				<span>Currency </span><br /><br />
-				<span>Merchant ID's</span><br /><br />
-				<span>Permissions</span><br /><br />
-				<span>Credit Card processing fee %</span><br /><br />
-				<span>Logos a go go's</span><br /><br />
-
+			<div class="tab-inner general">
+				<app-settings-general></app-settings-general>
 			</div>
 		</mat-tab>
-<!--		<mat-tab label="Rich Text Tepmlates">-->
-<!--			<ng-template mat-tab-label>-->
-<!--			<span class="tab-label">-->
-<!--				<mat-icon class="tab-icon">receipt</mat-icon>-->
-<!--				<span class="tab-label-text">Invoice Tepmlates</span></span>-->
-<!--			</ng-template>-->
-<!--			<div class="tab-inner">-->
-<!--				<span>Invoice Template stuff goes here</span>-->
-<!--			</div>-->
-<!--		</mat-tab>-->
+		<mat-tab label="Customer Forms">
+			<ng-template mat-tab-label>
+			<span class="tab-label">
+				<mat-icon class="tab-icon">person</mat-icon>
+				<span class="tab-label-text">Customer Form</span></span>
+			</ng-template>
+			<div class="tab-inner">
+				<span>Customer Form Stuff goes here</span>
+			</div>
+		</mat-tab>
 		<mat-tab label="Email Templates">
 			<ng-template mat-tab-label>
 			<span class="tab-label">

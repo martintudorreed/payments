@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {LocalDataService} from "../services/local-data.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ApplicationModelService} from "../services/ApplicationModelService";
@@ -10,7 +10,7 @@ import {Router} from "@angular/router";
   templateUrl: './control-display-send-methods.component.html',
   styleUrls: ['./control-display-send-methods.component.scss']
 })
-export class ControlDisplaySendMethodsComponent {
+export class ControlDisplaySendMethodsComponent implements OnInit{
   @Input() customerName: string = '';
   @Input() invoiceAmmount: number = 0;
   @Input() paymentTransactionExpiry: string ='01/01/2032';
@@ -19,6 +19,17 @@ export class ControlDisplaySendMethodsComponent {
   @Input() paymentStatusId: number = 0;
   isEMailChecked: boolean = true;
   isSMSChecked: boolean = false;
+
+  dataSource = this.localDataService.templateData;
+  selectedTemplate: string = this.applicationModelService.currentTemplateIdViewer$.getValue();
+
+  ngOnInit() {
+    // if(this.paymentStatusId === 2) {
+    //   this.applicationModelService.currentTemplateIdViewer$.next('1');
+    // }
+  }
+
+
   constructor(private localDataService: LocalDataService,
               public dialog: MatDialog,
               public applicationModelService: ApplicationModelService,
@@ -44,6 +55,10 @@ export class ControlDisplaySendMethodsComponent {
       });
     }
 
+  }
+
+  doSelectTemplate(templateID: string) {
+    this.applicationModelService.currentTemplateIdViewer$.next(templateID);
   }
 
 }

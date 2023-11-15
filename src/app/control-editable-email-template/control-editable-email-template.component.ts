@@ -14,7 +14,7 @@ import { ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./control-editable-email-template.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ControlEditableEmailTemplateComponent implements OnInit, AfterViewInit{
+export class ControlEditableEmailTemplateComponent {
   @Input() customerName: string =' ';
   @Input() invoiceAmmount: number = 0;
   @Input() paymentTransactionExpiry: string ='01/01/2032';
@@ -22,11 +22,14 @@ export class ControlEditableEmailTemplateComponent implements OnInit, AfterViewI
   @Input() isInMainUI: boolean = false;
 
   sourceApp = this.localDataService.ifmAppData;
-  selectedSauceID: string = '';
+  selectedSauceID: string = '0';
   dataSource = this.localDataService.templateData;
   selectedTemplate: number = 0;
   templateSections = this.dataSource[this.selectedTemplate].templateSections;
   brands = this.localDataService.themeBrandData;
+
+  templateColors = this.localDataService.colorSchemeData;
+  selectedColor: string = '0';
 
   templateID: string = '';
   currentTemplateID: string = '0'
@@ -41,6 +44,8 @@ export class ControlEditableEmailTemplateComponent implements OnInit, AfterViewI
   templateCreatedBy: string = '';
   templateCreatedOn: string = '';
 
+  foundTemplateIndex: number = 0;
+
   showViewer: boolean = true;
   dataSourceFromLocal: any[] = [];
 
@@ -52,134 +57,52 @@ export class ControlEditableEmailTemplateComponent implements OnInit, AfterViewI
   }
 
   ngOnInit() {
-    // // load from local storage
-    // if (localStorage.getItem('templateData')) {
-    //   const data = localStorage.getItem('templateData');
-    //   this.dataSource = (JSON.parse(data as string));
-    // } else {
-    //   this.dataSource = this.localDataService.templateData;
-    // }
-    this.templateID = this.dataSource[this.selectedTemplate].templateID;
-    this.templateLogo = this.dataSource[this.selectedTemplate].templateLogo;
-    this.logoString = "./assets/svg-logos/" + this.templateLogo + '-logo.svg';
-
-    this.templateName = this.dataSource[this.selectedTemplate].templateName;
-
-    // this.templateSections = this.dataSource[this.selectedTemplate].templateSections;
-    this.selectedSauceID = this.dataSource[this.selectedTemplate].templateSourceApplication;
-      // this.templateProviderId = this.dataSource[this.selectedTemplate].templateProviderId;
-    // this.templateType = this.dataSource[this.selectedTemplate].templateType;
-    // this.templateContents = this.dataSource[this.selectedTemplate].templateContents;
-    // this.templateCreatedBy = this.dataSource[this.selectedTemplate].templateCreatedBy;
-    // this.templateCreatedOn = this.dataSource[this.selectedTemplate].templateCreatedOn;
-
-    console.log('after view inti datasource is');
-    console.log(this.dataSource);
-  }
-
-  ngAfterViewInit() {
-
-  }
-
-  drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.templateSections, event.previousIndex, event.currentIndex);
-    console.log(this.templateSections);
-    this.doSave();
-  }
-
-  doAddRow() {
-    const newSectionId = this.dataSource[this.selectedTemplate].templateSections.length.toString();
-    console.log('new section is ' + newSectionId);
-    this.dataSource[this.selectedTemplate].templateSections.push({
-      sectionId: newSectionId,
-      sectionContent: 'New Email Line - click to edit',
-      sectionContentStyle: '',
-      sectionIndexOrder: -1
-    });
-  }
-
-  doDeleteRow(ind: number) {
-    this.templateSections.splice(ind, 1);
-    this.doSave();
-  }
-
-  doSaveLocally() {
-    // const numberOfElements = (this.dataSource.length).toString();
-    // this.dataSource.push({
-    //   templateID: numberOfElements,
-    //   templateProviderId: this.templateProviderId,
-    //   templateType: this.templateType,
-    //   templateName: this.templateName,
-    //   templateLogo: this.templateLogo,
-    //   templateSections: this.templateSections,
-    //   templateContents: this.templateContents,
-    //   templateCreatedBy: this.templateCreatedBy,
-    //   templateCreatedOn: this.templateCreatedOn,
-    // })
-    // this.doSave();
-  }
-
-  doSave() {
-    // localStorage.setItem('templateData', JSON.stringify(this.dataSource));
-    // console.log('after save this is the dataset');
-    // console.log(this.dataSource);
-  }
-
-  doChangeLogo(brand: string) {
-    this.logoString = "./assets/svg-logos/" + brand + '-logo.svg';
-    this.dataSource[this.selectedTemplate].templateLogo = brand;
-    this.doSave();
-  }
-
-  doSetStyle(style: string, sectionNo: number) {
-    this.dataSource[this.selectedTemplate].templateSections[sectionNo].sectionContentStyle = style;
-    this.doSave();
-  }
-
-  doGetContents() {
-    for (let i = 0; i < this.dataSource[this.selectedTemplate].templateSections.length; i++) {
-      console.log(this.dataSource[this.selectedTemplate].templateSections[i].sectionContent);
-    }
-  }
-
-  doBlur(ev: any, ind: number) {
-    this.dataSource[this.selectedTemplate].templateSections[ind].sectionContent = ev.target.innerHTML;
-    this.doSave();
-  }
-
-  doReplaceKeysWithDataValues() {
-    for (let i = 0; i < this.dataSource[this.selectedTemplate].templateSections.length; i++) {
-      // look for the a key match in the contents and replace it with correcponding value
-    }
+    this.doFindTemplate(this.applicationModelService.currentTemplateId$.getValue());
+    this.currentTemplateID = this.applicationModelService.currentTemplateIdViewer$.getValue();
   }
 
   doToggleViewer() {
-    this.doSave();
     this.showViewer = !this.showViewer;
   }
 
-  onSelectedTemplateChange(ind: number) {
-    console.log('gonna change to ' + ind)
-    console.log('using this dataset');
-    console.log(this.dataSource);
-    // this.selectedTemplate = ind;
-    // this.templateID = this.dataSource[this.selectedTemplate].templateID;
-    // this.templateLogo = this.dataSource[this.selectedTemplate].templateLogo;
-    // this.logoString = "./assets/svg-logos/" + this.templateLogo + '-logo.svg';
-    //
-    // this.templateName = this.dataSource[this.selectedTemplate].templateName;
-    //
-    // this.templateSections = this.dataSource[this.selectedTemplate].templateSections;
-    // console.log('when I toggle the view I will be sending ' + this.currentTemplateID);
+  onSelectedTemplateChange(ind: string) {
+    this.applicationModelService.currentTemplateIdViewer$.next(this.currentTemplateID);
+    this.doFindTemplate(this.currentTemplateID);
   }
 
-  trackByFn(index: number, item: any) {
-    return item.sectionId;
-  }
 
   onSelectedSourceChange(selectedSauceID: string) {
 
   }
 
+  doFindTemplate(templateIDToUse: string) {
+    this.foundTemplateIndex = this.dataSource.findIndex(template => template.templateID === templateIDToUse);
+  }
+
+  doNewTemplate() {
+
+  }
+
+  doGetTemplateSourceApplication(ind: string) {
+    if(ind === '0') {
+      return 'Triage';
+    }
+    if(ind === '1') {
+      return 'Menus';
+    }
+    if(ind === '2') {
+      return 'EPC';
+    }
+    if(ind === '3') {
+      return 'Ad Hoc';
+    } else {
+      return 'Ad Hoc';
+    }
+  }
+
+  onSelectedColorChange(color: string) {
+    this.dataSource[this.foundTemplateIndex].templateColor = color;
+    this.applicationModelService.currentTemplateIdViewer$.next(this.applicationModelService.currentTemplateIdViewer$.getValue());
+  }
 
 }

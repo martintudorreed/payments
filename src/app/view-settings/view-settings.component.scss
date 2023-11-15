@@ -34,8 +34,13 @@
     padding: 12px;
     display: flex;
     height: 100%;
+    flex-direction: column;
     &.email-template {
       padding-top: 18px;
+    }
+    &.general {
+      padding: 18px 6px 12px 6px;
+      background-color: palette.$very-light-grey;
     }
     .field-outer {
       margin-bottom: 12px

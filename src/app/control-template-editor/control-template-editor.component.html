@@ -1,6 +1,13 @@
+
+<!--<div *ngFor="let template of templateSections">-->
+
+<!--	<span>{{template.sectionId}}</span>-->
+<!--	<span>{{template.sectionContentStyle}}</span>-->
+<!--</div>-->
+
 <div class="edit-area">
 	<div cdkDropList class="section-list" (cdkDropListDropped)="drop($event)">
-		<section *ngFor="let template of templateSections, let i = index" class="section editor-drag" cdkDrag>
+		<section *ngFor="let template of templateSections; let i = index" class="section editor-drag" cdkDrag>
 
 			<div class="section-body">
 				<span *ngIf="template.sectionId === '0'"><img class="logo" src="{{logoString}}" alt="FutureMotors"></span>
@@ -8,7 +15,6 @@
 				<p *ngIf="template.sectionId !== '0' && template.sectionId !== '4'"
 				   class="section-content {{template.sectionContentStyle}}"
 				   contenteditable="true"
-				   [(ngModel)]="template.sectionContent"
 				   (blur)="doBlur($event, i)"
 				   [innerHTML]="template.sectionContent | safeHtml">
 				</p>
@@ -19,10 +25,10 @@
 			</div>
 
 			<div class="section-controls">
-							<span class="drag-handle" cdkDragHandle>
-								<mat-icon color="primary" *ngIf="template.sectionId !== '0'" [matMenuTriggerFor]="lineMenu">drag_indicator</mat-icon>
-								<mat-icon color="primary" *ngIf="template.sectionId === '0'" [matMenuTriggerFor]="brandMenu">drag_indicator</mat-icon>
-							</span>
+								<span class="drag-handle" cdkDragHandle>
+									<mat-icon color="primary" *ngIf="template.sectionId !== '0'" [matMenuTriggerFor]="lineMenu">drag_indicator</mat-icon>
+									<mat-icon color="primary" *ngIf="template.sectionId === '0'" [matMenuTriggerFor]="brandMenu">drag_indicator</mat-icon>
+								</span>
 			</div>
 
 			<mat-menu #lineMenu="matMenu" class="ifm-menu style-menu">
@@ -41,5 +47,6 @@
 
 		</section>
 
+		<button mat-icon-button color="primary" (click)="doAddRow()"><mat-icon>add_circle_outline</mat-icon></button>
 	</div>
 </div>

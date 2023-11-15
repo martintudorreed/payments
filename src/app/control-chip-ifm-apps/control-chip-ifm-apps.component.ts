@@ -28,7 +28,8 @@ export class ControlChipIfmAppsComponent {
       templateFilterItemName: name,});
   }
 
-  doRemoveChip(id: number) {
+  doRemoveChip(id: number, ev: any) {
+    ev.stopPropagation();
     for (let i = 0; i < this.filters.length; i++) {
       if (this.filters[i].templateFilterItemID === id) {
         this.filters.splice(i, 1);

@@ -5,6 +5,7 @@
   display: flex;
   justify-content: center;
   width: 100%;
+  overflow: auto;
 }
 
 .editor {
@@ -27,6 +28,110 @@
         justify-content: flex-end;
       }
     }
+
+  }
+  .canvas {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    .template-container {
+      display: flex;
+      position: relative;
+      height: 100%;
+      width: 100%;
+      flex-grow: 1;
+      .template-inner {
+        display: flex;
+        flex-direction: column;
+        //max-width: 700px;
+        //width: 700px;
+        width: 100%;
+        border: 1px solid palette.$medium-grey;
+        border-radius: 4px;
+        height: 100%;
+        overflow: auto;
+        position: relative;
+        z-index: 9;
+        .edit-area {
+          display: flex;
+          flex-direction: column;
+          height: 100%;
+          overflow: auto;
+          flex-grow: 1;
+          padding: 12px;
+          &.hide {
+            display: none;
+          }
+          .section-list {
+            display: flex;
+            flex-direction: column;
+            .section {
+              display: flex;
+              padding: 6px 0;
+              width: 100%;
+              border: 1px dotted transparent;
+              &:hover {
+                border: 1px dotted palette.$medium-grey;
+              }
+              &:focus {
+                border: 1px dotted palette.$medium-grey;
+              }
+              .section-body {
+                flex-grow: 1;
+                .section-content {
+                  margin: 0;
+                  padding: 0 6px;
+                }
+              }
+              .section-controls {
+                margin: 0;
+                display: flex;
+                align-items: center;
+              }
+
+              .style-menu {
+                .style-option {
+                  margin: 0;
+                }
+              }
+            }
+
+          }
+        }
+
+
+        .footer {
+          display: flex;
+          align-items: center;
+          min-height: 72px;
+          border-top:1px solid palette.$medium-grey;
+          .secondary {
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+            .data-template-name {
+            }
+            .data-template-app {
+              min-width: 200px;
+              margin: 0 12px;
+            }
+          }
+          .controls {
+            display: flex;
+            align-items: center;
+          }
+        }
+      }
+    }
+
+  }
+  .supporting-controls {
+    min-width: 320px;
+    padding: 0 12px 12px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
     .macro-keys-container {
       display: flex;
       width: 100%;
@@ -70,102 +175,7 @@
   }
 }
 
-.canvas {
-  padding: 12px;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  .template-container {
-    display: flex;
-    position: relative;
-    height: 100%;
-    width: 100%;
-    flex-grow: 1;
-    .template-inner {
-      display: flex;
-      flex-direction: column;
-      //max-width: 700px;
-      //width: 700px;
-      width: 100%;
-      border: 1px solid palette.$medium-grey;
-      border-radius: 4px;
-      height: 100%;
-      overflow: auto;
-      position: relative;
-      z-index: 9;
-      .edit-area {
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        overflow: auto;
-        flex-grow: 1;
-        padding: 12px;
-        &.hide {
-          display: none;
-        }
-        .section-list {
-          display: flex;
-          flex-direction: column;
-          .section {
-            display: flex;
-            padding: 6px 0;
-            width: 100%;
-            border: 1px dotted transparent;
-            &:hover {
-              border: 1px dotted palette.$medium-grey;
-            }
-            &:focus {
-              border: 1px dotted palette.$medium-grey;
-            }
-            .section-body {
-              flex-grow: 1;
-              .section-content {
-                margin: 0;
-                padding: 0 6px;
-              }
-            }
-            .section-controls {
-              margin: 0;
-              display: flex;
-              align-items: center;
-            }
 
-            .style-menu {
-              .style-option {
-                margin: 0;
-              }
-            }
-          }
-
-        }
-      }
-
-
-      .footer {
-        display: flex;
-        align-items: center;
-        min-height: 72px;
-        border-top:1px solid palette.$medium-grey;
-        .secondary {
-          display: flex;
-          align-items: center;
-          flex-grow: 1;
-          .data-template-name {
-          }
-          .data-template-app {
-            min-width: 200px;
-            margin: 0 12px;
-          }
-        }
-        .controls {
-          display: flex;
-          align-items: center;
-        }
-      }
-    }
-  }
-
-}
 
 .footer {
   padding: 0 12px;

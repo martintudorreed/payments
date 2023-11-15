@@ -9,7 +9,7 @@
 			</p>
 
 			<div class="section-content" *ngIf="template.sectionId === '4'">
-				<button mat-flat-button color="primary">{{template.sectionContent}}</button>
+				<button mat-flat-button color="primary" class="{{templateColorClass}}" (click)="doShowCustomerExperience($event)">{{template.sectionContent}}</button>
 			</div>
 		</div>
 	</section>

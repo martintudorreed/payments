@@ -2,6 +2,10 @@
 
 .ifm-expansion-panel {
   border: 1px solid palette.$medium-grey;
+  &.mat-expansion-panel {
+    margin-bottom: 12px;
+  }
+
   &.selector-control {
     display:flex;
     flex-direction: column;

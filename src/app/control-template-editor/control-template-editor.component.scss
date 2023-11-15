@@ -1,5 +1,9 @@
 @use "src/sass/themes/palette-constants" as palette;
 @use "src/sass/ifm-mixins/ifm-breakpoints" as bp;
+
+:host {
+  flex-grow: 1;
+}
 .edit-area {
   flex-grow: 1;
   padding: 12px;
@@ -26,6 +30,9 @@
           margin: 0;
           padding: 0 6px;
         }
+        .logo {
+          max-width: 280px
+        }
       }
       .section-controls {
         margin: 0;
@@ -41,4 +48,8 @@
     }
 
   }
+}
+
+[contenteditable] {
+  outline: 0px solid transparent;
 }

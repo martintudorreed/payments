@@ -44,6 +44,7 @@ import { ControlTemplateViewerComponent } from './control-template-viewer/contro
 import { ControlTemplateEditorComponent } from './control-template-editor/control-template-editor.component';
 import { ViewEmailTemplatesComponent } from './view-email-templates/view-email-templates.component';
 import { ControlChipIfmAppsComponent } from './control-chip-ifm-apps/control-chip-ifm-apps.component';
+import { SettingsGeneralComponent } from './settings-general/settings-general.component';
 
 const routes: Routes = [
 
@@ -85,7 +86,8 @@ const routes: Routes = [
     ControlTemplateViewerComponent,
     ControlTemplateEditorComponent,
     ViewEmailTemplatesComponent,
-    ControlChipIfmAppsComponent
+    ControlChipIfmAppsComponent,
+    SettingsGeneralComponent
   ],
   imports: [
     BrowserModule,

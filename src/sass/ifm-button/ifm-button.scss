@@ -18,5 +18,28 @@ button {
       --mdc-outlined-button-outline-color:  rgba(255,255,255,.4);
     }
   }
+
+  .mat-mdc-unelevated-button:not(:disabled) {
+    &.blue {
+      background-color: palette.$primary-blue;
+      color: palette.$white;
+    }
+    &.red {
+      background-color: palette.$red;
+      color: palette.$white;
+    }
+    &.green {
+      background-color: palette.$green;
+      color: palette.$white;
+    }
+    &.black {
+      background-color: palette.$black;
+      color: palette.$white;
+    }
+    &.white {
+      background-color: palette.$very-light-grey;
+    }
+  }
+
 }
 

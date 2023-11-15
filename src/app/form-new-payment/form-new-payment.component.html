@@ -174,7 +174,8 @@
 
 		<app-control-document-viewer
 				class="invoice"
-				[paymentStatusId]="paymentStatusId"></app-control-document-viewer>
+				[paymentStatusId]="paymentStatusId"
+				[isViewAttachment]="false"></app-control-document-viewer>
 
 	</div>
 </main>
@@ -194,7 +195,7 @@
 	</div>
 
 	<div class="footer-inner resend" *ngIf="tabContentType === 'payment'">
-		<div class="control-secondary">
+		<div class="control-secondary" *ngIf="paymentStatusId === 0">
 			<button mat-flat-button color="warn" mat-dialog-close (click)="doClearFields()">Refund</button>
 <!--			<div class="field-outer data-is-view-attachments">-->
 <!--				<mat-slide-toggle [checked]='isViewAttachment' (change)="doToggleAttachmentViewer()">View Attachment</mat-slide-toggle>-->

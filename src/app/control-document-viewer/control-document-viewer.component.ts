@@ -1,4 +1,4 @@
-import { Component, Input, AfterViewInit } from '@angular/core';
+import { Component, Input, AfterViewInit, OnInit } from '@angular/core';
 import {LocalDataService} from "../services/local-data.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ApplicationModelService} from "../services/ApplicationModelService";
@@ -11,13 +11,13 @@ import { DialogFullSecrrenDocViewerComponent } from "../dialog-full-secrren-doc-
   templateUrl: './control-document-viewer.component.html',
   styleUrls: ['./control-document-viewer.component.scss']
 })
-export class ControlDocumentViewerComponent implements AfterViewInit{
+export class ControlDocumentViewerComponent implements AfterViewInit, OnInit{
   @Input() paymentStatusId: number = -1;
   @Input() isShowAttachments: boolean = true;
   @Input() isInFullScreenViewer: boolean = false;
   browserWindowWidthValue: number | null = null;
   isDragging: boolean = false;
-  isViewAttachment: boolean = true;
+  @Input() isViewAttachment: boolean = true;
 
   viewerURLString: string = 'http://localhost:4402/assets/docs/pdfs/invoice.pdf'
   activeDocument: number = 0;
@@ -29,11 +29,17 @@ export class ControlDocumentViewerComponent implements AfterViewInit{
               private router: Router) {
   }
 
+  ngOnInit() {
+
+  }
+
   ngAfterViewInit() {
     this.applicationModelService.browserWindowWidth$.subscribe((width: number | null) => {
       this.browserWindowWidthValue = width;
-
     });
+    if(!this.isViewAttachment) {
+      this.applicationModelService.isDocumentViewerCollapsed$.next(true);
+    }
   }
 
   doDragEnter() {

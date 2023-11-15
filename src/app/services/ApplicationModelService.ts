@@ -45,7 +45,7 @@ export class ApplicationModelService {
   activeMainUITab = 0;
   activeMainUITab$: BehaviorSubject<number> = new BehaviorSubject<number>(this.activeMainUITab);
 
-  activeSettingsUITab = 1;
+  activeSettingsUITab = 0;
   activeSettingsUITab$: BehaviorSubject<number> = new BehaviorSubject<number>(this.activeSettingsUITab);
 
   // There are two tabs by default always showing, this starts at 1 to reflect index values , e.g. 0 ,1,...
@@ -78,4 +78,10 @@ export class ApplicationModelService {
 
   currentTemplateId = '0';
   currentTemplateId$: BehaviorSubject<string> = new BehaviorSubject<string>(this.currentTemplateId);
+
+  currentTemplateIdViewer = '0';
+  currentTemplateIdViewer$: BehaviorSubject<string> = new BehaviorSubject<string>(this.currentTemplateIdViewer);
+
+  currentPaymentIndexNumber = 0;
+  currentPaymentIndexNumber$: BehaviorSubject<number> = new BehaviorSubject<number>(this.currentPaymentIndexNumber);
 }

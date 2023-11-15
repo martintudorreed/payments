@@ -1,5 +1,26 @@
 import {Injectable, Input} from '@angular/core';
 
+
+export interface generalSettings {
+  publicIntegrationIKey: string;
+  dealerName:  string;
+  dealerEmail:  string;
+  dealerContactNumber: string;
+  currencySymbol: string;
+  APIKey: string;
+  sharedSecret: string;
+  APIUserName: string;
+  APIPassword: string;
+  merchantID: string;
+  supportTelephoneNumber: string;
+  defaultLogo: string;
+}
+
+export interface disclaimers {
+  disclaimerId: string;
+  disclaimerContents: string;
+}
+
 export interface sections {
   sectionId: string;
   sectionContent: string;
@@ -14,6 +35,7 @@ export interface commsTemplate {
   templateSourceApplication: string;
   templateName: string;
   templateLogo: string;
+  templateColor: string;
   templateSections: sections[];
   templateContents: string;
   templateCreatedBy: string;
@@ -24,6 +46,11 @@ export interface commsTemplate {
 export interface themeBrands {
   brandValue: string;
   brandName: string;
+}
+
+export interface colorScheme {
+  colorSchemeValue: string;
+  colorSchemeName: string;
 }
 
 export interface paymentMethods {
@@ -105,14 +132,64 @@ export class LocalDataService {
 
   constructor() { }
 
+  disclaimerData: disclaimers[] = [
+    {
+      disclaimerId: '0',
+      disclaimerContents: '<hr><span class="mat-caption">Superservice Triage does not store or process financial information. The Triage Customer Authorisation screen has the PayPal site within an Iframe and everything inside of that is secure. Triage cannot see any data that is being transacted due to the PayPal encryption being used.<br><br>' +
+        'Some additional options such as Payflow Link may need to be configured in the merchants account however the merchant (dealer) will need to investigate this as part of their due diligence. Additional fees may be charged to the dealer by PayPal for a business account.<br><br>' +
+        'Superservice Triage or Infomedia is not responsible for payment issues between the customer and PayPal.</span>',
+    }
+  ]
+
+  colorSchemeData: colorScheme [] = [
+    {
+      colorSchemeValue: '0',
+      colorSchemeName: 'Blue',
+    },
+    {
+      colorSchemeValue: '1',
+      colorSchemeName: 'Red',
+    },
+    {
+      colorSchemeValue: '2',
+      colorSchemeName: 'Green',
+    },
+    {
+      colorSchemeValue: '3',
+      colorSchemeName: 'Black',
+    },
+    // {
+    //   colorSchemeValue: '4',
+    //   colorSchemeName: 'white',
+    // },
+  ]
+
+  generalSettingsData: generalSettings [] = [
+    {
+      publicIntegrationIKey: '4RNOekvNNMiQGARKtcfg',
+      dealerName:  'Future Motors Space-Cars',
+      dealerEmail:  'fms@theworldoftommorrow.com',
+      dealerContactNumber: '04026704555',
+      currencySymbol: '$',
+      APIKey: 'e3eDaFUFZ07ADAuADPEG23qe3Ijde2',
+      sharedSecret: 'H4lHKlWnw54ciC1nlUbwibD2ljoXIM',
+      APIUserName: 'InfoMedia_API_Dev',
+      APIPassword: 'lwX53muBCvnXaqMRVaWYGPkn5Jf9x6!',
+      merchantID: 'IFM88',
+      supportTelephoneNumber: '04 0842 4428',
+      defaultLogo: 'nissan',
+    }
+  ]
+
   templateData: commsTemplate[]=[
     {
       templateID: '0',
       templateProviderId: '0',
       templateType: 'email',
       templateSourceApplication: '0',
+      templateColor: '0',
       templateName: 'Inspection Standard Email',
-      templateLogo: 'nissan',
+      templateLogo: 'future-motors',
       templateSections: [
         {
         sectionId: '0',
@@ -137,11 +214,70 @@ export class LocalDataService {
           sectionContent: '[invoiceNumber] is due on [dueDate]',
           sectionContentStyle: 'mat-headline-4',
           sectionIndexOrder: -1,
+        }
+        ,
+        {
+          sectionId: '5',
+          sectionContent: 'Hi [customerFirstname],<br><br> Here\'s your tax invoice [invoiceNumber] for $[ammount] for work completed at 7 Philip K. Dick Drive, Mars.<br><br>' +
+            'Please click the Pay Invoice button above to view, print, download or pay the invoice.<br><br>' +
+            'If you have any questions, please contact us on the interdimensional telephone - Mars99.',
+          sectionContentStyle: '',
+          sectionIndexOrder: -1,
+        },
+        {
+          sectionId: '6',
+          sectionContent: '[dealerName]',
+          sectionContentStyle: '',
+          sectionIndexOrder: -1,
         },
         {
           sectionId: '4',
           sectionContent: 'Pay Invoice',
           sectionContentStyle: '',
+          sectionIndexOrder: -1,
+        },
+        {
+          sectionId: '7',
+          sectionContent: '[triageDisclaimer]',
+          sectionContentStyle: '',
+          sectionIndexOrder: -1,
+        }
+      ],
+      templateContents: '',
+      templateCreatedBy: 'Martin Tudor Reed',
+      templateCreatedOn: '05/02/2032',
+    },
+    {
+      templateID: '1',
+      templateProviderId: '0',
+      templateType: 'email',
+      templateSourceApplication: '0',
+      templateColor: '1',
+      templateName: 'Overdue - Gentle Reminder',
+      templateLogo: 'future-motors',
+      templateSections: [
+        {
+          sectionId: '0',
+          sectionContent: 'logo',
+          sectionContentStyle: '',
+          sectionIndexOrder: -1,
+        },
+        {
+          sectionId: '1',
+          sectionContent: 'Payment Reminder',
+          sectionContentStyle: 'mat-headline-2',
+          sectionIndexOrder: -1,
+        },
+        {
+          sectionId: '4',
+          sectionContent: 'Pay Invoice',
+          sectionContentStyle: '',
+          sectionIndexOrder: -1,
+        },
+        {
+          sectionId: '3',
+          sectionContent: 'Hi [customerFirstname], [invoiceNumber] is due on [dueDate]',
+          sectionContentStyle: 'mat-headline-4',
           sectionIndexOrder: -1,
         }
         ,
@@ -159,17 +295,25 @@ export class LocalDataService {
           sectionContentStyle: '',
           sectionIndexOrder: -1,
         }
+        ,
+        {
+          sectionId: '7',
+          sectionContent: '[triageDisclaimer]',
+          sectionContentStyle: '',
+          sectionIndexOrder: -1,
+        }
       ],
       templateContents: '',
       templateCreatedBy: 'Martin Tudor Reed',
       templateCreatedOn: '05/02/2032',
     },
     {
-      templateID: '1',
+      templateID: '2',
       templateProviderId: '0',
       templateType: 'email',
-      templateSourceApplication: '0',
-      templateName: 'Menus Service - Fleet',
+      templateSourceApplication: '1',
+      templateColor: '0',
+      templateName: 'Aston Martin Service',
       templateLogo: 'aston-martin',
       templateSections: [
         {
@@ -191,14 +335,14 @@ export class LocalDataService {
           sectionIndexOrder: -1,
         },
         {
-          sectionId: '3',
+          sectionId: '4',
           sectionContent: 'Pay Invoice',
           sectionContentStyle: '',
           sectionIndexOrder: -1,
         }
         ,
         {
-          sectionId: '4',
+          sectionId: '3',
           sectionContent: 'Hi [customerFirstName] <br><br>' +
             'Please click the Pay Invoice button above to view, print, download or pay the invoice.<br><br>' +
             'If you have any questions, please contact us on the interdimensional telephone - Mars99.',
