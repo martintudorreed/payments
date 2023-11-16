@@ -43,9 +43,17 @@ export interface commsTemplate {
 }
 
 
+
 export interface themeBrands {
   brandValue: string;
   brandName: string;
+}
+
+export interface imageLibrary {
+  imageID: string;
+  ImageName: string;
+  ImageDiscName: string;
+  ImageDiscLocation: string;
 }
 
 export interface colorScheme {
@@ -135,7 +143,7 @@ export class LocalDataService {
   disclaimerData: disclaimers[] = [
     {
       disclaimerId: '0',
-      disclaimerContents: '<hr><span class="mat-caption">Superservice Triage does not store or process financial information. The Triage Customer Authorisation screen has the PayPal site within an Iframe and everything inside of that is secure. Triage cannot see any data that is being transacted due to the PayPal encryption being used.<br><br>' +
+      disclaimerContents: '<hr class="ifm-hr"><span class="mat-caption">Superservice Triage does not store or process financial information. The Triage Customer Authorisation screen has the PayPal site within an Iframe and everything inside of that is secure. Triage cannot see any data that is being transacted due to the PayPal encryption being used.<br><br>' +
         'Some additional options such as Payflow Link may need to be configured in the merchants account however the merchant (dealer) will need to investigate this as part of their due diligence. Additional fees may be charged to the dealer by PayPal for a business account.<br><br>' +
         'Superservice Triage or Infomedia is not responsible for payment issues between the customer and PayPal.</span>',
     }
@@ -283,7 +291,7 @@ export class LocalDataService {
         ,
         {
           sectionId: '5',
-          sectionContent: 'Here\'s your tax invoice [invoiceNumber] for $[ammount] for work completed at 7 Philip K. Dick Drive, Mars.<br><br>' +
+          sectionContent: 'Here\'s your tax invoice [invoiceNumber] for [ammount] for work completed at 7 Philip K. Dick Drive, Mars.<br><br>' +
             'Please click the Pay Invoice button above to view, print, download or pay the invoice.<br><br>' +
             'If you have any questions, please contact us on the interdimensional telephone - Mars99.',
           sectionContentStyle: '',
@@ -1102,6 +1110,28 @@ export class LocalDataService {
 
   ]
 
+  imageLibraryData: imageLibrary[] = [
+    {
+      imageID: '0',
+      ImageName: 'Future Motors Logo',
+      ImageDiscName: 'future-motors',
+      ImageDiscLocation: 'svg-logos',
+    },
+    {
+      imageID: '1',
+      ImageName: 'Nissan Logo',
+      ImageDiscName: 'nissan',
+      ImageDiscLocation: 'svg-logos',
+    }
+    ,
+    {
+      imageID: '2',
+      ImageName: 'Nissan and Future Motors Logo',
+      ImageDiscName: 'nissan-future-motors',
+      ImageDiscLocation: 'svg-logos',
+    }
+  ]
+
   themeBrandData: themeBrands [] = [
     {
       brandValue: "ford",
@@ -1229,6 +1259,8 @@ export class LocalDataService {
     }
 
   ];
+
+
 }
 
 

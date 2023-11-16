@@ -45,6 +45,9 @@ import { ControlTemplateEditorComponent } from './control-template-editor/contro
 import { ViewEmailTemplatesComponent } from './view-email-templates/view-email-templates.component';
 import { ControlChipIfmAppsComponent } from './control-chip-ifm-apps/control-chip-ifm-apps.component';
 import { SettingsGeneralComponent } from './settings-general/settings-general.component';
+import { SettingsDisclaimersComponent } from './settings-disclaimers/settings-disclaimers.component';
+import { DialogFullScreenEmailViewerComponent } from './dialog-full-screen-email-viewer/dialog-full-screen-email-viewer.component';
+import { ControlImageManagerComponent } from './control-image-manager/control-image-manager.component';
 
 const routes: Routes = [
 
@@ -87,7 +90,10 @@ const routes: Routes = [
     ControlTemplateEditorComponent,
     ViewEmailTemplatesComponent,
     ControlChipIfmAppsComponent,
-    SettingsGeneralComponent
+    SettingsGeneralComponent,
+    SettingsDisclaimersComponent,
+    DialogFullScreenEmailViewerComponent,
+    ControlImageManagerComponent
   ],
   imports: [
     BrowserModule,

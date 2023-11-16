@@ -104,5 +104,9 @@ export class ControlEditableEmailTemplateComponent {
     this.dataSource[this.foundTemplateIndex].templateColor = color;
     this.applicationModelService.currentTemplateIdViewer$.next(this.applicationModelService.currentTemplateIdViewer$.getValue());
   }
+  doFullScreen() {
+
+  }
+
 
 }

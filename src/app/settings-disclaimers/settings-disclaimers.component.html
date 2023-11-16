@@ -1,0 +1,17 @@
+<div class="disclaimer-inner">
+<!--	<div class="field-outer data-template-name">-->
+<!--		<mat-form-field class="" subscriptSizing="dynamic" floatLabel="always" appearance="outline">-->
+<!--			<mat-label>Di</mat-label>-->
+<!--			<input type="text" matInput placeholder="Dealer Name" [(ngModel)]="disclaimerData[0].disclaimerId">-->
+<!--		</mat-form-field>-->
+<!--	</div>-->
+<h1>Just the single disclaimer for now. it's editable and will auto save</h1>
+
+	<p
+			class="section-content {{disclaimerData[0].disclaimerContents}}"
+			contenteditable="true"
+			(blur)="doBlur($event)"
+			[innerHTML]="disclaimerData[0].disclaimerContents | safeHtml">
+	</p>
+</div>
+

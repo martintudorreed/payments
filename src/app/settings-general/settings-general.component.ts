@@ -11,6 +11,8 @@ import {Router} from "@angular/router";
   styleUrls: ['./settings-general.component.scss']
 })
 export class SettingsGeneralComponent implements OnInit{
+  isImagelibraryOpen: boolean = false;
+
   dataSource: any[] = [];
 
   defaultLogo: string = 'nissan';
@@ -41,4 +43,8 @@ export class SettingsGeneralComponent implements OnInit{
     this.dataSource = this.localDataService.generalSettingsData;
 
   }
+  doTogglePanel(state: boolean) {
+    this.isImagelibraryOpen = state;
+  }
+
 }

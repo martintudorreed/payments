@@ -14,7 +14,7 @@
 
 		<div class="invoice-status">
 			<mat-icon class="ifm-icon-medium th-icon" [ngClass]="{'green-text': paymentStatusId === 0,'bright-blue-text': paymentStatusId === 1,'red-text': paymentStatusId === 2}">credit_card</mat-icon>
-			<span class="status-text mat-headeline-4">{{paymentStatus}}</span>
+			<span class="status-text mat-headline-2">{{paymentStatus}}</span>
 			<div class="refNumber">
 				<span class="mat-headline-4 refNumber-text">INV:{{paymentTransactionNumber}}</span>
 			</div>
@@ -200,6 +200,9 @@
 <!--			<div class="field-outer data-is-view-attachments">-->
 <!--				<mat-slide-toggle [checked]='isViewAttachment' (change)="doToggleAttachmentViewer()">View Attachment</mat-slide-toggle>-->
 <!--			</div>-->
+		</div>
+		<div class="control-secondary" *ngIf="paymentStatusId !== 0">
+			<button mat-flat-button color="warn" mat-dialog-close (click)="doClearFields()">Cancel Transaction</button>
 		</div>
 		<div class="control-primary">
 			<button class="launcher" mat-icon-button color="primary" (click)="doCardlessPayment($event)"><mat-icon>rocket_launch</mat-icon></button>

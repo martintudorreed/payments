@@ -28,6 +28,7 @@ export class ControlTemplateEditorComponent implements OnInit{
   selectedTemplate: number = 0;
 
   brands = this.localDataService.themeBrandData;
+  images = this.localDataService.imageLibraryData;
 
   templateID: string = '';
   currentTemplateID: string = '0'

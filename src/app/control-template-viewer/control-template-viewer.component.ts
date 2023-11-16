@@ -14,6 +14,7 @@ import {DialogCustomerFormComponent} from "../dialog-customer-form/dialog-custom
 export class ControlTemplateViewerComponent implements OnInit, AfterViewInit, OnDestroy{
   @Input() templateIDToUse: string = '0' as string;
   @Input() currentPaymentItemIndexNo: number = 0;
+  @Input() isShowFullScreenControl: boolean = true;
 
   paymentData = this.localDataService.paymentListData;
 
@@ -166,7 +167,6 @@ export class ControlTemplateViewerComponent implements OnInit, AfterViewInit, On
     // this.applicationModelService.currentTemplateIdViewer$.unsubscribe();
   }
 
-
   doShowCustomerExperience(ev: any) {
     ev.stopPropagation();
     this.dialog.open(DialogCustomerFormComponent, {
@@ -178,4 +178,6 @@ export class ControlTemplateViewerComponent implements OnInit, AfterViewInit, On
       autoFocus: false,
     });
   }
+
+
 }

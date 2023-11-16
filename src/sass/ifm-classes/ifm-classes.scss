@@ -1,0 +1,8 @@
+@use "src/sass/themes/palette-constants" as palette;
+
+.ifm-hr {
+  border: 0;
+  border-top: 1px solid palette.$medium-grey;
+  margin-bottom: 18px;
+  margin-top: 0;
+}

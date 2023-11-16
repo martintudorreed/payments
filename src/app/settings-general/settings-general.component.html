@@ -31,6 +31,14 @@
 	</div>
 </div>
 
+<mat-expansion-panel class="ifm-expansion-panel mat-elevation-z0" (opened)="doTogglePanel(true)" (closed)="doTogglePanel(false)" [ngClass]="{'mat-elevation-z2': isImagelibraryOpen}">
+	<mat-expansion-panel-header>
+		<mat-panel-title>
+			<mat-icon>photo_library</mat-icon><span class="title-text">Image Manager</span>
+		</mat-panel-title>
+	</mat-expansion-panel-header>
+	<app-control-image-manager></app-control-image-manager>
+</mat-expansion-panel>
 
 
 

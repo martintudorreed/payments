@@ -47,6 +47,7 @@ $dense-theme: mat.define-light-theme((
 @import "./sass/ifm-icon/ifm-icon.scss";
 @import "./sass/ifm-bottom-sheet/ifm-bottom-sheet.scss";
 @import "./sass/ifm-spinner/ifm-spinner.scss";
+@import "./sass/ifm-classes/ifm-classes.scss";
 
 html, body { height: 100%; overflow: hidden;}
 * {

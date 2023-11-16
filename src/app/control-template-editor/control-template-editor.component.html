@@ -27,7 +27,7 @@
 			<div class="section-controls">
 								<span class="drag-handle" cdkDragHandle>
 									<mat-icon color="primary" *ngIf="template.sectionId !== '0'" [matMenuTriggerFor]="lineMenu">drag_indicator</mat-icon>
-									<mat-icon color="primary" *ngIf="template.sectionId === '0'" [matMenuTriggerFor]="brandMenu">drag_indicator</mat-icon>
+									<mat-icon color="primary" *ngIf="template.sectionId === '0'" [matMenuTriggerFor]="imageMenu">drag_indicator</mat-icon>
 								</span>
 			</div>
 
@@ -39,9 +39,9 @@
 				<button mat-menu-item class="style-option" color="warn" (click)="doDeleteRow(i)">Delete<mat-icon>delete</mat-icon></button>
 			</mat-menu>
 
-			<mat-menu #brandMenu="matMenu" class="ifm-menu style-menu">
-				<button *ngFor="let brand of brands, let i = index" mat-menu-item class="style-option" (click)="doChangeLogo(brand.brandValue)">
-					{{brand.brandName}}
+			<mat-menu #imageMenu="matMenu" class="ifm-menu style-menu">
+				<button *ngFor="let image of images, let i = index" mat-menu-item class="style-option" (click)="doChangeLogo(image.ImageDiscName)">
+					{{image.ImageName}}
 				</button>
 			</mat-menu>
 

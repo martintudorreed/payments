@@ -1,0 +1,104 @@
+@use "src/sass/themes/palette-constants" as palette;
+@use "src/sass/ifm-mixins/ifm-breakpoints" as bp;
+
+:host {
+  display: flex;
+}
+
+.image-library {
+  display: flex;
+  .image-item {
+    width: 200px;
+    min-width: 200px;
+    height: 200px;
+    min-height: 200px;
+    margin: 6px;
+    border: 1px solid palette.$medium-grey;
+    background-color: palette.$white;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    &.control-add-image {
+      align-items: center;
+      justify-content: center;
+    }
+    .control-container {
+      display: flex;
+      height: 1px;
+      max-height: 1px;
+      width: 100%;
+      left: 0;
+      right: 0;
+      top: 0;
+      z-index: 99;
+      justify-content: flex-end;
+    }
+    .image-container {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      img {
+        width: 100%;
+        max-height: 80px;
+        flex-grow: 1
+      }
+    }
+  }
+}
+
+.tile-text {
+  padding: 0 12px;
+}
+.file-input {
+  display: none;
+}
+
+/* entire container, keeps perspective */
+.flip-container {
+  perspective: 1000px;
+}
+/* flip the pane when hovered */
+.flip-container:hover .flipper, .flip-container.hover .flipper {
+  //transform: rotateY(180deg);
+}
+
+.flip-container.flipped .flipper, .flip-container.flipped .flipper {
+  transform: rotateY(180deg);
+}
+
+.front, .back {
+  width: 200px;
+  height: 200px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* flip speed goes here */
+.flipper {
+  transition: 0.6s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+/* hide back of pane during swap */
+.front, .back {
+  backface-visibility: hidden;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* front pane, placed above back */
+.front {
+  z-index: 2;
+  /* for firefox 31 */
+  transform: rotateY(0deg);
+}
+
+/* back, initially hidden pane */
+.back {
+  transform: rotateY(180deg);
+}

@@ -4,6 +4,8 @@ import {MatDialog} from "@angular/material/dialog";
 import {ApplicationModelService} from "../services/ApplicationModelService";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
+import {DialogCustomerFormComponent} from "../dialog-customer-form/dialog-customer-form.component";
+import {DialogFullScreenEmailViewerComponent} from "../dialog-full-screen-email-viewer/dialog-full-screen-email-viewer.component";
 
 @Component({
   selector: 'app-control-display-send-methods',
@@ -61,4 +63,16 @@ export class ControlDisplaySendMethodsComponent implements OnInit{
     this.applicationModelService.currentTemplateIdViewer$.next(templateID);
   }
 
+  doFullScreen(ev: any) {
+    ev.stopPropagation();
+    this.dialog.open(DialogFullScreenEmailViewerComponent, {
+      maxWidth: '100%',
+      width: '96%',
+      minWidth: '96%',
+      minHeight: '96%',
+      maxHeight: '96vh',
+      panelClass: 'ifm-dialog',
+      autoFocus: false,
+    });
+  }
 }

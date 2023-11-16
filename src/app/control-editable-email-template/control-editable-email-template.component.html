@@ -58,7 +58,6 @@
 				</caption>
 			</div>
 			<div class="template-inner mat-elevation-custom-z1">
-
 				<app-control-template-viewer *ngIf="showViewer"></app-control-template-viewer>
 				<app-control-template-editor *ngIf="!showViewer"></app-control-template-editor>
 
@@ -147,30 +146,3 @@
 	<div class="footer-inner"></div>
 </footer>
 
-
-
-<!--<div class="template-inner" *ngIf="isInMainUI">-->
-<!--	<div class="logo-container" [ngClass]="{'is-in-main-ui': isInMainUI}">-->
-<!--		<img class="logo" src="./assets/logos/future-motors-logo.png" alt="FutureMotors">-->
-<!--	</div>-->
-<!--	<div><span class="mat-headline-4">Your Invoice from Future Motors Ltd (BES-29367)</span></div>-->
-<!--	<div><span class="mat-headline-2">${{invoiceAmmount | number: '1.2-2'}}</span></div>-->
-<!--	<div><span class="mat-headline-4">INV-<span *ngIf="paymentTransactionNumber !== ''">{{paymentTransactionNumber}}</span> <span *ngIf="paymentTransactionNumber === ''">XXXXXX</span> is due on {{paymentTransactionExpiry}}</span></div>-->
-
-<!--	<div><button mat-flat-button color="primary">Pay Invoice</button></div>-->
-
-<!--	<div class="editable-message-body">-->
-
-<!--		<p >Hi {{customerName}},<br/><br/> <span contenteditable="true">Here's your tax invoice INV-6209 for ${{invoiceAmmount | number: '1.2-2' }} for work completed at 7 Philip K. Dick Drive, Mars.<br/>-->
-<!--				<br/>-->
-<!--				Please click the Pay Invoice button above to view, print, download or pay the invoice.<br/>-->
-<!--				<br/>-->
-<!--				If you have any questions, please contact us on the interdimentional telephone - Mars99.<br />-->
-<!--				<br />-->
-<!--				Thanks</span></p>-->
-
-
-<!--		<div><span></span></div></div>-->
-
-<!--	<div><span>Future Motors Ltd</span></div>-->
-<!--</div>-->

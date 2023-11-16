@@ -1,0 +1,32 @@
+<div class="flip-container image-library" *ngFor="let image of imageLibrary, let i = index" ontouchstart="this.classList.toggle('hover');" [ngClass]="{'flipped': isFlipped === i}">
+	<div class="flipper image-item" >
+		<div class="control-container">
+			<button mat-icon-button color="primary" matDialogClose (click)="doFlip(i)"><mat-icon class="very-dark-grey-text">flip_camera_android</mat-icon></button>
+		</div>
+		<div class="tile front">
+
+			<div class="image-container">
+				<img src="{{doGetImageSrcString(image.ImageDiscName)}}" />
+			</div>
+			<div class="field-outer data-template-app">
+				<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always" appearance="outline">
+					<mat-label>Name</mat-label>
+					<input type="text" matInput placeholder="Template Name" [(ngModel)]="imageLibrary[i].ImageName">
+				</mat-form-field>
+			</div>
+		</div>
+		<div class="back">
+
+			<div class="meta-data">
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="image-library" (click)="fileUpload.click()">
+	<div class="image-item control-add-image">
+		<button mat-icon-button color="primary"><mat-icon>add_circle_outline</mat-icon></button>
+		<input type="file" class="file-input" #fileUpload>
+	</div>
+</div>
