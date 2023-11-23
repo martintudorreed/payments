@@ -389,8 +389,14 @@ export class FormNewPaymentComponent implements OnInit, AfterViewInit{
       this.dataItems[activePayment].paymentPostCode = this.paymentPostCode;
       this.dataItems[activePayment].paymentVehicle = this.paymentVehicle;
       this.dataItems[activePayment].paymentInvoiceLines = this.paymentInvoiceLines;
-
       console.log(this.dataItems[activePayment]);
+  }
+
+  doCancelTransaction() {
+
+  }
+  doMarkAsPaid() {
+
   }
  }
 

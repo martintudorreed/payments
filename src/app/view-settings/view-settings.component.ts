@@ -39,6 +39,11 @@ export class ViewSettingsComponent {
   onSelectedHeaderChange(id: string) {
     this.applicationModelService.activeHeader$.next(id);
     this.selectedAppHeader = id;
+    if (id === '0') {
+      this.applicationModelService.isShowStatusColumnInTables$.next(false);
+    } else {
+      this.applicationModelService.isShowStatusColumnInTables$.next(true);
+    }
   }
 
   doToggleSimpleFilters() {

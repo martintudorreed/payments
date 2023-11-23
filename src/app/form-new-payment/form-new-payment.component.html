@@ -10,13 +10,11 @@
 			</mat-form-field>
 		</div>
 
-
-
 		<div class="invoice-status">
 			<mat-icon class="ifm-icon-medium th-icon" [ngClass]="{'green-text': paymentStatusId === 0,'bright-blue-text': paymentStatusId === 1,'red-text': paymentStatusId === 2}">credit_card</mat-icon>
 			<span class="status-text mat-headline-2">{{paymentStatus}}</span>
 			<div class="refNumber">
-				<span class="mat-headline-4 refNumber-text">INV:{{paymentTransactionNumber}}</span>
+				<span class="mat-headline-4 refNumber-text">{{paymentTransactionNumber}}</span>
 			</div>
 		</div>
 		<app-control-provider-select class="provider-select" *ngIf="paymentStatusId === 5"></app-control-provider-select>
@@ -203,7 +201,8 @@
 <!--			</div>-->
 		</div>
 		<div class="control-secondary" *ngIf="paymentStatusId !== 0">
-			<button mat-stroked-button color="warn" mat-dialog-close (click)="doClearFields()">Cancel Transaction</button>
+			<button mat-stroked-button color="warn" (click)="doClearFields()">Cancel Transaction</button>
+			<button mat-stroked-button color="primary" (click)="doClearFields()" class="ifm-stroked-button primary-outline button-paid">Mark as Paid</button>
 		</div>
 		<div class="control-primary">
 			<button class="launcher" mat-icon-button color="primary" (click)="doCardlessPayment($event)"><mat-icon>rocket_launch</mat-icon></button>

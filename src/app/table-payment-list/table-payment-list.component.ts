@@ -1,4 +1,4 @@
-import {Component, Input, ViewChild, AfterViewInit} from '@angular/core';
+import {Component, Input, ViewChild, AfterViewInit, isStandalone} from '@angular/core';
 import {LocalDataService, mainUITabs, paymentData} from "../services/local-data.service";
 import {ApplicationModelService} from "../services/ApplicationModelService";
 import {MatDialog} from "@angular/material/dialog";
@@ -42,6 +42,12 @@ export class TablePaymentListComponent implements AfterViewInit{
 
     constructor(public applicationModelService: ApplicationModelService,
                 private localDataService: LocalDataService, public dialog: MatDialog, ) {
+
+      this.applicationModelService.isShowStatusColumnInTables$.subscribe((newColumnStructure) => {
+        this.displayedColumns = this.displayedColumns.filter(item => item !== 'paymentSource');
+        this.doRemoveSourceColumn(newColumnStructure);
+      });
+
     }
 
     @ViewChild(MatSort) sort: MatSort;
@@ -61,12 +67,14 @@ export class TablePaymentListComponent implements AfterViewInit{
       console.log(this.isStandalone);
       if(this.isStandalone || this.applicationModelService.activeHeader$.getValue() === 'triage') {
         this.dataSource = this.filteredDataSource;
+        this.doRemoveSourceColumn(false);
       } else {
         this.dataSource = this.dataSource;
       }
 
       this.dataSource.sort = this.sort;
       // this.displayedColumns = JSON.parse(localStorage.getItem('columnOrder'));
+
     }
 
   onRowClick(item: number, ind: number) {
@@ -150,6 +158,16 @@ export class TablePaymentListComponent implements AfterViewInit{
 
   doFilter() {
     this.filteredData = this.localDataService.paymentListData.filter(payment => payment.paymentStatusId === 0);
+  }
+
+  doRemoveSourceColumn(state: boolean) {
+      if(!state) {
+        this.displayedColumns = this.displayedColumns.filter(item => item !== 'paymentSource');
+        console.log(this.displayedColumns);
+      } else {
+        this.displayedColumns = [ 'paymentTransactionNumber', 'paymentCustomerSurname','paymentStatus' , 'paymentSource', 'paymentCustomerEmail', 'paymentTransactionCreatedOn', 'paymentTransactionCreatedBy', 'paymentTransactionExpiry','paymentTransactionTotalIncTax', 'controls'];
+      }
+    localStorage.setItem('columnOrder', JSON.stringify(this.displayedColumns));
   }
 
 }

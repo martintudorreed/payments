@@ -57,6 +57,8 @@ import { DialogWelcomeComponent } from './dialog-welcome/dialog-welcome.componen
 import { HeaderTriageComponent } from './header-triage/header-triage.component';
 import { HeaderMenusComponent } from './header-menus/header-menus.component';
 import { ControlSmsTemplateViewerComponent } from './control-sms-template-viewer/control-sms-template-viewer.component';
+import { DialogMarkAsPaidComponent } from './dialog-mark-as-paid/dialog-mark-as-paid.component';
+import { DialogCancelTransactionComponent } from './dialog-cancel-transaction/dialog-cancel-transaction.component';
 
 const routes: Routes = [
 
@@ -110,7 +112,9 @@ const routes: Routes = [
     DialogWelcomeComponent,
     HeaderTriageComponent,
     HeaderMenusComponent,
-    ControlSmsTemplateViewerComponent
+    ControlSmsTemplateViewerComponent,
+    DialogMarkAsPaidComponent,
+    DialogCancelTransactionComponent
   ],
   imports: [
     BrowserModule,

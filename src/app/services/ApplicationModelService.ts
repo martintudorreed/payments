@@ -91,4 +91,6 @@ export class ApplicationModelService {
   isUseSimpleTextFilters = false;
   isUseSimpleTextFilters$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.isUseSimpleTextFilters);
 
+  isShowStatusColumnInTables = true;
+  isShowStatusColumnInTables$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.isShowStatusColumnInTables);
 }

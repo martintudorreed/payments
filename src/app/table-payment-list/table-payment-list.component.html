@@ -219,7 +219,7 @@
 		<th class="data-source" mat-header-cell mat-sort-header cdkDrag *matHeaderCellDef>
 			<div class="cell-inner no-collapse ">
 				<mat-icon class="ifm-icon-medium th-icon">pin</mat-icon>
-				<span class="header-text">RO No.</span>
+				<span class="header-text">Ref. No.</span>
 			</div>
 		</th>
 		<td mat-cell *matCellDef="let element">
@@ -257,7 +257,7 @@
 		</td>
 	</ng-container>
 
-	<ng-container matColumnDef="paymentSource" *ngIf="(applicationModelService.activeHeader$ | async) !== '0' && !(applicationModelService.isInIframe$ | async)">
+	<ng-container matColumnDef="paymentSource">
 		<th class="data-source" mat-header-cell mat-sort-header cdkDrag *matHeaderCellDef>
 			<div class="cell-inner">
 				<mat-icon class="ifm-icon-medium th-icon">monitor</mat-icon>
