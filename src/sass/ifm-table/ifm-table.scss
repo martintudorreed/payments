@@ -63,6 +63,7 @@
         border-bottom: 1px solid palette.$medium-grey;
         box-shadow: 0px 4px 20px -8px rgba(0, 0, 0, 0.1);
         position: sticky;
+        padding: 0 12px;
         top: 0;
         z-index: 999;
         border-left: 1px solid $medium-grey;
@@ -118,6 +119,7 @@
       }
       td {
         border: 1px solid palette.$white;
+        padding: 0 12px;
         .cell-inner {
           display: flex;
           //padding: 6px;

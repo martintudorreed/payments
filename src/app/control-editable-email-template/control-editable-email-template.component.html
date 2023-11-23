@@ -13,14 +13,18 @@
 		<div class="field-outer data-template-select" [ngClass]="{'fade': !showViewer}">
 			<mat-form-field class="ifm-input" appearance="outline" subscriptSizing="dynamic">
 				<mat-label>Name</mat-label>
-				<mat-select [(value)]="currentTemplateID"  (selectionChange)="onSelectedTemplateChange(currentTemplateID)">
+				<mat-select [(value)]="currentTemplateID" (selectionChange)="onSelectedTemplateChange(currentTemplateID)">
 					<mat-option  [value]="template.templateID" *ngFor="let template of dataSource, let i = index"><span class="option-label">{{ template.templateName }} - {{doGetTemplateSourceApplication(template.templateSourceApplication)}}</span></mat-option>
 				</mat-select>
 			</mat-form-field>
 		</div>
 
 		<div class="field-outer data-create-button" [ngClass]="{'fade': !showViewer}">
-			<button mat-stroked-button color="primary" class="ifm-stroked-button primary-outline">Create New</button>
+			<button
+					mat-stroked-button
+					color="primary"
+					class="ifm-stroked-button primary-outline"
+					(click)="doNew()">Create New</button>
 		</div>
 
 		<div class="field-outer data-template-app">
@@ -47,9 +51,11 @@
 				</mat-select>
 			</mat-form-field>
 		</div>
+
 		<button mat-icon-button *ngIf="!showViewer" color="warn"><mat-icon>delete</mat-icon></button>
 
 	</div>
+
 	<div class="canvas">
 		<div class="template-container">
 			<div class="caption-container">
@@ -58,18 +64,21 @@
 				</caption>
 			</div>
 			<div class="template-inner mat-elevation-custom-z1">
+				<div class="field-outer data-email-subject">
+					<mat-form-field class="field ifm-input selector compact" subscriptSizing="dynamic" floatLabel="always" appearance="outline">
+						<mat-label>Mail Subject</mat-label>
+						<mat-select [(value)]="selectedEmailID" (selectionChange)="onSelectedEmailChange(selectedEmailID)">
+							<mat-option  [value]="email.emailID" *ngFor="let email of emails, let i = index">{{ email.emailSubject }}</mat-option>
+						</mat-select>
+					</mat-form-field>
+				</div>
 				<app-control-template-viewer *ngIf="showViewer"></app-control-template-viewer>
 				<app-control-template-editor *ngIf="!showViewer"></app-control-template-editor>
 
 				<div class="footer">
-					<div class="secondary">
-
-
-					</div>
-
+					<div class="secondary"></div>
 					<div class="controls">
-
-						<div class="field-outer">
+						<div class="">
 							<button mat-stroked-button *ngIf="showViewer" color="primary" class="ifm-stroked-button primary-outline" (click)="doToggleViewer()">Edit</button>
 							<button mat-button *ngIf="!showViewer" color="primary" (click)="doToggleViewer()">Cancel</button>
 							<button mat-flat-button *ngIf="!showViewer" color="primary" (click)="doToggleViewer()">Save</button>
@@ -85,7 +94,7 @@
 		<div class="macro-keys-container">
 			<div class="caption-container">
 				<caption class="mat-caption">
-					<span>Triage Keys - Copy & Paste</span>
+					<span>Triage Keys</span>
 				</caption>
 			</div>
 			<div class="macro-keys-inner">
@@ -120,7 +129,12 @@
 					</div>
 					<div class="key-control"><mat-icon class="ifm-icon-medium">content_copy</mat-icon></div>
 				</div>
-
+				<div class="key">
+					<div class="key-text">
+						[vehicle]
+					</div>
+					<div class="key-control"><mat-icon class="ifm-icon-medium">content_copy</mat-icon></div>
+				</div>
 				<div class="key">
 					<div class="key-text">
 						[workCarriedOut]

@@ -27,6 +27,34 @@ export class ViewTabbedWorkspaceComponent {
   tabs = this.localDataService.mainUITabsData;
   tabToTreatAsHome: number = 0;
 
+  payments = this.localDataService.paymentListData
+
+  paymentIdNo: number = -1;
+  paymentCustomerName: string = '';
+  paymentDateRaised: string =  '';
+  paymentSource: string = '';
+  paymentStatus: string = 'New Adhoc Payment';
+  paymentStatusId: number = 5;
+  paymentTransactionProviderId: number = 0;
+  paymentTransactionNumber: string = '';
+  paymentTransactionTotalExTax: number = 0.00;
+  paymentTransactionTotalTax: number = 0.00;
+  paymentTransactionTotalIncTax: number = 0.00;
+  paymentTransactionCreatedOn: string = '';
+  paymentTransactionCreatedBy: string = '';
+  paymentTransactionExpiry: string = '';
+  paymentCustomerForename: string = '';
+  paymentCustomerSurname: string = '';
+  paymentCustomerTelNo: string = '';
+  paymentCustomerEmail: string = '';
+  paymentAddress1: string = '';
+  paymentAddress2: string = '';
+  paymentAddress3: string = '';
+  paymentState: string = '';
+  paymentPostCode: string = '';
+  paymentVehicle: string = '';
+  paymentInvoiceLines: string = '';
+
   constructor( private localDataService: LocalDataService,
                public dialog: MatDialog,
                public applicationModelService: ApplicationModelService,
@@ -36,6 +64,9 @@ export class ViewTabbedWorkspaceComponent {
   onTabSelected(ev: any) {
     console.log('tab changed to' + ev.index)
     this.applicationModelService.activeMainUITab$.next(ev.index);
+    if(ev.index === 1) {
+      this.doCreateNew();
+    }
   }
 
   doCloseTab(ind: number) {
@@ -71,5 +102,38 @@ export class ViewTabbedWorkspaceComponent {
         sourceAppID: sourceAppID,
       }
     });
+  }
+
+  doCreateNew() {
+    this.payments.push({
+      paymentIdNo: this.payments.length,
+      paymentCustomerName:  this.paymentCustomerName,
+      paymentDateRaised: this.paymentDateRaised,
+      paymentSource: this.paymentSource,
+      paymentStatus: this.paymentStatus,
+      paymentStatusId: this.paymentStatusId,
+      paymentTransactionProviderId: this.paymentTransactionProviderId,
+      paymentTransactionNumber: this.paymentTransactionNumber,
+      paymentTransactionTotalExTax: this.paymentTransactionTotalExTax,
+      paymentTransactionTotalTax: this.paymentTransactionTotalTax,
+      paymentTransactionTotalIncTax: this.paymentTransactionTotalIncTax,
+      paymentTransactionCreatedOn: this.paymentTransactionCreatedOn,
+      paymentTransactionCreatedBy: this.paymentTransactionCreatedBy,
+      paymentTransactionExpiry: this.paymentTransactionExpiry,
+      paymentCustomerForename: this.paymentCustomerForename,
+      paymentCustomerSurname: this.paymentCustomerSurname,
+      paymentCustomerTelNo: this.paymentCustomerTelNo,
+      paymentCustomerEmail: this.paymentCustomerEmail,
+      paymentAddress1: this.paymentAddress1,
+      paymentAddress2: this.paymentAddress2,
+      paymentAddress3: this.paymentAddress3,
+      paymentState: this.paymentState,
+      paymentPostCode: this.paymentPostCode,
+      paymentVehicle: this.paymentVehicle,
+      paymentInvoiceLines: this.paymentInvoiceLines,
+    })
+    this.applicationModelService.currentPaymentIndexNumber$.next(this.payments.length -1);
+    const eek = this.applicationModelService.currentTemplateIdViewer$.getValue();
+    this.applicationModelService.currentTemplateIdViewer$.next(eek);
   }
 }

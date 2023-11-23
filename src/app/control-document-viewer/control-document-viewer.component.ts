@@ -19,7 +19,7 @@ export class ControlDocumentViewerComponent implements AfterViewInit, OnInit{
   isDragging: boolean = false;
   @Input() isViewAttachment: boolean = true;
 
-  viewerURLString: string = 'http://localhost:4402/assets/docs/pdfs/invoice.pdf'
+  viewerURLString: string = 'http://payments.tult.co.nz/assets/docs/pdfs/invoice.pdf'
   activeDocument: number = 0;
 
   constructor(private localDataService: LocalDataService,
@@ -57,10 +57,10 @@ export class ControlDocumentViewerComponent implements AfterViewInit, OnInit{
 
   doLoadDocument(ind: number) {
     if (ind === 0) {
-      this.viewerURLString = 'http://localhost:4402/assets/docs/pdfs/invoice.pdf';
+      this.viewerURLString = 'http://payments.tult.co.nz/assets/docs/pdfs/invoice.pdf';
       console.log(this.viewerURLString);
     } else {
-      this.viewerURLString = 'http://localhost:4402/assets/docs/pdfs/tsandcs.pdf'
+      this.viewerURLString = 'http://payments.tult.co.nz/assets/docs/pdfs/tsandcs.pdf'
       console.log(this.viewerURLString);
     }
     this.activeDocument = ind;

@@ -54,6 +54,7 @@ export class TableTriageDataComponent {
         paymentAddress3: 'The Sea of Tranquility',
         paymentState: 'The Moon',
         paymentPostCode: '522',
+        paymentVehicle: 'Space Car 4000 - 4sField-100',
         paymentInvoiceLines: 'Operation Inspection details go here',
       }
     );

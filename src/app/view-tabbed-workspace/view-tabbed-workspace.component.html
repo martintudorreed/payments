@@ -30,7 +30,7 @@
 				<mat-icon class="tab-icon">add_outline</mat-icon>
 				<span class="tab-label-text">New Payment</span>
 			</span>
-			<button *ngIf="(applicationModelService.isShow2WayMenu$ | async)" [matMenuTriggerFor]="quickMenu" (click)="absorb($event)" mat-icon-button class="white-text "><mat-icon>arrow_drop_down</mat-icon></button>
+			<button *ngIf="(applicationModelService.activeHeader$ | async) === '-1'" [matMenuTriggerFor]="quickMenu" (click)="absorb($event)" mat-icon-button class="white-text "><mat-icon>arrow_drop_down</mat-icon></button>
 			<mat-menu #quickMenu="matMenu" xPosition="before">
 				<button mat-menu-item
 						*ngFor="let source of invoiceSource"

@@ -16,6 +16,7 @@ export class DialogPaymentAppComponent {
   totalExTax: number = 0.00;
   totalTax: number = 0.00;
   totalIncTax: number = 0.00;
+  currentPaymentId: number = 0;
 
   paymentMethods = this.localDataService.paymentMethodData;
   selectedPaymentMethod = this.paymentMethods[0].paymentMethodID;

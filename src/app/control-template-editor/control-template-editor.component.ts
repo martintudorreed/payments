@@ -6,6 +6,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
 import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
 import { ChangeDetectionStrategy } from '@angular/core';
+import {CdkContextMenuTrigger, CdkMenuItem, CdkMenu} from '@angular/cdk/menu';
 
 @Component({
   selector: 'app-control-template-editor',
@@ -42,6 +43,8 @@ export class ControlTemplateEditorComponent implements OnInit{
   templateContents: string = '';
   templateCreatedBy: string = '';
   templateCreatedOn: string = '';
+  templateColor: string = '';
+  templateColorClass: string = '';
 
   showViewer: boolean = true;
   dataSourceFromLocal: any[] = [];
@@ -80,19 +83,38 @@ export class ControlTemplateEditorComponent implements OnInit{
     this.templateType = this.dataSource[ind].templateType;
     this.templateName = this.dataSource[ind].templateName;
     this.templateLogo = this.dataSource[ind].templateLogo;
-    this.logoString = "./assets/svg-logos/" + this.templateLogo + '-logo.svg';
+    this.templateColor = this.dataSource[ind].templateColor
+    this.templateColorClass = this.doSetTemplateColor(this.templateColor);
+    this.logoString = this.doGetImageSrcString(this.templateLogo);
     this.templateContents = this.dataSource[ind].templateContents;
     this.templateCreatedBy = this.dataSource[ind].templateCreatedBy;
     this.templateCreatedOn = this.dataSource[ind].templateCreatedOn;
 
     this.templateSections = [];
     this.templateSections = this.dataSource[ind].templateSections;
-
   }
 
-
-  ngAfterViewInit() {
-
+  doSetTemplateColor(color: string) {
+    switch (color) {
+      case '0':
+        return 'blue'
+        break;
+      case '1':
+        return 'red'
+        break;
+      case '2':
+        return 'green'
+        break;
+      case '3':
+        return 'black'
+        break;
+      case '4':
+        return 'white very-dark-grey-text'
+        break;
+      default:
+        return 'blue'
+        break;
+    }
   }
 
   drop(event: CdkDragDrop<string[]>) {
@@ -101,12 +123,13 @@ export class ControlTemplateEditorComponent implements OnInit{
     this.doSave();
   }
 
-  doAddRow() {
+  doAddRow(key: string) {
     const newSectionId = this.dataSource[this.selectedTemplate].templateSections.length.toString();
-    console.log('new section is ' + newSectionId);
+
+
     this.dataSource[this.selectedTemplate].templateSections.push({
       sectionId: newSectionId,
-      sectionContent: 'New Email Line - click to edit',
+      sectionContent: key,
       sectionContentStyle: '',
       sectionIndexOrder: -1
     });
@@ -140,7 +163,7 @@ export class ControlTemplateEditorComponent implements OnInit{
   }
 
   doChangeLogo(brand: string) {
-    this.logoString = "./assets/svg-logos/" + brand + '-logo.svg';
+    this.logoString = this.doGetImageSrcString(brand);
     this.dataSource[this.selectedTemplate].templateLogo = brand;
     this.doSave();
   }
@@ -159,6 +182,43 @@ export class ControlTemplateEditorComponent implements OnInit{
   doBlur(ev: any, ind: number) {
     this.dataSource[this.selectedTemplate].templateSections[ind].sectionContent = ev.target.innerHTML;
     this.doSave();
+  }
+
+  doGetImageSrcString(imgName: string ) {
+    if (imgName === 'currentLogo') {
+      return './assets/svg-logos/' + this.applicationModelService.selectedThemeBrand$.getValue() + '-logo.svg';
+    } else {
+      return './assets/svg-logos/' + imgName + '-logo.svg';
+    }
+  }
+
+ insertText(text: string, ind: number) {
+    // Get the content-editable element
+   const editableElId = `editableSection${ind}`;
+
+   // Get the content-editable element by its dynamic ID
+   const editableEl = document.getElementById(editableElId);
+
+    // Get the current selection
+    const selection = window.getSelection();
+
+    if (!selection || selection.rangeCount === 0) return; // No selection available
+
+    const range = selection.getRangeAt(0);
+    range.deleteContents(); // Delete selected text if any
+
+    // Create a text node for the new text and insert it
+    const textNode = document.createTextNode(text);
+    range.insertNode(textNode);
+
+    // Move the cursor after the inserted text
+    range.setStartAfter(textNode);
+    range.setEndAfter(textNode);
+    selection.removeAllRanges();
+    selection.addRange(range);
+
+    // Focus back on the content-editable element
+    editableEl?.focus();
   }
 
 

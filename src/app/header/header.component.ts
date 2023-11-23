@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ApplicationModelService } from '../services/ApplicationModelService';
 import { LocalDataService } from '../services/local-data.service';
 import {Router} from "@angular/router";
@@ -8,14 +8,28 @@ import {Router} from "@angular/router";
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit{
 
   localRegions = this.localDataService.regionData;
   selectedRegion =  this.localRegions[0].regionValue;
+  brands = this.localDataService.themeBrandData;
 
   constructor( public applicationModelService: ApplicationModelService,
                private localDataService: LocalDataService,
                public router: Router) { }
+
+  ngOnInit() {
+    // find and then locally load template data
+    // load from local storage
+    if (localStorage.getItem('selectedLogo')) {
+      const data = localStorage.getItem('selectedLogo') || 'none';
+      console.log(data);
+      this.applicationModelService.selectedThemeBrand$.next(data);
+    } else {
+      this.applicationModelService.selectedThemeBrand$.next('nissan')
+    }
+
+  }
 
   doAbsorb(ev: any) {
     ev.stopPropagation();
@@ -37,5 +51,9 @@ export class HeaderComponent {
     this.applicationModelService.isSidenavActive$.next(true);
   }
 
+  doChangeLogo(brand: string) {
+    this.applicationModelService.selectedThemeBrand$.next(brand);
+    localStorage.setItem('selectedLogo', brand);
+}
 
 }

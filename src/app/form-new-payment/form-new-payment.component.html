@@ -74,20 +74,21 @@
 						  #autosize="cdkTextareaAutosize"
 						  [(ngModel)]="paymentInvoiceLines"
 						  cdkAutosizeMinRows="1"
-						  cdkAutosizeMaxRows="15"></textarea>
+						  cdkAutosizeMaxRows="15"
+						  (blur)="onBlurTouchViewer($event)"></textarea>
 			</mat-form-field>
 		</div>
 		<div class="two-fields">
 			<div class="field-outer data-ammount-payable">
 				<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
 					<mat-label>Ammount Payable</mat-label>
-					<input type="number" matInput placeholder="Contact Number" [(ngModel)]="paymentTransactionTotalIncTax">
+					<input type="number" matInput placeholder="Total" [(ngModel)]="paymentTransactionTotalIncTax" (blur)="onBlurTouchViewer($event)">
 				</mat-form-field>
 			</div>
 			<div class="field-outer data-expiry">
 				<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
 					<mat-label>Expiry Date</mat-label>
-					<input type="text" matInput placeholder="Contact Number" [(ngModel)]="paymentTransactionExpiry">
+					<input type="text" matInput placeholder="Contact Number" [(ngModel)]="paymentTransactionExpiry"  (blur)="onBlurTouchViewer($event)">
 				</mat-form-field>
 			</div>
 		</div>
@@ -95,28 +96,28 @@
 		<div class="field-outer data-customer-forename">
 			<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
 				<mat-label>Customer ForeName(s)</mat-label>
-				<input type="text" matInput placeholder="Forename" [(ngModel)]="paymentCustomerForename">
+				<input type="text" matInput placeholder="Forename" [(ngModel)]="paymentCustomerForename" (blur)="onBlurTouchViewer($event)">
 			</mat-form-field>
 		</div>
 
 		<div class="field-outer data-customer-surname">
 			<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
 				<mat-label>Customer Surname</mat-label>
-				<input type="text" matInput placeholder="Surname" [(ngModel)]="paymentCustomerSurname">
+				<input type="text" matInput placeholder="Surname" [(ngModel)]="paymentCustomerSurname" (blur)="onBlurTouchViewer($event)">
 			</mat-form-field>
 		</div>
 
 		<div class="field-outer data-customer-email">
 			<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
 				<mat-label>Email Address</mat-label>
-				<input type="text" matInput placeholder="Email Address" [(ngModel)]="paymentCustomerEmail">
+				<input type="text" matInput placeholder="Email Address" [(ngModel)]="paymentCustomerEmail" (blur)="onBlurTouchViewer($event)">
 			</mat-form-field>
 		</div>
 
 		<div class="field-outer data-customer-email">
 			<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always">
 				<mat-label>Contact Number</mat-label>
-				<input type="text" matInput placeholder="Contact Number" [(ngModel)]="paymentCustomerTelNo">
+				<input type="text" matInput placeholder="Contact Number" [(ngModel)]="paymentCustomerTelNo" (blur)="onBlurTouchViewer($event)">
 			</mat-form-field>
 		</div>
 
@@ -202,7 +203,7 @@
 <!--			</div>-->
 		</div>
 		<div class="control-secondary" *ngIf="paymentStatusId !== 0">
-			<button mat-flat-button color="warn" mat-dialog-close (click)="doClearFields()">Cancel Transaction</button>
+			<button mat-stroked-button color="warn" mat-dialog-close (click)="doClearFields()">Cancel Transaction</button>
 		</div>
 		<div class="control-primary">
 			<button class="launcher" mat-icon-button color="primary" (click)="doCardlessPayment($event)"><mat-icon>rocket_launch</mat-icon></button>

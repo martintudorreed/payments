@@ -43,6 +43,7 @@ export class FormNewPaymentComponent implements OnInit, AfterViewInit{
   paymentAddress3: string = '';
   paymentState: string = '';
   paymentPostCode: string = '';
+  paymentVehicle: string = '';
   paymentInvoiceLines: string = '';
 
   tabIndex: number = -1;
@@ -74,8 +75,11 @@ export class FormNewPaymentComponent implements OnInit, AfterViewInit{
 
   }
   ngOnInit() {
-    this.doLoadItem();
 
+    if(this.dataItemIndexNo === -1) {
+      this.applicationModelService.currentTemplateIdViewer$.next('0');
+      this.isViewAttachment = false;
+    }
     if (this.paymentStatusId === 5) {
       this.isViewAttachment = false;
     }
@@ -87,7 +91,7 @@ export class FormNewPaymentComponent implements OnInit, AfterViewInit{
       this.dataItemIndexNo = this.applicationModelService.isInIframeDataValue$.getValue();
       this.doLoadItem();
     }
-
+    this.doLoadItem();
   }
 
   doLoadItem() {
@@ -116,9 +120,43 @@ export class FormNewPaymentComponent implements OnInit, AfterViewInit{
       this.paymentAddress3 = this.dataItem.paymentAddress3;
       this.paymentState = this.dataItem.paymentState;
       this.paymentPostCode = this.dataItem.paymentPostCode;
+      this.paymentVehicle = this.dataItem.paymentVehicle;
       this.paymentInvoiceLines = this.dataItem.paymentInvoiceLines;
       this.selectedPaymentMethod = this.paymentMethods[0].paymentMethodID;
+    } else {
+
+      // this.dataItems.push({
+      //   paymentIdNo: this.dataItems.length,
+      //   paymentCustomerName:  this.paymentCustomerName,
+      //   paymentDateRaised: this.paymentDateRaised,
+      //   paymentSource: this.paymentSource,
+      //   paymentStatus: this.paymentStatus,
+      //   paymentStatusId: this.paymentStatusId,
+      //   paymentTransactionProviderId: this.paymentTransactionProviderId,
+      //   paymentTransactionNumber: this.paymentTransactionNumber,
+      //   paymentTransactionTotalExTax: this.paymentTransactionTotalExTax,
+      //   paymentTransactionTotalTax: this.paymentTransactionTotalTax,
+      //   paymentTransactionTotalIncTax: this.paymentTransactionTotalIncTax,
+      //   paymentTransactionCreatedOn: this.paymentTransactionCreatedOn,
+      //   paymentTransactionCreatedBy: this.paymentTransactionCreatedBy,
+      //   paymentTransactionExpiry: this.paymentTransactionExpiry,
+      //   paymentCustomerForename: this.paymentCustomerForename,
+      //   paymentCustomerSurname: this.paymentCustomerSurname,
+      //   paymentCustomerTelNo: this.paymentCustomerTelNo,
+      //   paymentCustomerEmail: this.paymentCustomerEmail,
+      //   paymentAddress1: this.paymentAddress1,
+      //   paymentAddress2: this.paymentAddress2,
+      //   paymentAddress3: this.paymentAddress3,
+      //   paymentState: this.paymentState,
+      //   paymentPostCode: this.paymentPostCode,
+      //   paymentVehicle: this.paymentVehicle,
+      //   paymentInvoiceLines: this.paymentInvoiceLines,
+      // })
+      // console.log('so at this point the currentPaymentIndexNumber$ =');
+      // console.log(this.dataItems.length);
     }
+    // this.applicationModelService.currentPaymentIndexNumber$.next(this.paymentIdNo);
+
   }
 
   ngAfterViewInit() {
@@ -168,6 +206,7 @@ export class FormNewPaymentComponent implements OnInit, AfterViewInit{
       paymentAddress3: this.paymentAddress3,
       paymentState: this.paymentState,
       paymentPostCode: this.paymentPostCode,
+      paymentVehicle: this.paymentVehicle,
       paymentInvoiceLines: this.paymentInvoiceLines,
       });
 
@@ -204,6 +243,7 @@ export class FormNewPaymentComponent implements OnInit, AfterViewInit{
     this.paymentAddress3 = '';
     this.paymentState = '';
     this.paymentPostCode = '';
+    this.paymentVehicle = '';
     this.paymentInvoiceLines = '';
   }
 
@@ -268,6 +308,7 @@ export class FormNewPaymentComponent implements OnInit, AfterViewInit{
       paymentAddress3: this.paymentAddress3,
       paymentState: this.paymentState,
       paymentPostCode: this.paymentPostCode,
+      paymentVehicle: this.paymentVehicle,
       paymentInvoiceLines: this.paymentInvoiceLines,
     });
 
@@ -309,6 +350,47 @@ export class FormNewPaymentComponent implements OnInit, AfterViewInit{
     if (!this.isViewAttachment) {
       this.isViewAttachment = true;
     }
+  }
+
+  onBlurTouchViewer(ev: any) {
+    this.doUpdate();
+    const eek = this.applicationModelService.currentTemplateIdViewer$.getValue();
+    this.applicationModelService.currentTemplateIdViewer$.next(eek);
+  }
+
+  doUpdate() {
+      const activePayment = this.applicationModelService.currentPaymentIndexNumber$.getValue();
+      console.log('payment index is');
+      console.log(activePayment);
+      this.dataItems[activePayment].paymentIdNo = this.paymentIdNo;
+      this.dataItems[activePayment].paymentCustomerName = this.paymentCustomerName;
+      this.dataItems[activePayment].paymentDateRaised = this.paymentDateRaised;
+      this.dataItems[activePayment].paymentSource = this.paymentSource;
+      this.dataItems[activePayment].paymentStatus = this.paymentStatus;
+      this.dataItems[activePayment].paymentStatusId = this.paymentStatusId;
+      this.dataItems[activePayment].paymentTransactionProviderId = this.paymentTransactionProviderId;
+      this.dataItems[activePayment].paymentTransactionNumber = this.paymentTransactionNumber;
+      this.dataItems[activePayment].paymentTransactionTotalExTax = this.paymentTransactionTotalExTax;
+      this.dataItems[activePayment].paymentTransactionTotalTax = this.paymentTransactionTotalTax;
+    console.log('new payment Vakue is');
+    console.log(this.paymentTransactionTotalIncTax);
+      this.dataItems[activePayment].paymentTransactionTotalIncTax = this.paymentTransactionTotalIncTax;
+      this.dataItems[activePayment].paymentTransactionCreatedOn = this.paymentTransactionCreatedOn;
+      this.dataItems[activePayment].paymentTransactionCreatedBy = this.paymentTransactionCreatedBy;
+      this.dataItems[activePayment].paymentTransactionExpiry = this.paymentTransactionExpiry;
+      this.dataItems[activePayment].paymentCustomerForename = this.paymentCustomerForename;
+      this.dataItems[activePayment].paymentCustomerSurname = this.paymentCustomerSurname;
+      this.dataItems[activePayment].paymentCustomerTelNo = this.paymentCustomerTelNo;
+      this.dataItems[activePayment].paymentCustomerEmail = this.paymentCustomerEmail;
+      this.dataItems[activePayment].paymentAddress1 = this.paymentAddress1;
+      this.dataItems[activePayment].paymentAddress2 = this.paymentAddress2;
+      this.dataItems[activePayment].paymentAddress3 = this.paymentAddress3;
+      this.dataItems[activePayment].paymentState = this.paymentState;
+      this.dataItems[activePayment].paymentPostCode = this.paymentPostCode;
+      this.dataItems[activePayment].paymentVehicle = this.paymentVehicle;
+      this.dataItems[activePayment].paymentInvoiceLines = this.paymentInvoiceLines;
+
+      console.log(this.dataItems[activePayment]);
   }
  }
 

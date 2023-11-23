@@ -1,4 +1,4 @@
-<div class="chip-filter-outer">
+<div class="chip-filter-outer" *ngIf="!(applicationModelService.isUseSimpleTextFilters$ | async)">
 	<div class="chip-list">
 		<mat-chip  *ngFor="let filter of filters" class="filter-item">
 		<div class="chip-inner">
@@ -14,3 +14,31 @@
 	<button mat-menu-item (click)="onAddFilterChip(2,'Overdue')">Overdue</button>
 	<button mat-menu-item (click)="onAddFilterChip(3,'Paid In Full')">Paid In Full</button>
 </mat-menu>
+
+<div class="filter-list" *ngIf="(applicationModelService.isUseSimpleTextFilters$ | async)">
+	<div class="filter-item">
+		<span class="filter-item-text">
+			All (27)
+		</span>
+	</div>
+	<div class="filter-item">
+		<span class="filter-item-text">
+			Pending (20)
+		</span>
+	</div>
+	<div class="filter-item">
+		<span class="filter-item-text">
+			Overdue (1)
+		</span>
+	</div>
+	<div class="filter-item">
+		<span class="filter-item-text">
+			Paid In Full (6)
+		</span>
+	</div>
+	<div class="filter-item">
+		<span class="filter-item-text">
+			Cancelled (0)
+		</span>
+	</div>
+</div>

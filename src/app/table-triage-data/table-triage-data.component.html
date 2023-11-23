@@ -27,10 +27,14 @@
 						<mat-icon class="ifm-icon-medium th-icon">fingerprint</mat-icon><span class="header-text">Rego / VIN</span>
 					</div>
 				</th>
-
 				<th class="data-created-on numeric">
 					<div class="cell-inner numeric no-collapse">
-						<mat-icon class="ifm-icon-medium th-icon">paid</mat-icon><span class="header-text">Ammount</span>
+						<mat-icon class="ifm-icon-medium th-icon">paid</mat-icon><span class="header-text">Identified</span>
+					</div>
+				</th>
+				<th class="data-created-on numeric">
+					<div class="cell-inner numeric no-collapse">
+						<mat-icon class="ifm-icon-medium th-icon">paid</mat-icon><span class="header-text">Authorised</span>
 					</div>
 				</th>
 			</tr>
@@ -59,6 +63,12 @@
 				<td>
 					<div class="cell-inner">
 						<span class="cell-text">{{item.triageDataRegoVIN}}</span>
+					</div>
+				</td>
+
+				<td>
+					<div class="cell-inner numeric">
+						<span class="cell-text">{{item.triageDataIdentified | number: '1.2-2'}}</span>
 					</div>
 				</td>
 

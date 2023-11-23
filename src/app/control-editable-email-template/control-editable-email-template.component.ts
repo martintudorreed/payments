@@ -27,6 +27,8 @@ export class ControlEditableEmailTemplateComponent {
   selectedTemplate: number = 0;
   templateSections = this.dataSource[this.selectedTemplate].templateSections;
   brands = this.localDataService.themeBrandData;
+  emails = this.localDataService.emailSettingData;
+  selectedEmailID: string = '0';
 
   templateColors = this.localDataService.colorSchemeData;
   selectedColor: string = '0';
@@ -48,6 +50,8 @@ export class ControlEditableEmailTemplateComponent {
 
   showViewer: boolean = true;
   dataSourceFromLocal: any[] = [];
+
+  emailSubject: string = "Invoice XXX-NNNNN for Future Motors Ltd";
 
   constructor(private localDataService: LocalDataService,
               public dialog: MatDialog,
@@ -72,7 +76,7 @@ export class ControlEditableEmailTemplateComponent {
 
 
   onSelectedSourceChange(selectedSauceID: string) {
-
+    this.dataSource[this.foundTemplateIndex].templateSourceApplication = selectedSauceID;
   }
 
   doFindTemplate(templateIDToUse: string) {
@@ -104,8 +108,35 @@ export class ControlEditableEmailTemplateComponent {
     this.dataSource[this.foundTemplateIndex].templateColor = color;
     this.applicationModelService.currentTemplateIdViewer$.next(this.applicationModelService.currentTemplateIdViewer$.getValue());
   }
-  doFullScreen() {
 
+  doNew() {
+    const templateId = (this.dataSource.length).toString();
+    console.log('template id or current id is ');
+    console.log(templateId);
+    this.dataSource.push(
+      {
+        templateID: templateId,
+        templateProviderId: '0',
+        templateType: 'email',
+        templateSourceApplication: '0',
+        templateEmailSourceID: '0',
+        templateColor: '0',
+        templateName: 'New Template',
+        templateLogo: 'future-motors',
+        templateSections: this.localDataService.emptySections,
+        templateContents: 'deprecated field',
+        templateCreatedBy: 'Martin Tudor Reed',
+        templateCreatedOn: '05/02/2032',
+    }
+    );
+    this.applicationModelService.currentTemplateIdViewer$.next(templateId);
+    this.doFindTemplate(templateId);
+    this.currentTemplateID = templateId;
+    this.doToggleViewer();
+  }
+
+  onSelectedEmailChange(id: string) {
+    this.dataSource[this.foundTemplateIndex].templateEmailSourceID = id;
   }
 
 

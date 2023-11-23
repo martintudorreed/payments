@@ -48,6 +48,15 @@ import { SettingsGeneralComponent } from './settings-general/settings-general.co
 import { SettingsDisclaimersComponent } from './settings-disclaimers/settings-disclaimers.component';
 import { DialogFullScreenEmailViewerComponent } from './dialog-full-screen-email-viewer/dialog-full-screen-email-viewer.component';
 import { ControlImageManagerComponent } from './control-image-manager/control-image-manager.component';
+import { SettingsCustomerFormComponent } from './settings-customer-form/settings-customer-form.component';
+import {CdkMenuModule} from '@angular/cdk/menu';
+import { SettingsEmailDetailsComponent } from './settings-email-details/settings-email-details.component';
+import { ControlEmailDetailsComponent } from './control-email-details/control-email-details.component';
+import { SettingsEmailComponent } from './settings-email/settings-email.component';
+import { DialogWelcomeComponent } from './dialog-welcome/dialog-welcome.component';
+import { HeaderTriageComponent } from './header-triage/header-triage.component';
+import { HeaderMenusComponent } from './header-menus/header-menus.component';
+import { ControlSmsTemplateViewerComponent } from './control-sms-template-viewer/control-sms-template-viewer.component';
 
 const routes: Routes = [
 
@@ -93,7 +102,15 @@ const routes: Routes = [
     SettingsGeneralComponent,
     SettingsDisclaimersComponent,
     DialogFullScreenEmailViewerComponent,
-    ControlImageManagerComponent
+    ControlImageManagerComponent,
+    SettingsCustomerFormComponent,
+    SettingsEmailDetailsComponent,
+    ControlEmailDetailsComponent,
+    SettingsEmailComponent,
+    DialogWelcomeComponent,
+    HeaderTriageComponent,
+    HeaderMenusComponent,
+    ControlSmsTemplateViewerComponent
   ],
   imports: [
     BrowserModule,
@@ -105,7 +122,8 @@ const routes: Routes = [
     ResizableModule,
     NgxDocViewerModule,
     PdfViewerModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CdkMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

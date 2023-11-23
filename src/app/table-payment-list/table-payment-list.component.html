@@ -213,8 +213,64 @@
   cdkDropList
   cdkDropListOrientation="horizontal"
   (cdkDropListDropped)="drop($event)"
-   *ngIf="(applicationModelService.currentBreakpoint$ | async) !== 'Medium' && (applicationModelService.currentBreakpoint$ | async) !== 'Small' && (applicationModelService.currentBreakpoint$ | async) !== 'XSmall'"
->
+   *ngIf="(applicationModelService.currentBreakpoint$ | async) !== 'Medium' && (applicationModelService.currentBreakpoint$ | async) !== 'Small' && (applicationModelService.currentBreakpoint$ | async) !== 'XSmall'">
+
+	<ng-container matColumnDef="paymentTransactionNumber">
+		<th class="data-source" mat-header-cell mat-sort-header cdkDrag *matHeaderCellDef>
+			<div class="cell-inner no-collapse ">
+				<mat-icon class="ifm-icon-medium th-icon">pin</mat-icon>
+				<span class="header-text">RO No.</span>
+			</div>
+		</th>
+		<td mat-cell *matCellDef="let element">
+			<div class="cell-inner no-collapse">
+				<span class="cell-text "> {{element.paymentTransactionNumber}} </span>
+			</div>
+		</td>
+	</ng-container>
+
+	<ng-container matColumnDef="paymentCustomerSurname" sticky>
+		<th class="data-name" mat-header-cell mat-sort-header cdkDrag *matHeaderCellDef>
+			<div class="cell-inner">
+				<mat-icon>person</mat-icon>
+				<span class="header-text">Surname</span>
+			</div>
+		</th>
+		<td mat-cell *matCellDef="let element">
+			<div class="cell-inner">
+				<span class="cell-text ">{{element.paymentCustomerSurname}}</span>
+			</div>
+		</td>
+	</ng-container>
+
+	<ng-container matColumnDef="paymentStatus">
+		<th mat-header-cell mat-sort-header cdkDrag *matHeaderCellDef>
+			<div class="cell-inner ">
+				<mat-icon class="ifm-icon-medium th-icon">traffic</mat-icon>
+				<span class="header-text">Status</span>
+			</div>
+		</th>
+		<td mat-cell *matCellDef="let element">
+			<div class="cell-inner has-icon no-collapse">
+				<mat-icon class="ifm-icon-medium th-icon" [ngClass]="{'green-text': element.paymentStatusId === 0,'bright-blue-text': element.paymentStatusId === 1,'red-text': element.paymentStatusId === 2}">credit_card</mat-icon><span class="cell-text ">{{element.paymentStatus}}</span>
+			</div>
+		</td>
+	</ng-container>
+
+	<ng-container matColumnDef="paymentSource" *ngIf="(applicationModelService.activeHeader$ | async) !== '0' && !(applicationModelService.isInIframe$ | async)">
+		<th class="data-source" mat-header-cell mat-sort-header cdkDrag *matHeaderCellDef>
+			<div class="cell-inner">
+				<mat-icon class="ifm-icon-medium th-icon">monitor</mat-icon>
+				<span class="header-text">Source</span>
+			</div>
+		</th>
+		<td mat-cell *matCellDef="let element">
+			<div class="cell-inner">
+				<span class="cell-text "> {{element.paymentSource}} </span>
+			</div>
+		</td>
+	</ng-container>
+
 	<ng-container matColumnDef="paymentTransactionCreatedOn" >
 		<th class="data-created-on"
 			mat-header-cell
@@ -234,19 +290,24 @@
 		</td>
 	</ng-container>
 
-  <ng-container matColumnDef="paymentCustomerSurname" sticky>
-    <th class="data-name" mat-header-cell mat-sort-header cdkDrag *matHeaderCellDef>
-		<div class="cell-inner">
-			<mat-icon>person</mat-icon>
-			<span class="header-text">Surname</span>
-		</div>
-	</th>
-    <td mat-cell *matCellDef="let element">
-		<div class="cell-inner">
-			<span class="cell-text ">{{element.paymentCustomerSurname}}</span>
-		</div>
-    </td>
-  </ng-container>
+	<ng-container matColumnDef="paymentTransactionCreatedBy" >
+		<th class="data-created-by"
+			mat-header-cell
+			mat-sort-header
+			cdkDrag
+			*matHeaderCellDef>
+			<div class="cell-inner no-collapse">
+				<mat-icon class="ifm-icon-medium th-icon">support_agent</mat-icon>
+				<span class="header-text">Created By</span>
+			</div>
+
+		</th>
+		<td mat-cell *matCellDef="let element">
+			<div class="cell-inner">
+				<span class="cell-text "> {{element.paymentTransactionCreatedBy}} </span>
+			</div>
+		</td>
+	</ng-container>
 
 	<ng-container matColumnDef="paymentCustomerEmail" sticky>
 		<th class="data-email" mat-header-cell mat-sort-header cdkDrag *matHeaderCellDef>
@@ -257,65 +318,6 @@
 		<td mat-cell *matCellDef="let element">
 			<div class="cell-inner">
 				<span class="cell-text ">{{element.paymentCustomerEmail}}</span>
-			</div>
-		</td>
-	</ng-container>
-
-  <ng-container matColumnDef="paymentSource">
-    <th class="data-source" mat-header-cell mat-sort-header cdkDrag *matHeaderCellDef>
-		<div class="cell-inner">
-			<mat-icon class="ifm-icon-medium th-icon">monitor</mat-icon>
-			<span class="header-text">Source</span>
-		</div>
-	</th>
-    <td mat-cell *matCellDef="let element">
-		<div class="cell-inner">
-			<span class="cell-text "> {{element.paymentSource}} </span>
-		</div>
-	</td>
-  </ng-container>
-
-	<ng-container matColumnDef="paymentTransactionNumber">
-		<th class="data-source" mat-header-cell mat-sort-header cdkDrag *matHeaderCellDef>
-			<div class="cell-inner">
-				<mat-icon class="ifm-icon-medium th-icon">pin</mat-icon>
-				<span class="header-text">Ref.</span>
-			</div>
-		</th>
-		<td mat-cell *matCellDef="let element">
-			<div class="cell-inner">
-				<span class="cell-text "> {{element.paymentTransactionNumber}} </span>
-			</div>
-		</td>
-	</ng-container>
-
-
-
-  <ng-container matColumnDef="paymentStatus">
-    <th mat-header-cell mat-sort-header cdkDrag *matHeaderCellDef>
-		<div class="cell-inner ">
-			<mat-icon class="ifm-icon-medium th-icon">traffic</mat-icon>
-			<span class="header-text">Status</span>
-		</div>
-	</th>
-    <td mat-cell *matCellDef="let element">
-		<div class="cell-inner has-icon no-collapse">
-			<mat-icon class="ifm-icon-medium th-icon" [ngClass]="{'green-text': element.paymentStatusId === 0,'bright-blue-text': element.paymentStatusId === 1,'red-text': element.paymentStatusId === 2}">credit_card</mat-icon><span class="cell-text ">{{element.paymentStatus}}</span>
-		</div>
-    </td>
-  </ng-container>
-
-
-	<ng-container matColumnDef="paymentTransactionTotalIncTax">
-		<th mat-header-cell mat-sort-header cdkDrag *matHeaderCellDef>
-			<div class="cell-inner no-collapse">
-				<mat-icon class="ifm-icon-medium th-icon">person</mat-icon>
-				<span class="header-text">Total</span>
-			</div>
-		</th>
-		<td mat-cell *matCellDef="let element">
-			<div class="cell-inner no-collapse numeric">
-				<span class="cell-text ">{{element.paymentTransactionTotalIncTax | number: '1.2-2'}} </span>
 			</div>
 		</td>
 	</ng-container>
@@ -334,6 +336,19 @@
 		</td>
 	</ng-container>
 
+	<ng-container matColumnDef="paymentTransactionTotalIncTax">
+		<th mat-header-cell mat-sort-header cdkDrag *matHeaderCellDef>
+			<div class="cell-inner no-collapse">
+				<mat-icon class="ifm-icon-medium th-icon">person</mat-icon>
+				<span class="header-text">Total</span>
+			</div>
+		</th>
+		<td mat-cell *matCellDef="let element">
+			<div class="cell-inner no-collapse numeric">
+				<span class="cell-text ">{{element.paymentTransactionTotalIncTax | number: '1.2-2'}} </span>
+			</div>
+		</td>
+	</ng-container>
 
   <ng-container matColumnDef="controls">
     <th mat-header-cell *matHeaderCellDef>

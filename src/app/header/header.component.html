@@ -20,7 +20,12 @@
 	</mat-menu>
 	<div class="brand-container">
 		<!--  <img class="logo" src="./assets/svg-logos/{{applicationModelService.selectedThemeBrand$.value}}-logo.svg" (click)="doShowSidebar('start', 'settings')" alt="logo" />-->
-		<img class="logo" (click)="doGoHome()" src="./assets/svg-logos/{{applicationModelService.selectedThemeBrand$.value}}-logo.svg" alt="logo" />
+		<img class="logo" [matMenuTriggerFor]="brandMenu" src="./assets/svg-logos/{{applicationModelService.selectedThemeBrand$.value}}-logo.svg" alt="logo" />
+		<mat-menu #brandMenu="matMenu" class="ifm-menu style-menu">
+			<button *ngFor="let brand of brands, let i = index" mat-menu-item class="style-option" (click)="doChangeLogo(brand.brandValue)">
+				{{brand.brandName}}
+			</button>
+		</mat-menu>
 		<img class="app-logo" (click)="doGoHome()" src="./assets/svg-logos/super-service-payments-logo.svg" alt="SuperservicePayments" />
 
 	</div>
@@ -43,19 +48,3 @@
 	<button mat-menu-item>Settings Guide</button>
 </mat-menu>
 
-<!--<mat-menu #settingsMenu="matMenu" class="ifm-menu user-menu">-->
-<!--	<div class="user-controls" *ngIf="(applicationModelService.currentBreakpoint$ | async) === 'XSmall'">-->
-<!--		<button mat-button [matMenuTriggerFor]="userMenu" class="primary-text"><mat-icon>account_circle</mat-icon><span>Martin Tudor Reed</span></button>-->
-<!--	</div>-->
-<!--	<div class="control-container control-container-in-menu" *ngIf="(applicationModelService.currentBreakpoint$ | async) === 'Small' || (applicationModelService.currentBreakpoint$ | async) === 'XSmall'">-->
-<!--		<img class='flag' src="./assets/flags/au.svg" alt="Australian Flag" />-->
-<!--		<mat-form-field class="no-hint region-select white-bg no-ripple-line"  (click)="doAbsorb($event)">-->
-<!--			<mat-select [(value)]="selectedRegion">-->
-<!--				<mat-option  [value]="region.regionValue" *ngFor="let region of localRegions"><img class='flag' src="./assets/flags/au.svg" alt="Australian Flag"/><span class="option-label">{{ region.regionName }}</span></mat-option>-->
-<!--			</mat-select>-->
-<!--		</mat-form-field>-->
-<!--		<mat-divider></mat-divider>-->
-<!--	</div>-->
-
-
-<!--</mat-menu>-->

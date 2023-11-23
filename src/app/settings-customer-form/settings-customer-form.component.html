@@ -1,0 +1,25 @@
+<div class="inner">
+	<div class="sidebar">
+		<div class="field-outer data-template-select">
+			<mat-form-field class="ifm-input" appearance="outline" subscriptSizing="dynamic">
+				<mat-label>Name</mat-label>
+				<mat-select [(value)]="currentTemplateID" (selectionChange)="onSelectedTemplateChange(currentTemplateID)">
+					<mat-option  [value]="template.custTemplateID" *ngFor="let template of templateDataSource, let i = index"><span class="option-label">{{ template.custTemplateName }}</span></mat-option>
+				</mat-select>
+			</mat-form-field>
+		</div>
+	</div>
+	<div class="canvas">
+		<div class="template-container">
+			<div class="caption-container">
+				<caption class="mat-caption">
+					<span>Template</span>
+				</caption>
+			</div>
+			<div class="template-inner mat-elevation-custom-z1">
+				<app-form-customer-payment></app-form-customer-payment>
+			</div>
+		</div>
+	</div>
+</div>
+

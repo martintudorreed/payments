@@ -8,6 +8,9 @@ import {LocalDataService} from "../services/local-data.service";
   styleUrls: ['./view-settings.component.scss']
 })
 export class ViewSettingsComponent {
+  selectedAppHeader: string = '-1';
+
+  ifmAppData = this.localDataService.ifmAppData;
 
   constructor(public applicationModelService: ApplicationModelService,
               private localDataService: LocalDataService ) {
@@ -27,5 +30,18 @@ export class ViewSettingsComponent {
 
   doToggleDashboardTab() {
     this.applicationModelService.isShowDashboard$.next(!this.applicationModelService.isShowDashboard$.getValue());
+  }
+
+  doChangeHeader(hd: string) {
+    this.applicationModelService.activeHeader$.next(hd);
+  }
+
+  onSelectedHeaderChange(id: string) {
+    this.applicationModelService.activeHeader$.next(id);
+    this.selectedAppHeader = id;
+  }
+
+  doToggleSimpleFilters() {
+    this.applicationModelService.isUseSimpleTextFilters$.next(!this.applicationModelService.isUseSimpleTextFilters$.getValue())
   }
 }

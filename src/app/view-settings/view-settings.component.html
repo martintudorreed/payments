@@ -27,7 +27,7 @@
 				<span class="tab-label-text">Customer Form</span></span>
 			</ng-template>
 			<div class="tab-inner">
-				<span>Customer Form Stuff goes here</span>
+				<app-settings-customer-form></app-settings-customer-form>
 			</div>
 		</mat-tab>
 		<mat-tab label="Email Templates">
@@ -67,12 +67,23 @@
 				<mat-icon class="tab-icon">rocket_launch</mat-icon>
 				<span class="tab-label-text">Prototype</span></span>
 			</ng-template>
-			<div class="tab-inner">
-				<div class="field-outer data-is-view-attachments">
-					<mat-slide-toggle [checked]='(applicationModelService.isShow2WayMenu$ | async)' (change)="doToggleTwoWayMenu()">Show 2 Way Menu</mat-slide-toggle>
+			<div class="tab-inner prototype">
+				<div class="field-outer data-payment-type" >
+					<mat-form-field class="field ifm-input selector compact" subscriptSizing="dynamic" floatLabel="always" appearance="outline">
+						<mat-label>Change Header</mat-label>
+						<mat-select [(value)]="selectedAppHeader" (selectionChange)="onSelectedHeaderChange(selectedAppHeader)">
+							<mat-option  [value]="app.ifmAppsID" *ngFor="let app of ifmAppData">{{ app.ifmAppsName }}</mat-option>
+						</mat-select>
+					</mat-form-field>
 				</div>
+<!--				<div class="field-outer data-is-view-attachments">-->
+<!--					<mat-slide-toggle [checked]='(applicationModelService.isShow2WayMenu$ | async)' (change)="doToggleTwoWayMenu()">Show 2 Way Menu</mat-slide-toggle>-->
+<!--				</div>-->
 				<div class="field-outer data-is-view-attachments">
 					<mat-slide-toggle [checked]='(applicationModelService.isShowDashboard$ | async)' (change)="doToggleDashboardTab()">Show Dashboard Tab</mat-slide-toggle>
+				</div>
+				<div class="field-outer data-is-simple-filters">
+					<mat-slide-toggle [checked]='(applicationModelService.isUseSimpleTextFilters$ | async)' (change)="doToggleSimpleFilters()">Use Simple Filters on List</mat-slide-toggle>
 				</div>
 			</div>
 		</mat-tab>

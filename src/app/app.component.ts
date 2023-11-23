@@ -5,6 +5,7 @@ import {takeUntil} from 'rxjs/operators';
 import {ApplicationModelService} from "./services/ApplicationModelService";
 import {NavigationEnd, Router} from '@angular/router';
 import {MatDialog} from "@angular/material/dialog";
+import {DialogWelcomeComponent} from "./dialog-welcome/dialog-welcome.component";
 
 @Component({
   selector: 'app-root',
@@ -62,6 +63,7 @@ export class AppComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
+    // this.doWelcomeDialog();
   }
 
   @HostListener('window:resize', ['$event'])
@@ -73,5 +75,14 @@ export class AppComponent implements AfterViewInit {
 
   sidenavClosed() {
     this.applicationModelService.isSidenavActive$.next(false);
+  }
+
+  doWelcomeDialog() {
+    this.dialog.open(DialogWelcomeComponent, {
+      maxWidth: '96%',
+      maxHeight: '96vh',
+      panelClass: 'ifm-dialog',
+      autoFocus: false,
+    });
   }
 }

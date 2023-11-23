@@ -19,10 +19,14 @@ export class TablePaymentListComponent implements AfterViewInit{
   @Input() isStandalone: boolean = false;
   // @ViewChild(MatSort, { static: true }) sort: MatSort;
   // dataSource = this.localDataService.paymentListData;
-  displayedColumns: string[] = [ 'paymentTransactionCreatedOn','paymentCustomerSurname', 'paymentCustomerEmail', 'paymentSource', 'paymentTransactionNumber' ,'paymentStatus', 'paymentTransactionTotalIncTax', 'paymentTransactionExpiry', 'controls'];
+  displayedColumns: string[] = [  'paymentTransactionNumber', 'paymentCustomerSurname','paymentStatus' , 'paymentSource', 'paymentCustomerEmail', 'paymentTransactionCreatedOn', 'paymentTransactionCreatedBy', 'paymentTransactionExpiry','paymentTransactionTotalIncTax', 'controls'];
   dataSource = new MatTableDataSource(this.localDataService.paymentListData);
+
+  filteredData = this.localDataService.paymentListData.filter(item => item.paymentSource === 'Triage');
+  filteredDataSource = new MatTableDataSource(this.filteredData);
+
   cardDataSource = this.localDataService.paymentListData;
-  filteredData: any[];
+
   tabs = this.localDataService.mainUITabsData;
   tabIndex: number = -1;
   tabOffset: number = 2;
@@ -53,6 +57,14 @@ export class TablePaymentListComponent implements AfterViewInit{
         const cols = localStorage.getItem('columnOrder');
         this.displayedColumns = (JSON.parse(cols as string));
       }
+      console.log('standalone = ');
+      console.log(this.isStandalone);
+      if(this.isStandalone || this.applicationModelService.activeHeader$.getValue() === 'triage') {
+        this.dataSource = this.filteredDataSource;
+      } else {
+        this.dataSource = this.dataSource;
+      }
+
       this.dataSource.sort = this.sort;
       // this.displayedColumns = JSON.parse(localStorage.getItem('columnOrder'));
     }
@@ -91,6 +103,7 @@ export class TablePaymentListComponent implements AfterViewInit{
     } else {
       this.applicationModelService.isInIframe$.next(true);
       this.applicationModelService.isInIframeDataValue$.next(this.dataItemIndexNo);
+      this.applicationModelService.currentPaymentIndexNumber$.next(ind);
       this.doOpenFormInDialog();
     }
 

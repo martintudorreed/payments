@@ -10,7 +10,9 @@
 		<app-view-settings></app-view-settings>
 	</mat-sidenav>
 	<mat-sidenav-content class="app-container">
-		<app-header *ngIf="(applicationModelService.activeRoute$ | async) === '/home'"></app-header>
+		<app-header *ngIf="(applicationModelService.activeHeader$ | async) === '-1' && (applicationModelService.activeRoute$ | async) === '/home'"></app-header>
+		<app-header-triage *ngIf="(applicationModelService.activeHeader$ | async) === '0' && (applicationModelService.activeRoute$ | async) === '/home'"></app-header-triage>
+		<app-header-menus *ngIf="(applicationModelService.activeHeader$ | async) === '1' && (applicationModelService.activeRoute$ | async) === '/home'"></app-header-menus>
 		<router-outlet></router-outlet>
 	</mat-sidenav-content>
 </mat-sidenav-container>

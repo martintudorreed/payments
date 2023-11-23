@@ -25,10 +25,22 @@ export class ControlDisplaySendMethodsComponent implements OnInit{
   dataSource = this.localDataService.templateData;
   selectedTemplate: string = this.applicationModelService.currentTemplateIdViewer$.getValue();
 
+  emailDataSource = this.localDataService.emailSettingData;
+  paymentDataSource = this.localDataService.paymentListData;
+  currentPaymentIndexNo = this.applicationModelService.currentPaymentIndexNumber$.getValue();
+  settingsData = this.localDataService.generalSettingsData;
+
+  foundTemplateIndex: number = 0;
+  foundEMailTemplateIndex: number = 0;
+
+  workingString: string = '';
+
   ngOnInit() {
     // if(this.paymentStatusId === 2) {
     //   this.applicationModelService.currentTemplateIdViewer$.next('1');
     // }
+    this.doFindTemplate(this.selectedTemplate);
+    this.doFindEmailTemplateData(this.dataSource[this.foundTemplateIndex].templateEmailSourceID);
   }
 
 
@@ -61,6 +73,8 @@ export class ControlDisplaySendMethodsComponent implements OnInit{
 
   doSelectTemplate(templateID: string) {
     this.applicationModelService.currentTemplateIdViewer$.next(templateID);
+    this.doFindTemplate(this.applicationModelService.currentTemplateIdViewer$.getValue());
+    this.doFindEmailTemplateData(this.dataSource[this.foundTemplateIndex].templateEmailSourceID);
   }
 
   doFullScreen(ev: any) {
@@ -74,5 +88,25 @@ export class ControlDisplaySendMethodsComponent implements OnInit{
       panelClass: 'ifm-dialog',
       autoFocus: false,
     });
+  }
+
+  doFindTemplate(templateIDToUse: string) {
+    this.foundTemplateIndex = this.dataSource.findIndex(template => template.templateID === templateIDToUse);
+  }
+
+  doFindEmailTemplateData(templateIDToUse: string) {
+    this.foundEMailTemplateIndex = this.dataSource.findIndex(template => template.templateEmailSourceID === templateIDToUse);
+  }
+
+  doReplaceKeysWithData() {
+    this.workingString = '';
+    this.workingString = this.emailDataSource[this.foundEMailTemplateIndex].emailSubject;
+    this.workingString = this.workingString.replace(/\[dealerName\]/g, this.settingsData[0].dealerName);
+    this.workingString = this.workingString.replace(/\[customerFirstname\]/g, this.paymentDataSource[this.currentPaymentIndexNo].paymentCustomerForename);
+    this.workingString = this.workingString.replace(/\[ammount\]/g, this.settingsData[0].currencySymbol +  this.paymentDataSource[this.currentPaymentIndexNo].paymentTransactionTotalIncTax);
+    this.workingString = this.workingString.replace(/\[invoiceNumber\]/g, this.paymentDataSource[this.currentPaymentIndexNo].paymentTransactionNumber);
+    this.workingString = this.workingString.replace(/\[dueDate\]/g, this.paymentDataSource[this.currentPaymentIndexNo].paymentTransactionExpiry);
+    this.workingString = this.workingString.replace(/\[workCarriedOut\]/g, this.paymentDataSource[this.currentPaymentIndexNo].paymentInvoiceLines);
+    return this.workingString
   }
 }

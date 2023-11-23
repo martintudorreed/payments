@@ -22,7 +22,11 @@ export class ControlImageManagerComponent {
   }
 
   doGetImageSrcString(imgName: string ) {
-    return './assets/svg-logos/' + imgName + '-logo.svg';
+    if (imgName === 'currentLogo') {
+      return './assets/svg-logos/' + this.applicationModelService.selectedThemeBrand$.getValue() + '-logo.svg';
+    } else {
+      return './assets/svg-logos/' + imgName + '-logo.svg';
+    }
   }
 
   doFlip(ind: number) {

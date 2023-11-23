@@ -27,6 +27,11 @@
       &.data-create-button {
         justify-content: flex-end;
       }
+      &.data-payment-type {
+        border-bottom: 1px solid palette.$medium-grey;
+        padding-bottom: 12px;
+        margin-bottom: 18px;
+      }
     }
 
   }
@@ -50,57 +55,12 @@
         border: 1px solid palette.$medium-grey;
         border-radius: 4px;
         height: 100%;
-        overflow: auto;
+        overflow: hidden;
         position: relative;
         z-index: 9;
-        .edit-area {
-          display: flex;
-          flex-direction: column;
-          height: 100%;
-          overflow: auto;
-          flex-grow: 1;
-          padding: 12px;
-          &.hide {
-            display: none;
-          }
-          .section-list {
-            display: flex;
-            flex-direction: column;
-            .section {
-              display: flex;
-              padding: 6px 0;
-              width: 100%;
-              border: 1px dotted transparent;
-              &:hover {
-                border: 1px dotted palette.$medium-grey;
-              }
-              &:focus {
-                border: 1px dotted palette.$medium-grey;
-              }
-              .section-body {
-                flex-grow: 1;
-                .section-content {
-                  margin: 0;
-                  padding: 0 6px;
-                }
-              }
-              .section-controls {
-                margin: 0;
-                display: flex;
-                align-items: center;
-              }
-
-              .style-menu {
-                .style-option {
-                  margin: 0;
-                }
-              }
-            }
-
-          }
+        .field-outer {
+          margin: 24px 12px 12px;
         }
-
-
         .footer {
           display: flex;
           align-items: center;

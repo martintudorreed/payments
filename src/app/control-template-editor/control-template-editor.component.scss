@@ -2,6 +2,10 @@
 @use "src/sass/ifm-mixins/ifm-breakpoints" as bp;
 
 :host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: auto;
   flex-grow: 1;
 }
 .edit-area {
@@ -17,7 +21,8 @@
       display: flex;
       padding: 6px 0;
       width: 100%;
-      border: 1px dotted transparent;
+      border: 1px dotted palette.$medium-grey;
+      margin: 2px 0;
       &:hover {
         border: 1px dotted palette.$medium-grey;
       }
@@ -46,10 +51,35 @@
         }
       }
     }
-
+    .add-new-item {
+      margin-top: 6px;
+    }
   }
 }
 
 [contenteditable] {
   outline: 0px solid transparent;
+}
+
+.insert-menu {
+  display: flex;
+  flex-direction: column;
+
+  .insert-menu-item {
+    display: flex;
+    padding: 16px;
+    background-color: palette.$white;
+    border: 0;
+    cursor: pointer;
+    &:hover {
+      background-color: palette.$very-light-grey;
+    }
+
+    &:first-child {
+      margin-top: 12px;
+    }
+    &:last-child {
+      margin-bottom: 12px;
+    }
+  }
 }

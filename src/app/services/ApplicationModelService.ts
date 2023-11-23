@@ -84,4 +84,11 @@ export class ApplicationModelService {
 
   currentPaymentIndexNumber = 0;
   currentPaymentIndexNumber$: BehaviorSubject<number> = new BehaviorSubject<number>(this.currentPaymentIndexNumber);
+
+  activeHeader = '-1';
+  activeHeader$: BehaviorSubject<string> = new BehaviorSubject<string>(this.activeHeader);
+
+  isUseSimpleTextFilters = false;
+  isUseSimpleTextFilters$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.isUseSimpleTextFilters);
+
 }

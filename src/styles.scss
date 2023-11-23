@@ -25,7 +25,11 @@ $dense-theme: mat.define-light-theme((
 ));
 
 @include mat.typography-hierarchy(ifm-typography.$ifm-theme-typography);
+@include mat.all-component-densities($ifm-theme);
 @include mat.all-component-themes($ifm-theme);
+
+@include mat.select-density($dense-theme); // Using -2 for compact
+@include mat.input-density($dense-theme); // Also for mat-input
 
 @import "./sass/typography/typography-classes.scss";
 @import "./sass/themes/palette-classes.scss";

@@ -42,9 +42,10 @@ export class ControlTemplateViewerComponent implements OnInit, AfterViewInit, On
 
   @Input() dealerName: string = this.settingsData[0].dealerName;
   @Input() customerFirstname: string = this.paymentData[this.applicationModelService.currentPaymentIndexNumber$.getValue()].paymentCustomerForename;
-  @Input() ammount: string = this.paymentData[this.applicationModelService.currentPaymentIndexNumber$.getValue()].paymentTransactionTotalIncTax.toString();
+  @Input() ammount: string = this.paymentData[this.applicationModelService.currentPaymentIndexNumber$.getValue()].paymentTransactionTotalIncTax.toFixed(2).toString();
   @Input() invoiceNumber: string = this.paymentData[this.applicationModelService.currentPaymentIndexNumber$.getValue()].paymentTransactionNumber;
   @Input() dueDate: string = this.paymentData[this.applicationModelService.currentPaymentIndexNumber$.getValue()].paymentTransactionExpiry;
+  @Input() paymentVehicle: string = this.paymentData[this.applicationModelService.currentPaymentIndexNumber$.getValue()].paymentVehicle;
   @Input() workCarriedOut: string = this.paymentData[this.applicationModelService.currentPaymentIndexNumber$.getValue()].paymentInvoiceLines;
   @Input() triageDisclaimer: string = this.disclaimerData[0].disclaimerContents;
 
@@ -58,8 +59,15 @@ export class ControlTemplateViewerComponent implements OnInit, AfterViewInit, On
     this.applicationModelService.currentTemplateIdViewer$.subscribe((newTemplateId) => {
       // Update other variables accordingly
       console.log('current template change occured');
+
+      this.doLoadPaymentData();
       this.doFindTemplate(newTemplateId);
     });
+    // this.applicationModelService.currentPaymentIndexNumber$.subscribe((newPaymentId) => {
+    //   // Update other variables accordingly
+    //   console.log('current Payment ID change occured');
+    //   console.log(newPaymentId);
+    // });
   }
 
   ngAfterViewInit() {
@@ -78,7 +86,6 @@ export class ControlTemplateViewerComponent implements OnInit, AfterViewInit, On
     //   this.dataSource = this.localDataService.templateData;
     // }
     // this.dataSource = this.localDataService.templateData;
-
   }
 
   doFindTemplate(templateIDToUse: string) {
@@ -105,7 +112,7 @@ export class ControlTemplateViewerComponent implements OnInit, AfterViewInit, On
     //Set the template logo
 
     this.templateLogo = this.dataSource[ind].templateLogo;
-    this.logoString = "./assets/svg-logos/" + this.templateLogo + '-logo.svg';
+    this.logoString = this.doGetImageSrcString(this.templateLogo);
     this.templateSections = this.dataSource[ind].templateSections;
     this.templateContents = this.dataSource[ind].templateContents;
     this.templateCreatedBy = this.dataSource[ind].templateCreatedBy;
@@ -118,11 +125,12 @@ export class ControlTemplateViewerComponent implements OnInit, AfterViewInit, On
     this.workingString = this.templateSections[ind].sectionContent;
     this.workingString = this.workingString.replace(/\[dealerName\]/g, this.dealerName);
     this.workingString = this.workingString.replace(/\[customerFirstname\]/g, this.customerFirstname);
-    this.workingString = this.workingString.replace(/\[ammount\]/g, this.settingsData[0].currencySymbol +  this.ammount);
+    this.workingString = this.workingString.replace(/\[ammount\]/g, this.settingsData[0].currencySymbol +   this.ammount);
     this.workingString = this.workingString.replace(/\[invoiceNumber\]/g, this.invoiceNumber);
     this.workingString = this.workingString.replace(/\[dueDate\]/g, this.dueDate);
     this.workingString = this.workingString.replace(/\[workCarriedOut\]/g, this.workCarriedOut);
     this.workingString = this.workingString.replace(/\[triageDisclaimer\]/g, this.triageDisclaimer);
+    this.workingString = this.workingString.replace(/\[vehicle\]/g, this.paymentVehicle);
     return this.workingString
   }
 
@@ -179,5 +187,23 @@ export class ControlTemplateViewerComponent implements OnInit, AfterViewInit, On
     });
   }
 
+  doGetImageSrcString(imgName: string ) {
+    if (this.templateLogo === 'currentLogo') {
+      return './assets/svg-logos/' + this.applicationModelService.selectedThemeBrand$.getValue() + '-logo.svg';
+    } else {
+      return './assets/svg-logos/' + this.templateLogo + '-logo.svg';
+    }
+  }
+
+  doLoadPaymentData() {
+  this.dealerName = this.settingsData[0].dealerName;
+    this.customerFirstname = this.paymentData[this.applicationModelService.currentPaymentIndexNumber$.getValue()].paymentCustomerForename;
+    this.ammount = this.paymentData[this.applicationModelService.currentPaymentIndexNumber$.getValue()].paymentTransactionTotalIncTax.toFixed(2).toString();
+    this.invoiceNumber = this.paymentData[this.applicationModelService.currentPaymentIndexNumber$.getValue()].paymentTransactionNumber;
+    this.dueDate= this.paymentData[this.applicationModelService.currentPaymentIndexNumber$.getValue()].paymentTransactionExpiry;
+    this.paymentVehicle = this.paymentData[this.applicationModelService.currentPaymentIndexNumber$.getValue()].paymentVehicle;
+    this.workCarriedOut = this.paymentData[this.applicationModelService.currentPaymentIndexNumber$.getValue()].paymentInvoiceLines;
+    this.triageDisclaimer = this.disclaimerData[0].disclaimerContents;
+  }
 
 }

@@ -1,4 +1,7 @@
 <!--<header class="header">-->
 <!--  <h1 class="mat-headline-2 title-text">Payment App</h1>-->
 <!--</header>-->
-<app-form-new-payment></app-form-new-payment>
+<div class="control-container">
+	<button mat-icon-button color="primary" matDialogClose><mat-icon>close</mat-icon></button>
+</div>
+<app-form-new-payment class="form" [dataItemIndexNo]=(this.currentPaymentId)></app-form-new-payment>

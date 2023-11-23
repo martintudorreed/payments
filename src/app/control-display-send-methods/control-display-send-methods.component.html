@@ -19,11 +19,25 @@
 						<div class="controls mat-elevation-custom-z1" *ngIf="paymentStatusId === 5 || paymentStatusId === 1 || paymentStatusId === 2">
 							<div class="field-outer data-template-select compact">
 								<mat-form-field class="ifm-input" appearance="outline" subscriptSizing="dynamic">
-									<mat-label for="templateSelector">Name</mat-label>
+									<mat-label for="templateSelector">Change Template</mat-label>
 									<mat-select [(value)]="selectedTemplate" name="templateSelector" (selectionChange)="doSelectTemplate(selectedTemplate)">
 										<mat-option  [value]="template.templateID" *ngFor="let template of dataSource, let i = index"><span class="option-label">{{ template.templateName }}</span></mat-option>
 									</mat-select>
 								</mat-form-field>
+							</div>
+							<div class="field-outer data-email-subject">
+								<div class="naked-form-field data-email">
+									<div class="field-label"><span>Subject Line</span></div>
+									<div class="field-outline">
+										<div class="field-contents">
+											<span
+													class="section-content"
+													contenteditable="true"
+													[innerHTML]="doReplaceKeysWithData() | safeHtml">
+											</span>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 						<div class="control-container">

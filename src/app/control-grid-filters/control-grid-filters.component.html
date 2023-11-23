@@ -2,9 +2,10 @@
 	<div class="field-outer data-customer-search">
 		<div class="search-outer"><input type="text" matInput placeholder="Search" [(ngModel)]="search"><mat-icon>search</mat-icon></div>
 	</div>
-	<span> Filter by </span>
-	<app-control-chip-filter class="chip-filter"></app-control-chip-filter>
-
+	<div class="field-outer data-customer-filter">
+		<span> Filter by </span>
+		<app-control-chip-filter class="chip-filter"></app-control-chip-filter>
+	</div>
 	<div class="field-outer field-from-date">
 		<mat-form-field class="field ifm-input white-bg" subscriptSizing="dynamic">
 			<mat-label>From</mat-label>
@@ -23,6 +24,7 @@
 		</mat-form-field>
 	</div>
 
-	<button *ngIf="!isStandalone" mat-stroked-button color="primary" class="ifm-stroked-button primary-outline export">Export</button>
-	<button *ngIf="isStandalone" mat-stroked-button (click)="doOpenFormInDialog()" color="primary" class="new-payment ifm-stroked-button primary-outline export">New Payment</button>
+
+	<button *ngIf="isStandalone" mat-stroked-button (click)="doOpenFormInDialog()" color="primary" class="ifm-stroked-button primary-outline export">New Payment</button>
+	<button mat-stroked-button color="primary" class="ifm-stroked-button primary-outline export">Export</button>
 </div>

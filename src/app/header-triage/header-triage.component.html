@@ -1,0 +1,37 @@
+<div class="header-inner">
+	<div class="brand-container">
+		<img class="logo" [matMenuTriggerFor]="brandMenu" src="./assets/svg-logos/{{applicationModelService.selectedThemeBrand$.value}}-logo.svg" alt="logo" />
+		<mat-menu #brandMenu="matMenu" class="ifm-menu style-menu">
+			<button *ngFor="let brand of brands, let i = index" mat-menu-item class="style-option" (click)="doChangeLogo(brand.brandValue)">
+				{{brand.brandName}}
+			</button>
+		</mat-menu>
+		<img class="app-logo" (click)="doGoHome()" src="./assets/svg-logos/triage-logo.svg" alt="Superservice Triage" />
+
+	</div>
+	<nav class="mat-tab-header-pagination-controls-disabled nav" mat-tab-nav-bar [mat-stretch-tabs]="false" [tabPanel]="tabPanel">
+		<a
+			mat-tab-link
+			*ngFor="let link of navLinks"
+			[href]="link.location"
+			[active]="link.label === 'Payments'"
+		>
+		<span>{{ link.label }}</span>
+		</a>
+	</nav>
+	<div class="settings">
+		<button mat-icon-button class="primary-text" (click)="doOpenSettings()"><mat-icon>chat</mat-icon></button>
+	</div>
+	<div class="settings">
+		<button mat-icon-button class="primary-text" (click)="doOpenSettings()"><mat-icon>notifications</mat-icon></button>
+	</div>
+	<div class="settings">
+		<button mat-icon-button class="primary-text" (click)="doOpenSettings()"><mat-icon>settings</mat-icon></button>
+	</div>
+	<mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
+</div>
+
+<mat-menu #helpMenu="matMenu">
+	<button mat-menu-item>Settings Guide</button>
+</mat-menu>
+

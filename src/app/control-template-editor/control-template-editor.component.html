@@ -13,14 +13,28 @@
 				<span *ngIf="template.sectionId === '0'"><img class="logo" src="{{logoString}}" alt="FutureMotors"></span>
 
 				<p *ngIf="template.sectionId !== '0' && template.sectionId !== '4'"
+				   id="editableSection{{i}}"
 				   class="section-content {{template.sectionContentStyle}}"
 				   contenteditable="true"
 				   (blur)="doBlur($event, i)"
-				   [innerHTML]="template.sectionContent | safeHtml">
+				   [innerHTML]="template.sectionContent | safeHtml"
+				   [cdkContextMenuTriggerFor]="context_menu">
 				</p>
+				<ng-template #context_menu>
+					<div class="insert-menu mat-elevation-z4" cdkMenu>
+						<button class="insert-menu-item" cdkMenuItem (click)="insertText('[dealerName]',i)">Dealer Name</button>
+						<button class="insert-menu-item" cdkMenuItem (click)="insertText('[customerFirstname]',i)">Customer First Name</button>
+						<button class="insert-menu-item" cdkMenuItem (click)="insertText('[ammount]',i)">Ammount</button>
+						<button class="insert-menu-item" cdkMenuItem (click)="insertText('[invoiceNumber]',i)">Invoice Number</button>
+						<button class="insert-menu-item" cdkMenuItem (click)="insertText('[dueDate]',i)">Due Date</button>
+						<button class="insert-menu-item" cdkMenuItem (click)="insertText('[vehicle]',i)">Vehicle</button>
+						<button class="insert-menu-item" cdkMenuItem (click)="insertText('[workCarriedOut]',i)">Work Carried Out</button>
+						<button class="insert-menu-item" cdkMenuItem (click)="insertText('[triageDisclaimer]',i)">Triage Disclaimer</button>
+					</div>
+				</ng-template>
 
 				<div class="section-content" *ngIf="template.sectionId === '4'">
-					<button mat-flat-button color="primary">{{template.sectionContent}}</button>
+					<button mat-flat-button color="primary" class="{{templateColorClass}}">{{template.sectionContent}}</button>
 				</div>
 			</div>
 
@@ -46,7 +60,23 @@
 			</mat-menu>
 
 		</section>
+		<section class="add-new-item">
+			<button mat-stroked-button [matMenuTriggerFor]="keyMenu" color="primary" class="ifm-stroked-button primary-outline"><mat-icon>add_circle_outline</mat-icon><span>Add New Line</span></button>
+			<mat-menu #keyMenu="matMenu">
+				<button mat-menu-item  (click)="doAddRow('[dealerName]')">Dealer Name</button>
+				<button mat-menu-item  (click)="doAddRow('[customerFirstname]')">Customer First Name</button>
+				<button mat-menu-item  (click)="doAddRow('[ammount]')">Total Ammount</button>
+				<button mat-menu-item  (click)="doAddRow('[invoiceNumber]')">Invoice Number</button>
+				<button mat-menu-item  (click)="doAddRow('[dueDate]')">Due Date</button>
+				<button mat-menu-item  (click)="doAddRow('[vehicle]')">Vehicle</button>
+				<button mat-menu-item  (click)="doAddRow('[workCarriedOut]')">Work Carried Out</button>
+				<button mat-menu-item  (click)="doAddRow('[triageDisclaimer]')">Disclaimer</button>
+				<button mat-menu-item  (click)="doAddRow('Blank Line')">Blank Line</button>
+			</mat-menu>
+		</section>
 
-		<button mat-icon-button color="primary" (click)="doAddRow()"><mat-icon>add_circle_outline</mat-icon></button>
+
 	</div>
 </div>
+
+

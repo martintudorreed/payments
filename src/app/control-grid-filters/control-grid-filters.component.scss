@@ -11,9 +11,10 @@
   padding: 0 6px;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
   width: 100%;
-  .data-customer-search {
+  .data-customer-filter {
+    display: flex;
+    align-items: center;
     flex-grow: 1;
   }
   .search-outer {
@@ -35,10 +36,6 @@
 button {
   margin: 0 6px;
 }
-
-
-
-
 
 .chip-filter {
   margin: 0 6px;
