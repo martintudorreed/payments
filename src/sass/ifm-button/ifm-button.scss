@@ -14,10 +14,14 @@ button {
     &.primary-outline {
       --mdc-outlined-button-outline-color:  #105fa8;
     }
+    &.warn-outline {
+      --mdc-outlined-button-outline-color:  #BB162B;
+    }
     &.light-outline {
       --mdc-outlined-button-outline-color:  rgba(255,255,255,.4);
     }
   }
+
 
   .mat-mdc-unelevated-button:not(:disabled) {
     &.blue {

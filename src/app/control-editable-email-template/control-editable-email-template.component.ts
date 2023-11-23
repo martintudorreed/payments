@@ -67,6 +67,7 @@ export class ControlEditableEmailTemplateComponent {
 
   doToggleViewer() {
     this.showViewer = !this.showViewer;
+    this.applicationModelService.currentTemplateIdViewer$.next(this.applicationModelService.currentTemplateIdViewer$.getValue());
   }
 
   onSelectedTemplateChange(ind: string) {

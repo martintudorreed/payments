@@ -22,7 +22,7 @@ export class ViewTabbedWorkspaceComponent {
   paymentMethods = this.localDataService.paymentMethodData;
   selectedPaymentMethod = this.paymentMethods[0].paymentMethodID;
 
-  invoiceSource = this.localDataService.ifmAppData;
+  invoiceSource = this.localDataService.ifmAppData.slice(1);
 
   tabs = this.localDataService.mainUITabsData;
   tabToTreatAsHome: number = 0;

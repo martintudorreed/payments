@@ -1,17 +1,22 @@
-<div class="editable-message-body">
+<p
+   id="editableSection"
+   class="section-content"
+   contenteditable="true"
+   (blur)="doBlur($event)"
+   [innerHTML]="sectionContent | safeHtml"
+   [cdkContextMenuTriggerFor]="context_menu">
+</p>
+<h1>There are {{doCountChars()}} Characters used out of 320</h1>
 
-	<p >Hi {{customerName}},
-		<br/><br/>
-		<span contenteditable="true">
-Tax invoice INV-6209 for ${{invoiceAmmount | number: '1.2-2' }}
-			<br/><br/>
-
-Please click the link below to view, print, download or pay the invoice.
-<br/><br/>
-<a href="#">https://tinyurl/payment</a>
-	<br/><br/></span>
-
-	<div><span></span></div></div>
-
-<div><span>Future Motors Ltd</span></div>
-
+<ng-template #context_menu>
+	<div class="insert-menu mat-elevation-z4" cdkMenu>
+		<button class="insert-menu-item" cdkMenuItem (click)="insertText('[dealerName]')">Dealer Name</button>
+		<button class="insert-menu-item" cdkMenuItem (click)="insertText('[customerFirstname]')">Customer First Name</button>
+		<button class="insert-menu-item" cdkMenuItem (click)="insertText('[ammount]')">Ammount</button>
+		<button class="insert-menu-item" cdkMenuItem (click)="insertText('[invoiceNumber]')">Invoice Number</button>
+		<button class="insert-menu-item" cdkMenuItem (click)="insertText('[dueDate]')">Due Date</button>
+		<button class="insert-menu-item" cdkMenuItem (click)="insertText('[vehicle]')">Vehicle</button>
+		<button class="insert-menu-item" cdkMenuItem (click)="insertText('[workCarriedOut]')">Work Carried Out</button>
+		<button class="insert-menu-item" cdkMenuItem (click)="insertText('[triageDisclaimer]')">Triage Disclaimer</button>
+	</div>
+</ng-template>

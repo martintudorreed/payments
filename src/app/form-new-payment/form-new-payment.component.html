@@ -201,8 +201,9 @@
 <!--			</div>-->
 		</div>
 		<div class="control-secondary" *ngIf="paymentStatusId !== 0">
-			<button mat-stroked-button color="warn" (click)="doClearFields()">Cancel Transaction</button>
-			<button mat-stroked-button color="primary" (click)="doClearFields()" class="ifm-stroked-button primary-outline button-paid">Mark as Paid</button>
+			<button mat-stroked-button color="primary" (click)="doClearFields()" class="ifm-stroked-button primary-outline">Mark as Paid</button>
+			<button mat-stroked-button class="button-paid ifm-stroked-button  warn-outline" color="warn" (click)="doClearFields()">Cancel Transaction</button>
+
 		</div>
 		<div class="control-primary">
 			<button class="launcher" mat-icon-button color="primary" (click)="doCardlessPayment($event)"><mat-icon>rocket_launch</mat-icon></button>
