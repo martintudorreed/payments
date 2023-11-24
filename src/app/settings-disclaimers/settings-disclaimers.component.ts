@@ -14,6 +14,8 @@ export class SettingsDisclaimersComponent {
 
   disclaimerData = this.localDataService.disclaimerData;
 
+  informationalData = this.localDataService.informationalLinkData;
+
   constructor(private localDataService: LocalDataService,
               public dialog: MatDialog,
               public applicationModelService: ApplicationModelService,
@@ -23,5 +25,9 @@ export class SettingsDisclaimersComponent {
 
   doBlur(ev: any) {
     this.disclaimerData[0].disclaimerContents = ev.target.innerHTML;
+  }
+
+  doToggleDisclaimerType() {
+    this.disclaimerData[0].disclaimerIsLink = !this.disclaimerData[0].disclaimerIsLink;
   }
 }

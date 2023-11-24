@@ -33,7 +33,7 @@ export class ViewTabbedWorkspaceComponent {
   paymentCustomerName: string = '';
   paymentDateRaised: string =  '';
   paymentSource: string = '';
-  paymentStatus: string = 'New Adhoc Payment';
+  paymentStatus: string = 'New Payment';
   paymentStatusId: number = 5;
   paymentTransactionProviderId: number = 0;
   paymentTransactionNumber: string = '';

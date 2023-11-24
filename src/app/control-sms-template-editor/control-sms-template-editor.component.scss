@@ -1,0 +1,37 @@
+@use "src/sass/themes/palette-constants" as palette;
+@use "src/sass/ifm-mixins/ifm-breakpoints" as bp;
+
+div {
+  margin-bottom: 12px;
+  &.editable-message-body {
+    //padding: 12px 0;
+    //margin: 12px 0;
+  }
+
+}
+[contenteditable] {
+  outline: 0px solid transparent;
+}
+
+.insert-menu {
+  display: flex;
+  flex-direction: column;
+
+  .insert-menu-item {
+    display: flex;
+    padding: 16px;
+    background-color: palette.$white;
+    border: 0;
+    cursor: pointer;
+    &:hover {
+      background-color: palette.$very-light-grey;
+    }
+
+    &:first-child {
+      margin-top: 12px;
+    }
+    &:last-child {
+      margin-bottom: 12px;
+    }
+  }
+}

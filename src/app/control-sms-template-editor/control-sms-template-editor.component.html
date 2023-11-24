@@ -1,0 +1,23 @@
+<p
+		id="editableSection"
+		class="section-content"
+		contenteditable="true"
+		(blur)="doBlur($event)"
+		(keyup)="doKeyUp($event)"
+		[innerHTML]="sectionContent | safeHtml"
+		[cdkContextMenuTriggerFor]="context_menu">
+</p>
+<h1 class="mat-headline-2">There are {{charsInSMS}} Characters used out of 320</h1>
+
+<ng-template #context_menu>
+	<div class="insert-menu mat-elevation-z4" cdkMenu>
+		<button class="insert-menu-item" cdkMenuItem (click)="insertText('[dealerName]')">Dealer Name</button>
+		<button class="insert-menu-item" cdkMenuItem (click)="insertText('[customerFirstname]')">Customer First Name</button>
+		<button class="insert-menu-item" cdkMenuItem (click)="insertText('[ammount]')">Ammount</button>
+		<button class="insert-menu-item" cdkMenuItem (click)="insertText('[invoiceNumber]')">Invoice Number</button>
+		<button class="insert-menu-item" cdkMenuItem (click)="insertText('[dueDate]')">Due Date</button>
+		<button class="insert-menu-item" cdkMenuItem (click)="insertText('[vehicle]')">Vehicle</button>
+		<button class="insert-menu-item" cdkMenuItem (click)="insertText('[workCarriedOut]')">Work Carried Out</button>
+		<button class="insert-menu-item" cdkMenuItem (click)="insertText('[triageDisclaimer]')">Triage Disclaimer</button>
+	</div>
+</ng-template>

@@ -2,14 +2,8 @@
 <div class="header-data">
 	<div class="caption-container">
 		<caption class="mat-caption">
-			<span>Global Settings</span>
+			<span>Global Settings - apply to all Sites and providers</span>
 		</caption>
-	</div>
-	<div class="field-outer data-merchant-id">
-		<mat-form-field class="" subscriptSizing="dynamic" floatLabel="always" appearance="outline">
-			<mat-label>Merchant ID</mat-label>
-			<input type="text" matInput placeholder="ID" [(ngModel)]="dataSource[0].merchantID">
-		</mat-form-field>
 	</div>
 	<div class="field-outer data-template-name">
 		<mat-form-field class="" subscriptSizing="dynamic" floatLabel="always" appearance="outline">
@@ -31,6 +25,86 @@
 	</div>
 </div>
 
+
+<mat-expansion-panel class="ifm-expansion-panel mat-elevation-z0">
+	<mat-expansion-panel-header>
+		<mat-panel-title>
+			<mat-icon>key</mat-icon><span class="title-text">Provider Settings</span>
+		</mat-panel-title>
+	</mat-expansion-panel-header>
+
+	<div class="panel-inner">
+		<app-control-provider-select [isShowLabel]="false" [isSettings]="true" class="provider-select"></app-control-provider-select>
+
+
+		<div class="api-credentials">
+			<div class="field-outer data-key">
+				<mat-form-field class="" subscriptSizing="dynamic" floatLabel="always" appearance="outline">
+					<mat-label>API Key</mat-label>
+					<input type="text" matInput placeholder="API Key" [(ngModel)]="dataSource[0].APIKey">
+				</mat-form-field>
+			</div>
+			<div class="field-outer data-template-name">
+				<mat-form-field class="" subscriptSizing="dynamic" floatLabel="always" appearance="outline">
+					<mat-label>Currency Symbol</mat-label>
+					<input type="text" matInput placeholder="Symbol" [(ngModel)]="dataSource[0].currencySymbol">
+				</mat-form-field>
+			</div>
+			<div class="field-outer data-template-name">
+				<mat-form-field class="" subscriptSizing="dynamic" floatLabel="always" appearance="outline">
+					<mat-label>Country Code.</mat-label>
+					<input type="text" matInput placeholder="Country" [(ngModel)]="dataSource[0].countryCode">
+				</mat-form-field>
+			</div>
+
+		</div>
+
+		<div class="merchant-keys">
+			<div class="field-outer data-merchant-id">
+				<mat-form-field class="" subscriptSizing="dynamic" floatLabel="always" appearance="outline">
+					<mat-label>Merchant ID</mat-label>
+					<input type="text" matInput placeholder="ID" [(ngModel)]="dataSource[0].merchantID">
+				</mat-form-field>
+			</div>
+		</div>
+
+		<div class="api-keys">
+			<div class="field-outer data-key">
+				<mat-form-field class="" subscriptSizing="dynamic" floatLabel="always" appearance="outline">
+					<mat-label>Public Integration Key</mat-label>
+					<input type="text" matInput placeholder="key" [(ngModel)]="dataSource[0].publicIntegrationIKey">
+				</mat-form-field>
+			</div>
+			<div class="field-outer data-key">
+				<mat-form-field class="" subscriptSizing="dynamic" floatLabel="always" appearance="outline">
+					<mat-label>API Username</mat-label>
+					<input type="text" matInput placeholder="Username" [(ngModel)]="dataSource[0].APIUserName">
+				</mat-form-field>
+			</div>
+
+			<div class="field-outer data-key">
+				<mat-form-field class="" subscriptSizing="dynamic" floatLabel="always" appearance="outline">
+					<mat-label>API Password</mat-label>
+					<input type="text" matInput placeholder="********" [(ngModel)]="dataSource[0].APIPassword">
+				</mat-form-field>
+			</div>
+			<div class="field-outer data-key">
+				<mat-form-field class="" subscriptSizing="dynamic" floatLabel="always" appearance="outline">
+					<mat-label>Shared Secret</mat-label>
+					<input type="text" matInput placeholder="Secret" [(ngModel)]="dataSource[0].sharedSecret">
+				</mat-form-field>
+			</div>
+		</div>
+
+		<div class="api-currency-code">
+
+		</div>
+
+	</div>
+
+
+</mat-expansion-panel>
+
 <mat-expansion-panel class="ifm-expansion-panel mat-elevation-z0" (opened)="doTogglePanel(true)" (closed)="doTogglePanel(false)" [ngClass]="{'mat-elevation-z2': isImagelibraryOpen}">
 	<mat-expansion-panel-header>
 		<mat-panel-title>
@@ -48,73 +122,22 @@
 	</mat-expansion-panel-header>
 </mat-expansion-panel>
 
+<!--<mat-expansion-panel class="ifm-expansion-panel mat-elevation-z0">-->
+<!--	<mat-expansion-panel-header>-->
+<!--		<mat-panel-title>-->
+<!--			<mat-icon>credit_card</mat-icon> <span class="title-text">Financial Settings</span>-->
+<!--		</mat-panel-title>-->
+<!--		<mat-panel-description>-->
 
-	<mat-expansion-panel class="ifm-expansion-panel mat-elevation-z0">
-		<mat-expansion-panel-header>
-			<mat-panel-title>
-				<mat-icon>key</mat-icon><span class="title-text">Secrets and Keys</span>
-			</mat-panel-title>
-		</mat-expansion-panel-header>
-
-		<div class="panel-inner">
-			<div class="api-keys">
-				<div class="field-outer data-key">
-					<mat-form-field class="" subscriptSizing="dynamic" floatLabel="always" appearance="outline">
-						<mat-label>Public Integration Key</mat-label>
-						<input type="text" matInput placeholder="key" [(ngModel)]="dataSource[0].publicIntegrationIKey">
-					</mat-form-field>
-				</div>
-				<div class="field-outer data-key">
-					<mat-form-field class="" subscriptSizing="dynamic" floatLabel="always" appearance="outline">
-						<mat-label>API Key</mat-label>
-						<input type="text" matInput placeholder="API Key" [(ngModel)]="dataSource[0].APIKey">
-					</mat-form-field>
-				</div>
-
-				<div class="field-outer data-key">
-					<mat-form-field class="" subscriptSizing="dynamic" floatLabel="always" appearance="outline">
-						<mat-label>Shared Secret</mat-label>
-						<input type="text" matInput placeholder="Secret" [(ngModel)]="dataSource[0].sharedSecret">
-					</mat-form-field>
-				</div>
-			</div>
-
-			<div class="api-credentials">
-				<div class="field-outer data-key">
-					<mat-form-field class="" subscriptSizing="dynamic" floatLabel="always" appearance="outline">
-						<mat-label>API Username</mat-label>
-						<input type="text" matInput placeholder="Username" [(ngModel)]="dataSource[0].APIUserName">
-					</mat-form-field>
-				</div>
-
-				<div class="field-outer data-key">
-					<mat-form-field class="" subscriptSizing="dynamic" floatLabel="always" appearance="outline">
-						<mat-label>API Password</mat-label>
-						<input type="text" matInput placeholder="********" [(ngModel)]="dataSource[0].APIPassword">
-					</mat-form-field>
-				</div>
-			</div>
-		</div>
-
-
-	</mat-expansion-panel>
-
-	<mat-expansion-panel class="ifm-expansion-panel mat-elevation-z0">
-		<mat-expansion-panel-header>
-			<mat-panel-title>
-				<mat-icon>credit_card</mat-icon> <span class="title-text">Financial Settings</span>
-			</mat-panel-title>
-			<mat-panel-description>
-
-			</mat-panel-description>
-		</mat-expansion-panel-header>
-		<div class="field-outer data-template-name">
-			<mat-form-field class="" subscriptSizing="dynamic" floatLabel="always" appearance="outline">
-				<mat-label>Currency Symbol</mat-label>
-				<input type="text" matInput placeholder="Symbol" [(ngModel)]="dataSource[0].currencySymbol">
-			</mat-form-field>
-		</div>
-	</mat-expansion-panel>
+<!--		</mat-panel-description>-->
+<!--	</mat-expansion-panel-header>-->
+<!--	<div class="field-outer data-template-name">-->
+<!--		<mat-form-field class="" subscriptSizing="dynamic" floatLabel="always" appearance="outline">-->
+<!--			<mat-label>Currency Symbol</mat-label>-->
+<!--			<input type="text" matInput placeholder="Symbol" [(ngModel)]="dataSource[0].currencySymbol">-->
+<!--		</mat-form-field>-->
+<!--	</div>-->
+<!--</mat-expansion-panel>-->
 
 <mat-expansion-panel class="ifm-expansion-panel mat-elevation-z0">
 	<mat-expansion-panel-header>

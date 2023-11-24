@@ -17,7 +17,13 @@
 				<span class="mat-headline-4 refNumber-text">{{paymentTransactionNumber}}</span>
 			</div>
 		</div>
-		<app-control-provider-select class="provider-select" *ngIf="paymentStatusId === 5"></app-control-provider-select>
+<!--		<app-control-provider-select class="provider-select" *ngIf="paymentStatusId === 5"></app-control-provider-select>-->
+
+		<div class="field-outer data-customer-search" *ngIf="paymentStatusId === 5">
+			<div class="search-outer"><div class="app-selector" *ngIf="(applicationModelService.activeHeader$ | async) !== '0'"><span>Triage</span><mat-icon>arrow_drop_down</mat-icon></div><input type="text" matInput class="ifm-input" placeholder="Job Number" [(ngModel)]="search"><mat-icon>search</mat-icon></div>
+		</div>
+
+
 		<div class="invoice-meta-data" *ngIf="dataItemIndexNo !== -1">
 			<div class="field-outer data-customer-search">
 				<div class="naked-form-field data-email">

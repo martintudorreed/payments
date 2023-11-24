@@ -7,6 +7,7 @@ export interface generalSettings {
   dealerEmail:  string;
   dealerContactNumber: string;
   currencySymbol: string;
+  countryCode: string;
   APIKey: string;
   sharedSecret: string;
   APIUserName: string;
@@ -18,7 +19,15 @@ export interface generalSettings {
 
 export interface disclaimers {
   disclaimerId: string;
+  disclaimerIsLink: boolean;
+  disclaimerLink: string;
   disclaimerContents: string;
+}
+
+export interface informationalLinks {
+  informationalLinkId: string;
+  informationalLinkSubject: string;
+  informationalLinkURL: string;
 }
 
 export interface emailSettings {
@@ -71,6 +80,17 @@ export interface custTemplate {
   custTemplateCreatedOn: string;
 }
 
+export interface smsTemplate {
+  smsTemplateID: string;
+  smsTemplateProviderId: string;
+  smsTemplateType: string;
+  smsTemplateSourceApplication: string;
+  smsTemplateName: string;
+  smsTemplateContent: string;
+  smsTemplateCreatedBy: string;
+  smsTemplateCreatedOn: string;
+}
+
 export interface themeBrands {
   brandValue: string;
   brandName: string;
@@ -96,6 +116,11 @@ export interface paymentMethods {
 export interface gridFilterItems {
   gridFilterItemID: number;
   gridFilterItemName: string;
+}
+
+export interface dealerships {
+  dealershipID: number;
+  dealershipName: string;
 }
 
 export interface templateFilterItems {
@@ -172,6 +197,30 @@ export class LocalDataService {
 
   constructor() { }
 
+  smsTemplateData: smsTemplate[] = [
+    {
+      smsTemplateID: '0',
+      smsTemplateProviderId: '0',
+      smsTemplateType: 'sms',
+      smsTemplateSourceApplication: '0',
+      smsTemplateName: 'Default - Request Payment',
+      smsTemplateContent: 'Tax invoice INV-6209 for $[ammount] <br><br>' +
+        'Please click the link below to view, print, download or pay the invoice.<br><br>' +
+        '[tinyURL]<br><br>' +
+        '[dealerName]',
+      smsTemplateCreatedBy: 'Martin Tudor Reed',
+      smsTemplateCreatedOn: '02/04/2034',
+    }
+  ]
+
+  informationalLinkData: informationalLinks[] = [
+    {
+      informationalLinkId: '0',
+      informationalLinkSubject: 'Terms and Conditions and Disclaimer',
+      informationalLinkURL: 'http://www.tult.co.nz/tsandcs'
+    }
+  ]
+
   emailSettingData: emailSettings[] = [
     {
       emailID: '0',
@@ -192,6 +241,8 @@ export class LocalDataService {
   disclaimerData: disclaimers[] = [
     {
       disclaimerId: '0',
+      disclaimerIsLink: false,
+      disclaimerLink: '',
       disclaimerContents: '<hr class="ifm-hr"><span class="mat-caption">Superservice Triage does not store or process financial information. The Triage Customer Authorisation screen has the PayPal site within an Iframe and everything inside of that is secure. Triage cannot see any data that is being transacted due to the PayPal encryption being used.<br><br>' +
         'Some additional options such as Payflow Link may need to be configured in the merchants account however the merchant (dealer) will need to investigate this as part of their due diligence. Additional fees may be charged to the dealer by PayPal for a business account.<br><br>' +
         'Superservice Triage or Infomedia is not responsible for payment issues between the customer and PayPal.</span>',
@@ -228,6 +279,7 @@ export class LocalDataService {
       dealerEmail:  'fms@theworldoftommorrow.com',
       dealerContactNumber: '04026704555',
       currencySymbol: '$',
+      countryCode: 'AUS',
       APIKey: 'e3eDaFUFZ07ADAuADPEG23qe3Ijde2',
       sharedSecret: 'H4lHKlWnw54ciC1nlUbwibD2ljoXIM',
       APIUserName: 'InfoMedia_API_Dev',

@@ -13,5 +13,17 @@
 			(blur)="doBlur($event)"
 			[innerHTML]="disclaimerData[0].disclaimerContents | safeHtml">
 	</p>
+
+	<div class="field-outer data-is-link">
+		<mat-slide-toggle [checked]='disclaimerData[0].disclaimerIsLink' (change)="doToggleDisclaimerType()">Use Shortened link</mat-slide-toggle>
+	</div>
+
+	<div class="field-outer data-key" *ngIf="disclaimerData[0].disclaimerIsLink">
+		<mat-form-field class="" subscriptSizing="dynamic" floatLabel="always" appearance="outline">
+			<mat-label>Link URL</mat-label>
+			<input type="text" matInput placeholder="Link subject" [(ngModel)]="disclaimerData[0].disclaimerLink">
+		</mat-form-field>
+	</div>
+
 </div>
 

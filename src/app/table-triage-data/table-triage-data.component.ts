@@ -4,6 +4,8 @@ import {LocalDataService} from "../services/local-data.service";
 import { DialogLoadFromApplicationDatasourceComponent} from "../dialog-load-from-application-datasource/dialog-load-from-application-datasource.component";
 
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import {MatTableDataSource} from "@angular/material/table";
+import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
 
 @Component({
   selector: 'app-table-triage-data',
@@ -11,6 +13,9 @@ import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dial
   styleUrls: ['./table-triage-data.component.scss']
 })
 export class TableTriageDataComponent {
+
+  displayedColumns: string[] = [  'triageDataJobNumber', 'triageDataCustomerName','triageDataCustomerName' , 'triageDataRegoVIN', 'triageDataIdentified', 'triageDataAuthorised', 'controls'];
+  dataSource = new MatTableDataSource(this.localDataService.triageData);
 
   triageData = this.localDataService.triageData;
 
@@ -27,9 +32,11 @@ export class TableTriageDataComponent {
               private localDataService: LocalDataService, public dialog: MatDialog, ) {
   }
 
-  onRowClick(item: number) {
+  onRowClick(item: number, ev: any) {
+    console.log('did I fire ?');
+    ev.stopPropagation();
     this.dataItem  = this.localDataService.triageData[item];
-    this.dataItems.unshift(
+    this.dataItems.push(
       {
         paymentIdNo: this.dataItems.length,
         paymentCustomerName:  this.dataItem.triageDataCustomerName,
@@ -58,18 +65,26 @@ export class TableTriageDataComponent {
         paymentInvoiceLines: 'Operation Inspection details go here',
       }
     );
+
+    console.log(this.dataItems);
+    console.log('which means that the payId is ');
+    console.log(this.dataItems.length);
+    // ensure that when dashboard is showing the tab indexes are correct
     if( !this.applicationModelService.isShowDashboard$.getValue()) {
       this.tabOffset = 1;
     } else {
       this.tabOffset = 2;
     }
+
     this.tabIndex = this.applicationModelService.currentTabCount$.getValue() + this.tabOffset;
     console.log('current tab should be ' + this.tabIndex + 'displayed no ' + (this.tabIndex + this.tabOffset));
+
     this.applicationModelService.nextNewTabContentType$.next('newPaymentTriage');
+
     this.tabs.push({
       tabIndex: this.tabIndex,
-      tabLabel: 'RO:' + this.dataItem.triageDataJobNumber,
-      tabContentType: 'newPaymentTriageNotSent',
+      tabLabel: '∞FM-' + this.dataItem.triageDataJobNumber,
+      tabContentType: 'payment',
       tabdataItemIndexNo: this.dataItems.length -1});
 
     console.log(this.tabs);
@@ -77,7 +92,17 @@ export class TableTriageDataComponent {
     setTimeout(() => {
       this.applicationModelService.activeMainUITab$.next(this.tabIndex);
       this.applicationModelService.currentTabCount$.next(this.tabIndex);
+      this.applicationModelService.currentPaymentIndexNumber$.next(this.dataItems.length);
       this.dialog.closeAll();
     }, 200);
+
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.displayedColumns, event.previousIndex, event.currentIndex);
+  }
+
+  absorb(ev: any) {
+
   }
 }

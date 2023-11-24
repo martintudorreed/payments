@@ -16,6 +16,7 @@ export class FormNewPaymentComponent implements OnInit, AfterViewInit{
   @Input() tabContentType: string = 'newPayment';
   @Input() isStandalone: boolean = false;
   browserWindowWidthValue: number | null = null;
+  search: string = '';
 
   isShowEmail: number = 0;
   isHasAddress: boolean = false;
@@ -24,7 +25,7 @@ export class FormNewPaymentComponent implements OnInit, AfterViewInit{
   paymentCustomerName: string = '';
   paymentDateRaised: string =  '';
   paymentSource: string = '';
-  paymentStatus: string = 'New Adhoc Payment';
+  paymentStatus: string = 'New Payment';
   paymentStatusId: number = 5;
   paymentTransactionProviderId: number = 0;
   paymentTransactionNumber: string = '';

@@ -21,6 +21,7 @@ export class ControlTemplateViewerComponent implements OnInit, AfterViewInit, On
   settingsData = this.localDataService.generalSettingsData;
 
   disclaimerData = this.localDataService.disclaimerData;
+  informationalData = this.localDataService.informationalLinkData;
 
   dataSource = this.localDataService.templateData;
   foundTemplateIndex: number = -1;
@@ -47,7 +48,7 @@ export class ControlTemplateViewerComponent implements OnInit, AfterViewInit, On
   @Input() dueDate: string = this.paymentData[this.applicationModelService.currentPaymentIndexNumber$.getValue()].paymentTransactionExpiry;
   @Input() paymentVehicle: string = this.paymentData[this.applicationModelService.currentPaymentIndexNumber$.getValue()].paymentVehicle;
   @Input() workCarriedOut: string = this.paymentData[this.applicationModelService.currentPaymentIndexNumber$.getValue()].paymentInvoiceLines;
-  @Input() triageDisclaimer: string = this.disclaimerData[0].disclaimerContents;
+  @Input() triageDisclaimer: string = this.doBuildDisclaimer();
 
   workingString: string = '';
 
@@ -203,7 +204,15 @@ export class ControlTemplateViewerComponent implements OnInit, AfterViewInit, On
     this.dueDate= this.paymentData[this.applicationModelService.currentPaymentIndexNumber$.getValue()].paymentTransactionExpiry;
     this.paymentVehicle = this.paymentData[this.applicationModelService.currentPaymentIndexNumber$.getValue()].paymentVehicle;
     this.workCarriedOut = this.paymentData[this.applicationModelService.currentPaymentIndexNumber$.getValue()].paymentInvoiceLines;
-    this.triageDisclaimer = this.disclaimerData[0].disclaimerContents;
+    this.triageDisclaimer = this.doBuildDisclaimer();
+  }
+
+  doBuildDisclaimer() {
+    if(this.disclaimerData[0].disclaimerIsLink) {
+      return '<a href="' + this.disclaimerData[0].disclaimerLink + '">' + this.disclaimerData[0].disclaimerContents + '</a>'
+    } else {
+      return this.disclaimerData[0].disclaimerContents;
+    }
   }
 
 }

@@ -3,28 +3,38 @@
 		<div class="search-outer"><input type="text" matInput placeholder="Search" [(ngModel)]="search"><mat-icon>search</mat-icon></div>
 	</div>
 	<div class="field-outer data-customer-filter">
-		<span> Filter by </span>
+		<span> Dealer </span>
+		<app-control-chip-dealership-filter class="chip-filter"></app-control-chip-dealership-filter>
+	</div>
+	<div class="field-outer data-customer-filter">
+		<span> Status </span>
 		<app-control-chip-filter class="chip-filter"></app-control-chip-filter>
 	</div>
-	<div class="field-outer field-from-date">
-		<mat-form-field class="field ifm-input white-bg" subscriptSizing="dynamic">
-			<mat-label>From</mat-label>
-			<input matInput [matDatepicker]="picker" placeholder="From" [(ngModel)]="dpicker">
-			<mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-			<mat-datepicker #picker></mat-datepicker>
-		</mat-form-field>
+	<div class="data-date-range">
+		<div class="field-outer field-from-date">
+			<mat-form-field class="field ifm-input white-bg" subscriptSizing="dynamic">
+				<mat-label>From</mat-label>
+				<input matInput [matDatepicker]="picker" placeholder="From" [(ngModel)]="dpicker">
+				<mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+				<mat-datepicker #picker></mat-datepicker>
+			</mat-form-field>
+		</div>
+
+		<div class="field-outer field-to-date">
+			<mat-form-field class="field ifm-input white-bg" subscriptSizing="dynamic">
+				<mat-label>To</mat-label>
+				<input matInput [matDatepicker]="picker1" placeholder="To" name="p1" [(ngModel)]="dpicker1">
+				<mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+				<mat-datepicker #picker1></mat-datepicker>
+			</mat-form-field>
+		</div>
+		<button mat-icon-button color="primary" class="ifm-stroked-button primary-outline export"><mat-icon>restart_alt</mat-icon></button>
 	</div>
-
-	<div class="field-outer field-to-date">
-		<mat-form-field class="field ifm-input white-bg" subscriptSizing="dynamic">
-			<mat-label>To</mat-label>
-			<input matInput [matDatepicker]="picker1" placeholder="To" name="p1" [(ngModel)]="dpicker1">
-			<mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
-			<mat-datepicker #picker1></mat-datepicker>
-		</mat-form-field>
-	</div>
-
-
 	<button *ngIf="isStandalone" mat-stroked-button (click)="doOpenFormInDialog()" color="primary" class="ifm-stroked-button primary-outline export">New Payment</button>
-	<button mat-stroked-button color="primary" class="ifm-stroked-button primary-outline export">Export</button>
+	<button mat-stroked-button [matMenuTriggerFor]="exportMenu" color="primary" class="ifm-stroked-button primary-outline export">Export</button>
+
+	<mat-menu #exportMenu="matMenu">
+		<button mat-menu-item>xls</button>
+		<button mat-menu-item>csv</button>
+	</mat-menu>
 </div>

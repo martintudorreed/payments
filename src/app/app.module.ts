@@ -59,6 +59,8 @@ import { HeaderMenusComponent } from './header-menus/header-menus.component';
 import { ControlSmsTemplateViewerComponent } from './control-sms-template-viewer/control-sms-template-viewer.component';
 import { DialogMarkAsPaidComponent } from './dialog-mark-as-paid/dialog-mark-as-paid.component';
 import { DialogCancelTransactionComponent } from './dialog-cancel-transaction/dialog-cancel-transaction.component';
+import { ControlChipDealershipFilterComponent } from './control-chip-dealership-filter/control-chip-dealership-filter.component';
+import { ControlSmsTemplateEditorComponent } from './control-sms-template-editor/control-sms-template-editor.component';
 
 const routes: Routes = [
 
@@ -114,7 +116,9 @@ const routes: Routes = [
     HeaderMenusComponent,
     ControlSmsTemplateViewerComponent,
     DialogMarkAsPaidComponent,
-    DialogCancelTransactionComponent
+    DialogCancelTransactionComponent,
+    ControlChipDealershipFilterComponent,
+    ControlSmsTemplateEditorComponent
   ],
   imports: [
     BrowserModule,

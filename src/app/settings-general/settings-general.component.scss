@@ -22,8 +22,15 @@
 .panel-inner {
   flex-direction: column;
   display: flex;
+  .provider-select {
+    margin-bottom: 24px;
+  }
   .field-outer {
     margin: 0 6px;
+  }
+  .merchant-keys {
+    display: flex;
+    margin-bottom: 24px;
   }
   .api-keys {
     display: flex;
@@ -31,6 +38,11 @@
   }
   .api-credentials {
     display: flex;
+    margin-bottom: 24px;
+  }
+  .api-currency-code {
+    display: flex;
+    margin-bottom: 24px;
   }
 }
 

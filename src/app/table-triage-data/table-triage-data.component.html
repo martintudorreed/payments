@@ -1,89 +1,181 @@
-<div class="table-container">
-	<table class="ifm-table" *ngIf="(applicationModelService.currentBreakpoint$ | async) !== 'Small' && (applicationModelService.currentBreakpoint$ | async) !== 'XSmall'">
-		<thead>
-			<tr>
-				<th class="data-job-number">
-					<div class="cell-inner">
-						<mat-icon class="ifm-icon-medium th-icon">check_circle</mat-icon><span class="header-text">Job Number</span>
-						<mat-icon class="ifm-icon-medium">vertical_align_bottom</mat-icon>
-						<!--					<mat-icon>upgrade</mat-icon> ascending-->
-					</div>
-				</th>
+<!--<div class="table-container">-->
+<!--	<table class="ifm-table" *ngIf="(applicationModelService.currentBreakpoint$ | async) !== 'Small' && (applicationModelService.currentBreakpoint$ | async) !== 'XSmall'">-->
+<!--		<thead>-->
+<!--			<tr>-->
+<!--				<th class="data-job-number">-->
+<!--					<div class="cell-inner">-->
+<!--						<mat-icon class="ifm-icon-medium th-icon">check_circle</mat-icon><span class="header-text">Job Number</span>-->
+<!--						<mat-icon class="ifm-icon-medium">vertical_align_bottom</mat-icon>-->
+<!--						&lt;!&ndash;					<mat-icon>upgrade</mat-icon> ascending&ndash;&gt;-->
+<!--					</div>-->
+<!--				</th>-->
 
-				<th class="data-created-on">
-					<div class="cell-inner">
-						<mat-icon class="ifm-icon-medium th-icon">person</mat-icon><span class="header-text">Customer Name</span>
-					</div>
-				</th>
+<!--				<th class="data-created-on">-->
+<!--					<div class="cell-inner">-->
+<!--						<mat-icon class="ifm-icon-medium th-icon">person</mat-icon><span class="header-text">Customer Name</span>-->
+<!--					</div>-->
+<!--				</th>-->
 
-				<th class="data-vehicle">
-					<div class="cell-inner">
-						<mat-icon class="ifm-icon-medium th-icon">rocket_launch</mat-icon><span class="header-text">Vehicle</span>
-					</div>
-				</th>
+<!--				<th class="data-vehicle">-->
+<!--					<div class="cell-inner">-->
+<!--						<mat-icon class="ifm-icon-medium th-icon">rocket_launch</mat-icon><span class="header-text">Vehicle</span>-->
+<!--					</div>-->
+<!--				</th>-->
 
-				<th class="data-rego-vin">
-					<div class="cell-inner">
-						<mat-icon class="ifm-icon-medium th-icon">fingerprint</mat-icon><span class="header-text">Rego / VIN</span>
-					</div>
-				</th>
-				<th class="data-created-on numeric">
-					<div class="cell-inner numeric no-collapse">
-						<mat-icon class="ifm-icon-medium th-icon">paid</mat-icon><span class="header-text">Identified</span>
-					</div>
-				</th>
-				<th class="data-created-on numeric">
-					<div class="cell-inner numeric no-collapse">
-						<mat-icon class="ifm-icon-medium th-icon">paid</mat-icon><span class="header-text">Authorised</span>
-					</div>
-				</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr *ngFor="let item of triageData,let i = index" (click)="onRowClick(i)" class="is-selectable">
-				<td>
-					<div class="cell-inner">
-						<span class="cell-text">{{item.triageDataJobNumber}}</span>
-					</div>
-				</td>
+<!--				<th class="data-rego-vin">-->
+<!--					<div class="cell-inner">-->
+<!--						<mat-icon class="ifm-icon-medium th-icon">fingerprint</mat-icon><span class="header-text">Rego / VIN</span>-->
+<!--					</div>-->
+<!--				</th>-->
+<!--				<th class="data-created-on numeric">-->
+<!--					<div class="cell-inner numeric no-collapse">-->
+<!--						<mat-icon class="ifm-icon-medium th-icon">paid</mat-icon><span class="header-text">Identified</span>-->
+<!--					</div>-->
+<!--				</th>-->
+<!--				<th class="data-created-on numeric">-->
+<!--					<div class="cell-inner numeric no-collapse">-->
+<!--						<mat-icon class="ifm-icon-medium th-icon">paid</mat-icon><span class="header-text">Authorised</span>-->
+<!--					</div>-->
+<!--				</th>-->
+<!--			</tr>-->
+<!--		</thead>-->
+<!--		<tbody>-->
+<!--			<tr *ngFor="let item of triageData,let i = index" (click)="onRowClick(i)" class="is-selectable">-->
+<!--				<td>-->
+<!--					<div class="cell-inner">-->
+<!--						<span class="cell-text">{{item.triageDataJobNumber}}</span>-->
+<!--					</div>-->
+<!--				</td>-->
 
-				<td>
-					<div class="cell-inner">
-						<span class="cell-text">{{item.triageDataCustomerName}}</span>
-					</div>
-				</td>
+<!--				<td>-->
+<!--					<div class="cell-inner">-->
+<!--						<span class="cell-text">{{item.triageDataCustomerName}}</span>-->
+<!--					</div>-->
+<!--				</td>-->
 
-				<td>
-					<div class="cell-inner">
-						<span class="cell-text">{{item.triageDataVehicle}}</span>
-					</div>
-				</td>
+<!--				<td>-->
+<!--					<div class="cell-inner">-->
+<!--						<span class="cell-text">{{item.triageDataCustomerName}}</span>-->
+<!--					</div>-->
+<!--				</td>-->
 
 
-				<td>
-					<div class="cell-inner">
-						<span class="cell-text">{{item.triageDataRegoVIN}}</span>
-					</div>
-				</td>
+<!--				<td>-->
+<!--					<div class="cell-inner">-->
+<!--						<span class="cell-text">{{item.triageDataRegoVIN}}</span>-->
+<!--					</div>-->
+<!--				</td>-->
 
-				<td>
-					<div class="cell-inner numeric">
-						<span class="cell-text">{{item.triageDataIdentified | number: '1.2-2'}}</span>
-					</div>
-				</td>
+<!--				<td>-->
+<!--					<div class="cell-inner numeric">-->
+<!--						<span class="cell-text">{{item.triageDataIdentified | number: '1.2-2'}}</span>-->
+<!--					</div>-->
+<!--				</td>-->
 
-				<td>
-					<div class="cell-inner numeric">
-						<span class="cell-text">{{item.triageDataAuthorised | number: '1.2-2'}}</span>
-					</div>
-				</td>
-			</tr>
-		</tbody>
-	</table>
-</div>
+<!--				<td>-->
+<!--					<div class="cell-inner numeric">-->
+<!--						<span class="cell-text">{{item.triageDataAuthorised | number: '1.2-2'}}</span>-->
+<!--					</div>-->
+<!--				</td>-->
+<!--			</tr>-->
+<!--		</tbody>-->
+<!--	</table>-->
+<!--</div>-->
 
-<!--triageDataJobNumber: '88288442',-->
-<!--triageDataCustomerName: 'Duncan Seyward',-->
-<!--triageDataVehicle: 'Spacecar 3034 - Convertible 4sField',-->
-<!--triageDataRegoVIN: 'Zaphod99',-->
-<!--triageDataAuthorised: '88.88',-->
+<table mat-table
+	   class="ifm-table"
+	   [dataSource]="dataSource"
+	   matSort
+	   id="table"
+       #table
+	   cdkDropList
+	   cdkDropListOrientation="horizontal"
+	   (cdkDropListDropped)="drop($event)"
+	   >
+
+	<ng-container matColumnDef="triageDataJobNumber">
+		<th class="data-source" mat-header-cell mat-sort-header cdkDrag *matHeaderCellDef>
+			<div class="cell-inner no-collapse ">
+				<mat-icon class="ifm-icon-medium th-icon">pin</mat-icon>
+				<span class="header-text">Ref. No.</span>
+			</div>
+		</th>
+		<td mat-cell *matCellDef="let element">
+			<div class="cell-inner no-collapse">
+				<span class="cell-text "> {{element.triageDataJobNumber}} </span>
+			</div>
+		</td>
+	</ng-container>
+
+	<ng-container matColumnDef="triageDataCustomerName">
+		<th class="data-source" mat-header-cell mat-sort-header cdkDrag *matHeaderCellDef>
+			<div class="cell-inner no-collapse ">
+				<mat-icon class="ifm-icon-medium th-icon">pin</mat-icon>
+				<span class="header-text">Customer</span>
+			</div>
+		</th>
+		<td mat-cell *matCellDef="let element">
+			<div class="cell-inner no-collapse">
+				<span class="cell-text "> {{element.triageDataCustomerName}} </span>
+			</div>
+		</td>
+	</ng-container>
+
+	<ng-container matColumnDef="triageDataRegoVIN">
+		<th class="data-source" mat-header-cell mat-sort-header cdkDrag *matHeaderCellDef>
+			<div class="cell-inner no-collapse ">
+				<mat-icon class="ifm-icon-medium th-icon">pin</mat-icon>
+				<span class="header-text">Rego/VIN</span>
+			</div>
+		</th>
+		<td mat-cell *matCellDef="let element">
+			<div class="cell-inner no-collapse">
+				<span class="cell-text "> {{element.triageDataRegoVIN}} </span>
+			</div>
+		</td>
+	</ng-container>
+
+
+	<ng-container matColumnDef="triageDataIdentified">
+		<th mat-header-cell mat-sort-header cdkDrag *matHeaderCellDef>
+			<div class="cell-inner no-collapse">
+				<mat-icon class="ifm-icon-medium th-icon">person</mat-icon>
+				<span class="header-text">Identified</span>
+			</div>
+		</th>
+		<td mat-cell *matCellDef="let element">
+			<div class="cell-inner no-collapse numeric">
+				<span class="cell-text demi">{{element.triageDataIdentified | number: '1.2-2'}}</span>
+			</div>
+		</td>
+	</ng-container>
+
+	<ng-container matColumnDef="triageDataAuthorised">
+		<th mat-header-cell mat-sort-header cdkDrag *matHeaderCellDef>
+			<div class="cell-inner no-collapse">
+				<mat-icon class="ifm-icon-medium th-icon">person</mat-icon>
+				<span class="header-text">Authorised</span>
+			</div>
+		</th>
+		<td mat-cell *matCellDef="let element">
+			<div class="cell-inner no-collapse numeric">
+				<span class="cell-text demi">{{element.triageDataAuthorised | number: '1.2-2'}}</span>
+			</div>
+		</td>
+	</ng-container>
+
+	<ng-container matColumnDef="controls">
+		<th mat-header-cell *matHeaderCellDef>
+			<div class="cell-inner no-collapse">&nbsp;</div>
+		</th>
+		<td mat-cell *matCellDef="let element">
+			<button mat-icon-button color="primary" (click)="absorb($event)"><mat-icon>more_vert</mat-icon></button>
+		</td>
+	</ng-container>
+
+	<tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+	<tr mat-row
+		*matRowDef="let row;let i = index; columns: displayedColumns;"
+		(click)="onRowClick(i, $event)"
+	></tr>
+</table>
