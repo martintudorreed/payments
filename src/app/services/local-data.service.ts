@@ -19,6 +19,7 @@ export interface generalSettings {
 
 export interface disclaimers {
   disclaimerId: string;
+  disclaimerName: string;
   disclaimerIsLink: boolean;
   disclaimerLink: string;
   disclaimerContents: string;
@@ -241,11 +242,19 @@ export class LocalDataService {
   disclaimerData: disclaimers[] = [
     {
       disclaimerId: '0',
+      disclaimerName: 'Service Disclaimer - full version',
       disclaimerIsLink: false,
       disclaimerLink: '',
-      disclaimerContents: '<hr class="ifm-hr"><span class="mat-caption">Superservice Triage does not store or process financial information. The Triage Customer Authorisation screen has the PayPal site within an Iframe and everything inside of that is secure. Triage cannot see any data that is being transacted due to the PayPal encryption being used.<br><br>' +
+      disclaimerContents: '<span class="mat-caption">Superservice Triage does not store or process financial information. The Triage Customer Authorisation screen has the PayPal site within an Iframe and everything inside of that is secure. Triage cannot see any data that is being transacted due to the PayPal encryption being used.<br><br>' +
         'Some additional options such as Payflow Link may need to be configured in the merchants account however the merchant (dealer) will need to investigate this as part of their due diligence. Additional fees may be charged to the dealer by PayPal for a business account.<br><br>' +
         'Superservice Triage or Infomedia is not responsible for payment issues between the customer and PayPal.</span>',
+    },
+    {
+      disclaimerId: '1',
+      disclaimerName: 'Service Disclaimer - URL Link',
+      disclaimerIsLink: true,
+      disclaimerLink: 'http://www.tult.co.nz/triage',
+      disclaimerContents: '<span class="mat-caption">Terms and Conditions of Service - 2032</span>',
     }
   ]
 
@@ -2082,6 +2091,20 @@ export class LocalDataService {
       imageID: '1',
       ImageName: 'Brand Logo',
       ImageDiscName: 'currentLogo',
+      ImageDiscLocation: 'svg-logos',
+    }
+    ,
+    {
+      imageID: '2',
+      ImageName: 'BMW Logo',
+      ImageDiscName: 'bmw',
+      ImageDiscLocation: 'svg-logos',
+    }
+    ,
+    {
+      imageID: '3',
+      ImageName: 'Kia Logo',
+      ImageDiscName: 'kia',
       ImageDiscLocation: 'svg-logos',
     }
     // ,

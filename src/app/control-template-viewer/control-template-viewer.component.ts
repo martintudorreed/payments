@@ -208,10 +208,11 @@ export class ControlTemplateViewerComponent implements OnInit, AfterViewInit, On
   }
 
   doBuildDisclaimer() {
-    if(this.disclaimerData[0].disclaimerIsLink) {
-      return '<a href="' + this.disclaimerData[0].disclaimerLink + '">' + this.disclaimerData[0].disclaimerContents + '</a>'
+    const currentActiveDisclaimer = this.applicationModelService.currentDisclaimerIndexNumber$.getValue();
+    if(this.disclaimerData[currentActiveDisclaimer].disclaimerIsLink) {
+      return '<hr class="ifm-hr"/><a href="' + this.disclaimerData[currentActiveDisclaimer].disclaimerLink + '">' + this.disclaimerData[currentActiveDisclaimer].disclaimerContents + '</a>'
     } else {
-      return this.disclaimerData[0].disclaimerContents;
+      return '<hr class="ifm-hr"/>' + this.disclaimerData[currentActiveDisclaimer].disclaimerContents;
     }
   }
 

@@ -13,8 +13,8 @@ import {Router} from "@angular/router";
 export class SettingsDisclaimersComponent {
 
   disclaimerData = this.localDataService.disclaimerData;
-
-  informationalData = this.localDataService.informationalLinkData;
+  currentDisclaimerID: string = '0';
+  currentDisclaimerIndex: number = 0;
 
   constructor(private localDataService: LocalDataService,
               public dialog: MatDialog,
@@ -24,10 +24,15 @@ export class SettingsDisclaimersComponent {
   }
 
   doBlur(ev: any) {
-    this.disclaimerData[0].disclaimerContents = ev.target.innerHTML;
+    this.disclaimerData[this.currentDisclaimerIndex].disclaimerContents = ev.target.innerHTML;
   }
 
   doToggleDisclaimerType() {
-    this.disclaimerData[0].disclaimerIsLink = !this.disclaimerData[0].disclaimerIsLink;
+    this.disclaimerData[this.currentDisclaimerIndex].disclaimerIsLink = !this.disclaimerData[this.currentDisclaimerIndex].disclaimerIsLink;
+  }
+
+  onSelectedDisclaimerChange(id: string) {
+    this.currentDisclaimerIndex = this.disclaimerData.findIndex(disclaimer => disclaimer.disclaimerId === id);
+    this.applicationModelService.currentDisclaimerIndexNumber$.next(this.currentDisclaimerIndex);
   }
 }

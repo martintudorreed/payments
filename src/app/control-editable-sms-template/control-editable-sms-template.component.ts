@@ -10,10 +10,12 @@ import {Router} from "@angular/router";
   templateUrl: './control-editable-sms-template.component.html',
   styleUrls: ['./control-editable-sms-template.component.scss']
 })
-export class ControlEditableSmsTemplateComponent implements AfterViewInit, OnInit{
+export class ControlEditableSmsTemplateComponent {
 
-  templates = this.localDataService.smsTemplateData;
-  sectionContent = this.templates[0].smsTemplateContent;
+  disclaimerData = this.localDataService.disclaimerData;
+  currentDisclaimerID: string = '0';
+  currentDisclaimerIndex: number = 0;
+  numberOfCharactersUsed: number = 0;
 
   constructor(private localDataService: LocalDataService,
               public dialog: MatDialog,
@@ -22,10 +24,22 @@ export class ControlEditableSmsTemplateComponent implements AfterViewInit, OnIni
               private router: Router) {
   }
 
-  ngOnInit(): void {
+  doBlur(ev: any) {
+    this.disclaimerData[this.currentDisclaimerIndex].disclaimerContents = ev.target.innerHTML;
   }
 
-  ngAfterViewInit() {
+  doToggleDisclaimerType() {
+    this.disclaimerData[this.currentDisclaimerIndex].disclaimerIsLink = !this.disclaimerData[this.currentDisclaimerIndex].disclaimerIsLink;
+  }
+
+  onSelectedDisclaimerChange(id: string) {
+    this.currentDisclaimerIndex = this.disclaimerData.findIndex(disclaimer => disclaimer.disclaimerId === id);
+    this.applicationModelService.currentDisclaimerIndexNumber$.next(this.currentDisclaimerIndex);
+  }
+
+  handleCharsInSMS(chars: number) {
+    console.log('emit');
+    this.numberOfCharactersUsed = chars;
   }
 
 }

@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, EventEmitter, Output} from '@angular/core';
 import {LocalDataService} from "../services/local-data.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ApplicationModelService} from "../services/ApplicationModelService";
@@ -15,7 +15,7 @@ export class ControlSmsTemplateEditorComponent {
   @Input() invoiceAmmount: number = 0;
   @Input() paymentTransactionExpiry: string ='01/01/2032';
   @Input() paymentTransactionNumber: string ='xxxxx'
-
+  @Output() charsInSMSEmit: EventEmitter<number> = new EventEmitter();
   charsInSMS: number = 0;
 
   templates = this.localDataService.smsTemplateData;
@@ -33,7 +33,6 @@ export class ControlSmsTemplateEditorComponent {
     this.charsInSMS = this.countCharacters(this.sectionContent);
   }
 
-
   countCharacters(content: string): number {
     const div = document.createElement('div');
     div.innerHTML = content;
@@ -48,6 +47,7 @@ export class ControlSmsTemplateEditorComponent {
 
   ngAfterViewInit() {
     this.doCountChars();
+    this.emitCharsInSMS();
   }
 
   doBlur(ev: any) {
@@ -65,5 +65,10 @@ export class ControlSmsTemplateEditorComponent {
   doKeyUp(ev: any) {
     let content = (ev.target as HTMLElement).textContent || "";
     this.charsInSMS = content.length;
+    this.emitCharsInSMS();
+  }
+
+  emitCharsInSMS() {
+    this.charsInSMSEmit.emit(this.charsInSMS);
   }
 }

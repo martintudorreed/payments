@@ -93,4 +93,7 @@ export class ApplicationModelService {
 
   isShowStatusColumnInTables = true;
   isShowStatusColumnInTables$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.isShowStatusColumnInTables);
+
+  currentDisclaimerIndexNumber = 0;
+  currentDisclaimerIndexNumber$: BehaviorSubject<number> = new BehaviorSubject<number>(this.currentDisclaimerIndexNumber);
 }

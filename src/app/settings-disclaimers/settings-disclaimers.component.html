@@ -1,29 +1,41 @@
-<div class="disclaimer-inner">
-<!--	<div class="field-outer data-template-name">-->
-<!--		<mat-form-field class="" subscriptSizing="dynamic" floatLabel="always" appearance="outline">-->
-<!--			<mat-label>Di</mat-label>-->
-<!--			<input type="text" matInput placeholder="Dealer Name" [(ngModel)]="disclaimerData[0].disclaimerId">-->
-<!--		</mat-form-field>-->
-<!--	</div>-->
-<h1>Just the single disclaimer for now. it's editable and will auto save</h1>
-
-	<p
-			class="section-content {{disclaimerData[0].disclaimerContents}}"
-			contenteditable="true"
-			(blur)="doBlur($event)"
-			[innerHTML]="disclaimerData[0].disclaimerContents | safeHtml">
-	</p>
-
-	<div class="field-outer data-is-link">
-		<mat-slide-toggle [checked]='disclaimerData[0].disclaimerIsLink' (change)="doToggleDisclaimerType()">Use Shortened link</mat-slide-toggle>
+<div class="inner">
+	<div class="sidebar">
+		<div class="field-outer data-template-select">
+			<mat-form-field class="ifm-input" appearance="outline" subscriptSizing="dynamic">
+				<mat-label>Name</mat-label>
+				<mat-select [(value)]="currentDisclaimerID" (selectionChange)="onSelectedDisclaimerChange(currentDisclaimerID)">
+					<mat-option  [value]="disclaimer.disclaimerId" *ngFor="let disclaimer of disclaimerData, let i = index"><span class="option-label">{{ disclaimer.disclaimerName }}</span></mat-option>
+				</mat-select>
+			</mat-form-field>
+		</div>
+		<p>By changing the select above you are setting the disclaimer that will be used on every template in the prototype. This is temporary.</p>
 	</div>
+	<div class="canvas">
+		<div class="template-container">
+			<div class="caption-container">
+				<caption class="mat-caption">
+					<span>Template</span>
+				</caption>
+			</div>
+			<div class="template-inner mat-elevation-custom-z1">
+				<p
+						class="section-content {{disclaimerData[currentDisclaimerIndex].disclaimerContents}}"
+						contenteditable="true"
+						(blur)="doBlur($event)"
+						[innerHTML]="disclaimerData[currentDisclaimerIndex].disclaimerContents | safeHtml">
+				</p>
+				<mat-divider></mat-divider>
+				<div class="field-outer data-is-link">
+					<mat-slide-toggle [checked]='disclaimerData[currentDisclaimerIndex].disclaimerIsLink' (change)="doToggleDisclaimerType()">Use Shortened link</mat-slide-toggle>
+				</div>
 
-	<div class="field-outer data-key" *ngIf="disclaimerData[0].disclaimerIsLink">
-		<mat-form-field class="" subscriptSizing="dynamic" floatLabel="always" appearance="outline">
-			<mat-label>Link URL</mat-label>
-			<input type="text" matInput placeholder="Link subject" [(ngModel)]="disclaimerData[0].disclaimerLink">
-		</mat-form-field>
+				<div class="field-outer data-url" *ngIf="disclaimerData[currentDisclaimerIndex].disclaimerIsLink">
+					<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always" appearance="outline">
+						<mat-label>Link URL</mat-label>
+						<input type="text" matInput placeholder="http://etc..." [(ngModel)]="disclaimerData[currentDisclaimerIndex].disclaimerLink">
+					</mat-form-field>
+				</div>
+			</div>
+		</div>
 	</div>
-
 </div>
-
