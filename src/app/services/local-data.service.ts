@@ -205,7 +205,20 @@ export class LocalDataService {
       smsTemplateType: 'sms',
       smsTemplateSourceApplication: '0',
       smsTemplateName: 'Default - Request Payment',
-      smsTemplateContent: 'Tax invoice INV-6209 for $[ammount] <br><br>' +
+      smsTemplateContent: 'Tax invoice INV-6209 for [ammount] <br><br>' +
+        'Please click the link below to view, print, download or pay the invoice.<br><br>' +
+        '[tinyURL]<br><br>' +
+        '[dealerName]',
+      smsTemplateCreatedBy: 'Martin Tudor Reed',
+      smsTemplateCreatedOn: '02/04/2034',
+    },
+    {
+      smsTemplateID: '1',
+      smsTemplateProviderId: '0',
+      smsTemplateType: 'sms',
+      smsTemplateSourceApplication: '0',
+      smsTemplateName: 'Overdue - Request Payment',
+      smsTemplateContent: 'Hi [customerForename] Tax invoice INV-6209 for [ammount] is Overdue.<br><br>' +
         'Please click the link below to view, print, download or pay the invoice.<br><br>' +
         '[tinyURL]<br><br>' +
         '[dealerName]',
@@ -226,7 +239,7 @@ export class LocalDataService {
     {
       emailID: '0',
       emailSourceApplicationID: '0',
-      emailSubject: 'Invoice [invoiceNumber] for work carried out at [dealerName]' ,
+      emailSubject: 'Invoice [invoiceNumber] for superservice!!' ,
       emailSender: 'sender@dealeremail.com',
       emailReplyTo: 'replyTo@dealeremail.com',
     },

@@ -3,8 +3,8 @@
 		<div class="field-outer data-template-select">
 			<mat-form-field class="ifm-input" appearance="outline" subscriptSizing="dynamic">
 				<mat-label>Name</mat-label>
-				<mat-select [(value)]="currentDisclaimerID" (selectionChange)="onSelectedDisclaimerChange(currentDisclaimerID)">
-					<mat-option  [value]="disclaimer.disclaimerId" *ngFor="let disclaimer of disclaimerData, let i = index"><span class="option-label">{{ disclaimer.disclaimerName }}</span></mat-option>
+				<mat-select [(value)]="currentTemplateID" (selectionChange)="onSelectedTemplateChange(currentTemplateID)">
+					<mat-option  [value]="template.smsTemplateID" *ngFor="let template of smsTemplates, let i = index"><span class="option-label">{{ template.smsTemplateName }}</span></mat-option>
 				</mat-select>
 			</mat-form-field>
 		</div>
@@ -13,30 +13,95 @@
 		<div class="template-container">
 			<div class="caption-container">
 				<caption class="mat-caption">
-					<span>Template</span>
+					<span>SMS Template</span>
 				</caption>
 			</div>
 			<div class="template-inner mat-elevation-custom-z1">
-				<div class="device-outer">
+				<div class="device-outer mat-elevation-custom-z1">
 					<div class="device-inner">
 						<div class="camera">
 							<div class="aperture"></div>
 						</div>
 						<div class="canvas">
-							<app-control-sms-template-editor (charsInSMSEmit)="handleCharsInSMS($event)"></app-control-sms-template-editor>
+							<app-control-sms-template-editor (charsInSMSEmit)="handleCharsInSMS($event)" *ngIf="isEditMode"></app-control-sms-template-editor>
+							<app-control-sms-template-viewer *ngIf="!isEditMode"></app-control-sms-template-viewer>
 						</div>
-						<div class="status-bar">
+						<div class="status-bar" *ngIf="isEditMode">
 							<h1 class="mat-headline-2 counter-text">There are {{numberOfCharactersUsed}} Characters used out of 320</h1>
 						</div>
 						<div class="device-button">
 							<div class="soft-home">
-								<button mat-icon-button color="primary"><mat-icon>edit</mat-icon></button>
+								<button mat-icon-button color="primary" (click)="doToggleEitMode()"><mat-icon>edit</mat-icon></button>
 							</div>
 						</div>
 					</div>
 
 				</div>
 			</div>
+		</div>
+	</div>
+	<div class="supporting-controls">
+		<div class="macro-keys-container" *ngIf="isEditMode">
+			<div class="caption-container">
+				<caption class="mat-caption">
+					<span>Triage Keys</span>
+				</caption>
+			</div>
+			<div class="macro-keys-inner">
+				<!--				[cdkCopyToClipboard]="'[dealerName]'"-->
+				<div class="key" >
+					<div class="key-text">[dealerName]</div>
+					<div class="key-control"><mat-icon class="ifm-icon-medium">content_copy</mat-icon></div>
+				</div>
+
+				<div class="key">
+					<div class="key-text">[customerFirstname]</div>
+					<div class="key-control"><mat-icon class="ifm-icon-medium">content_copy</mat-icon></div>
+				</div>
+
+				<div class="key">
+					<div class="key-text">
+						[ammount]
+					</div>
+					<div class="key-control"><mat-icon class="ifm-icon-medium">content_copy</mat-icon></div>
+				</div>
+
+				<div class="key">
+					<div class="key-text">
+						[invoiceNumber]
+					</div>
+					<div class="key-control"><mat-icon class="ifm-icon-medium">content_copy</mat-icon></div>
+				</div>
+
+				<div class="key">
+					<div class="key-text">
+						[dueDate]
+					</div>
+					<div class="key-control"><mat-icon class="ifm-icon-medium">content_copy</mat-icon></div>
+				</div>
+				<div class="key">
+					<div class="key-text">
+						[vehicle]
+					</div>
+					<div class="key-control"><mat-icon class="ifm-icon-medium">content_copy</mat-icon></div>
+				</div>
+				<div class="key">
+					<div class="key-text">
+						[workCarriedOut]
+					</div>
+					<div class="key-control"><mat-icon class="ifm-icon-medium">content_copy</mat-icon></div>
+				</div>
+				<div class="key">
+					<div class="key-text">
+						[triageDisclaimer]
+					</div>
+					<div class="key-control"><mat-icon class="ifm-icon-medium">content_copy</mat-icon></div>
+				</div>
+				<div class="key-toggle">
+
+				</div>
+			</div>
+
 		</div>
 	</div>
 </div>

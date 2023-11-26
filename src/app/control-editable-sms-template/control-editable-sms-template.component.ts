@@ -12,10 +12,11 @@ import {Router} from "@angular/router";
 })
 export class ControlEditableSmsTemplateComponent {
 
-  disclaimerData = this.localDataService.disclaimerData;
-  currentDisclaimerID: string = '0';
-  currentDisclaimerIndex: number = 0;
+  smsTemplates = this.localDataService.smsTemplateData;
+  currentTemplateID: string = '0';
+  currentTemplateIndex: number = 0;
   numberOfCharactersUsed: number = 0;
+  isEditMode: boolean = false;
 
   constructor(private localDataService: LocalDataService,
               public dialog: MatDialog,
@@ -24,22 +25,20 @@ export class ControlEditableSmsTemplateComponent {
               private router: Router) {
   }
 
-  doBlur(ev: any) {
-    this.disclaimerData[this.currentDisclaimerIndex].disclaimerContents = ev.target.innerHTML;
-  }
 
-  doToggleDisclaimerType() {
-    this.disclaimerData[this.currentDisclaimerIndex].disclaimerIsLink = !this.disclaimerData[this.currentDisclaimerIndex].disclaimerIsLink;
-  }
-
-  onSelectedDisclaimerChange(id: string) {
-    this.currentDisclaimerIndex = this.disclaimerData.findIndex(disclaimer => disclaimer.disclaimerId === id);
-    this.applicationModelService.currentDisclaimerIndexNumber$.next(this.currentDisclaimerIndex);
-  }
 
   handleCharsInSMS(chars: number) {
     console.log('emit');
     this.numberOfCharactersUsed = chars;
+  }
+
+  doToggleEitMode() {
+    this.isEditMode = !this.isEditMode;
+  }
+
+  onSelectedTemplateChange(id: string) {
+    // this.currentTemplateIndex = this.smsTemplates.findIndex(template => template.smsTemplateID === id);
+    // this.applicationModelService.currentDisclaimerIndexNumber$.next(this.currentDisclaimerIndex);
   }
 
 }
