@@ -18,8 +18,9 @@ export class ControlDocumentViewerComponent implements AfterViewInit, OnInit{
   browserWindowWidthValue: number | null = null;
   isDragging: boolean = false;
   @Input() isViewAttachment: boolean = true;
+  @Input() isStandalone: boolean = false;
 
-  viewerURLString: string = 'http://payments.tult.co.nz/assets/docs/pdfs/invoice.pdf'
+  viewerURLString: string = '/assets/docs/pdfs/invoice.pdf'
   activeDocument: number = 0;
 
   constructor(private localDataService: LocalDataService,
@@ -30,7 +31,9 @@ export class ControlDocumentViewerComponent implements AfterViewInit, OnInit{
   }
 
   ngOnInit() {
-
+      if(this.isStandalone) {
+       this.paymentStatusId = 5;
+      }
   }
 
   ngAfterViewInit() {
@@ -57,10 +60,10 @@ export class ControlDocumentViewerComponent implements AfterViewInit, OnInit{
 
   doLoadDocument(ind: number) {
     if (ind === 0) {
-      this.viewerURLString = 'http://payments.tult.co.nz/assets/docs/pdfs/invoice.pdf';
+      this.viewerURLString = '/assets/docs/pdfs/invoice.pdf';
       console.log(this.viewerURLString);
     } else {
-      this.viewerURLString = 'http://payments.tult.co.nz/assets/docs/pdfs/tsandcs.pdf'
+      this.viewerURLString = '/assets/docs/pdfs/tsandcs.pdf'
       console.log(this.viewerURLString);
     }
     this.activeDocument = ind;

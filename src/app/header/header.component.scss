@@ -28,11 +28,11 @@
     padding: 0 12px;
     align-items: center;
     .logo {
-      max-height: 48px;
+      max-height: 44px;
     }
     .app-logo {
       margin: 0 24px;
-      max-height: 28px;
+      max-height: 24px;
     }
   }
   .control-container {
@@ -51,9 +51,16 @@
     display: flex;
     padding: 0 12px;
     align-items: center;
+    .data-dealership {
+      min-width: 200px;
+      margin: 0 12px;
+    }
   }
   .help {
     padding: 0 6px;
+    .help-menu {
+      cursor: context-menu;
+    }
   }
   .settings {
     padding: 0 6px;

@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class DialogCustomerFormComponent {
 
+  formToShow: number = 0;
+
+  doChangeForm(ind: number) {
+    this.formToShow = ind;
+  }
+
 }

@@ -1,12 +1,15 @@
-<div class="chip-filter-outer" *ngIf="!(applicationModelService.isUseSimpleTextFilters$ | async)">
+<div class="chip-filter-outer" *ngIf="!(applicationModelService.isUseSimpleTextFilters$ | async)" [matMenuTriggerFor]="menu">
+  <div class="caption-container">
+    <caption class="mat-caption">Payment Status</caption>
+  </div>
 	<div class="chip-list">
 		<mat-chip  *ngFor="let filter of filters" class="filter-item">
 		<div class="chip-inner">
-			<span class="chip-text">{{filter.gridFilterItemName}}</span><mat-icon (click)="doRemoveChip(filter.gridFilterItemID)" *ngIf="filter.gridFilterItemID !== 0" class="ifm-icon-medium chip-icon">close</mat-icon>
+			<span class="chip-text">{{filter.statusFilterItemName}}</span><mat-icon (click)="doRemoveChip($event, filter.statusFilterItemID)" *ngIf="filter.statusFilterItemID !== 0" class="ifm-icon-medium chip-icon">close</mat-icon>
 		</div>
 		</mat-chip>
 	</div>
-	<button [matMenuTriggerFor]="menu" mat-icon-button color="primary"><mat-icon>arrow_drop_down</mat-icon></button>
+	<button  mat-icon-button color="primary" [ngClass]="{'white-text': (applicationModelService.activeHeader$ | async) !== '-1'}"><mat-icon>arrow_drop_down</mat-icon></button>
 </div>
 <mat-menu #menu="matMenu" xPosition="before">
 	<button mat-menu-item (click)="onAddFilterChip(0,'All')">All</button>

@@ -5,7 +5,9 @@ import {ApplicationModelService} from "../services/ApplicationModelService";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {DialogCustomerFormComponent} from "../dialog-customer-form/dialog-customer-form.component";
 import {DialogLoadFromApplicationDatasourceComponent} from "../dialog-load-from-application-datasource/dialog-load-from-application-datasource.component";
+import { DialogShowTransactionHistoryComponent } from "../dialog-show-transaction-history/dialog-show-transaction-history.component";
 import { NavigationEnd, Router, ActivatedRoute, Params } from '@angular/router';
+
 @Component({
   selector: 'app-form-new-payment',
   templateUrl: './form-new-payment.component.html',
@@ -72,8 +74,6 @@ export class FormNewPaymentComponent implements OnInit, AfterViewInit{
               public applicationModelService: ApplicationModelService,
               private _snackBar: MatSnackBar,
               private router: Router,) {
-
-
   }
   ngOnInit() {
 
@@ -255,10 +255,11 @@ export class FormNewPaymentComponent implements OnInit, AfterViewInit{
   doCardlessPayment(ev: any) {
     ev.stopPropagation();
     this.dialog.open(DialogCustomerFormComponent, {
-      maxWidth: '800px',
-      minWidth: '300px',
-      minHeight: '180px',
+      maxWidth: '466px',
+      minWidth: '466px',
+      minHeight: '96%',
       maxHeight: '96vh',
+      height: '96%',
       panelClass: 'ifm-dialog',
       autoFocus: false,
     });
@@ -373,8 +374,6 @@ export class FormNewPaymentComponent implements OnInit, AfterViewInit{
       this.dataItems[activePayment].paymentTransactionNumber = this.paymentTransactionNumber;
       this.dataItems[activePayment].paymentTransactionTotalExTax = this.paymentTransactionTotalExTax;
       this.dataItems[activePayment].paymentTransactionTotalTax = this.paymentTransactionTotalTax;
-    console.log('new payment Vakue is');
-    console.log(this.paymentTransactionTotalIncTax);
       this.dataItems[activePayment].paymentTransactionTotalIncTax = this.paymentTransactionTotalIncTax;
       this.dataItems[activePayment].paymentTransactionCreatedOn = this.paymentTransactionCreatedOn;
       this.dataItems[activePayment].paymentTransactionCreatedBy = this.paymentTransactionCreatedBy;
@@ -390,14 +389,29 @@ export class FormNewPaymentComponent implements OnInit, AfterViewInit{
       this.dataItems[activePayment].paymentPostCode = this.paymentPostCode;
       this.dataItems[activePayment].paymentVehicle = this.paymentVehicle;
       this.dataItems[activePayment].paymentInvoiceLines = this.paymentInvoiceLines;
-      console.log(this.dataItems[activePayment]);
   }
 
   doCancelTransaction() {
 
   }
+
   doMarkAsPaid() {
 
+  }
+
+  doShowHistory(ev: any) {
+    ev.stopPropagation();
+    this.dialog.open(DialogShowTransactionHistoryComponent, {
+      maxWidth: 'unset',
+      width: '96%',
+      minWidth: '466px',
+      minHeight: '96%',
+      maxHeight: '96vh',
+      height: '96%',
+      panelClass: 'ifm-dialog',
+      autoFocus: false,
+      disableClose: false,
+    });
   }
  }
 

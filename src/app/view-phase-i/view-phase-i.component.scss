@@ -1,0 +1,26 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.header {
+  position: relative;
+  z-index: 999;
+}
+
+.table-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: auto;
+  flex-grow: 1;
+}
+
+.payment-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: auto;
+}

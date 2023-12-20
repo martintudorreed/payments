@@ -1,4 +1,9 @@
-<mat-tab-group mat-stretch-tabs="false" class="ifm-tabs-main-ui add-ops-tabs" [selectedIndex]="(applicationModelService.activeMainUITab$ | async)" (selectedTabChange)="onTabSelected($event)">
+<mat-tab-group animationDuration="{{getAnimationSpeed()}}ms"
+                mat-stretch-tabs="false"
+               class="ifm-tabs-main-ui add-ops-tabs"
+               [selectedIndex]="(applicationModelService.activeMainUITab$ | async)"
+               (selectedTabChange)="onTabSelected($event)"
+               [ngClass]="{'hide-header': (applicationModelService.activeHeader$ | async) !== '-1'}">
 	<mat-tab label="Index" *ngIf="(applicationModelService.isShowDashboard$ | async)">
 		<ng-template mat-tab-label>
 			<span class="tab-label">

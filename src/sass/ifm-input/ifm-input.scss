@@ -7,6 +7,29 @@
       background-color: palette.$white;
     }
   }
+
+  &.bg-blue {
+    .mat-mdc-text-field-wrapper {
+      background-color: palette.$dark-blue;
+      color: palette.$white;
+      .mat-mdc-floating-label {
+        &.mdc-floating-label {
+          color: palette.$white;
+        }
+      }
+      .mat-mdc-icon-button {
+        color: palette.$white;
+      }
+      input {
+        color: palette.$white;
+      }
+      .mat-form-field-underline {
+        color: palette.$white;
+      }
+      --mdc-filled-text-field-active-indicator-color: #ffffff;
+    }
+
+}
   .mat-mdc-form-field-infix {
     width: 100%;
   }
@@ -86,6 +109,9 @@ input::-webkit-inner-spin-button {
   height: 6px;
   overflow: visible;
   background-color: white;
+  &.bg-blue {
+    background-color: palette.$dark-blue;
+  }
   z-index: 999;
   .mat-caption {
     position: relative;

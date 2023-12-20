@@ -14,7 +14,7 @@ import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
 })
 export class TableTriageDataComponent {
 
-  displayedColumns: string[] = [  'triageDataJobNumber', 'triageDataCustomerName','triageDataCustomerName' , 'triageDataRegoVIN', 'triageDataIdentified', 'triageDataAuthorised', 'controls'];
+  displayedColumns: string[] = [  'triageDataJobNumber', 'triageDataCustomerName','triageDataCustomerName' , 'triageDataRegoVIN', 'triageDataIdentified', 'triageDataAuthorised'];
   dataSource = new MatTableDataSource(this.localDataService.triageData);
 
   triageData = this.localDataService.triageData;
@@ -33,7 +33,7 @@ export class TableTriageDataComponent {
   }
 
   onRowClick(item: number, ev: any) {
-    console.log('did I fire ?');
+
     ev.stopPropagation();
     this.dataItem  = this.localDataService.triageData[item];
     this.dataItems.push(
@@ -66,35 +66,41 @@ export class TableTriageDataComponent {
       }
     );
 
-    console.log(this.dataItems);
-    console.log('which means that the payId is ');
-    console.log(this.dataItems.length);
-    // ensure that when dashboard is showing the tab indexes are correct
-    if( !this.applicationModelService.isShowDashboard$.getValue()) {
-      this.tabOffset = 1;
+    if( this.applicationModelService.isUsePhaseIUI$.getValue()) {
+      this.applicationModelService.isPaymentOpen$.next(true);
+      setTimeout(() => {
+        this.applicationModelService.currentPaymentIndexNumber$.next(this.dataItems.length);
+      }, 300);
+
+
     } else {
-      this.tabOffset = 2;
+      // ensure that when dashboard is showing the tab indexes are correct
+      if( !this.applicationModelService.isShowDashboard$.getValue()) {
+        this.tabOffset = 1;
+      } else {
+        this.tabOffset = 2;
+      }
+
+      this.tabIndex = this.applicationModelService.currentTabCount$.getValue() + this.tabOffset;
+      console.log('current tab should be ' + this.tabIndex + 'displayed no ' + (this.tabIndex + this.tabOffset));
+
+      this.applicationModelService.nextNewTabContentType$.next('newPaymentTriage');
+
+      this.tabs.push({
+        tabIndex: this.tabIndex,
+        tabLabel: '∞FM-' + this.dataItem.triageDataJobNumber,
+        tabContentType: 'payment',
+        tabdataItemIndexNo: this.dataItems.length -1});
+
+      console.log(this.tabs);
+
+      setTimeout(() => {
+        this.applicationModelService.activeMainUITab$.next(this.tabIndex);
+        this.applicationModelService.currentTabCount$.next(this.tabIndex);
+        this.applicationModelService.currentPaymentIndexNumber$.next(this.dataItems.length);
+        this.dialog.closeAll();
+      }, 200);
     }
-
-    this.tabIndex = this.applicationModelService.currentTabCount$.getValue() + this.tabOffset;
-    console.log('current tab should be ' + this.tabIndex + 'displayed no ' + (this.tabIndex + this.tabOffset));
-
-    this.applicationModelService.nextNewTabContentType$.next('newPaymentTriage');
-
-    this.tabs.push({
-      tabIndex: this.tabIndex,
-      tabLabel: '∞FM-' + this.dataItem.triageDataJobNumber,
-      tabContentType: 'payment',
-      tabdataItemIndexNo: this.dataItems.length -1});
-
-    console.log(this.tabs);
-
-    setTimeout(() => {
-      this.applicationModelService.activeMainUITab$.next(this.tabIndex);
-      this.applicationModelService.currentTabCount$.next(this.tabIndex);
-      this.applicationModelService.currentPaymentIndexNumber$.next(this.dataItems.length);
-      this.dialog.closeAll();
-    }, 200);
 
   }
 

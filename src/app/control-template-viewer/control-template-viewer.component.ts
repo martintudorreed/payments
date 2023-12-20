@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, AfterViewInit, OnDestroy} from '@angular/core';
+import { Component, Input, OnInit, AfterViewInit } from '@angular/core';
 import {LocalDataService} from "../services/local-data.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ApplicationModelService} from "../services/ApplicationModelService";
@@ -11,7 +11,7 @@ import {DialogCustomerFormComponent} from "../dialog-customer-form/dialog-custom
   templateUrl: './control-template-viewer.component.html',
   styleUrls: ['./control-template-viewer.component.scss']
 })
-export class ControlTemplateViewerComponent implements OnInit, AfterViewInit, OnDestroy{
+export class ControlTemplateViewerComponent implements OnInit, AfterViewInit{
   @Input() templateIDToUse: string = '0' as string;
   @Input() currentPaymentItemIndexNo: number = 0;
   @Input() isShowFullScreenControl: boolean = true;
@@ -140,6 +140,7 @@ export class ControlTemplateViewerComponent implements OnInit, AfterViewInit, On
     for (let i = 0; i < this.templateSections.length; i++) {
       this.templateSectionsConverted.push({
         sectionId: this.templateSections[i].sectionId,
+        sectionType: this.templateSections[i].sectionType,
         sectionContent: this.doReplaceKeysWithData(i),
         sectionContentStyle: this.templateSections[i].sectionContentStyle,
         sectionIndexOrder: this.templateSections[i].sectionIndexOrder,

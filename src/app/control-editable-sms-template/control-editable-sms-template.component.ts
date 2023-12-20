@@ -41,4 +41,12 @@ export class ControlEditableSmsTemplateComponent {
     // this.applicationModelService.currentDisclaimerIndexNumber$.next(this.currentDisclaimerIndex);
   }
 
+  doNew() {
+
+  }
+
+  doPsuedoSend() {
+
+  }
+
 }

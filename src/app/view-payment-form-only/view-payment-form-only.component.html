@@ -1,1 +1,4 @@
-<app-form-new-payment [dataItemIndexNo]=(3) [isStandalone]="true"></app-form-new-payment>
+<app-headerv2 class="header mat-elevation-z4" [isStandalone]="true"></app-headerv2>
+<div class="payment-container">
+  <app-form-new-payment [dataItemIndexNo]=(applicationModelService.currentPaymentIndexNumber$.value) [isStandalone]="true"></app-form-new-payment>
+</div>

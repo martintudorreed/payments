@@ -96,4 +96,6 @@ export class ControlGridFiltersComponent {
       autoFocus: false,
     });
   }
+
+  doToggleMultiDealershipsInTable() {}
 }

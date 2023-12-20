@@ -1,18 +1,33 @@
-<div class="controls-inner">
+<div class="controls-inner" [ngClass]="{'bg-blue': (applicationModelService.activeHeader$ | async) !== '-1'}">
 	<div class="field-outer data-customer-search">
-		<div class="search-outer"><input type="text" matInput placeholder="Search" [(ngModel)]="search"><mat-icon>search</mat-icon></div>
-	</div>
-	<div class="field-outer data-customer-filter">
-		<span> Dealer </span>
-		<app-control-chip-dealership-filter class="chip-filter"></app-control-chip-dealership-filter>
-	</div>
+<!--		<div class="search-outer"><input type="text" matInput placeholder="Search" [(ngModel)]="search" [ngClass]="{'bg-blue': (applicationModelService.activeHeader$ | async) !== '-1'}"><mat-icon>search</mat-icon></div>-->
+    <div class="search-outer">
+      <div class="caption-container">
+        <caption class="mat-caption">Search</caption>
+      </div>
+      <div class="app-selector" [matMenuTriggerFor]="menu"><span class="selection-text">All Fields</span><mat-icon>arrow_drop_down</mat-icon></div>
+      <input type="text" matInput class="ifm-input" placeholder="Search Term" [(ngModel)]="search">
+      <button mat-icon-button><mat-icon>search</mat-icon></button>
+    </div>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>Job Number</button>
+      <button mat-menu-item>Customer Name</button>
+      <button mat-menu-item>Customer Email</button>
+      <button mat-menu-item>Created By</button>
+    </mat-menu>
+
+  </div>
+<!--	<div class="field-outer data-customer-filter">-->
+<!--		<span *ngIf="(applicationModelService.isShowMultiDealerships$ | async)"> Dealer </span>-->
+<!--		<app-control-chip-dealership-filter class="chip-filter" *ngIf="(applicationModelService.isShowMultiDealerships$ | async)"></app-control-chip-dealership-filter>-->
+<!--	</div>-->
 	<div class="field-outer data-customer-filter">
 		<span> Status </span>
 		<app-control-chip-filter class="chip-filter"></app-control-chip-filter>
 	</div>
 	<div class="data-date-range">
 		<div class="field-outer field-from-date">
-			<mat-form-field class="field ifm-input white-bg" subscriptSizing="dynamic">
+			<mat-form-field class="field ifm-input white-bg" subscriptSizing="dynamic" [ngClass]="{'bg-blue': (applicationModelService.activeHeader$ | async) !== '-1'}" appearance="outline">
 				<mat-label>From</mat-label>
 				<input matInput [matDatepicker]="picker" placeholder="From" [(ngModel)]="dpicker">
 				<mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
@@ -21,15 +36,27 @@
 		</div>
 
 		<div class="field-outer field-to-date">
-			<mat-form-field class="field ifm-input white-bg" subscriptSizing="dynamic">
+			<mat-form-field class="field ifm-input white-bg" subscriptSizing="dynamic" [ngClass]="{'bg-blue': (applicationModelService.activeHeader$ | async) !== '-1'}" appearance="outline">
 				<mat-label>To</mat-label>
 				<input matInput [matDatepicker]="picker1" placeholder="To" name="p1" [(ngModel)]="dpicker1">
 				<mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
 				<mat-datepicker #picker1></mat-datepicker>
 			</mat-form-field>
 		</div>
-		<button mat-icon-button color="primary" class="ifm-stroked-button primary-outline export"><mat-icon>restart_alt</mat-icon></button>
+		<button mat-icon-button color="primary"
+            class="ifm-stroked-button primary-outline export"
+            [ngClass]="{'bg-blue': (applicationModelService.activeHeader$ | async) !== '-1'}"
+    ><mat-icon>restart_alt</mat-icon></button>
 	</div>
+<!--  <mat-slide-toggle-->
+<!--    class="toggle-dealers"-->
+<!--    *ngIf="(applicationModelService.isShowMultiDealerships$ | async)"-->
+<!--    [checked]='(applicationModelService.isShowAllDealersInTable$ | async)'-->
+<!--    (change)="doToggleMultiDealershipsInTable()">All Dealers</mat-slide-toggle>-->
+  	<div class="field-outer data-customer-filter">
+  		<span *ngIf="(applicationModelService.isShowMultiDealerships$ | async)"> Dealer </span>
+  		<app-control-chip-dealership-filter class="chip-filter" *ngIf="(applicationModelService.isShowMultiDealerships$ | async)"></app-control-chip-dealership-filter>
+  	</div>
 	<button *ngIf="isStandalone" mat-stroked-button (click)="doOpenFormInDialog()" color="primary" class="ifm-stroked-button primary-outline export">New Payment</button>
 	<button mat-stroked-button [matMenuTriggerFor]="exportMenu" color="primary" class="ifm-stroked-button primary-outline export">Export</button>
 

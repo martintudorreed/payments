@@ -8,6 +8,8 @@ import {CdkDragDrop, CdkDropList, CdkDrag, CdkDragHandle, moveItemInArray} from 
 import {NgFor} from '@angular/common';
 import { List } from 'immutable';
 import { ChangeDetectionStrategy } from '@angular/core';
+import { DialogEmailExampleComponent } from "../dialog-email-example/dialog-email-example.component";
+
 @Component({
   selector: 'app-control-editable-email-template',
   templateUrl: './control-editable-email-template.component.html',
@@ -33,6 +35,9 @@ export class ControlEditableEmailTemplateComponent {
   templateColors = this.localDataService.colorSchemeData;
   selectedColor: string = '0';
 
+  dealers = this.localDataService.dealerData;
+  selectedDealer: string = '0';
+
   templateID: string = '';
   currentTemplateID: string = '0'
   templateProviderId: string = '';
@@ -53,6 +58,9 @@ export class ControlEditableEmailTemplateComponent {
 
   emailSubject: string = "Invoice XXX-NNNNN for Future Motors Ltd";
 
+  isNew: boolean = false;
+  previousLoadedTemplate: string = '';
+
   constructor(private localDataService: LocalDataService,
               public dialog: MatDialog,
               public applicationModelService: ApplicationModelService,
@@ -66,6 +74,18 @@ export class ControlEditableEmailTemplateComponent {
   }
 
   doToggleViewer() {
+    this.showViewer = !this.showViewer;
+    this.applicationModelService.currentTemplateIdViewer$.next(this.applicationModelService.currentTemplateIdViewer$.getValue());
+  }
+
+  doCancel() {
+    if(this.isNew) {
+      this.dataSource.pop();
+      this.isNew = false;
+      this.applicationModelService.currentTemplateIdViewer$.next(this.previousLoadedTemplate);
+      this.doFindTemplate(this.previousLoadedTemplate);
+      this.currentTemplateID = this.previousLoadedTemplate;
+    }
     this.showViewer = !this.showViewer;
     this.applicationModelService.currentTemplateIdViewer$.next(this.applicationModelService.currentTemplateIdViewer$.getValue());
   }
@@ -112,8 +132,8 @@ export class ControlEditableEmailTemplateComponent {
 
   doNew() {
     const templateId = (this.dataSource.length).toString();
-    console.log('template id or current id is ');
-    console.log(templateId);
+    this.previousLoadedTemplate = this.dataSource[this.foundTemplateIndex].templateID;
+    this.isNew = true;
     this.dataSource.push(
       {
         templateID: templateId,
@@ -140,5 +160,23 @@ export class ControlEditableEmailTemplateComponent {
     this.dataSource[this.foundTemplateIndex].templateEmailSourceID = id;
   }
 
+  onSelecteddealerChange(dlr: string) {
+
+  }
+
+  doPsuedoSend() {
+    this.dialog.open(DialogEmailExampleComponent, {
+      maxWidth: '98%',
+      minWidth: '98%',
+      minHeight: '96vh',
+      maxHeight: '98%',
+      panelClass: 'ifm-dialog',
+      autoFocus: false,
+      data: {
+        isShowAttachments: false,
+        isInFullScreenViewer: true,
+      }
+    });
+  }
 
 }

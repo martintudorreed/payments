@@ -1,5 +1,12 @@
 import {Injectable, Input} from '@angular/core';
 
+export interface replacementTags {
+  replacementTagId: string;
+  replacementTagName: string;
+  replacementTagCount: number;
+  replacementTagApplicableType: string[];
+  replacementTagApplicableApp: string[];
+}
 
 export interface generalSettings {
   publicIntegrationIKey: string;
@@ -41,6 +48,7 @@ export interface emailSettings {
 
 export interface sections {
   sectionId: string;
+  sectionType: string;
   sectionContent: string;
   sectionContentStyle: string;
   sectionIndexOrder: number;
@@ -119,8 +127,27 @@ export interface gridFilterItems {
   gridFilterItemName: string;
 }
 
+export interface statusFilterItems {
+  statusFilterItemID: number;
+  statusFilterItemName: string;
+}
+
+export interface createdByFilterItems {
+  createdByFilterItemID: number;
+  createdByFilterItemName: string;
+}
+
+export interface dealershipFilterItems {
+  dealershipFilterItemID: number;
+  dealershipFilterItemName: string;
+}
+
+export interface recentSearchTerms {
+  searchTerm: string;
+}
+
 export interface dealerships {
-  dealershipID: number;
+  dealershipID: string;
   dealershipName: string;
 }
 
@@ -197,6 +224,91 @@ export interface regions {
 export class LocalDataService {
 
   constructor() { }
+
+  dealerData: dealerships[] = [
+    {
+      dealershipID: '0',
+      dealershipName: 'FM Jupiter'
+    },
+    {
+      dealershipID: '1',
+      dealershipName: 'FM Mars'
+    },
+    {
+      dealershipID: '0',
+      dealershipName: 'FM Saturn'
+    },
+    {
+      dealershipID: '0',
+      dealershipName: 'FM Terra II'
+    },
+  ]
+
+  replacementTagsData: replacementTags[] = [
+    {
+      replacementTagId: '0',
+      replacementTagName: 'dealerName',
+      replacementTagCount: 20,
+      replacementTagApplicableType: ['sms','email'],
+      replacementTagApplicableApp: ['0'],
+    },
+    {
+      replacementTagId: '1',
+      replacementTagName: 'customerFirstname',
+      replacementTagCount: 12,
+      replacementTagApplicableType: ['sms','email'],
+      replacementTagApplicableApp: ['0'],
+    },
+    {
+      replacementTagId: '2',
+      replacementTagName: 'customerSurname',
+      replacementTagCount: 12,
+      replacementTagApplicableType: ['sms','email'],
+      replacementTagApplicableApp: ['0'],
+    },
+    {
+      replacementTagId: '3',
+      replacementTagName: 'ammount',
+      replacementTagCount: 8,
+      replacementTagApplicableType: ['sms','email'],
+      replacementTagApplicableApp: ['0'],
+    },
+    {
+      replacementTagId: '4',
+      replacementTagName: 'invoiceNumber',
+      replacementTagCount: 8,
+      replacementTagApplicableType: ['sms','email'],
+      replacementTagApplicableApp: ['0'],
+    },
+    {
+      replacementTagId: '5',
+      replacementTagName: 'dueDate',
+      replacementTagCount: 10,
+      replacementTagApplicableType: ['sms','email'],
+      replacementTagApplicableApp: ['0'],
+    },
+    {
+      replacementTagId: '6',
+      replacementTagName: 'vehicle',
+      replacementTagCount: 20,
+      replacementTagApplicableType: ['sms','email'],
+      replacementTagApplicableApp: ['0'],
+    },
+    {
+      replacementTagId: '7',
+      replacementTagName: 'workCarriedOut',
+      replacementTagCount: 10,
+      replacementTagApplicableType: ['sms','email'],
+      replacementTagApplicableApp: ['0'],
+    },
+    {
+      replacementTagId: '8',
+      replacementTagName: 'triageDisclaimer',
+      replacementTagCount: 10,
+      replacementTagApplicableType: ['email'],
+      replacementTagApplicableApp: ['0'],
+    },
+    ]
 
   smsTemplateData: smsTemplate[] = [
     {
@@ -315,24 +427,28 @@ export class LocalDataService {
   emptySections: sections[] = [
     {
       sectionId: '0',
+      sectionType: 'image',
       sectionContent: 'logo',
       sectionContentStyle: '',
       sectionIndexOrder: -1,
     },
     {
       sectionId: '1',
+      sectionType: 'text',
       sectionContent: 'Starter text [dealerName]',
       sectionContentStyle: 'mat-headline-4',
       sectionIndexOrder: -1,
     },
     {
       sectionId: '2',
+      sectionType: 'text',
       sectionContent: 'Starter text [ammount]',
       sectionContentStyle: 'mat-headline-2',
       sectionIndexOrder: -1,
     },
     {
       sectionId: '3',
+      sectionType: 'text',
       sectionContent: 'Starter text [invoiceNumber] is due on [dueDate]',
       sectionContentStyle: 'mat-headline-4',
       sectionIndexOrder: -1,
@@ -340,24 +456,28 @@ export class LocalDataService {
     ,
     {
       sectionId: '5',
+      sectionType: 'text',
       sectionContent: 'Starter text [customerFirstname],<br><br> Here\'s your tax invoice [invoiceNumber] for $[ammount] Starter text',
       sectionContentStyle: '',
       sectionIndexOrder: -1,
     },
     {
       sectionId: '6',
+      sectionType: 'text',
       sectionContent: 'Starter text [dealerName]',
       sectionContentStyle: '',
       sectionIndexOrder: -1,
     },
     {
       sectionId: '4',
+      sectionType: 'button',
       sectionContent: 'Pay Invoice',
       sectionContentStyle: '',
       sectionIndexOrder: -1,
     },
     {
       sectionId: '7',
+      sectionType: 'text',
       sectionContent: 'Starter text [triageDisclaimer]',
       sectionContentStyle: '',
       sectionIndexOrder: -1,
@@ -398,24 +518,28 @@ export class LocalDataService {
       templateSections: [
         {
         sectionId: '0',
+        sectionType: 'image',
         sectionContent: 'logo',
         sectionContentStyle: '',
         sectionIndexOrder: -1,
         },
         {
           sectionId: '1',
+          sectionType: 'text',
           sectionContent: '[customerFirstname] Your Invoice from [dealerName] (BES-29367)',
           sectionContentStyle: 'mat-headline-4',
           sectionIndexOrder: -1,
         },
         {
           sectionId: '2',
+          sectionType: 'text',
           sectionContent: '[ammount]',
           sectionContentStyle: 'mat-headline-2',
           sectionIndexOrder: -1,
         },
         {
           sectionId: '3',
+          sectionType: 'text',
           sectionContent: 'is due on [dueDate]',
           sectionContentStyle: 'mat-headline-4',
           sectionIndexOrder: -1,
@@ -423,18 +547,21 @@ export class LocalDataService {
         ,
         {
           sectionId: '5',
+          sectionType: 'text',
           sectionContent: 'Please find attached your tax invoice for the service work completed on your vehicle [vehicle] <br> <br> Please click the Pay Invoice button to pay the invoice',
           sectionContentStyle: '',
           sectionIndexOrder: -1,
         },
         {
           sectionId: '4',
+          sectionType: 'button',
           sectionContent: 'Pay Invoice',
           sectionContentStyle: '',
           sectionIndexOrder: -1,
         },
         {
           sectionId: '7',
+          sectionType: 'disclaimer',
           sectionContent: '[triageDisclaimer]',
           sectionContentStyle: '',
           sectionIndexOrder: -1,
@@ -457,30 +584,35 @@ export class LocalDataService {
       templateSections: [
         {
           sectionId: '0',
+          sectionType: 'image',
           sectionContent: 'logo',
           sectionContentStyle: '',
           sectionIndexOrder: -1,
         },
         {
           sectionId: '1',
+          sectionType: 'text',
           sectionContent: 'Payment Reminder',
           sectionContentStyle: 'mat-headline-2',
           sectionIndexOrder: -1,
         },
         {
           sectionId: '4',
+          sectionType: 'button',
           sectionContent: 'Pay Invoice',
           sectionContentStyle: '',
           sectionIndexOrder: -1,
         },
         {
           sectionId: '6',
+          sectionType: 'text',
           sectionContent: '[ammount]',
           sectionContentStyle: 'mat-headline-2',
           sectionIndexOrder: -1,
         },
         {
           sectionId: '3',
+          sectionType: 'text',
           sectionContent: 'is due on [dueDate]',
           sectionContentStyle: 'mat-headline-4',
           sectionIndexOrder: -1,
@@ -488,6 +620,7 @@ export class LocalDataService {
         ,
         {
           sectionId: '5',
+          sectionType: 'text',
           sectionContent: 'Please find attached your tax invoice for the service work completed on your vehicle [vehicle] <br> <br> Please click the Pay Invoice button to pay the invoice',
           sectionContentStyle: '',
           sectionIndexOrder: -1,
@@ -495,6 +628,7 @@ export class LocalDataService {
         ,
         {
           sectionId: '7',
+          sectionType: 'disclaimer',
           sectionContent: '[triageDisclaimer]',
           sectionContentStyle: '',
           sectionIndexOrder: -1,
@@ -516,24 +650,28 @@ export class LocalDataService {
       templateSections: [
         {
           sectionId: '0',
+          sectionType: 'image',
           sectionContent: 'logo',
           sectionContentStyle: '',
           sectionIndexOrder: -1,
         },
         {
           sectionId: '1',
+          sectionType: 'text',
           sectionContent: 'Service at [dealerName]',
           sectionContentStyle: 'mat-headline-4',
           sectionIndexOrder: -1,
         },
         {
           sectionId: '2',
+          sectionType: 'text',
           sectionContent: '[invoiceNumber] for [ammount] is due on [dueDate]',
           sectionContentStyle: 'mat-headline-2',
           sectionIndexOrder: -1,
         },
         {
           sectionId: '4',
+          sectionType: 'button',
           sectionContent: 'Pay Invoice',
           sectionContentStyle: '',
           sectionIndexOrder: -1,
@@ -541,6 +679,7 @@ export class LocalDataService {
         ,
         {
           sectionId: '3',
+          sectionType: 'text',
           sectionContent: 'Hi [customerFirstName] <br><br>' +
             'Please click the Pay Invoice button above to view, print, download or pay the invoice.<br><br>' +
             'If you have any questions, please contact us on the interdimensional telephone - Mars99.',
@@ -549,6 +688,7 @@ export class LocalDataService {
         },
         {
           sectionId: '5',
+          sectionType: 'text',
           sectionContent: '[dealerName]',
           sectionContentStyle: '',
           sectionIndexOrder: -1,
@@ -560,9 +700,7 @@ export class LocalDataService {
     }
   ]
 
-  mainUITabsData: mainUITabs [] = [
-
-  ]
+  mainUITabsData: mainUITabs [] = []
 
   triageData: triageDataStructure[] = [
     {
@@ -911,10 +1049,46 @@ export class LocalDataService {
     }
   ]
 
+  recentSearchTermData: recentSearchTerms [] = [
+    {
+      searchTerm: 'Smith',
+    },
+    {
+      searchTerm: 'Jones',
+    },
+    {
+      searchTerm: 'reed@',
+    },
+    {
+      searchTerm: 'spoonthrusterV',
+    },
+  ]
+
   gridFilterItemsData: gridFilterItems [] = [
     {
       gridFilterItemID: 0,
       gridFilterItemName: 'All',
+    },
+  ]
+
+  statusFilterItemsData: statusFilterItems [] = [
+    {
+      statusFilterItemID: 0,
+      statusFilterItemName: 'All',
+    },
+  ]
+
+  createdByFilterItemsData: createdByFilterItems [] = [
+    {
+      createdByFilterItemID: 0,
+      createdByFilterItemName: 'All',
+    },
+  ]
+
+  dealershipFilterItemsData: dealershipFilterItems [] = [
+    {
+      dealershipFilterItemID: 0,
+      dealershipFilterItemName: 'All',
     },
   ]
 
@@ -981,7 +1155,7 @@ export class LocalDataService {
       paymentIdNo: 0,
       paymentCustomerName: '',
       paymentDateRaised: 'Today',
-      paymentSource: 'Adhoc',
+      paymentSource: 'Triage',
       paymentStatus: 'Pending',
       paymentStatusId: 1,
       paymentTransactionProviderId: 0,
@@ -1002,7 +1176,7 @@ export class LocalDataService {
       paymentState: 'Victoria',
       paymentPostCode: '3931',
       paymentVehicle: 'Space Car 1200 - 4sField-1200',
-      paymentInvoiceLines: 'Rebuild engine floaters - anti rad',
+      paymentInvoiceLines: 'Inspection carried out and work identified as authorised',
     },
     {
       paymentIdNo: 1,
@@ -1062,9 +1236,9 @@ export class LocalDataService {
       paymentIdNo: 3,
       paymentCustomerName: 'Martin Tudor Reed',
       paymentDateRaised: '22/08/2032',
-      paymentSource: 'Menus',
-      paymentStatus: 'Paid in Full',
-      paymentStatusId: 0,
+      paymentSource: 'Triage',
+      paymentStatus: 'Pending',
+      paymentStatusId: 1,
       paymentTransactionProviderId: 0,
       paymentTransactionNumber: '∞FM-8842222',
       paymentTransactionTotalExTax: 80.00,

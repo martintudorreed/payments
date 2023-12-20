@@ -1,3 +1,6 @@
+@use "src/sass/themes/palette-constants" as palette;
+@use "src/sass/ifm-mixins/ifm-breakpoints" as bp;
+
 :host {
   display:flex;
   flex-direction: column;
@@ -9,6 +12,7 @@
   align-items: center;
   width: 100%;
   padding: 12px;
+  border-bottom: 1px solid palette.$medium-grey;
   .search-filter {
     display: flex;
     align-items: center;

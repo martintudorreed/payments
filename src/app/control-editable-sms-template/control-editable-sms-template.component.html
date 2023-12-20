@@ -1,14 +1,47 @@
 <div class="inner">
-	<div class="sidebar">
-		<div class="field-outer data-template-select">
-			<mat-form-field class="ifm-input" appearance="outline" subscriptSizing="dynamic">
-				<mat-label>Name</mat-label>
-				<mat-select [(value)]="currentTemplateID" (selectionChange)="onSelectedTemplateChange(currentTemplateID)">
-					<mat-option  [value]="template.smsTemplateID" *ngFor="let template of smsTemplates, let i = index"><span class="option-label">{{ template.smsTemplateName }}</span></mat-option>
-				</mat-select>
-			</mat-form-field>
-		</div>
-	</div>
+
+  <div class="sidebar-meta-data">
+    <div class="field-outer data-payment-type" >
+      <!--			<mat-form-field class="field ifm-input selector" subscriptSizing="dynamic" floatLabel="always" appearance="outline">-->
+      <!--				<mat-label>Applicable to</mat-label>-->
+      <!--				<mat-select [(value)]="selectedSauceID" (selectionChange)="onSelectedSourceChange(selectedSauceID)">-->
+      <!--					<mat-option  [value]="app.ifmAppsID" *ngFor="let app of sourceApp">{{ app.ifmAppsName }}</mat-option>-->
+      <!--				</mat-select>-->
+      <!--			</mat-form-field>-->
+      <app-control-chip-dealership-filter></app-control-chip-dealership-filter>
+    </div>
+
+    <div class="field-outer data-template-select">
+      <mat-form-field class="ifm-input" appearance="outline" subscriptSizing="dynamic">
+        <mat-label>Name</mat-label>
+        <mat-select [(value)]="currentTemplateID" (selectionChange)="onSelectedTemplateChange(currentTemplateID)">
+          <mat-option  [value]="template.smsTemplateID" *ngFor="let template of smsTemplates, let i = index"><span class="option-label">{{ template.smsTemplateName }}</span></mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="field-outer data-create-button">
+      <button
+        mat-stroked-button
+        color="primary"
+        class="ifm-stroked-button primary-outline"
+        (click)="doNew()">Create New</button>
+    </div>
+
+    <mat-divider></mat-divider>
+    <div class="send-test-email">
+      <div class="field-outer">
+        <mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always" appearance="outline">
+          <mat-label>Send Test SMS to</mat-label>
+          <input type="text" matInput placeholder="Mobile Number">
+          <button mat-icon-button matSuffix color="primary" (click)="doPsuedoSend()"><mat-icon>send</mat-icon></button>
+        </mat-form-field>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+
+    <!--    <app-control-send-email></app-control-send-email>-->
+  </div>
 	<div class="canvas">
 		<div class="template-container">
 			<div class="caption-container">
@@ -31,7 +64,10 @@
 						</div>
 						<div class="device-button">
 							<div class="soft-home">
-								<button mat-icon-button color="primary" (click)="doToggleEitMode()"><mat-icon>edit</mat-icon></button>
+								<button mat-icon-button color="primary" (click)="doToggleEitMode()">
+                  <mat-icon *ngIf="!isEditMode">edit</mat-icon>
+                  <mat-icon *ngIf="isEditMode">close</mat-icon>
+                </button>
 							</div>
 						</div>
 					</div>
@@ -41,59 +77,53 @@
 		</div>
 	</div>
 	<div class="supporting-controls">
-		<div class="macro-keys-container" *ngIf="isEditMode">
+		<div class="macro-keys-container" [ngClass]="{'edit-mode': isEditMode}">
 			<div class="caption-container">
 				<caption class="mat-caption">
-					<span>Triage Keys</span>
+					<span>Mailmerge fields - Triage</span>
 				</caption>
 			</div>
 			<div class="macro-keys-inner">
 				<!--				[cdkCopyToClipboard]="'[dealerName]'"-->
 				<div class="key" >
-					<div class="key-text">[dealerName]</div>
+					<div class="key-text">[dealerName] - 24 chars</div>
 					<div class="key-control"><mat-icon class="ifm-icon-medium">content_copy</mat-icon></div>
 				</div>
 
 				<div class="key">
-					<div class="key-text">[customerFirstname]</div>
-					<div class="key-control"><mat-icon class="ifm-icon-medium">content_copy</mat-icon></div>
-				</div>
-
-				<div class="key">
-					<div class="key-text">
-						[ammount]
-					</div>
+					<div class="key-text">[customerFirstname] - 12 chars</div>
 					<div class="key-control"><mat-icon class="ifm-icon-medium">content_copy</mat-icon></div>
 				</div>
 
 				<div class="key">
 					<div class="key-text">
-						[invoiceNumber]
+						[ammount] - 10 chars
 					</div>
 					<div class="key-control"><mat-icon class="ifm-icon-medium">content_copy</mat-icon></div>
 				</div>
 
 				<div class="key">
 					<div class="key-text">
-						[dueDate]
+						[invoiceNumber]  - 12 chars
+					</div>
+					<div class="key-control"><mat-icon class="ifm-icon-medium">content_copy</mat-icon></div>
+				</div>
+
+				<div class="key">
+					<div class="key-text">
+						[dueDate]  - 10 chars
 					</div>
 					<div class="key-control"><mat-icon class="ifm-icon-medium">content_copy</mat-icon></div>
 				</div>
 				<div class="key">
 					<div class="key-text">
-						[vehicle]
+						[vehicle]  - 34 chars
 					</div>
 					<div class="key-control"><mat-icon class="ifm-icon-medium">content_copy</mat-icon></div>
 				</div>
 				<div class="key">
 					<div class="key-text">
-						[workCarriedOut]
-					</div>
-					<div class="key-control"><mat-icon class="ifm-icon-medium">content_copy</mat-icon></div>
-				</div>
-				<div class="key">
-					<div class="key-text">
-						[triageDisclaimer]
+						[workCarriedOut] - 200 chars
 					</div>
 					<div class="key-control"><mat-icon class="ifm-icon-medium">content_copy</mat-icon></div>
 				</div>

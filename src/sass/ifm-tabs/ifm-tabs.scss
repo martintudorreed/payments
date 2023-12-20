@@ -5,6 +5,11 @@
   .mat-mdc-tab-body-wrapper {
     height: 100%;
   }
+  &.hide-header {
+    .mat-mdc-tab-header {
+      display: none;
+    }
+  }
   .mat-mdc-tab-header {
     border-bottom: 1px solid #f9f9f9;
     box-shadow: 0px 5px 10px -1px rgba(0,0,0,0.37);
@@ -26,6 +31,13 @@
   }
 
   .mat-mdc-tab {
+    &:nth-child(2) {
+      position: fixed;
+      right: 0;
+      padding: 0 0 0 12px;
+      border-right: 1px solid palette.$white;
+      border-left: 1px solid palette.$white;
+    }
     .tab-label {
       opacity: .84
     }

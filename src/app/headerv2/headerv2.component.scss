@@ -1,0 +1,103 @@
+@use "src/sass/themes/palette-constants" as palette;
+@use "src/sass/ifm-mixins/ifm-breakpoints" as bp;
+
+:host {
+  display: flex;
+  align-items: center;
+  .header-inner {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 56px;
+    border-bottom: 1px solid palette.$white;
+    background-color: palette.$dark-blue;
+    top: 0;
+    &.bg-blue {
+      background-color: palette.$dark-blue;
+    }
+    .pre {
+      display: flex;
+      align-items: center;
+      flex-grow: 1;
+      height: 100%;
+      .control {
+        display: flex;
+        border-left: 1px solid rgba(255, 255, 255, 0.4);
+        border-right: 1px solid rgba(255, 255, 255, 0.4);
+        padding-right: 18px;
+        height: 100%;
+        &:hover {
+          cursor: pointer;
+        }
+        align-items: center;
+        .control-text {
+        }
+      }
+    }
+    .post {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      &.leave-space-for-dialog-close {
+        margin-right: 48px;
+      }
+      .new-button {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        .pre-button {
+          display: flex;
+          align-items: center;
+          height: 100%;
+          padding: 0 12px;
+          .text {
+            margin: 0 6px;
+          }
+          &:hover {
+            cursor: pointer;
+          }
+        }
+        .split-button-sep {
+          display: flex;
+          width: 1px;
+          height: 30px;
+          background-color: palette.$white;
+          opacity: .4;
+        }
+
+        .select-drop-down {
+          display: flex;
+          align-items: center;
+          width: 40px;
+          justify-content: center;
+          height: 100%;
+          &:hover {
+            cursor: context-menu;
+          }
+        }
+      }
+      .export-button {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        border-left: 1px solid rgba(255,255,255,0.4);
+        border-right: 1px solid rgba(255,255,255,0.4);
+        padding: 0 12px;
+        &:hover {
+          cursor: context-menu;
+        }
+        .text {
+          margin: 0 12px;
+        }
+        .select-drop-down {
+          display: flex;
+          align-items: center;
+          height: 100%;
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}

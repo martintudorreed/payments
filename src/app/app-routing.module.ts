@@ -6,6 +6,7 @@ import { ViewTabbedWorkspaceComponent } from "./view-tabbed-workspace/view-tabbe
 import { ViewPaymentTableOnlyComponent } from "./view-payment-table-only/view-payment-table-only.component";
 import { ViewPaymentFormOnlyComponent} from "./view-payment-form-only/view-payment-form-only.component";
 import { ViewPaymentFormNewComponent } from "./view-payment-form-new/view-payment-form-new.component";
+import { ViewPhaseIComponent } from "./view-phase-i/view-phase-i.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -19,7 +20,7 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    component: ViewTabbedWorkspaceComponent,
+    component: ViewPhaseIComponent,
   },
   {
     path: 'payment-table-only',
@@ -32,6 +33,10 @@ const routes: Routes = [
   {
     path: 'payment-form-new',
     component: ViewPaymentFormNewComponent,
+  },
+  {
+    path: 'phaseII',
+    component: ViewTabbedWorkspaceComponent,
   },
 ];
 

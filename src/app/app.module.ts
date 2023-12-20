@@ -61,6 +61,16 @@ import { DialogMarkAsPaidComponent } from './dialog-mark-as-paid/dialog-mark-as-
 import { DialogCancelTransactionComponent } from './dialog-cancel-transaction/dialog-cancel-transaction.component';
 import { ControlChipDealershipFilterComponent } from './control-chip-dealership-filter/control-chip-dealership-filter.component';
 import { ControlSmsTemplateEditorComponent } from './control-sms-template-editor/control-sms-template-editor.component';
+import { FormCustomerPaymentSuccessComponent } from './form-customer-payment-success/form-customer-payment-success.component';
+import { ControlSendEmailComponent } from './control-send-email/control-send-email.component';
+import { FormCustomerPaymentFailureComponent } from './form-customer-payment-failure/form-customer-payment-failure.component';
+import { DialogEmailExampleComponent } from './dialog-email-example/dialog-email-example.component';
+import { ControlGridFiltersDropdownComponent } from './control-grid-filters-dropdown/control-grid-filters-dropdown.component';
+import { ControlButtonFilterOverlayComponent } from './control-button-filter-overlay/control-button-filter-overlay.component';
+import { ControlChipCreatedByFilterComponent } from './control-chip-created-by-filter/control-chip-created-by-filter.component';
+import { ViewPhaseIComponent } from './view-phase-i/view-phase-i.component';
+import { Headerv2Component } from './headerv2/headerv2.component';
+import { DialogShowTransactionHistoryComponent } from './dialog-show-transaction-history/dialog-show-transaction-history.component';
 
 const routes: Routes = [
 
@@ -118,7 +128,17 @@ const routes: Routes = [
     DialogMarkAsPaidComponent,
     DialogCancelTransactionComponent,
     ControlChipDealershipFilterComponent,
-    ControlSmsTemplateEditorComponent
+    ControlSmsTemplateEditorComponent,
+    FormCustomerPaymentSuccessComponent,
+    ControlSendEmailComponent,
+    FormCustomerPaymentFailureComponent,
+    DialogEmailExampleComponent,
+    ControlGridFiltersDropdownComponent,
+    ControlButtonFilterOverlayComponent,
+    ControlChipCreatedByFilterComponent,
+    ViewPhaseIComponent,
+    Headerv2Component,
+    DialogShowTransactionHistoryComponent
   ],
   imports: [
     BrowserModule,

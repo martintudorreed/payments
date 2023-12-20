@@ -67,6 +67,8 @@ export class ControlTemplateEditorComponent implements OnInit{
 
   doFindTemplate(templateIDToUse: string) {
     this.foundTemplateIndex = this.dataSource.findIndex(template => template.templateID === templateIDToUse);
+    console.log('in doFindTemplate the color in the array index  is reporting as ');
+    console.log(this.dataSource[this.foundTemplateIndex].templateColor);
     if (this.foundTemplateIndex !== -1) {
       console.log('i found the one you want at ' + this.foundTemplateIndex);
       this.selectedTemplate = this.foundTemplateIndex;
@@ -83,13 +85,14 @@ export class ControlTemplateEditorComponent implements OnInit{
     this.templateType = this.dataSource[ind].templateType;
     this.templateName = this.dataSource[ind].templateName;
     this.templateLogo = this.dataSource[ind].templateLogo;
-    this.templateColor = this.dataSource[ind].templateColor
+    this.templateColor = this.dataSource[ind].templateColor;
     this.templateColorClass = this.doSetTemplateColor(this.templateColor);
+    console.log('so hey at this point the colour is set to');
+    console.log(this.templateColorClass);
     this.logoString = this.doGetImageSrcString(this.templateLogo);
     this.templateContents = this.dataSource[ind].templateContents;
     this.templateCreatedBy = this.dataSource[ind].templateCreatedBy;
     this.templateCreatedOn = this.dataSource[ind].templateCreatedOn;
-
     this.templateSections = [];
     this.templateSections = this.dataSource[ind].templateSections;
   }
@@ -123,12 +126,12 @@ export class ControlTemplateEditorComponent implements OnInit{
     this.doSave();
   }
 
-  doAddRow(key: string) {
+  doAddRow(key: string, type: string) {
     const newSectionId = this.dataSource[this.selectedTemplate].templateSections.length.toString();
-
 
     this.dataSource[this.selectedTemplate].templateSections.push({
       sectionId: newSectionId,
+      sectionType: 'text',
       sectionContent: key,
       sectionContentStyle: '',
       sectionIndexOrder: -1
@@ -221,5 +224,14 @@ export class ControlTemplateEditorComponent implements OnInit{
     editableEl?.focus();
   }
 
+  hasColorChanged(ind: number) {
+    // console.log('setting color ?');
+    // console.log(this.doSetTemplateColor(this.dataSource[ind].templateColor));
+    // const colorToUse = this.doSetTemplateColor(this.dataSource[ind].templateColor)
+    // this.dataSource[ind].templateColor = colorToUse;
+    // this.templateColorClass = colorToUse;
+    // console.log(this.templateColorClass);
+    // this.doSave();
+  }
 
 }

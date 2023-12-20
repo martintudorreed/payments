@@ -11,6 +11,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./control-sms-template-editor.component.scss']
 })
 export class ControlSmsTemplateEditorComponent {
+
   @Input() customerName: string =' ';
   @Input() invoiceAmmount: number = 0;
   @Input() paymentTransactionExpiry: string ='01/01/2032';

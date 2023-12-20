@@ -1,3 +1,20 @@
 :host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   padding: 24px 24px 0 24px;
+}
+
+.forms {
+  flex-grow: 1;
+}
+
+.controls {
+  display: flex;
+  padding: 0 24px 24px;
+  align-items: center;
+  justify-content: center;
+  button {
+    margin: 0 12px;
+  }
 }

@@ -1,0 +1,8 @@
+<app-headerv2 class="header mat-elevation-z4"></app-headerv2>
+<div class="table-container" *ngIf="!(applicationModelService.isPaymentOpen$ | async)">
+  <app-table-payment-list></app-table-payment-list>
+</div>
+<div class="payment-container" *ngIf="(applicationModelService.isPaymentOpen$ | async)">
+  <app-form-new-payment [dataItemIndexNo]=(applicationModelService.currentPaymentIndexNumber$.value)></app-form-new-payment>
+</div>
+

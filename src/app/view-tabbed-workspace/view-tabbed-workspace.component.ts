@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {LocalDataService} from "../services/local-data.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ApplicationModelService} from "../services/ApplicationModelService";
@@ -11,7 +11,7 @@ import {DialogCustomerFormComponent} from "../dialog-customer-form/dialog-custom
   templateUrl: './view-tabbed-workspace.component.html',
   styleUrls: ['./view-tabbed-workspace.component.scss']
 })
-export class ViewTabbedWorkspaceComponent {
+export class ViewTabbedWorkspaceComponent implements OnInit {
   isHasData: boolean = true;
   editMode: boolean = true;
   isHasAddress: boolean = true;
@@ -26,6 +26,7 @@ export class ViewTabbedWorkspaceComponent {
 
   tabs = this.localDataService.mainUITabsData;
   tabToTreatAsHome: number = 0;
+  animationSpeed: number = 0;
 
   payments = this.localDataService.paymentListData
 
@@ -59,6 +60,10 @@ export class ViewTabbedWorkspaceComponent {
                public dialog: MatDialog,
                public applicationModelService: ApplicationModelService,
                private _snackBar: MatSnackBar) {
+  }
+
+  ngOnInit() {
+    this.applicationModelService.isUsePhaseIUI$.next(false);
   }
 
   onTabSelected(ev: any) {
@@ -135,5 +140,13 @@ export class ViewTabbedWorkspaceComponent {
     this.applicationModelService.currentPaymentIndexNumber$.next(this.payments.length -1);
     const eek = this.applicationModelService.currentTemplateIdViewer$.getValue();
     this.applicationModelService.currentTemplateIdViewer$.next(eek);
+  }
+
+  getAnimationSpeed() {
+    if(this.applicationModelService.isTabAnimationRemoved$.getValue()) {
+      return  0;
+    } else {
+      return  200;
+    }
   }
 }

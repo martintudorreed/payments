@@ -49,4 +49,29 @@ export class ViewSettingsComponent {
   doToggleSimpleFilters() {
     this.applicationModelService.isUseSimpleTextFilters$.next(!this.applicationModelService.isUseSimpleTextFilters$.getValue())
   }
+
+  doToggleMultiDealerships() {
+    this.applicationModelService.isShowMultiDealerships$.next(!this.applicationModelService.isShowMultiDealerships$.getValue());
+  }
+
+  doRemoveTabAnimation() {
+    this.applicationModelService.isTabAnimationRemoved$.next(!this.applicationModelService.isTabAnimationRemoved$.getValue());
+  }
+
+  doUseGridFiltersDropDown() {
+    this.applicationModelService.isUseGridFilterDropDown$.next(!this.applicationModelService.isUseGridFilterDropDown$.getValue());
+  }
+
+  doUsePhaseIUI() {
+    this.applicationModelService.isUsePhaseIUI$.next(!this.applicationModelService.isUsePhaseIUI$.getValue());
+  }
+
+  doUseCompactSearchFilter() {
+    this.applicationModelService.isUseCompactSearchFilter$.next(!this.applicationModelService.isUseCompactSearchFilter$.getValue());
+  }
+
+  doUsePaymentsMenu() {
+    this.applicationModelService.isUsePaymentsMenu$.next(!this.applicationModelService.isUsePaymentsMenu$.getValue());
+  }
+
 }

@@ -1,0 +1,12 @@
+<!-- Container to position the overlay relative to -->
+<div #containerRef style="width: 100%; height: 100%;">
+  <!-- Button to open the overlay -->
+  <button (click)="openOverlay()">Open Overlay</button>
+
+  <!-- The overlay content template -->
+  <ng-template #overlayTemplate>
+    <div style="padding: 10px; background-color: white; border: 1px solid black;">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </div>
+  </ng-template>
+</div>

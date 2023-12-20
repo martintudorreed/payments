@@ -1,0 +1,5 @@
+<form [formGroup]="emailForm" (ngSubmit)="onSubmit()">
+  <input type="text" formControlName="subject" placeholder="Subject">
+  <textarea formControlName="body" placeholder="Body"></textarea>
+  <button type="submit">Send Email</button>
+</form>

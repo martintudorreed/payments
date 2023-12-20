@@ -54,11 +54,11 @@
   thead {
     height: 48px;
     tr {
-      background-color: palette.$very-light-grey;
+      background-color: palette.$white;
       th {
         font-weight: 400;
         text-align: left;
-        background-color: $light-grey;
+        background-color: palette.$white;
         color: palette.$very-dark-grey;
         border-bottom: 1px solid palette.$medium-grey;
         box-shadow: 0px 4px 20px -8px rgba(0, 0, 0, 0.1);

@@ -35,4 +35,9 @@ export class SettingsDisclaimersComponent {
     this.currentDisclaimerIndex = this.disclaimerData.findIndex(disclaimer => disclaimer.disclaimerId === id);
     this.applicationModelService.currentDisclaimerIndexNumber$.next(this.currentDisclaimerIndex);
   }
+
+  doNew() {
+
+  }
+
 }

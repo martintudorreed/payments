@@ -19,7 +19,7 @@ export class TablePaymentListComponent implements AfterViewInit{
   @Input() isStandalone: boolean = false;
   // @ViewChild(MatSort, { static: true }) sort: MatSort;
   // dataSource = this.localDataService.paymentListData;
-  displayedColumns: string[] = [  'paymentTransactionNumber', 'paymentCustomerSurname','paymentStatus' , 'paymentSource', 'paymentCustomerEmail', 'paymentTransactionCreatedOn', 'paymentTransactionCreatedBy', 'paymentTransactionExpiry','paymentTransactionTotalIncTax', 'controls'];
+  displayedColumns: string[] = [  'paymentTransactionNumber', 'paymentCustomerSurname','paymentStatus' , 'paymentSource', 'paymentCustomerEmail', 'paymentTransactionCreatedOn', 'paymentTransactionCreatedBy', 'paymentTransactionExpiry','paymentTransactionTotalIncTax'];
   dataSource = new MatTableDataSource(this.localDataService.paymentListData);
 
   filteredData = this.localDataService.paymentListData.filter(item => item.paymentSource === 'Triage');
@@ -40,13 +40,17 @@ export class TablePaymentListComponent implements AfterViewInit{
 
   filters = this.localDataService.gridFilterItemsData;
 
+  isSelecting: boolean = false;
+
     constructor(public applicationModelService: ApplicationModelService,
-                private localDataService: LocalDataService, public dialog: MatDialog, ) {
+                private localDataService: LocalDataService,
+                public dialog: MatDialog, ) {
 
       this.applicationModelService.isShowStatusColumnInTables$.subscribe((newColumnStructure) => {
         this.displayedColumns = this.displayedColumns.filter(item => item !== 'paymentSource');
         this.doRemoveSourceColumn(newColumnStructure);
       });
+
 
     }
 
@@ -78,44 +82,87 @@ export class TablePaymentListComponent implements AfterViewInit{
     }
 
   onRowClick(item: number, ind: number) {
-      for (let i = 0; i < this.dataItems.length; i++) {
-        if (this.dataItems[i].paymentIdNo === item) {
-          this.dataItem = this.dataItems[i];
-          this.dataItemIndexNo = i;
+
+      if (!this.isSelecting) {
+
+        if( this.applicationModelService.isUsePhaseIUI$.getValue()) {
+
+          for (let i = 0; i < this.dataItems.length; i++) {
+            if (this.dataItems[i].paymentIdNo === item) {
+              this.dataItem = this.dataItems[i];
+              this.dataItemIndexNo = i;
+            }
+          }
+
+          this.applicationModelService.currentPaymentIndexNumber$.next(this.dataItemIndexNo);
+          this.applicationModelService.isPaymentOpen$.next(true);
+
+        } else {
+
+          for (let i = 0; i < this.dataItems.length; i++) {
+            if (this.dataItems[i].paymentIdNo === item) {
+              this.dataItem = this.dataItems[i];
+              this.dataItemIndexNo = i;
+            }
+          }
+
+          if( !this.isStandalone ) {
+            // this.dataItem = this.dataItems[this.dataItemIndexNo];
+            if( !this.applicationModelService.isShowDashboard$.getValue()) {
+              this.tabOffset = 1;
+            } else {
+              this.tabOffset = 2;
+            }
+            this.tabIndex = this.applicationModelService.currentTabCount$.getValue() + this.tabOffset;
+            this.applicationModelService.currentPaymentIndexNumber$.next(ind);
+            this.tabs.push({
+              tabIndex: this.tabIndex,
+              tabLabel: this.dataItem.paymentTransactionNumber,
+              tabContentType: 'payment',
+              tabdataItemIndexNo: this.dataItemIndexNo});
+
+            if( this.localDataService.paymentListData[ind].paymentStatusId === 2) {
+              this.applicationModelService.currentTemplateIdViewer$.next('1');
+            }
+
+            setTimeout(() => {
+              this.applicationModelService.activeMainUITab$.next(this.tabIndex);
+              this.applicationModelService.currentTabCount$.next(this.tabIndex);
+            }, 200);
+          } else {
+            this.applicationModelService.isInIframe$.next(true);
+            this.applicationModelService.isInIframeDataValue$.next(this.dataItemIndexNo);
+            this.applicationModelService.currentPaymentIndexNumber$.next(ind);
+            this.doOpenFormInDialog();
+          }
+
         }
-      }
 
-    if( !this.isStandalone ) {
-      // this.dataItem = this.dataItems[this.dataItemIndexNo];
-      if( !this.applicationModelService.isShowDashboard$.getValue()) {
-        this.tabOffset = 1;
-      } else {
-        this.tabOffset = 2;
-      }
-      this.tabIndex = this.applicationModelService.currentTabCount$.getValue() + this.tabOffset;
-      this.applicationModelService.currentPaymentIndexNumber$.next(ind);
-      this.tabs.push({
-        tabIndex: this.tabIndex,
-        tabLabel: this.dataItem.paymentTransactionNumber,
-        tabContentType: 'payment',
-        tabdataItemIndexNo: this.dataItemIndexNo});
 
-      if( this.localDataService.paymentListData[ind].paymentStatusId === 2) {
-        this.applicationModelService.currentTemplateIdViewer$.next('1');
       }
-
-      setTimeout(() => {
-        this.applicationModelService.activeMainUITab$.next(this.tabIndex);
-        this.applicationModelService.currentTabCount$.next(this.tabIndex);
-      }, 200);
-    } else {
-      this.applicationModelService.isInIframe$.next(true);
-      this.applicationModelService.isInIframeDataValue$.next(this.dataItemIndexNo);
-      this.applicationModelService.currentPaymentIndexNumber$.next(ind);
-      this.doOpenFormInDialog();
     }
 
+  // Attach this handler to the mousedown event on the table rows
+  handleMouseDown(ev:any): void {
+    // Check if there's any text currently selected
+    console.log('down');
+    if (window.getSelection()?.toString()) {
+      this.isSelecting = true;
     }
+  }
+
+// Attach this handler to the mouseup event on the table rows
+  handleMouseUp(ev:any): void {
+    // If text is selected after the mouse up, set isSelecting to true
+    if (window.getSelection()?.toString()) {
+      this.isSelecting = true;
+    }
+
+    // Reset after a slight delay to handle the click event
+    setTimeout(() => {
+      this.isSelecting = false;
+    }, 100);
+  }
 
   absorb(ev: any) {
     ev.stopPropagation();
@@ -123,10 +170,11 @@ export class TablePaymentListComponent implements AfterViewInit{
 
   doCardlessPayment() {
     this.dialog.open(DialogCustomerFormComponent, {
-      maxWidth: '800px',
-      minWidth: '380px',
-      minHeight: '180px',
+      maxWidth: '466px',
+      minWidth: '466px',
+      minHeight: '96%',
       maxHeight: '96vh',
+      height: '96%',
       panelClass: 'ifm-dialog',
       autoFocus: false,
     });
@@ -165,7 +213,7 @@ export class TablePaymentListComponent implements AfterViewInit{
         this.displayedColumns = this.displayedColumns.filter(item => item !== 'paymentSource');
         console.log(this.displayedColumns);
       } else {
-        this.displayedColumns = [ 'paymentTransactionNumber', 'paymentCustomerSurname','paymentStatus' , 'paymentSource', 'paymentCustomerEmail', 'paymentTransactionCreatedOn', 'paymentTransactionCreatedBy', 'paymentTransactionExpiry','paymentTransactionTotalIncTax', 'controls'];
+        this.displayedColumns = [ 'paymentTransactionNumber', 'paymentCustomerSurname','paymentStatus' , 'paymentSource', 'paymentCustomerEmail', 'paymentTransactionCreatedOn', 'paymentTransactionCreatedBy', 'paymentTransactionExpiry','paymentTransactionTotalIncTax'];
       }
     localStorage.setItem('columnOrder', JSON.stringify(this.displayedColumns));
   }

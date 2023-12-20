@@ -1,1 +1,13 @@
-<app-form-customer-payment></app-form-customer-payment>
+<div class="forms">
+  <app-form-customer-payment *ngIf="formToShow === 0"></app-form-customer-payment>
+  <app-form-customer-payment-success *ngIf="formToShow === 1"></app-form-customer-payment-success>
+  <app-form-customer-payment-failure *ngIf="formToShow === 2"></app-form-customer-payment-failure>
+</div>
+<div class="controls">
+  <mat-button-toggle-group aria-label="Favorite Color">
+    <mat-button-toggle [checked]="formToShow === 0" (click)="doChangeForm(0)">Pay</mat-button-toggle>
+    <mat-button-toggle [checked]="formToShow === 1" (click)="doChangeForm(1)">Success</mat-button-toggle>
+    <mat-button-toggle [checked]="formToShow === 2" (click)="doChangeForm(2)">Fail</mat-button-toggle>
+    <mat-button-toggle [checked]="formToShow === 3" disabled (click)="doChangeForm(3)">Redirect</mat-button-toggle>
+  </mat-button-toggle-group>
+</div>

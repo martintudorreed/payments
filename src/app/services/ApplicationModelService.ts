@@ -8,7 +8,8 @@ import { Router } from '@angular/router';
 
 export class ApplicationModelService {
 
-  constructor( public router: Router ) { }
+  constructor(public router: Router) {
+  }
 
   isRTL = 'ltr';
   isRTL$: BehaviorSubject<string> = new BehaviorSubject<string>(this.isRTL);
@@ -67,7 +68,7 @@ export class ApplicationModelService {
   isInIframeDataValue = -1;
   isInIframeDataValue$: BehaviorSubject<number> = new BehaviorSubject<number>(this.isInIframeDataValue);
 
-  isDocumentViewerCollapsed  = false;
+  isDocumentViewerCollapsed = false;
   isDocumentViewerCollapsed$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.isDocumentViewerCollapsed);
 
   templateDataSource: any[] = [];
@@ -96,4 +97,40 @@ export class ApplicationModelService {
 
   currentDisclaimerIndexNumber = 0;
   currentDisclaimerIndexNumber$: BehaviorSubject<number> = new BehaviorSubject<number>(this.currentDisclaimerIndexNumber);
+
+  isShowMultiDealerships = false;
+  isShowMultiDealerships$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.isShowMultiDealerships);
+
+  isShowAllDealersInTable = false;
+  isShowAllDealersInTable$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.isShowAllDealersInTable);
+
+  isTabAnimationRemoved = false;
+  isTabAnimationRemoved$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.isTabAnimationRemoved);
+
+  isUseGridFilterDropDown = true;
+  isUseGridFilterDropDown$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.isUseGridFilterDropDown);
+
+  isUsePhaseIUI = true;
+  isUsePhaseIUI$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.isUsePhaseIUI);
+
+  isPaymentOpen = false;
+  isPaymentOpen$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.isPaymentOpen);
+
+  isUseCompactSearchFilter = true;
+  isUseCompactSearchFilter$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.isUseCompactSearchFilter);
+
+  triggerToClearChipLists = false;
+  triggerToClearChipLists$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.triggerToClearChipLists);
+
+  chipFilterStatusIsSet = false;
+  chipFilterStatusIsSet$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.chipFilterStatusIsSet);
+
+  chipFilterCreatedByIsSet = false;
+  chipFilterCreatedByIsSet$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.chipFilterCreatedByIsSet);
+
+  chipFilterDealershipIsSet = false;
+  chipFilterDealershipIsSet$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.chipFilterDealershipIsSet);
+
+  isUsePaymentsMenu = true;
+  isUsePaymentsMenu$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.isUsePaymentsMenu);
 }

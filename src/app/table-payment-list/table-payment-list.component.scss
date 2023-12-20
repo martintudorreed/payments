@@ -3,15 +3,19 @@
 :host {
   display: flex;
   flex-direction: column;
-  overflow: auto;
+  overflow: hidden;
 }
 
 .header {
-  min-height: 72px;
+  min-height: 82px;
   display: flex;
   align-items: center;
   border-bottom: 1px solid palette.$medium-grey;
   background-color: palette.$white;
+  top: 0;
+  &.bg-blue {
+    background-color: palette.$dark-blue;
+  }
 }
 
 
@@ -46,17 +50,24 @@
   width: 1%;
 }
 
+.payment-table {
+  overflow: auto;
+}
+
 .table-container {
   display: flex;
   flex-grow: 1;
   height: 100%;
   overflow: auto;
-  background-color: palette.$light-grey;
 }
 
+
 .cards-container {
-  padding: 12px;
+  padding: 18px 12px 12px;
   width: 100%;
+  display: flex;
+  overflow: auto;
+  flex-direction: column;
   .card-generic{
     margin-bottom: 18px;
     padding: 12px 0 12px 0;

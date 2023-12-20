@@ -1,0 +1,28 @@
+<div class="meta-data">
+  <div class="meta-inner">
+    <img class="logo" [matMenuTriggerFor]="brandMenu" src="./assets/svg-logos/{{applicationModelService.selectedThemeBrand$.value}}-logo.svg" alt="logo" />
+    <mat-menu #brandMenu="matMenu" class="ifm-menu style-menu">
+      <button *ngFor="let brand of brands, let i = index" mat-menu-item class="style-option" (click)="doChangeLogo(brand.brandValue)">
+        {{brand.brandName}}
+      </button>
+    </mat-menu>
+    <div class="meta dealer-name">
+      <span class="mat-headline-2 meta-text">{{dealerName}}</span>
+    </div>
+
+  </div>
+  <div class="meta-inner">
+    <div class="meta invoice-number">
+      <span class="mat-headline-4 meta-text">INV:800200</span>
+    </div>
+    <div class="meta invoice-ammount">
+      <span class="mat-headline-2 meta-text">$88.88</span>
+    </div>
+  </div>
+
+</div>
+
+<div class="response">
+  <h2 class="mat-headline-2 heading">Oh No! It didn't work</h2>
+  <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+</div>

@@ -11,15 +11,14 @@
   display: flex;
   width: 100%;
   height: 100%;
-  .sidebar {
+  .sidebar-meta-data {
     min-width: 320px;
-    width: 320px;
     padding: 12px;
     overflow: auto;
     display: flex;
     flex-direction: column;
     .fade {
-      opacity: .2;
+      opacity: .4;
     }
     .field-outer {
       display: flex;
@@ -27,6 +26,17 @@
       &.data-create-button {
         justify-content: flex-end;
       }
+      &.data-payment-type {
+        border-bottom: 1px solid palette.$medium-grey;
+        padding-bottom: 12px;
+        margin-bottom: 18px;
+      }
+    }
+    .send-test-email {
+      margin: 24px 0 12px 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
     }
   }
   .canvas {
@@ -156,6 +166,10 @@
       position: relative;
       margin-top: 12px;
       margin-bottom: 12px;
+      opacity: .5;
+      &.edit-mode {
+        opacity: 1;
+      }
       .macro-keys-inner {
         display: flex;
         flex-direction: column;

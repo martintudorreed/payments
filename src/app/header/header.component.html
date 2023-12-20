@@ -1,25 +1,6 @@
 <div class="header-inner">
-	<div class="control" [matMenuTriggerFor]="homeMenu" *ngIf="(applicationModelService.currentBreakpoint$ | async) == 'TabletPortrait' || (applicationModelService.currentBreakpoint$ | async) == 'TabletLandscape'"><button mat-icon-button tabindex="-1"><mat-icon>menu</mat-icon></button></div>
-	<mat-menu #homeMenu="matMenu">
-		<button mat-menu-item (click)="doSidenavMobile('/', 'Home')">Home</button>
-		<button mat-menu-item (click)="doSidenavMobile('vehicle-categories', 'Vehicle Categories')">Vehicle Categories</button>
-		<button mat-menu-item (click)="doSidenavMobile('section-framework','Section Framework')">Section Framework</button>
-		<button mat-menu-item (click)="doSidenavMobile('time-adjustment','Time Adjustment')">Labour Time Adjustment</button>
-		<button mat-menu-item (click)="doSidenavMobile('operation-authoring','Operation Authoring')">Operation Authoring</button>
-		<button mat-menu-item (click)="doSidenavMobile('part-and-sundry-substitution','Part and Sundry Substitution')">Part and Sundry Substitution</button>
-		<button mat-menu-item (click)="doSidenavMobile('upsell-recommendations','Upsell Recommendations')">Upsell Recommendations</button>
-		<button mat-menu-item (click)="doSidenavMobile('operation-packages','Operation Packages')">Operation Packages</button>
-		<button mat-menu-item (click)="doSidenavMobile('item-bundles','Item Bundles')">Item Bundles</button>
-		<button mat-menu-item (click)="doSidenavMobile('discount-rules','Discount Rules')">Discount Rules</button>
-		<button mat-menu-item (click)="doSidenavMobile('price-rounding','Price Rounding')">Price Rounding</button>
-		<button mat-menu-item (click)="doSidenavMobile('pricing-matrix','Pricing Matrix')">Pricing Matrix</button>
-		<button mat-menu-item (click)="doSidenavMobile('part-price-markups','Part Price Mark-ups')">Part Price Markup</button>
-		<button mat-menu-item (click)="doSidenavMobile('external-systems','External Systems')">External Systems</button>
-		<button mat-menu-item (click)="doSidenavMobile('file-export','File Import / Export')">File Import / Export</button>
-		<button mat-menu-item (click)="doSidenavMobile('file-import','File Import')">File Import</button>
-	</mat-menu>
+	<div class="control" *ngIf="(applicationModelService.currentBreakpoint$ | async) == 'TabletPortrait' || (applicationModelService.currentBreakpoint$ | async) == 'TabletLandscape'"><button mat-icon-button tabindex="-1"><mat-icon>menu</mat-icon></button></div>
 	<div class="brand-container">
-		<!--  <img class="logo" src="./assets/svg-logos/{{applicationModelService.selectedThemeBrand$.value}}-logo.svg" (click)="doShowSidebar('start', 'settings')" alt="logo" />-->
 		<img class="logo" [matMenuTriggerFor]="brandMenu" src="./assets/svg-logos/{{applicationModelService.selectedThemeBrand$.value}}-logo.svg" alt="logo" />
 		<mat-menu #brandMenu="matMenu" class="ifm-menu style-menu">
 			<button *ngFor="let brand of brands, let i = index" mat-menu-item class="style-option" (click)="doChangeLogo(brand.brandValue)">
@@ -30,13 +11,20 @@
 
 	</div>
 	<div class="user-controls" *ngIf="(applicationModelService.currentBreakpoint$ | async) !== 'XSmall'">
+    <div class="field-outer data-dealership" *ngIf="(applicationModelService.isShowMultiDealerships$ | async)">
+      <mat-form-field class="field ifm-input selector compact" subscriptSizing="dynamic" floatLabel="always" appearance="outline">
+        <mat-select [(value)]="selectedDealer" (selectionChange)="onSelecteddealerChange(selectedDealer)">
+          <mat-option  [value]="dealer.dealershipID" *ngFor="let dealer of dealers, let i = index">{{ dealer.dealershipName }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
 		<button mat-button [matMenuTriggerFor]="userMenu" class="primary-text"><mat-icon>account_circle</mat-icon><span>Martin Tudor Reed</span></button>
 	</div>
 	<mat-menu #userMenu="matMenu" class="ifm-menu user-menu">
 		<button mat-menu-item><mat-icon color="warn">logout</mat-icon>Logout</button>
 	</mat-menu>
 	<div class="help">
-		<button mat-icon-button class="primary-text" [matMenuTriggerFor]="helpMenu"><mat-icon>help_outline</mat-icon></button>
+		<button mat-icon-button class="help-menu primary-text" [matMenuTriggerFor]="helpMenu"><mat-icon>help_outline</mat-icon></button>
 	</div>
 	<div class="settings">
 		<button mat-icon-button class="primary-text" (click)="doOpenSettings()"><mat-icon>settings</mat-icon></button>

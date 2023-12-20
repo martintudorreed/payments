@@ -1,9 +1,14 @@
 
 <div class="meta-data">
 	<div class="meta-inner">
-		<img class="logo" src="./assets/logos/future-motors-logo.png" alt="FutureMotors">
+    <img class="logo" [matMenuTriggerFor]="brandMenu" src="./assets/svg-logos/{{applicationModelService.selectedThemeBrand$.value}}-logo.svg" alt="logo" />
+    <mat-menu #brandMenu="matMenu" class="ifm-menu style-menu">
+      <button *ngFor="let brand of brands, let i = index" mat-menu-item class="style-option" (click)="doChangeLogo(brand.brandValue)">
+        {{brand.brandName}}
+      </button>
+    </mat-menu>
 		<div class="meta dealer-name">
-			<span class="mat-headline-2 meta-text">Future Motors LTD</span>
+      <span class="mat-headline-2 meta-text">{{dealerName}}</span>
 		</div>
 
 	</div>

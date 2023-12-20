@@ -13,6 +13,8 @@ export class HeaderComponent implements OnInit{
   localRegions = this.localDataService.regionData;
   selectedRegion =  this.localRegions[0].regionValue;
   brands = this.localDataService.themeBrandData;
+  dealers = this.localDataService.dealerData;
+  selectedDealer: string = '0';
 
   constructor( public applicationModelService: ApplicationModelService,
                private localDataService: LocalDataService,
@@ -54,6 +56,11 @@ export class HeaderComponent implements OnInit{
   doChangeLogo(brand: string) {
     this.applicationModelService.selectedThemeBrand$.next(brand);
     localStorage.setItem('selectedLogo', brand);
-}
+  }
+
+  onSelecteddealerChange(dlr: string) {
+
+  }
+
 
 }

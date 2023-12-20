@@ -180,12 +180,14 @@
 		<app-control-document-viewer
 				class="invoice"
 				[paymentStatusId]="paymentStatusId"
-				[isViewAttachment]="false"></app-control-document-viewer>
+				[isViewAttachment]="false"
+        [isStandalone]="true"></app-control-document-viewer>
 
 	</div>
 </main>
-<footer class="footer mat-elevation-z2-up">
-	<div class="footer-inner" *ngIf="tabContentType === 'newPayment'">
+<footer class="footer mat-elevation-z2-up" *ngIf="!(applicationModelService.isUsePaymentsMenu$ | async)">
+
+	<div class="footer-inner" *ngIf="paymentStatusId === 5">
 		<div class="control-secondary">
 			<button mat-button color="primary" mat-dialog-close (click)="doClearFields()">Clear All</button>
 <!--			<div class="field-outer data-is-view-attachments">-->
@@ -199,18 +201,13 @@
 		</div>
 	</div>
 
-	<div class="footer-inner resend" *ngIf="tabContentType === 'payment'">
-		<div class="control-secondary" *ngIf="paymentStatusId === 0">
-			<button mat-flat-button color="warn" mat-dialog-close (click)="doClearFields()">Refund</button>
-<!--			<div class="field-outer data-is-view-attachments">-->
-<!--				<mat-slide-toggle [checked]='isViewAttachment' (change)="doToggleAttachmentViewer()">View Attachment</mat-slide-toggle>-->
-<!--			</div>-->
+	<div class="footer-inner resend" *ngIf="paymentStatusId !== 5">
+		<div class="control-secondary">
+      <button mat-stroked-button color="primary" class="ifm-stroked-button primary-outline" (click)="doShowHistory($event)">Show History</button>
+			<button mat-flat-button class="button-secondary" color="warn" *ngIf="paymentStatusId === 0">Refund</button>
+      <button mat-stroked-button class="button-secondary ifm-stroked-button  warn-outline" color="warn"  *ngIf="paymentStatusId !== 0">Cancel Transaction</button>
 		</div>
-		<div class="control-secondary" *ngIf="paymentStatusId !== 0">
-<!--			<button mat-stroked-button color="primary" (click)="doClearFields()" class="ifm-stroked-button primary-outline">Mark as Paid</button>-->
-			<button mat-stroked-button class="button-paid ifm-stroked-button  warn-outline" color="warn" (click)="doClearFields()">Cancel Transaction</button>
 
-		</div>
 		<div class="control-primary">
 			<button class="launcher" mat-icon-button color="primary" (click)="doCardlessPayment($event)"><mat-icon>rocket_launch</mat-icon></button>
 <!--			<app-control-provider-select class="provider-select"></app-control-provider-select>-->
@@ -220,7 +217,7 @@
 
 	<div class="footer-inner" *ngIf="tabContentType === 'newPaymentTriage' || tabContentType === 'newPaymentTriageNotSent'">
 		<div class="control-secondary">
-			<button mat-button color="primary" mat-dialog-close (click)="doClearFields()">Clear All</button>
+<!--			<button mat-button color="primary" mat-dialog-close (click)="doClearFields()">Clear All</button>-->
 		</div>
 		<div class="control-primary">
 			<button mat-icon-button class="launcher" color="primary" (click)="doCardlessPayment($event)"><mat-icon>rocket_launch</mat-icon></button>

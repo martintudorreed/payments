@@ -1,0 +1,224 @@
+@use "src/sass/themes/palette-constants" as palette;
+@use "src/sass/ifm-mixins/ifm-breakpoints" as bp;
+
+:host {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.controls-inner {
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  &.bg-blue {
+    background-color: palette.$dark-blue;
+    color: palette.$white;
+  }
+
+  .pre {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    .data-customer-search {
+      display: flex;
+      align-items: center;
+      .search-outer {
+        position: relative;
+        display: flex;
+        align-items: center;
+        border: 1px solid palette.$medium-dark-grey;
+        &.bg-blue {
+          border: 1px solid palette.$white;
+        }
+        height: 48px;
+        border-radius: 4px;
+        width: 480px;
+        @include bp.breakpoint(smaller) {
+          width: 100%;
+        }
+        &.is-compact {
+          height: 38px;
+        }
+        &.input-has-focus {
+          border-bottom-right-radius: 0;
+        }
+        .prefix {
+          display: flex;
+          flex-grow: 1;
+          height: 100%;
+          .app-selector {
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+            border-right: 1px solid palette.$medium-grey;
+            &.bg-blue {
+              border-right: 1px solid palette.$white;
+            }
+            .selection-text {
+              white-space: nowrap;
+            }
+          }
+          .input-container {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            input {
+              outline: 0;
+              border: 0;
+              width: 100%;
+              font-size: 14px;
+              padding: 0 12px;
+              &::placeholder {
+                font-size: 14px;
+              }
+              &.bg-blue {
+                background-color: palette.$dark-blue;
+                color: palette.$white;
+                &::placeholder {
+                  color: palette.$white;
+                  opacity: .74;
+                }
+              }
+            }
+          }
+
+        }
+        .suffix {
+          display: flex;
+          align-items: center;
+          height: 100%;
+          .psuedoButton {
+            display: flex;
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            &:hover {
+              cursor: pointer;
+            }
+          }
+          .vertical-divider {
+            width: 1px;
+            background-color: palette.$medium-grey;
+            height: 100%;
+            &.bg-blue {
+              background-color: palette.$white;
+            }
+          }
+
+        }
+
+      }
+    }
+    .filter-status {
+      display: flex;
+      align-items: center;
+      margin: 0 12px;
+      .control-reset {
+        margin: 0 6px;
+        &:disabled {
+          opacity: .4;
+        }
+      }
+    }
+    .data-customer-filter {
+      display: flex;
+      align-items: center;
+    }
+  }
+  .post {
+    display: flex;
+    align-items: center;
+    .toggle-dealers {
+      margin: 0 6px;
+    }
+  }
+}
+
+.filter-menu {
+  display: flex;
+  flex-direction: column;
+  min-width: 480px;
+  background-color: palette.$white;
+  border-radius: 6px;
+  border: 1px solid palette.$medium-grey;
+
+  .filter-header {
+    display: flex;
+    align-items: center;
+    //background-color: palette.$very-light-grey;
+    height: 48px;
+    //border-top-left-radius: 6px;
+    //border-top-right-radius: 6px;
+    //border-bottom: 1px solid palette.$medium-grey;
+    .filter-heading {
+      margin: 0 12px;
+    }
+  }
+  .filters-body {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 0 0 ;
+    .field-outer {
+      padding: 0 12px;
+      margin-bottom: 18px;
+      &.field-to-date {
+        flex-basis: 50%;
+      }
+      &.field-from-date {
+        flex-basis: 50%;
+      }
+    }
+    .data-date-range {
+      display: flex;
+      align-items: center;
+      flex-grow: 1;
+    }
+  }
+
+  .filter-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 12px;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-top: 1px solid palette.$medium-grey;
+    background-color: palette.$very-light-grey;
+    .reset-button {
+      margin: 0 12px;
+    }
+  }
+}
+
+.search-history {
+  display: flex;
+  flex-direction: column;
+  min-width: 375px;
+  background-color: palette.$white;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  border: 1px solid palette.$medium-grey;
+  border-top: 1px solid white;
+  padding: 6px 12px 12px;
+  .history-item {
+    display: flex;
+    padding: 6px 0;
+    &:hover {
+      background-color: palette.$very-light-grey;
+      cursor: pointer;
+    }
+  }
+}
+
+.new-payment {
+  margin: 0 24px;
+}
+
+.transparent-backdrop {
+  background-color: transparent;
+}

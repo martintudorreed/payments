@@ -21,7 +21,10 @@ button {
       --mdc-outlined-button-outline-color:  rgba(255,255,255,.4);
     }
   }
-
+  &.ifm-transparent-icon-button {
+    --mdc-outlined-button-outline-color:  transparent;
+    background-color: transparent;
+  }
 
   .mat-mdc-unelevated-button:not(:disabled) {
     &.blue {
@@ -43,6 +46,11 @@ button {
     &.white {
       background-color: palette.$very-light-grey;
     }
+  }
+
+  &.bg-blue {
+    background-color: palette.$primary-blue;
+    color: palette.$white;
   }
 
 }

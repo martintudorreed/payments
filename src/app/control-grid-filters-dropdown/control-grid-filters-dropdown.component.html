@@ -1,0 +1,129 @@
+<div class="controls-inner" [ngClass]="{'bg-blue': isBlue}">
+  <div class="pre">
+    <div class="field-outer data-customer-search" #containerRef>
+      <!--		<div class="search-outer"><input type="text" matInput placeholder="Search" [(ngModel)]="search" [ngClass]="{'bg-blue': (applicationModelService.activeHeader$ | async) !== '-1'}"><mat-icon>search</mat-icon></div>-->
+      <div class="search-outer" [ngClass]="{'input-has-focus': inputHasFocus, 'is-compact': (applicationModelService.isUseCompactSearchFilter$ | async),'bg-blue': isBlue}">
+        <div class="caption-container" [ngClass]="{'bg-blue': isBlue}" *ngIf="hasSearchLabel">
+          <caption class="mat-caption">Search</caption>
+        </div>
+        <div class="prefix">
+          <div class="app-selector" [matMenuTriggerFor]="menu" [ngClass]="{'bg-blue': isBlue}"><span class="selection-text">{{currentSearchCriteria}}</span><mat-icon>arrow_drop_down</mat-icon></div>
+
+          <div class="input-container" #inputContainerRef>
+            <input type="text" matInput class="ifm-input" placeholder="Search Term" [(ngModel)]="search" (focus)="openInputOverlay()" [ngClass]="{'bg-blue': isBlue}">
+          </div>
+
+        </div>
+        <div class="suffix">
+          <div class="psuedoButton search-button" (click)="search = ''" *ngIf="(applicationModelService.isUseCompactSearchFilter$ | async) && search !== ''">
+            <mat-icon class="ifm-icon-medium">close</mat-icon>
+          </div>
+          <div class="psuedoButton search-button" (click)="doSearch()" *ngIf="(applicationModelService.isUseCompactSearchFilter$ | async)">
+            <mat-icon>search</mat-icon>
+          </div>
+          <div class="vertical-divider" [ngClass]="{'bg-blue': isBlue}" *ngIf="(applicationModelService.isUseCompactSearchFilter$ | async)"></div>
+          <div class="psuedoButton filter-menu-button" *ngIf="(applicationModelService.isUseCompactSearchFilter$ | async)" id="triggerButton" (click)="openOverlay()">
+            <mat-icon>filter_alt</mat-icon>
+          </div>
+          <button mat-icon-button  (click)="doSearch()" *ngIf="!(applicationModelService.isUseCompactSearchFilter$ | async)"><mat-icon>search</mat-icon></button>
+          <div class="vertical-divider" [ngClass]="{'bg-blue': isBlue}" *ngIf="!(applicationModelService.isUseCompactSearchFilter$ | async)"></div>
+          <button mat-icon-button  *ngIf="!(applicationModelService.isUseCompactSearchFilter$ | async)" id="triggerButton" (click)="openOverlay()"><mat-icon>filter_alt</mat-icon></button>
+<!--          was <mat-icon>tune</mat-icon>-->
+          <!-- The overlay content template -->
+
+          <ng-template #overlayTemplate>
+            <div class="filter-menu mat-elevation-z4">
+              <div class="filter-header">
+                <h1 class="mat-headline-2 filter-heading">Filter Payments</h1>
+              </div>
+              <div class="filters-body">
+                <div class="field-outer data-status-filter">
+                  <app-control-chip-filter class="chip-filter"></app-control-chip-filter>
+                </div>
+                <div class="field-outer data-status-filter">
+                  <app-control-chip-created-by-filter class="chip-filter"></app-control-chip-created-by-filter>
+                </div>
+                <div class="field-outer data-customer-filter" *ngIf="(applicationModelService.isShowMultiDealerships$ | async)">
+                  <app-control-chip-dealership-filter class="chip-filter" ></app-control-chip-dealership-filter>
+                </div>
+                <div class="data-date-range">
+                  <div class="field-outer field-from-date">
+                    <mat-form-field class="field ifm-input white-bg" subscriptSizing="dynamic" [ngClass]="{'bg-blue': (applicationModelService.activeHeader$ | async) !== '-1'}" appearance="outline">
+                      <mat-label>From</mat-label>
+                      <input matInput [matDatepicker]="picker" placeholder="From" [(ngModel)]="dpicker">
+                      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="field-outer field-to-date">
+                    <mat-form-field class="field ifm-input white-bg" subscriptSizing="dynamic" [ngClass]="{'bg-blue': (applicationModelService.activeHeader$ | async) !== '-1'}" appearance="outline">
+                      <mat-label>To</mat-label>
+                      <input matInput [matDatepicker]="picker1" placeholder="To" name="p1" [(ngModel)]="dpicker1">
+                      <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+                      <mat-datepicker #picker1></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+              <div class="filter-footer">
+                <button
+                  (click)="doResetAllFilters()"
+                  mat-stroked-button
+                  class="ifm-stroked-button primary-outline reset-button"
+                  color="primary"
+                  [disabled]="!checkIfAnyFiltersAreSet()">Reset Filters</button>
+                <button
+                  mat-stroked-button
+                  class="ifm-stroked-button primary-outline"
+                  color="primary"
+                  [disabled]="!checkIfAnyFiltersAreSet()">Apply</button>
+              </div>
+            </div>
+          </ng-template>
+
+          <ng-template #inputOverlayTemplate>
+            <div class="search-history mat-elevation-z1">
+              <span (click)="doSetSearchTerm(historyItem.searchTerm)" *ngFor="let historyItem of searchHistoryItems" class="history-item">{{historyItem.searchTerm}}</span>
+            </div>
+
+          </ng-template>
+        </div>
+      </div>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="changeSearchCriteria('All Fields')">All Fields</button>
+        <button mat-menu-item (click)="changeSearchCriteria('Job Number')">Ref. No</button>
+        <button mat-menu-item (click)="changeSearchCriteria('Customer Name')">Customer Name</button>
+        <button mat-menu-item (click)="changeSearchCriteria('Customer Email')">Customer Email</button>
+      </mat-menu>
+
+    </div>
+    <div class="filter-status">
+      <span *ngIf="checkIfAnyFiltersAreSet()"><b>Filters Set</b></span>
+      <span *ngIf="!checkIfAnyFiltersAreSet()">No Filters</span>
+      <div class="button-container" matTooltip="Reset Grid Filters">
+        <button mat-icon-button
+                class="ifm-transparent-icon-button control-reset white-text"
+                [ngClass]="{'bg-blue': (applicationModelService.activeHeader$ | async) !== '-1'}"
+                [disabled]="!checkIfAnyFiltersAreSet()"
+                (click)="doResetAllFilters()">
+          <mat-icon>restart_alt</mat-icon>
+        </button>
+      </div>
+
+    </div>
+  </div>
+  <div class="post">
+
+    <button *ngIf="isStandalone" mat-stroked-button (click)="doOpenFormInDialog()" color="primary" class="ifm-stroked-button primary-outline export">New Payment</button>
+    <button *ngIf="!isBlue" mat-stroked-button [matMenuTriggerFor]="exportMenu" color="primary" class="ifm-stroked-button primary-outline export">Export</button>
+
+    <mat-menu #exportMenu="matMenu">
+      <button mat-menu-item>xls</button>
+      <button mat-menu-item>csv</button>
+    </mat-menu>
+  </div>
+
+
+
+</div>

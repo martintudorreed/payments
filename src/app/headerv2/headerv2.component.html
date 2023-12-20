@@ -1,0 +1,59 @@
+<div class="header-inner" *ngIf="!(applicationModelService.isPaymentOpen$ | async)">
+  <div class="pre">
+    <app-control-grid-filters *ngIf="!(applicationModelService.isUseGridFilterDropDown$ | async)" [isStandalone]="false"></app-control-grid-filters>
+    <app-control-grid-filters-dropdown *ngIf="(applicationModelService.isUseGridFilterDropDown$ | async)" [isStandalone]="false" [isBlue]="true" [hasSearchLabel]="false"></app-control-grid-filters-dropdown>
+  </div>
+  <div class="post" >
+
+    <div class="export-button white-text" [matMenuTriggerFor]="exportMenu">
+      <mat-icon>file_download</mat-icon><span class="text">Export</span>
+      <div class="select-drop-down">
+<!--        <mat-icon>arrow_drop_down</mat-icon>-->
+      </div>
+    </div>
+    <mat-menu #exportMenu="matMenu">
+      <button mat-menu-item>xls</button>
+      <button mat-menu-item>csv</button>
+    </mat-menu>
+
+    <div class="new-button white-text" (click)="doAddNew()">
+
+      <div class="pre-button">
+        <mat-icon>add</mat-icon><span class="text">Add New</span>
+      </div>
+
+      <div class="split-button-sep"></div>
+
+      <div class="select-drop-down" [matMenuTriggerFor]="quickMenu" (click)="doAbsorb($event)">
+        <mat-icon>arrow_drop_down</mat-icon>
+      </div>
+    </div>
+    <mat-menu #quickMenu="matMenu" xPosition="before">
+      <button mat-menu-item
+              *ngFor="let source of invoiceSource"
+              (click)="doLoadSourceData(source.ifmAppsID)"
+      >{{source.ifmAppsName}}</button>
+    </mat-menu>
+  </div>
+</div>
+<div class="header-inner" *ngIf="(applicationModelService.isPaymentOpen$ | async)">
+  <div class="pre" >
+    <div class="control" (click)="doIndex()" *ngIf="!this.isStandalone">
+      <button mat-icon-button class="white-text"><mat-icon>arrow_back_ios</mat-icon></button><span class="control-text white-text">Back to Index</span>
+    </div>
+
+  </div>
+  <div class="post" [ngClass]="{'leave-space-for-dialog-close': isStandalone}">
+    <div class="export-button white-text" [matMenuTriggerFor]="paymentsMenu" *ngIf="(applicationModelService.isUsePaymentsMenu$ | async)">
+      <span class="text">Payment Actions</span>
+      <div class="select-drop-down">
+        <!--        <mat-icon>arrow_drop_down</mat-icon>-->
+      </div>
+    </div>
+    <mat-menu #paymentsMenu="matMenu">
+      <button mat-menu-item (click)="doSend()">Send to Customer</button>
+      <button mat-menu-item (click)="doShowHistory($event)">Show History</button>
+      <button mat-menu-item (click)="doCancel()">Cancel Transaction</button>
+    </mat-menu>
+  </div>
+</div>

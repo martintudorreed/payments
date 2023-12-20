@@ -7,7 +7,7 @@
 <!--					<mat-option  [value]="app.ifmAppsID" *ngFor="let app of sourceApp">{{ app.ifmAppsName }}</mat-option>-->
 <!--				</mat-select>-->
 <!--			</mat-form-field>-->
-			<app-control-chip-ifm-apps></app-control-chip-ifm-apps>
+			<app-control-chip-dealership-filter></app-control-chip-dealership-filter>
 		</div>
 
 		<div class="field-outer data-template-select" [ngClass]="{'fade': !showViewer}">
@@ -27,33 +27,57 @@
 					(click)="doNew()">Create New</button>
 		</div>
 
-		<div class="field-outer data-template-app">
-			<mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always" appearance="outline">
-				<mat-label>Edit Name</mat-label>
-				<input type="text" matInput placeholder="Template Name" [(ngModel)]="dataSource[foundTemplateIndex].templateName">
-			</mat-form-field>
-		</div>
+    <div class="edit-mode-controls" *ngIf="!showViewer">
 
-		<div class="field-outer data-template-app">
-			<mat-form-field class="field ifm-input selector" subscriptSizing="dynamic" floatLabel="always" appearance="outline">
-				<mat-label>Applicable to</mat-label>
-				<mat-select [(value)]="selectedSauceID" (selectionChange)="onSelectedSourceChange(selectedSauceID)">
-					<mat-option  [value]="app.ifmAppsID" *ngFor="let app of sourceApp">{{ app.ifmAppsName }}</mat-option>
-				</mat-select>
-			</mat-form-field>
-		</div>
+      <div class="field-outer data-template-app">
+        <mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always" appearance="outline">
+          <mat-label>Edit Name</mat-label>
+          <input type="text" matInput placeholder="Template Name" [(ngModel)]="dataSource[foundTemplateIndex].templateName">
+        </mat-form-field>
+      </div>
 
-		<div class="field-outer data-template-app">
-			<mat-form-field class="field ifm-input selector" subscriptSizing="dynamic" floatLabel="always" appearance="outline">
-				<mat-label>Colour</mat-label>
-				<mat-select [(value)]="selectedColor" (selectionChange)="onSelectedColorChange(selectedColor)">
-					<mat-option  [value]="color.colorSchemeValue" *ngFor="let color of templateColors">{{ color.colorSchemeName }}</mat-option>
-				</mat-select>
-			</mat-form-field>
-		</div>
+      <div class="field-outer data-dealership" *ngIf="(applicationModelService.isShowMultiDealerships$ | async)">
+        <mat-form-field class="field ifm-input selector" subscriptSizing="dynamic" floatLabel="always" appearance="outline">
+          <mat-label>Dealer</mat-label>
+          <mat-select [(value)]="selectedDealer" (selectionChange)="onSelecteddealerChange(selectedDealer)">
+            <mat-option  [value]="dealer.dealershipID" *ngFor="let dealer of dealers, let i = index">{{ dealer.dealershipName }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
 
-		<button mat-icon-button *ngIf="!showViewer" color="warn"><mat-icon>delete</mat-icon></button>
+      <!--		<div class="field-outer data-template-app">-->
+      <!--			<mat-form-field class="field ifm-input selector" subscriptSizing="dynamic" floatLabel="always" appearance="outline">-->
+      <!--				<mat-label>Applicable to</mat-label>-->
+      <!--				<mat-select [(value)]="selectedSauceID" (selectionChange)="onSelectedSourceChange(selectedSauceID)">-->
+      <!--					<mat-option  [value]="app.ifmAppsID" *ngFor="let app of sourceApp">{{ app.ifmAppsName }}</mat-option>-->
+      <!--				</mat-select>-->
+      <!--			</mat-form-field>-->
+      <!--		</div>-->
 
+      <div class="field-outer data-template-app">
+        <mat-form-field class="field ifm-input selector" subscriptSizing="dynamic" floatLabel="always" appearance="outline">
+          <mat-label>Colour</mat-label>
+          <mat-select [(value)]="selectedColor" (selectionChange)="onSelectedColorChange(selectedColor)">
+            <mat-option  [value]="color.colorSchemeValue" *ngFor="let color of templateColors">{{ color.colorSchemeName }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+
+    </div>
+    <mat-divider></mat-divider>
+    <div class="send-test-email">
+      <div class="field-outer">
+        <mat-form-field class="ifm-input" subscriptSizing="dynamic" floatLabel="always" appearance="outline">
+          <mat-label>Send Test Email to</mat-label>
+          <input type="text" matInput placeholder="xxxx@email.com">
+          <button mat-icon-button matSuffix color="primary" (click)="doPsuedoSend()"><mat-icon>send</mat-icon></button>
+        </mat-form-field>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+
+<!--    <app-control-send-email></app-control-send-email>-->
 	</div>
 
 	<div class="canvas">
@@ -76,11 +100,14 @@
 				<app-control-template-editor *ngIf="!showViewer"></app-control-template-editor>
 
 				<div class="footer">
-					<div class="secondary"></div>
+					<div class="secondary">
+          </div>
 					<div class="controls">
 						<div class="">
+
+              <button *ngIf="!showViewer" mat-stroked-button color="warn" class="ifm-stroked-button warn-outline"><mat-icon>delete</mat-icon>Delete</button>
 							<button mat-stroked-button *ngIf="showViewer" color="primary" class="ifm-stroked-button primary-outline" (click)="doToggleViewer()">Edit</button>
-							<button mat-button *ngIf="!showViewer" color="primary" (click)="doToggleViewer()">Cancel</button>
+							<button mat-button *ngIf="!showViewer" color="primary" (click)="doCancel()">Cancel</button>
 							<button mat-flat-button *ngIf="!showViewer" color="primary" (click)="doToggleViewer()">Save</button>
 						</div>
 					</div>
@@ -91,10 +118,10 @@
 
 	</div>
 	<div class="supporting-controls">
-		<div class="macro-keys-container" *ngIf="!showViewer">
+		<div class="macro-keys-container" [ngClass]="{'edit-mode': !showViewer}">
 			<div class="caption-container">
 				<caption class="mat-caption">
-					<span>Triage Keys</span>
+					<span>Mailmerge fields - Triage</span>
 				</caption>
 			</div>
 			<div class="macro-keys-inner">
@@ -147,6 +174,14 @@
 					</div>
 					<div class="key-control"><mat-icon class="ifm-icon-medium">content_copy</mat-icon></div>
 				</div>
+
+        <div class="key">
+          <div class="key-text">
+            [triageDisclaimer]
+          </div>
+          <div class="key-control"><mat-icon class="ifm-icon-medium">content_copy</mat-icon></div>
+        </div>
+
 				<div class="key-toggle">
 
 				</div>

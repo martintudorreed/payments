@@ -1,0 +1,35 @@
+.meta-data {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 12px;
+  .meta-inner {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    margin-bottom: 12px;
+    .logo {
+      max-width: 100px;
+    }
+  }
+  .meta {
+    flex-grow: 1;
+    margin-bottom: 12px;
+    display: flex;
+    &.invoice-ammount {
+      justify-content: flex-end;
+    }
+    &.dealer-name {
+      justify-content: flex-end;
+    }
+    .meta-text {
+      margin: 0;
+    }
+  }
+}
+
+.response {
+  .heading {
+    margin-bottom: 24px;
+  }
+}
