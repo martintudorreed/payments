@@ -94,6 +94,8 @@ export class Headerv2Component implements OnInit {
     this.applicationModelService.currentTemplateIdViewer$.next(eek);
 
     this.applicationModelService.isPaymentOpen$.next(true);
+    console.log('isPaymentOpen = ');
+    console.log(this.applicationModelService.isPaymentOpen$.getValue());
     setTimeout(() => {
       this.applicationModelService.currentPaymentIndexNumber$.next(this.payments.length -1);
     }, 100);
@@ -145,6 +147,13 @@ export class Headerv2Component implements OnInit {
 
   doCancel() {
     this._snackBar.open('Smoke and Mirrors' , 'Undo', {
+      duration: 5000,
+      panelClass: 'ifm-snackbar'
+    });
+  }
+
+  doExport() {
+    this._snackBar.open('dateTimeStampExport.csv saved to Downloads' , '', {
       duration: 5000,
       panelClass: 'ifm-snackbar'
     });

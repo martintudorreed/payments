@@ -82,9 +82,9 @@
 				<div class="field-outer data-is-view-attachments">
 					<mat-slide-toggle [checked]='(applicationModelService.isShowDashboard$ | async)' (change)="doToggleDashboardTab()">Show Dashboard Tab  - /phaseII</mat-slide-toggle>
 				</div>
-				<div class="field-outer data-is-simple-filters">
-					<mat-slide-toggle [checked]='(applicationModelService.isUseSimpleTextFilters$ | async)' (change)="doToggleSimpleFilters()">Use Simple Filters on List</mat-slide-toggle>
-				</div>
+<!--				<div class="field-outer data-is-simple-filters">-->
+<!--					<mat-slide-toggle [checked]='(applicationModelService.isUseSimpleTextFilters$ | async)' (change)="doToggleSimpleFilters()">Use Simple Filters on List</mat-slide-toggle>-->
+<!--				</div>-->
         <div class="field-outer data-is-simple-filters">
           <mat-slide-toggle [checked]='(applicationModelService.isTabAnimationRemoved$ | async)' (change)="doRemoveTabAnimation()">Remove Tab Animation - /phaseII</mat-slide-toggle>
         </div>
@@ -96,6 +96,9 @@
         </div>
         <div class="field-outer data-is-simple-filters">
           <mat-slide-toggle [checked]='(applicationModelService.isUsePaymentsMenu$ | async)' (change)="doUsePaymentsMenu()">Use Payments Menu</mat-slide-toggle>
+        </div>
+        <div class="field-outer data-is-simple-filters">
+          <mat-slide-toggle [checked]='(applicationModelService.isGlobalSearchHasDropDown$ | async)' (change)="doIsGlobalSearchDropDown()">Global Search has Field Dropdown</mat-slide-toggle>
         </div>
 <!--        <div class="field-outer data-is-simple-filters">-->
 <!--          <mat-slide-toggle [checked]='(applicationModelService.isUsePhaseIUI$ | async)' (change)="doUsePhaseIUI()">Use Phase I UI</mat-slide-toggle>-->

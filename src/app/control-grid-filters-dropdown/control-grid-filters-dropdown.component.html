@@ -7,7 +7,12 @@
           <caption class="mat-caption">Search</caption>
         </div>
         <div class="prefix">
-          <div class="app-selector" [matMenuTriggerFor]="menu" [ngClass]="{'bg-blue': isBlue}"><span class="selection-text">{{currentSearchCriteria}}</span><mat-icon>arrow_drop_down</mat-icon></div>
+          <div class="app-selector"
+               *ngIf="(applicationModelService.isGlobalSearchHasDropDown$ | async)"
+               [matMenuTriggerFor]="menu"
+               [ngClass]="{'bg-blue': isBlue}">
+            <span class="selection-text">{{currentSearchCriteria}}</span><mat-icon>arrow_drop_down</mat-icon>
+          </div>
 
           <div class="input-container" #inputContainerRef>
             <input type="text" matInput class="ifm-input" placeholder="Search Term" [(ngModel)]="search" (focus)="openInputOverlay()" [ngClass]="{'bg-blue': isBlue}">

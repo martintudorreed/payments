@@ -5,12 +5,10 @@
   </div>
   <div class="post" >
 
-    <div class="export-button white-text" [matMenuTriggerFor]="exportMenu">
+    <div class="export-button white-text" (click)="doExport()">
       <mat-icon>file_download</mat-icon><span class="text">Export</span>
-      <div class="select-drop-down">
-<!--        <mat-icon>arrow_drop_down</mat-icon>-->
-      </div>
     </div>
+<!--    [matMenuTriggerFor]="exportMenu"-->
     <mat-menu #exportMenu="matMenu">
       <button mat-menu-item>xls</button>
       <button mat-menu-item>csv</button>
@@ -22,19 +20,21 @@
         <mat-icon>add</mat-icon><span class="text">Add New</span>
       </div>
 
-      <div class="split-button-sep"></div>
+<!--      <div class="split-button-sep"></div>-->
 
-      <div class="select-drop-down" [matMenuTriggerFor]="quickMenu" (click)="doAbsorb($event)">
-        <mat-icon>arrow_drop_down</mat-icon>
-      </div>
-    </div>
-    <mat-menu #quickMenu="matMenu" xPosition="before">
-      <button mat-menu-item
-              *ngFor="let source of invoiceSource"
-              (click)="doLoadSourceData(source.ifmAppsID)"
-      >{{source.ifmAppsName}}</button>
-    </mat-menu>
+<!--      <div class="select-drop-down" [matMenuTriggerFor]="quickMenu" (click)="doAbsorb($event)">-->
+<!--        <mat-icon>arrow_drop_down</mat-icon>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <mat-menu #quickMenu="matMenu" xPosition="before">-->
+<!--      <button mat-menu-item-->
+<!--              *ngFor="let source of invoiceSource"-->
+<!--              (click)="doLoadSourceData(source.ifmAppsID)"-->
+<!--      >{{source.ifmAppsName}}</button>-->
+<!--    </mat-menu>-->
   </div>
+</div>
+
 </div>
 <div class="header-inner" *ngIf="(applicationModelService.isPaymentOpen$ | async)">
   <div class="pre" >

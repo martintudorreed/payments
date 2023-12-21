@@ -46,9 +46,9 @@ export class ViewSettingsComponent {
     }
   }
 
-  doToggleSimpleFilters() {
-    this.applicationModelService.isUseSimpleTextFilters$.next(!this.applicationModelService.isUseSimpleTextFilters$.getValue())
-  }
+  // doToggleSimpleFilters() {
+  //   this.applicationModelService.isUseSimpleTextFilters$.next(!this.applicationModelService.isUseSimpleTextFilters$.getValue())
+  // }
 
   doToggleMultiDealerships() {
     this.applicationModelService.isShowMultiDealerships$.next(!this.applicationModelService.isShowMultiDealerships$.getValue());
@@ -74,4 +74,7 @@ export class ViewSettingsComponent {
     this.applicationModelService.isUsePaymentsMenu$.next(!this.applicationModelService.isUsePaymentsMenu$.getValue());
   }
 
+  doIsGlobalSearchDropDown() {
+    this.applicationModelService.isGlobalSearchHasDropDown$.next(!this.applicationModelService.isGlobalSearchHasDropDown$.getValue());
+  }
 }

@@ -14,7 +14,7 @@ export class ApplicationModelService {
   isRTL = 'ltr';
   isRTL$: BehaviorSubject<string> = new BehaviorSubject<string>(this.isRTL);
 
-  activeRoute = this.router.url;
+  activeRoute = '/home';
   activeRoute$: BehaviorSubject<string> = new BehaviorSubject<string>(this.activeRoute);
 
 
@@ -133,4 +133,7 @@ export class ApplicationModelService {
 
   isUsePaymentsMenu = true;
   isUsePaymentsMenu$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.isUsePaymentsMenu);
+
+  isGlobalSearchHasDropDown = false;
+  isGlobalSearchHasDropDown$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.isGlobalSearchHasDropDown);
 }

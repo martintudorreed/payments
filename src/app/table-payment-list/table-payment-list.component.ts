@@ -47,8 +47,8 @@ export class TablePaymentListComponent implements AfterViewInit{
                 public dialog: MatDialog, ) {
 
       this.applicationModelService.isShowStatusColumnInTables$.subscribe((newColumnStructure) => {
-        this.displayedColumns = this.displayedColumns.filter(item => item !== 'paymentSource');
-        this.doRemoveSourceColumn(newColumnStructure);
+        // this.displayedColumns = this.displayedColumns.filter(item => item !== 'paymentSource');
+        // this.doRemoveSourceColumn(newColumnStructure);
       });
 
 
@@ -67,14 +67,13 @@ export class TablePaymentListComponent implements AfterViewInit{
         const cols = localStorage.getItem('columnOrder');
         this.displayedColumns = (JSON.parse(cols as string));
       }
-      console.log('standalone = ');
-      console.log(this.isStandalone);
-      if(this.isStandalone || this.applicationModelService.activeHeader$.getValue() === 'triage') {
-        this.dataSource = this.filteredDataSource;
-        this.doRemoveSourceColumn(false);
-      } else {
-        this.dataSource = this.dataSource;
-      }
+
+      // if(this.isStandalone || this.applicationModelService.activeHeader$.getValue() === 'triage') {
+      //   this.dataSource = this.filteredDataSource;
+      //   this.doRemoveSourceColumn(false);
+      // } else {
+      //   this.dataSource = this.dataSource;
+      // }
 
       this.dataSource.sort = this.sort;
       // this.displayedColumns = JSON.parse(localStorage.getItem('columnOrder'));
